@@ -12,24 +12,24 @@ app.get("/", (req, res) => {
 //mongodb+srv://mkr1998:Iphone2019@cluster0.nlocabm.mongodb.net/scotland-app-development?retryWrites=true&w=majority
 // const global = {}
 
-// async function getMongoClient() {
-//   if (!global.client) {
-//     global.client = new MongoClient(process.env.MONGODB_URI);
-//   }
-//   // It is okay to call connect() even if it is connected
-//   // using node-mongodb-native v4 (it will be no-op)
-//   // See: https://github.com/mongodb/node-mongodb-native/blob/4.0/docs/CHANGES_4.0.0.md
-//   await global.client.connect();
-//   await global.client.db().command({ ping: 1 });
-//     console.log("Pinged your deployment. You successfully connected to MongoDB!");
-//   return global.client;
-// }
+async function getMongoClient() {
+  if (!global.client) {
+    global.client = new MongoClient(process.env.MONGODB_URI);
+  }
+  // It is okay to call connect() even if it is connected
+  // using node-mongodb-native v4 (it will be no-op)
+  // See: https://github.com/mongodb/node-mongodb-native/blob/4.0/docs/CHANGES_4.0.0.md
+  await global.client.connect();
+  await global.client.db().command({ ping: 1 });
+  console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  return global.client;
+}
 
-// app.use(async(req, res, next) => {
-//   req.dbClient = await getMongoClient();
-//   req.db = req.dbClient.db();
-//   next();
-// });
+app.use(async (req, res, next) => {
+  req.dbClient = await getMongoClient();
+  req.db = req.dbClient.db();
+  next();
+});
 
 // const generateAccessToken = async (apiKey, sharedSecret, code, shop) => {
 //   const query = {
