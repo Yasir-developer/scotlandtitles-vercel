@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
 // const cryptoJS = require("crypto-js");
-// const axios = require("axios");
+const axios = require("axios");
 dotenv.config();
 // const { MongoClient } = require("mongodb");
 
