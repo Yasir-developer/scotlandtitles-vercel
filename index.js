@@ -1,14 +1,14 @@
 const express = require("express");
 const app = express();
-const dotenv = require('dotenv')
-const cryptoJS = require('crypto-js')
-const axios = require('axios')
-dotenv.config()
-const {MongoClient } = require('mongodb')
+const dotenv = require("dotenv");
+// const cryptoJS = require("crypto-js");
+// const axios = require("axios");
+dotenv.config();
+// const {MongoClient } = require('mongodb')
 
-app.get('/', (req, res) => {
-  res.send('hello world')
-})
+app.get("/", (req, res) => {
+  res.send("hello world");
+});
 
 // const global = {}
 
@@ -64,7 +64,7 @@ app.get('/', (req, res) => {
 // router.get('/auth/callback', (req, res) => {
 //   const apiKey = process.env.CLIENT_ID
 //   const apiSecret = process.env.CLIENT_SECRET
-  
+
 //   const params = req.query
 //   const code = params.code
 //   const shop = params.shop
@@ -78,7 +78,6 @@ app.get('/', (req, res) => {
 //   // const computed_hmac = bcrypt.hashSync(paramsString, 'sha256', apiSecret)
 //   const computed_hmac = cryptoJS.HmacSHA256(paramsString, apiSecret).toString();
 
-  
 //   if(computed_hmac === hmac) {
 //       generateAccessToken(apiKey, apiSecret, code, shop)
 //           .then(async (at) => {
@@ -88,7 +87,7 @@ app.get('/', (req, res) => {
 //               })
 //               const accessTokenFromDB = await req.db.collection('config').findOne({accessToken:at})
 //               res.send(accessTokenFromDB)
-              
+
 //           })
 //           .catch( (e) => {
 //               console.log(e)
@@ -99,8 +98,6 @@ app.get('/', (req, res) => {
 //       res.status(403).json({'access_token': 'unable to match hash', 'hmac': hmac, 'cmac': computed_hmac})
 //   }
 // })
-
-
 
 // Define routes and middleware here
 // app.get("/", (req, res) => {
