@@ -1,10 +1,10 @@
 const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
-// const cryptoJS = require("crypto-js");
-// const axios = require("axios");
+const cryptoJS = require("crypto-js");
+const axios = require("axios");
 dotenv.config();
-// const {MongoClient } = require('mongodb')
+const { MongoClient } = require("mongodb");
 
 app.get("/", (req, res) => {
   res.send("hello world");
