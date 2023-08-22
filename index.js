@@ -97,7 +97,6 @@ router.get('/auth/callback', (req, res) => {
 })
 
 
-app.use(mainRoutes)
 
 // Define routes and middleware here
 // app.get("/", (req, res) => {
