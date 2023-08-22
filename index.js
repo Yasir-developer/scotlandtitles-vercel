@@ -4,12 +4,12 @@ const dotenv = require("dotenv");
 const cryptoJS = require("crypto-js");
 const axios = require("axios");
 dotenv.config();
-// const { MongoClient } = require("mongodb");
+const { MongoClient } = require("mongodb");
 
 app.get("/", (req, res) => {
   res.send("hello world");
 });
-
+//mongodb+srv://mkr1998:Iphone2019@cluster0.nlocabm.mongodb.net/scotland-app-development?retryWrites=true&w=majority
 // const global = {}
 
 // async function getMongoClient() {
