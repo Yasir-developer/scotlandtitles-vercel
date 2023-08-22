@@ -29,7 +29,7 @@ router.get('/', (req, res) => {
     const paramsKeys = Object.keys(params).sort();
     const paramsString = paramsKeys.map(key => key + '=' + params[key]).join('&');
 
-    // const computed_hmac = bcrypt.hashSync(paramsString, 'sha256', apiSecret);
+    // const computed_hmac = bcrypt.hashSync(paramsString, 'sha256', apiSecret)
     const computed_hmac = cryptoJS.HmacSHA256(paramsString, apiSecret).toString();
 
     
