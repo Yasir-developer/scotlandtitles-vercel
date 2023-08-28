@@ -2,7 +2,5 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js",
-  "/api/auth/callback": "pages/api/auth/callback.js",
-  "/api/install": "pages/api/install.js"
+  "/": "pages/index.js"
 }
