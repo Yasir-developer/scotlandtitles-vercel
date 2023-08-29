@@ -1,6 +1,6 @@
-
 export default async function handler(req, res) {
-    console.log('req.body',req.body)
+  console.log("req.body", req.body);
+  //   res.setHeader("Cache-Control", "s-maxage=600, stale-while-revalidate=30"); // set caching header
 
-    return;
+  return res.status(200);
 }

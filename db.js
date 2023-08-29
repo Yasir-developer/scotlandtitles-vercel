@@ -1,8 +1,9 @@
 // mongodb.js
 import { MongoClient } from "mongodb";
 
-// const uri ="mongodb+srv://alirf50:zSMWWSOcAwlivFl6@cluster0.g7q6vuo.mongodb.net/?retryWrites=true&w=majority"; // Replace with your MongoDB connection URI
-const uri =process.env.MONGODB_URI; // Replace with your MongoDB connection URI
+const uri =
+  "mongodb+srv://alirf50:zSMWWSOcAwlivFl6@cluster0.g7q6vuo.mongodb.net/?retryWrites=true&w=majority"; // Replace with your MongoDB connection URI
+// const uri =process.env.MONGODB_URI; // Replace with your MongoDB connection URI
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
