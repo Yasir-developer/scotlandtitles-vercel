@@ -31,5 +31,5 @@ export default async function handler(req, res) {
   //     console.error(error);
   //     res.status(500).send("An error occurred");
   //   }
-  res.status(200).send("Successfull request");
+  //   res.status(200).send("Successfull request");
 }
