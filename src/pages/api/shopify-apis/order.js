@@ -4,10 +4,14 @@ import * as ftp from "basic-ftp";
 import { Readable } from "stream";
 import doctorimg from "../../../../public/images/doctor-2.jpg";
 import path from "path";
+import fontkit from "@pdf-lib/fontkit";
 
 export default async function handler(req, res) {
+  console.log("hard code");
   const client = new ftp.Client();
   var name1;
+  var pdfDate;
+  // var pdfDate
   await client.access({
     host: "92.205.12.5",
     port: 21, // FTP port
@@ -25,6 +29,8 @@ export default async function handler(req, res) {
 
     try {
       const pdfDoc = await PDFDocument.create();
+      pdfDoc.registerFontkit(fontkit);
+
       //   const url = "https://pdf-lib.js.org/assets/with_update_sections.pdf";
       //   const existingPdfBytes = await fetch(url).then((res) =>
       //     res.arrayBuffer()
@@ -70,7 +76,10 @@ export default async function handler(req, res) {
       //   console.log(pages, "pages");
       //   return;
       const page = pdfDoc.addPage([600, 800]);
+      const pagetwo = pdfDoc.addPage([600, 800]);
       const embeddedPage = await pdfDoc.embedPage(page);
+      const embeddedPagetwo = await pdfDoc.embedPage(pagetwo);
+
       const courierBoldFont = await pdfDoc.embedFont(StandardFonts.Courier);
       //For background Color
       // page.drawRectangle({
@@ -86,11 +95,19 @@ export default async function handler(req, res) {
       //   width: page.getWidth(),
       //   height: page.getHeight(),
       // });
-      //   const filePath = path.resolve("./public", "images", "doctor-2.jpg");
+      // const pngImage = await pdfDoc.embedPng(pngImageBytes)
 
-      //   const imgBuffer = fs.readFileSync(filePath);
-      //   // console.log(imgBuffer, "imgBuffer");
-      //   const img = await pdfDoc.embedJpg(imgBuffer);
+      const filePath = path.resolve("./public", "images", "scotland_log.png");
+      const fontBytes = fs.readFileSync(
+        path.join("./utils", "fonts", "OLDENGL.TTF")
+      );
+      const customFont = await pdfDoc.embedFont(fontBytes);
+
+      const imgBuffer = fs.readFileSync(filePath);
+      // console.log(imgBuffer, "imgBuffer");
+      const img = await pdfDoc.embedPng(imgBuffer);
+      const pngDims = img.scale(0.22);
+
       //   // console.log(img, "img");
       //   page.drawImage(img, {
       //     width: page.getWidth(),
@@ -106,34 +123,128 @@ export default async function handler(req, res) {
           if (propItem.name == "_Name1") {
             name1 = propItem.value;
           }
+          if (propItem.name == "_Date") {
+            pdfDate = propItem.value;
+          }
           console.log(propItem, "propItem");
         });
       });
-      const date = "12th june 2022";
-      const heading = `12th June 2022 Land with reference number  ${id}: Lord ${name1}`;
-      const content = `Please find enclosed your Certificate \nof Disposition and Proclamation confirming you now own Land \n within a Scottish Estate . You may choose to adopt the traditional Scottish title of Laird as a sign of \n respect, or the English language equivalent \n. Your land is located within our Estate with street address of Kingseat Road (off Cantsdam Road), Cantsdam, Kelty, Fife, Scotland KY12 0SW. Your plot of land is located beside  Kingseat Road single track road that leads north from the B912 Cantsdam Road. You can view the land online. The following coordinates will show you the centre of the Estate; Google Maps type in  coordinates 56.1215718, - 3.3856475 Ordinance Survey 10 Figure Grid Reference N T 1 3956 92954 X Easting 313956 , Y Northing 692954 We hope that you have the opportunity to visit your land, and to enjoy the Scottish countryside as a Laird of Scotland . You can keep up to date via our Facebook page at fb.me/ScotlandTitles I very much hope that owning a piece of Scotland is something that will give you a sense of pride, and would like to take this opportunity to thank you for choosing Scotland Titles`;
 
-      // const page = document.getPage(0);
+      const date = pdfDate;
+      const heading = `Land with reference number ${id}: Lord ${name1} of\nBlairadam`;
+      const content = `Please find enclosed your Certificate of Disposition and Proclamation confirming you now own Land\nwithin a Scottish Estate . You may choose to adopt the traditional Scottish title of Laird as a sign of\nrespect, or the English language equivalent.\n\nYour land is located within our Estate with street address of Kingseat Road (off Cantsdam Road),\nCantsdam, Kelty, Fife, Scotland KY12 0SW. Your plot of land is located beside Kingseat Road single\ntrack road that leads north from the B912 Cantsdam Road.\n\nYou can view the land online. The following coordinates will show you the centre of the Estate;\n\nGoogle Maps type in  coordinates 56.1215718, - 3.3856475\nOrdinance Survey 10 Figure Grid Reference NT 13956 92954\nX Easting 313956 , Y Northing 692954\n\nWe hope that you have the opportunity to visit your land, and to enjoy the Scottish countryside as a\nLaird of Scotland . You can keep up to date via our Facebook page at fb.me/ScotlandTitles\n\nI very much hope that owning a piece of Scotland is something that will give you a sense of pride, and\nwould like to take this opportunity to thank you for choosing Scotland Titles`; // const page = document.getPage(0);
+      const welcomeContent = `Welcome to Scotland!`; // const page = document.getPage(0);
 
+      const fontSize = 11;
+      const headingFontSize = 14;
+      const textWidth = page.getWidth() - 100; // Adjust the width as needed
+      const textHeight = page.getHeight() - 50;
       //   page.moveTo(72, 570);
+      const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
+      const timesRomanFontHeading = await pdfDoc.embedFont(
+        StandardFonts.TimesRomanBold
+      );
+
       page.drawText(date, {
-        x: 10,
-        y: 590,
-        size: 12,
+        x: 50,
+        y: 710,
+        size: fontSize,
+        width: textWidth,
+        height: textHeight,
         color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFont,
       });
       page.drawText(heading, {
-        x: 10,
-        y: 570,
-        size: 18,
+        x: 50,
+        y: 650,
+        width: textWidth,
+        height: textHeight,
+        size: headingFontSize,
         color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
       });
 
       page.drawText(content, {
-        x: 10,
-        y: 560,
-        size: 12,
+        x: 50,
+        y: 600,
+        width: textWidth,
+        height: textHeight,
+        size: fontSize,
         color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFont,
+      });
+
+      page.drawText(welcomeContent, {
+        x: 170,
+        y: 300,
+        width: textWidth,
+        height: textHeight,
+        size: fontSize,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFont,
+      });
+
+      page.drawImage(img, {
+        x: 350,
+        y: 690,
+        width: pngDims.width,
+        height: pngDims.height,
+      });
+
+      pagetwo.drawText(date, {
+        x: 50,
+        y: 710,
+        size: fontSize,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFont,
+      });
+      pagetwo.drawText(heading, {
+        x: 50,
+        y: 650,
+        width: textWidth,
+        height: textHeight,
+        size: headingFontSize,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+
+      pagetwo.drawText(content, {
+        x: 50,
+        y: 600,
+        width: textWidth,
+        height: textHeight,
+        size: fontSize,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFont,
+      });
+
+      pagetwo.drawText(welcomeContent, {
+        x: 170,
+        y: 300,
+        width: textWidth,
+        height: textHeight,
+        size: fontSize,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFont,
+      });
+
+      pagetwo.drawImage(img, {
+        x: 350,
+        y: 690,
+        width: pngDims.width,
+        height: pngDims.height,
       });
 
       const pdfBytes = await pdfDoc.save();
