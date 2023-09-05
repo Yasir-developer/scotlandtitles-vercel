@@ -76,7 +76,7 @@ export default async function handler(req, res) {
       //   console.log(pages, "pages");
       //   return;
       const page = pdfDoc.addPage([600, 800]);
-      const pagetwo = pdfDoc.addPage([600, 800]);
+      const pagetwo = pdfDoc.addPage([800, 600]);
       const embeddedPage = await pdfDoc.embedPage(page);
       const embeddedPagetwo = await pdfDoc.embedPage(pagetwo);
 
@@ -134,6 +134,8 @@ export default async function handler(req, res) {
       const heading = `Land with reference number ${id}: Lord ${name1} of\nBlairadam`;
       const content = `Please find enclosed your Certificate of Disposition and Proclamation confirming you now own Land\nwithin a Scottish Estate . You may choose to adopt the traditional Scottish title of Laird as a sign of\nrespect, or the English language equivalent.\n\nYour land is located within our Estate with street address of Kingseat Road (off Cantsdam Road),\nCantsdam, Kelty, Fife, Scotland KY12 0SW. Your plot of land is located beside Kingseat Road single\ntrack road that leads north from the B912 Cantsdam Road.\n\nYou can view the land online. The following coordinates will show you the centre of the Estate;\n\nGoogle Maps type in  coordinates 56.1215718, - 3.3856475\nOrdinance Survey 10 Figure Grid Reference NT 13956 92954\nX Easting 313956 , Y Northing 692954\n\nWe hope that you have the opportunity to visit your land, and to enjoy the Scottish countryside as a\nLaird of Scotland . You can keep up to date via our Facebook page at fb.me/ScotlandTitles\n\nI very much hope that owning a piece of Scotland is something that will give you a sense of pride, and\nwould like to take this opportunity to thank you for choosing Scotland Titles`; // const page = document.getPage(0);
       const welcomeContent = `Welcome to Scotland!`; // const page = document.getPage(0);
+
+      //Font work
 
       const fontSize = 11;
       const headingFontSize = 14;
@@ -196,55 +198,79 @@ export default async function handler(req, res) {
         height: pngDims.height,
       });
 
-      pagetwo.drawText(date, {
-        x: 50,
-        y: 710,
-        size: fontSize,
-        width: textWidth,
-        height: textHeight,
-        color: rgb(0, 0, 0),
-        lineHeight: fontSize * 1.2,
-        font: timesRomanFont,
+      //Page Two of certificate
+
+      //Image work
+      const filePathTwo = path.resolve("./public", "images", "pdf-bg.jpg");
+
+      const imgBufferTwo = fs.readFileSync(filePathTwo);
+      // console.log(imgBuffer, "imgBuffer");
+      const imgBg = await pdfDoc.embedJpg(imgBufferTwo);
+
+      const fontTwo = fs.readFileSync(
+        path.join("./utils", "fonts", "TEMPSITC.TTF")
+      );
+      const tempusFont = await pdfDoc.embedFont(fontTwo);
+
+      const fontThree = fs.readFileSync(
+        path.join("./utils", "fonts", "OLDENGL.TTF")
+      );
+      const oldEng = await pdfDoc.embedFont(fontThree);
+      const certificateHeading = "Certificate of Disposition and Proclamation";
+      const certficateAddress =
+        "between Scotland Titles, Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom and";
+
+      const certficateUserName = "Lady Kathryn Joy Smith ofBlairadam";
+
+      const certificateAddressTwo =
+        "(hereafter to be proclaimed as “THE LORD”), care of Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom";
+      pagetwo.drawImage(imgBg, {
+        width: pagetwo.getWidth(),
+        height: pagetwo.getHeight(),
       });
-      pagetwo.drawText(heading, {
-        x: 50,
-        y: 650,
+      pagetwo.drawText(certificateHeading, {
+        x: 150,
+        y: 570,
+        size: 26,
         width: textWidth,
         height: textHeight,
-        size: headingFontSize,
+        color: rgb(0.219, 0.337, 0.137),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+      pagetwo.drawText(certficateAddress, {
+        x: 170,
+        y: 550,
+        width: textWidth,
+        height: textHeight,
+        size: 10,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         // font: customFont,
-        font: timesRomanFontHeading,
+        font: tempusFont,
       });
 
-      pagetwo.drawText(content, {
-        x: 50,
-        y: 600,
+      pagetwo.drawText(certficateUserName, {
+        x: 165,
+        y: 530,
         width: textWidth,
         height: textHeight,
-        size: fontSize,
+        size: 24,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
-        font: timesRomanFont,
+        font: oldEng,
       });
 
-      pagetwo.drawText(welcomeContent, {
-        x: 170,
-        y: 300,
+      pagetwo.drawText(certficateAddress, {
+        x: 145,
+        y: 510,
         width: textWidth,
         height: textHeight,
-        size: fontSize,
+        size: 10,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
-        font: timesRomanFont,
-      });
-
-      pagetwo.drawImage(img, {
-        x: 350,
-        y: 690,
-        width: pngDims.width,
-        height: pngDims.height,
+        // font: customFont,
+        font: tempusFont,
       });
 
       const pdfBytes = await pdfDoc.save();
