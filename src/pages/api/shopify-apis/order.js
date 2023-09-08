@@ -76,7 +76,7 @@ export default async function handler(req, res) {
       //   console.log(pages, "pages");
       //   return;
       const page = pdfDoc.addPage([600, 800]);
-      const pagetwo = pdfDoc.addPage([900, 550]);
+      const pagetwo = pdfDoc.addPage([900, 600]);
       const deedPage = pdfDoc.addPage([600, 800]);
 
       const embeddedPage = await pdfDoc.embedPage(page);
@@ -220,7 +220,7 @@ export default async function handler(req, res) {
       const ertificateMidpngDims = certificateMid.scale(0.22);
 
       const fontTwo = fs.readFileSync(
-        path.join("./utils", "fonts", "TempusSansITC Bold.ttf")
+        path.join("./utils", "fonts", "TempusSansITCBold.ttf")
       );
       const tempusFont = await pdfDoc.embedFont(fontTwo);
 
@@ -339,6 +339,10 @@ export default async function handler(req, res) {
 
       //Page Three of Deed of certificate =========================================================
 
+      const timesRomanItalicFontHeading = await pdfDoc.embedFont(
+        StandardFonts.TimesRomanItalic
+      );
+
       const MainHeading = "Master Title Deed";
       const SubHeading = "Deed of Change of Name and Title (Deed Poll)";
       const formerTitle = "(Former Name & Title)";
@@ -352,28 +356,32 @@ export default async function handler(req, res) {
       const underlineY = 680; // Adjust the y-position as needed
 
       // Adjust the x-positions as needed for each form field
-      const underlineX1 = 170; // For Form Field 1
-      const underlineX2 = 270; // For Form Field 1
-      const underlineX3 = 170; // For Form Field 2
-      const underlineX4 = 270; // For Form Field 2
-      const underlineX5 = 90; // For Form Field 3
+      const underlineX7 = 410; // For Form Field 1
+      const underlineX8 = 470;
+      const underlineX1 = 240; // For Form Field 1
+      const underlineX2 = 320; // For Form Field 1
+      const underlineX3 = 110; // For Form Field 2
+      const underlineX4 = 180; // For Form Field 2
+      const underlineX5 = 60; // For Form Field 3
       const underlineX6 = 580; // For Form Field 3
+      const deedFormTextPlaceHolder = "Home Address";
 
-      deedPage.drawLine({
-        start: { x: underlineX5, y: 600 }, // Adjust the y-position for Form Field 3
-        end: { x: underlineX6, y: 600 }, // Adjust the y-position for Form Field 3
-        color: rgb(0, 0, 0),
-        thickness: underlineHeight,
-      });
       const deedFormText = `of Craig Edward Smith ${formerTitle}\n\nnow Lord Craig Edward Smith ${newTitle}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\nLord Craig Edward Smith,\n\nof`;
-      // deedPage.drawLine({
-      //   x: 70,
-      //   y: 680,
-      //   // start: { x: underlineX1, y: underlineY },
-      //   // end: { x: underlineX2, y: underlineY },
-      //   color: rgb(0, 0, 0),
-      //   thickness: underlineHeight,
-      // });
+      const declarationOne = `HEREBY DECLARE AS FOLLOWS;\n\n1.    I ABSOLUTELY and entirely renounce, relinquish and abandon the use of my said Former Name &\nTitle and assume, adopt and determine to take and use from the date hereof the New Name & Title in\nsubstitution for my Former Name & Title.`;
+      const declarationTwo = `2.    I SHALL AT ALL TIMES hereafter in all records, deeds, documents and other writings and in all\nactions and proceedings as well as in all dealings and transactions and on all occasions whatsoever use and\nsubscribe the said New Name & Title as my name in substitution for my Former Name & Title so\nrelinquished as aforesaid to the intent that I may hereafter be called, known or distinguished by the New Name\n& Title only and not by the Former Name & Title.`;
+      const declarationThree = `3.    I AUTHORISE AND REQUIRE all persons at all times to designate, describe and address me by my\nadopted New Name & Title.`;
+      const declarationFour = `IN WITNESS whereof I have hereunto subscribed my adopted and substituted New Name & Title and also my\nFormer Name & Title.`;
+      const signed = "SIGNED THIS";
+      const day = "DAY OF";
+      const year = "IN THE YEAR";
+      const signedAs = "SIGNED AS A DEED AND DELIVERED\n\nby the above named";
+      const signPlaceHolder = "Signature";
+      const lordName = "Lord Craig Edward Smith\n\nFormerly known as";
+      const formerName = "Craig Edward Smith";
+
+      const presence = "In the presence of:";
+      const witness = "Witness's signature";
+
       deedPage.drawText(MainHeading, {
         x: 200,
         y: 750,
@@ -408,28 +416,300 @@ export default async function handler(req, res) {
         font: timesRomanFont,
       });
 
-      // deedPage.drawText(content, {
-      //   x: 50,
-      //   y: 600,
-      //   width: textWidth,
-      //   height: textHeight,
-      //   size: fontSize,
-      //   color: rgb(0, 0, 0),
-      //   lineHeight: fontSize * 1.2,
-      //   font: timesRomanFont,
-      // });
-
-      deedPage.drawText(welcomeContent, {
-        x: 170,
-        y: 300,
+      deedPage.drawText(deedFormText, {
+        x: 30,
+        y: 710,
         width: textWidth,
         height: textHeight,
-        size: fontSize,
+        size: 12,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
+        // font: customFont,
         font: timesRomanFont,
       });
 
+      deedPage.drawLine({
+        start: { x: underlineX5, y: 600 }, // Adjust the y-position for Form Field 3
+        end: { x: underlineX6, y: 600 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+
+      deedPage.drawText(deedFormTextPlaceHolder, {
+        x: 60,
+        y: 600,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0.65, 0.65, 0.65),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanItalicFontHeading,
+      });
+
+      deedPage.drawText(declarationOne, {
+        x: 30,
+        y: 580,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(declarationTwo, {
+        x: 30,
+        y: 500,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(declarationThree, {
+        x: 30,
+        y: 420,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(declarationFour, {
+        x: 30,
+        y: 370,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(signed, {
+        x: 30,
+        y: 300,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+      deedPage.drawLine({
+        start: { x: underlineX3, y: 300 }, // Adjust the y-position for Form Field 3
+        end: { x: underlineX4, y: 300 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+
+      deedPage.drawText(day, {
+        x: 190,
+        y: 300,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawLine({
+        start: { x: underlineX1, y: 300 }, // Adjust the y-position for Form Field 3
+        end: { x: underlineX2, y: 300 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+
+      deedPage.drawText(year, {
+        x: 330,
+        y: 300,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(signedAs, {
+        x: 30,
+        y: 270,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawLine({
+        start: { x: 30, y: 200 }, // Adjust the y-position for Form Field 3
+        end: { x: 250, y: 200 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+      deedPage.drawText(signPlaceHolder, {
+        x: 40,
+        y: 190,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0.65, 0.65, 0.65),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanItalicFontHeading,
+      });
+
+      deedPage.drawLine({
+        start: { x: 30, y: 170 }, // Adjust the y-position for Form Field 3
+        end: { x: 250, y: 170 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+
+      deedPage.drawText(lordName, {
+        x: 40,
+        y: 155,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawLine({
+        start: { x: 30, y: 90 }, // Adjust the y-position for Form Field 3
+        end: { x: 250, y: 90 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+
+      deedPage.drawText(formerName, {
+        x: 40,
+        y: 75,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(presence, {
+        x: 270,
+        y: 250,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(witness, {
+        x: 270,
+        y: 225,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawLine({
+        start: { x: 370, y: 225 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 225 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+
+      deedPage.drawText("Name", {
+        x: 270,
+        y: 195,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawLine({
+        start: { x: 300, y: 195 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 195 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+
+      deedPage.drawText("Address", {
+        x: 270,
+        y: 160,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawLine({
+        start: { x: 310, y: 160 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 160 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+      deedPage.drawLine({
+        start: { x: 270, y: 135 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 135 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+      deedPage.drawLine({
+        start: { x: 270, y: 115 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 115 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+
+      deedPage.drawText("Occupation", {
+        x: 270,
+        y: 70,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawLine({
+        start: { x: 320, y: 70 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 70 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
       const pdfBytes = await pdfDoc.save();
 
       const pdfStream = new Readable();
