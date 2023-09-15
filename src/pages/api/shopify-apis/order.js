@@ -3870,7 +3870,7 @@ export default async function handler(req, res) {
               resultObject._Date
             );
           } else {
-            onlyEmblem(
+            onlyTartan(
               resultObject._Title1,
               resultObject._name1,
               resultObject._Date
