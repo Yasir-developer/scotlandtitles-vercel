@@ -2735,8 +2735,26 @@ export default async function handler(req, res) {
       ];
 
       const monthName = monthNames[dateObj.getMonth()];
+      let dayWithSuffix;
 
-      const dateContent = `THIS ${day} DAY OF ${monthName} IN THE YEAR ${year}`;
+      if (day >= 11 && day <= 13) {
+        dayWithSuffix = `${day}th`;
+      } else {
+        switch (day % 10) {
+          case 1:
+            dayWithSuffix = `${day}st`;
+            break;
+          case 2:
+            dayWithSuffix = `${day}nd`;
+            break;
+          case 3:
+            dayWithSuffix = `${day}rd`;
+            break;
+          default:
+            dayWithSuffix = `${day}th`;
+        }
+      }
+      const dateContent = `THIS ${day} ${dayWithSuffix} DAY OF ${monthName} IN THE YEAR ${year}`;
       const copyright =
         "All content, layout, artwork and illustrations copyright Scotland Titles 2021 and subject to licence";
 
@@ -3275,8 +3293,26 @@ export default async function handler(req, res) {
       ];
 
       const monthName = monthNames[dateObj.getMonth()];
+      let dayWithSuffix;
 
-      const dateContent = `THIS ${day} DAY OF ${monthName} IN THE YEAR ${year}`;
+      if (day >= 11 && day <= 13) {
+        dayWithSuffix = `${day}th`;
+      } else {
+        switch (day % 10) {
+          case 1:
+            dayWithSuffix = `${day}st`;
+            break;
+          case 2:
+            dayWithSuffix = `${day}nd`;
+            break;
+          case 3:
+            dayWithSuffix = `${day}rd`;
+            break;
+          default:
+            dayWithSuffix = `${day}th`;
+        }
+      }
+      const dateContent = `THIS ${day} ${dayWithSuffix} DAY OF ${monthName} IN THE YEAR ${year}`;
       const copyright =
         "All content, layout, artwork and illustrations copyright Scotland Titles 2021 and subject to licence";
 
