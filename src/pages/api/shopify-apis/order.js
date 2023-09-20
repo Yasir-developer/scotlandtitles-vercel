@@ -324,6 +324,17 @@ export default async function handler(req, res) {
         "between Scotland Titles, Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom and";
       const certficateUserName = `${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1} of Blairadam`;
 
+      //   const emblemCertficateUserName = `${propObject.p_8727183065361._Title1} ${propObject.p_8727183065361._Name1}`;
+      const certificateUserNametextWidth = oldEng.widthOfTextAtSize(
+        certficateUserName,
+        12
+      );
+
+      const certificateHalfOfWord = certificateUserNametextWidth / 2;
+      const certificateStartingPosition =
+        (pagetwo.getWidth() - certificateUserNametextWidth) / 2;
+      const certificateX = certificateStartingPosition - certificateHalfOfWord;
+
       const certificateAddressTwo = `(hereafter to be proclaimed as “THE ${propObject.p_8727183196433._Title1}”), care of Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom`;
 
       const certificateText = `The Scotland Titles Estate in Fife, Scotland, hereinafter referred to as “THE ESTATE”,\nhas been partitioned into dedicated souvenir plots of land.\n\nTHE LORD has petitioned unto Scotland Titles on this day their intention to\npurchase, and Scotland Titles has determined to accept the disposition of a plot of\nland within THE ESTATE, at Cantsdam, hereafter referred to as “THE LAND”.\n\nScotland Titles, in CONSIDERATION of all monies due to be paid to us by THE\n ${propObject.p_8727183196433._Title1}, of which we have received of in full, we do hereby DISCHARGE unto them\nand DISPONE to and in perpetuity in favour of THE ${propObject.p_8727183196433._Title1} and to their future\nassignees the whole of THE LAND but always with pedestrian access only over THE\nESTATE; such rights of vehicular access are reserved to Scotland Titles and its\nsuccessors in title plus any and all others authorised by it; THE LORD covenants not\nto dispose of THE LAND in part only.\n\nScotland Titles is a trading name of Blairdam Corporation PA. Terms and Conditions,\nand this CERTIFICATE shall be governed by the Law of Scotland.`;
@@ -438,7 +449,7 @@ export default async function handler(req, res) {
       });
 
       pagetwo.drawText(certficateUserName, {
-        x: 215,
+        x: certificateX,
         y: 470,
         width: textWidth,
         height: textHeight,
@@ -919,10 +930,10 @@ export default async function handler(req, res) {
       const emblem_certificate_heading = `To All & Sundry whom these presents do concern\n
              Scotland Titles does declare that`;
       //   const emblemCertficateUserName = `${propObject.p_8727183065361._Title1} ${propObject.p_8727183065361._Name1}`;
-      const emblemCertficateUserName = `Lord Large`;
+      const emblemCertficateUserName = `${propObject.p_8727183065361._Title1} ${propObject.p_8727183065361._Name1}`;
       const userNametextWidth = oldEng.widthOfTextAtSize(
         emblemCertficateUserName,
-        fontSize
+        12
       );
 
       const halfOfWord = userNametextWidth / 2;
@@ -1077,28 +1088,28 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawImage(certificateMid, {
-        x: 300,
+        x: 250,
         y: 610,
         width: ertificateMidpngDims.width,
         height: ertificateMidpngDims.height,
       });
       emblemCertificate.drawImage(img, {
         x: 40,
-        y: 660,
+        y: 740,
         width: pngDims.width,
         height: pngDims.height,
       });
 
       emblemCertificate.drawImage(stampImg, {
-        x: 590,
+        x: 490,
         y: 70,
         width: stampPngDims.width,
         height: stampPngDims.height,
       });
 
       emblemCertificate.drawText(emblem_certificate_heading, {
-        x: 200,
-        y: 700,
+        x: 150,
+        y: 730,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -1110,7 +1121,7 @@ export default async function handler(req, res) {
       emblemCertificate.drawText(emblemCertficateUserName, {
         // x: 200,
         x: x,
-        y: 640,
+        y: 670,
         width: textWidth,
         height: textHeight,
         size: 26,
@@ -1120,7 +1131,7 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(petition, {
-        x: 40,
+        x: 25,
         y: 580,
         size: 16,
         width: textWidth,
@@ -1131,22 +1142,22 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(emblemCertificateText, {
-        x: 170,
+        x: 160,
         y: 580,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
       });
 
       emblemCertificate.drawText(emblemCertificateTextTwo, {
-        x: 40,
+        x: 25,
         y: 565,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
@@ -1155,7 +1166,7 @@ export default async function handler(req, res) {
       //shewen text
 
       emblemCertificate.drawText(Shewen, {
-        x: 40,
+        x: 25,
         y: 490,
         size: 16,
         width: textWidth,
@@ -1166,22 +1177,22 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(emblemCertificateShewenText, {
-        x: 100,
+        x: 85,
         y: 490,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
       });
 
       emblemCertificate.drawText(emblemCertificateShewenTextTwo, {
-        x: 40,
+        x: 25,
         y: 475,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
@@ -1190,7 +1201,7 @@ export default async function handler(req, res) {
       //videlict
 
       emblemCertificate.drawText(videlicit, {
-        x: 40,
+        x: 25,
         y: 290,
         size: 16,
         width: textWidth,
@@ -1201,22 +1212,22 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(emblemCertificateVidelicitText, {
-        x: 115,
+        x: 90,
         y: 290,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
       });
 
       emblemCertificate.drawText(emblemCertificateVidelicitTextTwo, {
-        x: 40,
+        x: 25,
         y: 275,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
@@ -1225,7 +1236,7 @@ export default async function handler(req, res) {
       //In Testimony Whereof
 
       emblemCertificate.drawText(testimony, {
-        x: 40,
+        x: 25,
         y: 210,
         size: 16,
         width: textWidth,
@@ -1236,22 +1247,22 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(emblemCertificateTestimonyText, {
-        x: 195,
+        x: 180,
         y: 210,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
       });
 
       emblemCertificate.drawText(emblemCertificateTestimonyTextTwo, {
-        x: 40,
+        x: 25,
         y: 195,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
@@ -1259,24 +1270,24 @@ export default async function handler(req, res) {
 
       //middle line image ===========
 
-      emblemCertificate.drawImage(emblem_middle, {
-        x: 340,
-        y: 170,
-        height: 430,
-        // width: ertificateMidpngDims.width,
-        // height: ertificateMidpngDims.height,
-      });
+      //   emblemCertificate.drawImage(emblem_middle, {
+      //     x: 340,
+      //     y: 170,
+      //     height: 430,
+      //     // width: ertificateMidpngDims.width,
+      //     // height: ertificateMidpngDims.height,
+      //   });
 
       emblemCertificate.drawImage(emblem_logo, {
-        x: 380,
-        y: 340,
-        height: 250,
+        x: 320,
+        y: 400,
+        height: 200,
         width: 250,
       });
 
       emblemCertificate.drawText(further, {
-        x: 380,
-        y: 330,
+        x: 310,
+        y: 380,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -1286,19 +1297,19 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(furtherDescription, {
-        x: 380,
-        y: 310,
+        x: 310,
+        y: 355,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
       });
 
       emblemCertificate.drawText(Scilicet, {
-        x: 380,
-        y: 250,
+        x: 310,
+        y: 275,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -1308,22 +1319,22 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(scilicetSubDescription, {
-        x: 430,
-        y: 250,
+        x: 360,
+        y: 275,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
       });
 
       emblemCertificate.drawText(ScilicetDescription, {
-        x: 380,
-        y: 235,
+        x: 310,
+        y: 260,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
@@ -1331,7 +1342,7 @@ export default async function handler(req, res) {
 
       //SIGNED
       emblemCertificate.drawText(emblemSigned, {
-        x: 200,
+        x: 150,
         y: 110,
         size: 16,
         width: textWidth,
@@ -1342,7 +1353,7 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(dateText, {
-        x: 220,
+        x: 170,
         y: 80,
         size: 16,
         width: textWidth,
@@ -1353,18 +1364,18 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(dateContent, {
-        x: 260,
+        x: 210,
         y: 80,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
       });
 
       emblemCertificate.drawText(copyright, {
-        x: 240,
+        x: 190,
         y: 70,
         width: textWidth,
         height: textHeight,
@@ -1375,10 +1386,10 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawImage(emblem_signature, {
-        x: 260,
+        x: 210,
         y: 100,
         height: 50,
-        width: 50,
+        width: 30,
       });
 
       //tartan ============
@@ -1389,7 +1400,7 @@ export default async function handler(req, res) {
       const tartanCertficateUserName = `${propObject.p_8727183032593._Title1} ${propObject.p_8727183032593._Name1}`;
       const tartanUserNametextWidth = oldEng.widthOfTextAtSize(
         tartanCertficateUserName,
-        fontSize
+        12
       );
 
       const tartanHalfOfWord = tartanUserNametextWidth / 2;
@@ -1436,8 +1447,7 @@ export default async function handler(req, res) {
 
       const tartanTestimony = "In Testimony whereof";
       const tartanTestimonyDescription = "we have subscribed these";
-      const tartanTestimonyDescriptionTwo =
-        "presents and the seal of our office is affixed hereto at Scotland\nTitles this day in this year of the reign of our sovereign Charles\nthe Third, by the Grace of God, of the United Kingdom of\nGreat Britain and Northern Ireland, King, Head of the\nCommonwealth, Defender of the Faith, and in the Year of our\nLord stated henceforth.";
+      const tartanTestimonyDescriptionTwo = `presents and the seal of our office is affixed hereto at Scotland\nTitles this day in this year of the reign of our sovereign Charles\nthe Third, by the Grace of God, of the United Kingdom of\nGreat Britain and Northern Ireland, King, Head of the\nCommonwealth, Defender of the Faith, and in the Year of our\n${propObject.p_8727183032593._Title1} stated henceforth.`;
 
       const tartanSigned = "Signed";
 
@@ -1983,7 +1993,7 @@ export default async function handler(req, res) {
         x: 210,
         y: 90,
         height: 50,
-        width: 50,
+        width: 30,
       });
 
       const pdfBytes = await pdfDoc.save();
@@ -2348,7 +2358,7 @@ export default async function handler(req, res) {
         x: 500,
         y: 70,
         height: 70,
-        width: 50,
+        width: 30,
       });
 
       pagetwo.drawText("Signed", {
@@ -2870,7 +2880,7 @@ export default async function handler(req, res) {
       const emblemCertficateUserName = `Lord Large`;
       const userNametextWidth = oldEng.widthOfTextAtSize(
         emblemCertficateUserName,
-        fontSize
+        12
       );
 
       const halfOfWord = userNametextWidth / 2;
@@ -3025,28 +3035,28 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawImage(certificateMid, {
-        x: 300,
+        x: 250,
         y: 610,
         width: ertificateMidpngDims.width,
         height: ertificateMidpngDims.height,
       });
       emblemCertificate.drawImage(img, {
         x: 40,
-        y: 660,
+        y: 740,
         width: pngDims.width,
         height: pngDims.height,
       });
 
       emblemCertificate.drawImage(stampImg, {
-        x: 590,
+        x: 490,
         y: 70,
         width: stampPngDims.width,
         height: stampPngDims.height,
       });
 
       emblemCertificate.drawText(emblem_certificate_heading, {
-        x: 200,
-        y: 700,
+        x: 150,
+        y: 730,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -3058,7 +3068,7 @@ export default async function handler(req, res) {
       emblemCertificate.drawText(emblemCertficateUserName, {
         // x: 200,
         x: x,
-        y: 640,
+        y: 670,
         width: textWidth,
         height: textHeight,
         size: 26,
@@ -3068,7 +3078,7 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(petition, {
-        x: 40,
+        x: 25,
         y: 580,
         size: 16,
         width: textWidth,
@@ -3079,22 +3089,22 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(emblemCertificateText, {
-        x: 170,
+        x: 160,
         y: 580,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
       });
 
       emblemCertificate.drawText(emblemCertificateTextTwo, {
-        x: 40,
+        x: 25,
         y: 565,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
@@ -3103,7 +3113,7 @@ export default async function handler(req, res) {
       //shewen text
 
       emblemCertificate.drawText(Shewen, {
-        x: 40,
+        x: 25,
         y: 490,
         size: 16,
         width: textWidth,
@@ -3114,22 +3124,22 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(emblemCertificateShewenText, {
-        x: 100,
+        x: 85,
         y: 490,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
       });
 
       emblemCertificate.drawText(emblemCertificateShewenTextTwo, {
-        x: 40,
+        x: 25,
         y: 475,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
@@ -3138,7 +3148,7 @@ export default async function handler(req, res) {
       //videlict
 
       emblemCertificate.drawText(videlicit, {
-        x: 40,
+        x: 25,
         y: 290,
         size: 16,
         width: textWidth,
@@ -3149,22 +3159,22 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(emblemCertificateVidelicitText, {
-        x: 115,
+        x: 90,
         y: 290,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
       });
 
       emblemCertificate.drawText(emblemCertificateVidelicitTextTwo, {
-        x: 40,
+        x: 25,
         y: 275,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
@@ -3173,7 +3183,7 @@ export default async function handler(req, res) {
       //In Testimony Whereof
 
       emblemCertificate.drawText(testimony, {
-        x: 40,
+        x: 25,
         y: 210,
         size: 16,
         width: textWidth,
@@ -3184,22 +3194,22 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(emblemCertificateTestimonyText, {
-        x: 195,
+        x: 180,
         y: 210,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
       });
 
       emblemCertificate.drawText(emblemCertificateTestimonyTextTwo, {
-        x: 40,
+        x: 25,
         y: 195,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
@@ -3207,24 +3217,24 @@ export default async function handler(req, res) {
 
       //middle line image ===========
 
-      emblemCertificate.drawImage(emblem_middle, {
-        x: 340,
-        y: 170,
-        height: 430,
-        // width: ertificateMidpngDims.width,
-        // height: ertificateMidpngDims.height,
-      });
+      //   emblemCertificate.drawImage(emblem_middle, {
+      //     x: 340,
+      //     y: 170,
+      //     height: 430,
+      //     // width: ertificateMidpngDims.width,
+      //     // height: ertificateMidpngDims.height,
+      //   });
 
       emblemCertificate.drawImage(emblem_logo, {
-        x: 380,
-        y: 340,
-        height: 250,
+        x: 320,
+        y: 400,
+        height: 200,
         width: 250,
       });
 
       emblemCertificate.drawText(further, {
-        x: 380,
-        y: 330,
+        x: 310,
+        y: 380,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -3234,19 +3244,19 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(furtherDescription, {
-        x: 380,
-        y: 310,
+        x: 310,
+        y: 355,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
       });
 
       emblemCertificate.drawText(Scilicet, {
-        x: 380,
-        y: 250,
+        x: 310,
+        y: 275,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -3256,22 +3266,22 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(scilicetSubDescription, {
-        x: 430,
-        y: 250,
+        x: 360,
+        y: 275,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
       });
 
       emblemCertificate.drawText(ScilicetDescription, {
-        x: 380,
-        y: 235,
+        x: 310,
+        y: 260,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
@@ -3279,7 +3289,7 @@ export default async function handler(req, res) {
 
       //SIGNED
       emblemCertificate.drawText(emblemSigned, {
-        x: 200,
+        x: 150,
         y: 110,
         size: 16,
         width: textWidth,
@@ -3290,7 +3300,7 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(dateText, {
-        x: 220,
+        x: 170,
         y: 80,
         size: 16,
         width: textWidth,
@@ -3301,18 +3311,18 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(dateContent, {
-        x: 260,
+        x: 210,
         y: 80,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
       });
 
       emblemCertificate.drawText(copyright, {
-        x: 240,
+        x: 190,
         y: 70,
         width: textWidth,
         height: textHeight,
@@ -3323,10 +3333,10 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawImage(emblem_signature, {
-        x: 260,
+        x: 210,
         y: 100,
         height: 50,
-        width: 50,
+        width: 30,
       });
 
       const pdfBytes = await pdfDoc.save();
@@ -3689,7 +3699,7 @@ export default async function handler(req, res) {
         x: 500,
         y: 70,
         height: 70,
-        width: 50,
+        width: 30,
       });
 
       pagetwo.drawText("Signed", {
@@ -4206,7 +4216,7 @@ export default async function handler(req, res) {
       const tartanCertficateUserName = `${propObject.p_8727183032593._Title1} ${propObject.p_8727183032593._Name1}`;
       const userNametextWidth = oldEng.widthOfTextAtSize(
         tartanCertficateUserName,
-        fontSize
+        12
       );
 
       const halfOfWord = userNametextWidth / 2;
@@ -4317,24 +4327,24 @@ export default async function handler(req, res) {
       //     "DECEMBER",
       //   ];
 
-      const tartanmonthName = monthNames[dateObj.getMonth()];
+      const tartanmonthName = monthNames[tartandateObj.getMonth()];
       let tartandayWithSuffix;
 
-      if (day >= 11 && day <= 13) {
-        tartandayWithSuffix = `${day}th`;
+      if (tartanday >= 11 && tartanday <= 13) {
+        tartandayWithSuffix = `${tartanday}th`;
       } else {
-        switch (day % 10) {
+        switch (tartanday % 10) {
           case 1:
-            tartandayWithSuffix = `${day}st`;
+            tartandayWithSuffix = `${tartanday}st`;
             break;
           case 2:
-            tartandayWithSuffix = `${day}nd`;
+            tartandayWithSuffix = `${tartanday}nd`;
             break;
           case 3:
-            tartandayWithSuffix = `${day}rd`;
+            tartandayWithSuffix = `${tartanday}rd`;
             break;
           default:
-            tartandayWithSuffix = `${day}th`;
+            tartandayWithSuffix = `${tartanday}th`;
         }
       }
       const TartandateContent = `THIS ${tartandayWithSuffix} DAY OF ${tartanmonthName} IN THE YEAR ${tartanyear}`;
@@ -4347,22 +4357,22 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawImage(img, {
-        x: 600,
-        y: 680,
+        x: 500,
+        y: 740,
         width: pngDims.width,
         height: pngDims.height,
       });
 
       tartanCertificate.drawImage(stampImg, {
-        x: 580,
-        y: 60,
+        x: 500,
+        y: 80,
         width: stampPngDims.width,
         height: stampPngDims.height,
       });
 
       tartanCertificate.drawText(tartan_certificate_heading, {
-        x: 200,
-        y: 710,
+        x: 150,
+        y: 750,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -4373,7 +4383,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanCertficateUserName, {
         x: x,
-        y: 680,
+        y: 720,
         width: textWidth,
         height: textHeight,
         size: 26,
@@ -4383,8 +4393,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(declare, {
-        x: 300,
-        y: 650,
+        x: 250,
+        y: 690,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -4394,8 +4404,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(Allegiance, {
-        x: 100,
-        y: 620,
+        x: 50,
+        y: 660,
         size: 26,
         width: textWidth,
         height: textHeight,
@@ -4405,8 +4415,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(prey, {
-        x: 280,
-        y: 620,
+        x: 230,
+        y: 660,
         size: 18,
         width: textWidth,
         height: textHeight,
@@ -4416,8 +4426,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(certified, {
-        x: 420,
-        y: 620,
+        x: 370,
+        y: 660,
         size: 26,
         width: textWidth,
         height: textHeight,
@@ -4428,14 +4438,14 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawImage(certificateMid, {
-        x: 300,
-        y: 590,
+        x: 230,
+        y: 630,
         width: ertificateMidpngDims.width,
         height: ertificateMidpngDims.height,
       });
       tartanCertificate.drawText(Greeting, {
-        x: 40,
-        y: 570,
+        x: 20,
+        y: 600,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -4445,8 +4455,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(tartanCertificateGreetingText, {
-        x: 240,
-        y: 570,
+        x: 220,
+        y: 600,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -4456,8 +4466,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(tartanCertificateGreetingTextTwo, {
-        x: 40,
-        y: 555,
+        x: 20,
+        y: 585,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -4469,8 +4479,8 @@ export default async function handler(req, res) {
       //shewen text
 
       tartanCertificate.drawText(know, {
-        x: 40,
-        y: 530,
+        x: 20,
+        y: 560,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -4480,8 +4490,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(tartanCertificateknowText, {
-        x: 168,
-        y: 530,
+        x: 143,
+        y: 560,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -4491,8 +4501,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(tartanCertificateknowTextTwo, {
-        x: 40,
-        y: 515,
+        x: 20,
+        y: 545,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -4504,8 +4514,8 @@ export default async function handler(req, res) {
       //videlict
 
       tartanCertificate.drawText(Therefore, {
-        x: 40,
-        y: 425,
+        x: 20,
+        y: 445,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -4515,8 +4525,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(tartanCertificateThereforeText, {
-        x: 165,
-        y: 425,
+        x: 150,
+        y: 445,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -4526,8 +4536,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(tartanCertificateThereforeTextTwo, {
-        x: 40,
-        y: 410,
+        x: 20,
+        y: 430,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -4539,8 +4549,8 @@ export default async function handler(req, res) {
       //In Testimony Whereof
 
       tartanCertificate.drawText(scotlantTiles, {
-        x: 40,
-        y: 350,
+        x: 20,
+        y: 360,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -4550,8 +4560,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(tartanCertificateScotlantTilesText, {
-        x: 225,
-        y: 350,
+        x: 205,
+        y: 360,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -4561,8 +4571,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(tartanCertificateScotlantTilesTextTwo, {
-        x: 40,
-        y: 335,
+        x: 20,
+        y: 345,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -4572,8 +4582,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(Tartan, {
-        x: 40,
-        y: 250,
+        x: 20,
+        y: 260,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -4583,8 +4593,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(tartanCertificateText, {
-        x: 185,
-        y: 250,
+        x: 165,
+        y: 260,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -4594,8 +4604,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(tartanCertificateTextTwo, {
-        x: 40,
-        y: 235,
+        x: 20,
+        y: 245,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -4605,8 +4615,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(demostration, {
-        x: 40,
-        y: 170,
+        x: 20,
+        y: 180,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -4616,8 +4626,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(demonstrationText, {
-        x: 182,
-        y: 170,
+        x: 155,
+        y: 180,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -4627,8 +4637,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(demonstrationTextTwo, {
-        x: 40,
-        y: 155,
+        x: 20,
+        y: 165,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -4638,8 +4648,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText("Royal Stewart Hunting", {
-        x: 400,
-        y: 570,
+        x: 360,
+        y: 600,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -4649,15 +4659,15 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawImage(tartan_logo, {
-        x: 400,
-        y: 310,
+        x: 330,
+        y: 340,
         height: 250,
         width: 250,
       });
 
       tartanCertificate.drawText(tartanFurther, {
-        x: 380,
-        y: 280,
+        x: 310,
+        y: 310,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -4667,8 +4677,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(tartanFurtherDescription, {
-        x: 550,
-        y: 280,
+        x: 485,
+        y: 310,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -4678,8 +4688,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(tartanFurtherDescriptionTwo, {
-        x: 380,
-        y: 265,
+        x: 310,
+        y: 295,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -4689,8 +4699,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(tartanTestimony, {
-        x: 380,
-        y: 230,
+        x: 310,
+        y: 260,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -4700,8 +4710,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(tartanTestimonyDescription, {
-        x: 525,
-        y: 230,
+        x: 455,
+        y: 260,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -4711,8 +4721,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(tartanTestimonyDescriptionTwo, {
-        x: 380,
-        y: 215,
+        x: 310,
+        y: 245,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -4723,7 +4733,7 @@ export default async function handler(req, res) {
 
       //SIGNED
       tartanCertificate.drawText(tartanSigned, {
-        x: 200,
+        x: 150,
         y: 100,
         size: 16,
         width: textWidth,
@@ -4734,7 +4744,7 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(dateText, {
-        x: 220,
+        x: 170,
         y: 70,
         size: 16,
         width: textWidth,
@@ -4745,7 +4755,7 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(TartandateContent, {
-        x: 260,
+        x: 210,
         y: 70,
         width: textWidth,
         height: textHeight,
@@ -4756,7 +4766,7 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(copyright, {
-        x: 240,
+        x: 190,
         y: 60,
         width: textWidth,
         height: textHeight,
@@ -4767,10 +4777,10 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawImage(tartan_signature, {
-        x: 260,
+        x: 210,
         y: 90,
         height: 50,
-        width: 50,
+        width: 30,
       });
       const pdfBytes = await pdfDoc.save();
 
@@ -5138,7 +5148,7 @@ export default async function handler(req, res) {
         x: 500,
         y: 70,
         height: 70,
-        width: 50,
+        width: 30,
       });
 
       pagetwo.drawText("Signed", {
@@ -5682,7 +5692,7 @@ export default async function handler(req, res) {
       const emblemCertficateUserName = `Lord ${propObject.p_8727183065361._Title1} ${propObject.p_8727183065361._Name1}`;
       const userNametextWidth = oldEng.widthOfTextAtSize(
         emblemCertficateUserName,
-        fontSize
+        12
       );
 
       const halfOfWord = userNametextWidth / 2;
@@ -5833,34 +5843,35 @@ export default async function handler(req, res) {
       const emblem_signature = await pdfDoc.embedPng(emblem_signature_Buffer);
       const textWidth = emblemCertificate.getWidth() - 100; // Adjust the width as needed
       const textHeight = emblemCertificate.getHeight() - 50;
+
       emblemCertificate.drawImage(emblem_bg, {
         width: emblemCertificate.getWidth(),
         height: emblemCertificate.getHeight(),
       });
 
       emblemCertificate.drawImage(certificateMid, {
-        x: 300,
+        x: 250,
         y: 610,
         width: ertificateMidpngDims.width,
         height: ertificateMidpngDims.height,
       });
       emblemCertificate.drawImage(img, {
         x: 40,
-        y: 660,
+        y: 740,
         width: pngDims.width,
         height: pngDims.height,
       });
 
       emblemCertificate.drawImage(stampImg, {
-        x: 590,
+        x: 490,
         y: 70,
         width: stampPngDims.width,
         height: stampPngDims.height,
       });
 
       emblemCertificate.drawText(emblem_certificate_heading, {
-        x: 200,
-        y: 700,
+        x: 150,
+        y: 730,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -5872,7 +5883,7 @@ export default async function handler(req, res) {
       emblemCertificate.drawText(emblemCertficateUserName, {
         // x: 200,
         x: x,
-        y: 640,
+        y: 670,
         width: textWidth,
         height: textHeight,
         size: 26,
@@ -5882,7 +5893,7 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(petition, {
-        x: 40,
+        x: 25,
         y: 580,
         size: 16,
         width: textWidth,
@@ -5893,22 +5904,22 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(emblemCertificateText, {
-        x: 170,
+        x: 160,
         y: 580,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
       });
 
       emblemCertificate.drawText(emblemCertificateTextTwo, {
-        x: 40,
+        x: 25,
         y: 565,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
@@ -5917,7 +5928,7 @@ export default async function handler(req, res) {
       //shewen text
 
       emblemCertificate.drawText(Shewen, {
-        x: 40,
+        x: 25,
         y: 490,
         size: 16,
         width: textWidth,
@@ -5928,22 +5939,22 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(emblemCertificateShewenText, {
-        x: 100,
+        x: 85,
         y: 490,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
       });
 
       emblemCertificate.drawText(emblemCertificateShewenTextTwo, {
-        x: 40,
+        x: 25,
         y: 475,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
@@ -5952,7 +5963,7 @@ export default async function handler(req, res) {
       //videlict
 
       emblemCertificate.drawText(videlicit, {
-        x: 40,
+        x: 25,
         y: 290,
         size: 16,
         width: textWidth,
@@ -5963,22 +5974,22 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(emblemCertificateVidelicitText, {
-        x: 115,
+        x: 90,
         y: 290,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
       });
 
       emblemCertificate.drawText(emblemCertificateVidelicitTextTwo, {
-        x: 40,
+        x: 25,
         y: 275,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
@@ -5987,7 +5998,7 @@ export default async function handler(req, res) {
       //In Testimony Whereof
 
       emblemCertificate.drawText(testimony, {
-        x: 40,
+        x: 25,
         y: 210,
         size: 16,
         width: textWidth,
@@ -5998,22 +6009,22 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(emblemCertificateTestimonyText, {
-        x: 195,
+        x: 180,
         y: 210,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
       });
 
       emblemCertificate.drawText(emblemCertificateTestimonyTextTwo, {
-        x: 40,
+        x: 25,
         y: 195,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
@@ -6021,22 +6032,24 @@ export default async function handler(req, res) {
 
       //middle line image ===========
 
-      emblemCertificate.drawImage(emblem_middle, {
-        x: 340,
-        y: 170,
-        height: 430,
-      });
+      //   emblemCertificate.drawImage(emblem_middle, {
+      //     x: 340,
+      //     y: 170,
+      //     height: 430,
+      //     // width: ertificateMidpngDims.width,
+      //     // height: ertificateMidpngDims.height,
+      //   });
 
       emblemCertificate.drawImage(emblem_logo, {
-        x: 380,
-        y: 340,
-        height: 250,
+        x: 320,
+        y: 400,
+        height: 200,
         width: 250,
       });
 
       emblemCertificate.drawText(further, {
-        x: 380,
-        y: 330,
+        x: 310,
+        y: 380,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -6046,19 +6059,19 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(furtherDescription, {
-        x: 380,
-        y: 310,
+        x: 310,
+        y: 355,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
       });
 
       emblemCertificate.drawText(Scilicet, {
-        x: 380,
-        y: 250,
+        x: 310,
+        y: 275,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -6068,22 +6081,22 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(scilicetSubDescription, {
-        x: 430,
-        y: 250,
+        x: 360,
+        y: 275,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
       });
 
       emblemCertificate.drawText(ScilicetDescription, {
-        x: 380,
-        y: 235,
+        x: 310,
+        y: 260,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
@@ -6091,7 +6104,7 @@ export default async function handler(req, res) {
 
       //SIGNED
       emblemCertificate.drawText(emblemSigned, {
-        x: 200,
+        x: 150,
         y: 110,
         size: 16,
         width: textWidth,
@@ -6102,7 +6115,7 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(dateText, {
-        x: 220,
+        x: 170,
         y: 80,
         size: 16,
         width: textWidth,
@@ -6113,18 +6126,18 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(dateContent, {
-        x: 260,
+        x: 210,
         y: 80,
         width: textWidth,
         height: textHeight,
-        size: 10,
+        size: 9,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
         font: tempusFont,
       });
 
       emblemCertificate.drawText(copyright, {
-        x: 240,
+        x: 190,
         y: 70,
         width: textWidth,
         height: textHeight,
@@ -6135,10 +6148,10 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawImage(emblem_signature, {
-        x: 260,
+        x: 210,
         y: 100,
         height: 50,
-        width: 50,
+        width: 30,
       });
 
       const pdfBytes = await pdfDoc.save();
@@ -6169,7 +6182,7 @@ export default async function handler(req, res) {
       const tartanCertficateUserName = `${propObject.p_8727183032593._Title1} ${propObject.p_8727183032593._Name1}`;
       const userNametextWidth = oldEng.widthOfTextAtSize(
         tartanCertficateUserName,
-        fontSize
+        12
       );
 
       const halfOfWord = userNametextWidth / 2;
@@ -6763,7 +6776,7 @@ export default async function handler(req, res) {
         x: 210,
         y: 90,
         height: 50,
-        width: 50,
+        width: 30,
       });
 
       const pdfBytes = await pdfDoc.save();
