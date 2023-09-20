@@ -495,6 +495,7 @@ export default async function handler(req, res) {
         font: tempusFont,
       });
 
+      //Deed page
       const timesRomanItalicFontHeading = await pdfDoc.embedFont(
         StandardFonts.TimesRomanItalic
       );
@@ -503,35 +504,31 @@ export default async function handler(req, res) {
       const SubHeading = "Deed of Change of Name and Title (Deed Poll)";
       const formerTitle = "Former Name & Title";
       const newTitle = "(New Name & Title)";
-
-      const underlineHeight = 1;
+      const underlineHeight = 0.5;
       const underlineY = 680; // Adjust the y-position as needed
 
       // Adjust the x-positions as needed for each form field
-      const underlineX7 = 410; // For Form Field 1
-      const underlineX8 = 470;
+
       const underlineX1 = 240; // For Form Field 1
       const underlineX2 = 320; // For Form Field 1
       const underlineX3 = 110; // For Form Field 2
       const underlineX4 = 180; // For Form Field 2
-      const underlineX5 = 60; // For Form Field 3
+      const underlineX5 = 50; // For Form Field 3
       const underlineX6 = 580; // For Form Field 3
       const deedFormTextPlaceHolder = "Home Address";
       // const formerNameAndTitle="Former Name & Title"
       // const newNameAndTitle="New Name & Title"
 
       const positions = [
-        { x: 110, y: 710 }, //first
-        { x: 125, y: 528 }, //second
-        { x: 365, y: 475 },
-        // { x: 375, y: 420 },
+        // { x: 110, y: 710 }, //first
+        { x: 125, y: 536 }, //second
+        // { x: 395, y: 473 },
         { x: 30, y: 355 }, //in witneess
-        // { x: 630, y: 400 },
 
         // Add more positions as needed
       ];
       positions.forEach((position) => {
-        deedPage.drawText(formerTitle, {
+        deedPage.drawText(`${formerTitle}.`, {
           x: position.x,
           y: position.y,
           size: 12,
@@ -542,10 +539,44 @@ export default async function handler(req, res) {
           font: timesRomanFontHeading,
         });
       });
+      //   const formertextWidth = timesRomanFontHeading.widthOfTextAtSize(
+      //     formerTitle,
+      //     12
+      //   );
+      //   const sideWidthAndFormerWidth = formertextWidth + 40;
+      //   const addFormerAndTotal = sideWidthAndFormerWidth - deedPage.getWidth();
+      //   console.log(addFormerAndTotal, "addFormerAndTotal");
+
+      const deedUserNameWidth = `of ${propObject.p_8727183196433._Name1}`;
+      const formertextWidth = timesRomanFontHeading.widthOfTextAtSize(
+        deedUserNameWidth,
+        12
+      );
+      console.log(formertextWidth, "formertextWidth");
+      const totalWidth = formertextWidth + 35;
+
+      const deedNewNameWidth = `now ${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1}`;
+      const newtextWidth = timesRomanFontHeading.widthOfTextAtSize(
+        deedNewNameWidth,
+        12
+      );
+
+      const newTotalTextWidth = newtextWidth + 30;
+
+      deedPage.drawText(`(${formerTitle})`, {
+        x: totalWidth,
+        y: 710,
+        size: 12,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFontHeading,
+      });
 
       deedPage.drawText(formerTitle, {
-        x: 270,
-        y: 450,
+        x: 175,
+        y: 449,
         size: 12,
         width: textWidth,
         height: textHeight,
@@ -565,8 +596,8 @@ export default async function handler(req, res) {
       //   font: timesRomanFontHeading,
       // });
       deedPage.drawText(newTitle, {
-        x: 140,
-        y: 680,
+        x: newTotalTextWidth,
+        y: 683,
         size: 12,
         width: textWidth,
         height: textHeight,
@@ -576,10 +607,30 @@ export default async function handler(req, res) {
       });
 
       const deedFormText = `of ${propObject.p_8727183196433._Name1}\n\nnow ${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1}\n\nof`;
-      const declarationOne = `HEREBY DECLARE AS FOLLOWS;\n\n1.    I ABSOLUTELY and entirely renounce, relinquish and abandon the use of my said Former Name &\nTitle and assume, adopt and determine to take and use from the date hereof the New Name & Title in\nsubstitution for my`;
-      const declarationTwo = `2.    I SHALL AT ALL TIMES hereafter in all records, deeds, documents and other writings and in all\nactions and proceedings as well as in all dealings and transactions and on all occasions whatsoever use and\nsubscribe the said New Name & Title as my name in substitution for my so\nrelinquished as aforesaid to the intent that I may hereafter be called, known or distinguished by the New Name\n& Title only and not by the`;
-      const declarationThree = `3.    I AUTHORISE AND REQUIRE all persons at all times to designate, describe and address me by my\nadopted New Name & Title.`;
-      const declarationFour = `IN WITNESS whereof I have hereunto subscribed my adopted and substituted New Name & Title and also my.`;
+      const declarationOne = `HEREBY DECLARE AS FOLLOWS;`;
+      const absolute =
+        "1.   I ABSOLUTELY and entirely renounce, relinquish and abandon the use of my said";
+      const formerNameBreak = `Former Name &`;
+      const titleBreak = "Title";
+      const absoluteTwo =
+        "and assume, adopt and determine to take and use from the date hereof the";
+      const newTitleTwo = "New Name & Title";
+      const inContent = "in";
+      const absoluteThree = "substitution for my";
+      const declarationTwo = `2.    I SHALL AT ALL TIMES hereafter in all records, deeds, documents and other writings and in all\nactions and proceedings as well as in all dealings and transactions and on all occasions whatsoever use and`;
+      const declarationTwoSubscribe = "subscribe the said";
+      const declarationTwoSubscribeName = "as my name in substitution for my";
+      const so = "so";
+      const relinqushed =
+        "relinquished as aforesaid to the intent that I may hereafter be called, known or distinguished by the";
+      const newTitleBreak = "New Name";
+      const newTitleBreakTwo = "& Title";
+      const only = "only and not by the";
+
+      const declarationThree = `3.    I AUTHORISE AND REQUIRE all persons at all times to designate, describe and address me by my`;
+      const adopt = "adopted";
+      const declarationFour = `IN WITNESS whereof I have hereunto subscribed my adopted and substituted`;
+      const declarationFourTwo = "and also my";
       const signed = "SIGNED THIS";
       const dayOf = "DAY OF";
       const yearIn = "IN THE YEAR";
@@ -640,13 +691,13 @@ export default async function handler(req, res) {
       deedPage.drawLine({
         start: { x: underlineX5, y: 600 }, // Adjust the y-position for Form Field 3
         end: { x: underlineX6, y: 600 }, // Adjust the y-position for Form Field 3
-        color: rgb(0, 0, 0),
+        color: rgb(0.65, 0.65, 0.65),
         thickness: underlineHeight,
       });
 
       deedPage.drawText(deedFormTextPlaceHolder, {
         x: 60,
-        y: 600,
+        y: 603,
         width: textWidth,
         height: textHeight,
         size: 12,
@@ -668,6 +719,84 @@ export default async function handler(req, res) {
         font: timesRomanFont,
       });
 
+      deedPage.drawText(absolute, {
+        x: 30,
+        y: 560,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(formerNameBreak, {
+        x: 453,
+        y: 560,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+      deedPage.drawText(titleBreak, {
+        x: 30,
+        y: 548,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+      deedPage.drawText(absoluteTwo, {
+        x: 58,
+        y: 548,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(newTitleTwo, {
+        x: 415,
+        y: 548,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+      deedPage.drawText(inContent, {
+        x: 520,
+        y: 548,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(absoluteThree, {
+        x: 30,
+        y: 536,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
       deedPage.drawText(declarationTwo, {
         x: 30,
         y: 500,
@@ -679,6 +808,108 @@ export default async function handler(req, res) {
         // font: customFont,
         font: timesRomanFont,
       });
+
+      deedPage.drawText(declarationTwoSubscribe, {
+        x: 30,
+        y: 473,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(newTitleTwo, {
+        x: 120,
+        y: 473,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(declarationTwoSubscribeName, {
+        x: 210,
+        y: 473,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(formerTitle, {
+        x: 380,
+        y: 473,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+
+      deedPage.drawText(so, {
+        x: 500,
+        y: 473,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(relinqushed, {
+        x: 30,
+        y: 461,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(newTitleBreak, {
+        x: 510,
+        y: 461,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFontHeading,
+      });
+
+      deedPage.drawText(newTitleBreakTwo, {
+        x: 30,
+        y: 449,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFontHeading,
+      });
+
+      deedPage.drawText(only, {
+        x: 73,
+        y: 449,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFontHeading,
+      });
+
       deedPage.drawText(declarationThree, {
         x: 30,
         y: 420,
@@ -691,8 +922,54 @@ export default async function handler(req, res) {
         font: timesRomanFont,
       });
 
+      deedPage.drawText(adopt, {
+        x: 30,
+        y: 408,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(newTitleTwo, {
+        x: 70,
+        y: 408,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+
       deedPage.drawText(declarationFour, {
         x: 30,
+        y: 370,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(newTitleTwo, {
+        x: 413,
+        y: 370,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+      deedPage.drawText(declarationFourTwo, {
+        x: 515,
         y: 370,
         width: textWidth,
         height: textHeight,
@@ -822,7 +1099,7 @@ export default async function handler(req, res) {
 
       deedPage.drawText(presence, {
         x: 270,
-        y: 250,
+        y: 240,
         width: textWidth,
         height: textHeight,
         size: 12,
@@ -834,7 +1111,7 @@ export default async function handler(req, res) {
 
       deedPage.drawText(witness, {
         x: 270,
-        y: 225,
+        y: 190,
         width: textWidth,
         height: textHeight,
         size: 12,
@@ -845,32 +1122,13 @@ export default async function handler(req, res) {
       });
 
       deedPage.drawLine({
-        start: { x: 370, y: 225 }, // Adjust the y-position for Form Field 3
-        end: { x: 540, y: 225 }, // Adjust the y-position for Form Field 3
+        start: { x: 370, y: 190 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 190 }, // Adjust the y-position for Form Field 3
         color: rgb(0, 0, 0),
         thickness: underlineHeight,
       });
 
       deedPage.drawText("Name", {
-        x: 270,
-        y: 195,
-        width: textWidth,
-        height: textHeight,
-        size: 12,
-        color: rgb(0, 0, 0),
-        lineHeight: fontSize * 1.2,
-        // font: customFont,
-        font: timesRomanFont,
-      });
-
-      deedPage.drawLine({
-        start: { x: 300, y: 195 }, // Adjust the y-position for Form Field 3
-        end: { x: 540, y: 195 }, // Adjust the y-position for Form Field 3
-        color: rgb(0, 0, 0),
-        thickness: underlineHeight,
-      });
-
-      deedPage.drawText("Address", {
         x: 270,
         y: 160,
         width: textWidth,
@@ -883,27 +1141,15 @@ export default async function handler(req, res) {
       });
 
       deedPage.drawLine({
-        start: { x: 310, y: 160 }, // Adjust the y-position for Form Field 3
+        start: { x: 300, y: 160 }, // Adjust the y-position for Form Field 3
         end: { x: 540, y: 160 }, // Adjust the y-position for Form Field 3
         color: rgb(0, 0, 0),
         thickness: underlineHeight,
       });
-      deedPage.drawLine({
-        start: { x: 270, y: 135 }, // Adjust the y-position for Form Field 3
-        end: { x: 540, y: 135 }, // Adjust the y-position for Form Field 3
-        color: rgb(0, 0, 0),
-        thickness: underlineHeight,
-      });
-      deedPage.drawLine({
-        start: { x: 270, y: 115 }, // Adjust the y-position for Form Field 3
-        end: { x: 540, y: 115 }, // Adjust the y-position for Form Field 3
-        color: rgb(0, 0, 0),
-        thickness: underlineHeight,
-      });
 
-      deedPage.drawText("Occupation", {
+      deedPage.drawText("Address", {
         x: 270,
-        y: 70,
+        y: 130,
         width: textWidth,
         height: textHeight,
         size: 12,
@@ -914,12 +1160,42 @@ export default async function handler(req, res) {
       });
 
       deedPage.drawLine({
-        start: { x: 320, y: 70 }, // Adjust the y-position for Form Field 3
-        end: { x: 540, y: 70 }, // Adjust the y-position for Form Field 3
+        start: { x: 310, y: 130 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 130 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+      deedPage.drawLine({
+        start: { x: 270, y: 105 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 105 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+      deedPage.drawLine({
+        start: { x: 270, y: 80 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 80 }, // Adjust the y-position for Form Field 3
         color: rgb(0, 0, 0),
         thickness: underlineHeight,
       });
 
+      deedPage.drawText("Occupation", {
+        x: 270,
+        y: 50,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawLine({
+        start: { x: 330, y: 50 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 50 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
       //emblem
 
       const emblemCertificate = pdfDoc.addPage([595, 842]);
@@ -2280,8 +2556,19 @@ export default async function handler(req, res) {
       const certficateAddress =
         "between Scotland Titles, Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom and";
 
+      //   const certficateUserName = `${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1} of Blairadam`;
       const certficateUserName = `${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1} of Blairadam`;
 
+      //   const emblemCertficateUserName = `${propObject.p_8727183065361._Title1} ${propObject.p_8727183065361._Name1}`;
+      const certificateUserNametextWidth = oldEng.widthOfTextAtSize(
+        certficateUserName,
+        12
+      );
+
+      const certificateHalfOfWord = certificateUserNametextWidth / 2;
+      const certificateStartingPosition =
+        (pagetwo.getWidth() - certificateUserNametextWidth) / 2;
+      const certificateX = certificateStartingPosition - certificateHalfOfWord;
       const certificateAddressTwo = `(hereafter to be proclaimed as “THE ${propObject.p_8727183196433._Title1}”), care of Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom`;
 
       const certificateText = `The Scotland Titles Estate in Fife, Scotland, hereinafter referred to as “THE ESTATE”,\nhas been partitioned into dedicated souvenir plots of land.\n\nTHE LORD has petitioned unto Scotland Titles on this day their intention to\npurchase, and Scotland Titles has determined to accept the disposition of a plot of\nland within THE ESTATE, at Cantsdam, hereafter referred to as “THE LAND”.\n\nScotland Titles, in CONSIDERATION of all monies due to be paid to us by THE\n ${propObject.p_8727183196433._Title1}, of which we have received of in full, we do hereby DISCHARGE unto them\nand DISPONE to and in perpetuity in favour of THE ${propObject.p_8727183196433._Title1} and to their future\nassignees the whole of THE LAND but always with pedestrian access only over THE\nESTATE; such rights of vehicular access are reserved to Scotland Titles and its\nsuccessors in title plus any and all others authorised by it; THE LORD covenants not\nto dispose of THE LAND in part only.\n\nScotland Titles is a trading name of Blairdam Corporation PA. Terms and Conditions,\nand this CERTIFICATE shall be governed by the Law of Scotland.`;
@@ -2396,7 +2683,7 @@ export default async function handler(req, res) {
       });
 
       pagetwo.drawText(certficateUserName, {
-        x: 215,
+        x: certificateX,
         y: 470,
         width: textWidth,
         height: textHeight,
@@ -2450,35 +2737,31 @@ export default async function handler(req, res) {
       const SubHeading = "Deed of Change of Name and Title (Deed Poll)";
       const formerTitle = "Former Name & Title";
       const newTitle = "(New Name & Title)";
-
-      const underlineHeight = 1;
+      const underlineHeight = 0.5;
       const underlineY = 680; // Adjust the y-position as needed
 
       // Adjust the x-positions as needed for each form field
-      const underlineX7 = 410; // For Form Field 1
-      const underlineX8 = 470;
+
       const underlineX1 = 240; // For Form Field 1
       const underlineX2 = 320; // For Form Field 1
       const underlineX3 = 110; // For Form Field 2
       const underlineX4 = 180; // For Form Field 2
-      const underlineX5 = 60; // For Form Field 3
+      const underlineX5 = 50; // For Form Field 3
       const underlineX6 = 580; // For Form Field 3
       const deedFormTextPlaceHolder = "Home Address";
       // const formerNameAndTitle="Former Name & Title"
       // const newNameAndTitle="New Name & Title"
 
       const positions = [
-        { x: 110, y: 710 }, //first
-        { x: 125, y: 528 }, //second
-        { x: 365, y: 475 },
-        // { x: 375, y: 420 },
+        // { x: 110, y: 710 }, //first
+        { x: 125, y: 536 }, //second
+        // { x: 395, y: 473 },
         { x: 30, y: 355 }, //in witneess
-        // { x: 630, y: 400 },
 
         // Add more positions as needed
       ];
       positions.forEach((position) => {
-        deedPage.drawText(formerTitle, {
+        deedPage.drawText(`${formerTitle}.`, {
           x: position.x,
           y: position.y,
           size: 12,
@@ -2489,10 +2772,44 @@ export default async function handler(req, res) {
           font: timesRomanFontHeading,
         });
       });
+      //   const formertextWidth = timesRomanFontHeading.widthOfTextAtSize(
+      //     formerTitle,
+      //     12
+      //   );
+      //   const sideWidthAndFormerWidth = formertextWidth + 40;
+      //   const addFormerAndTotal = sideWidthAndFormerWidth - deedPage.getWidth();
+      //   console.log(addFormerAndTotal, "addFormerAndTotal");
+
+      const deedUserNameWidth = `of ${propObject.p_8727183196433._Name1}`;
+      const formertextWidth = timesRomanFontHeading.widthOfTextAtSize(
+        deedUserNameWidth,
+        12
+      );
+      console.log(formertextWidth, "formertextWidth");
+      const totalWidth = formertextWidth + 35;
+
+      const deedNewNameWidth = `now ${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1}`;
+      const newtextWidth = timesRomanFontHeading.widthOfTextAtSize(
+        deedNewNameWidth,
+        12
+      );
+
+      const newTotalTextWidth = newtextWidth + 30;
+
+      deedPage.drawText(`(${formerTitle})`, {
+        x: totalWidth,
+        y: 710,
+        size: 12,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFontHeading,
+      });
 
       deedPage.drawText(formerTitle, {
-        x: 270,
-        y: 450,
+        x: 175,
+        y: 449,
         size: 12,
         width: textWidth,
         height: textHeight,
@@ -2512,8 +2829,8 @@ export default async function handler(req, res) {
       //   font: timesRomanFontHeading,
       // });
       deedPage.drawText(newTitle, {
-        x: 140,
-        y: 680,
+        x: newTotalTextWidth,
+        y: 683,
         size: 12,
         width: textWidth,
         height: textHeight,
@@ -2523,10 +2840,30 @@ export default async function handler(req, res) {
       });
 
       const deedFormText = `of ${propObject.p_8727183196433._Name1}\n\nnow ${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1}\n\nof`;
-      const declarationOne = `HEREBY DECLARE AS FOLLOWS;\n\n1.    I ABSOLUTELY and entirely renounce, relinquish and abandon the use of my said Former Name &\nTitle and assume, adopt and determine to take and use from the date hereof the New Name & Title in\nsubstitution for my`;
-      const declarationTwo = `2.    I SHALL AT ALL TIMES hereafter in all records, deeds, documents and other writings and in all\nactions and proceedings as well as in all dealings and transactions and on all occasions whatsoever use and\nsubscribe the said New Name & Title as my name in substitution for my so\nrelinquished as aforesaid to the intent that I may hereafter be called, known or distinguished by the New Name\n& Title only and not by the`;
-      const declarationThree = `3.    I AUTHORISE AND REQUIRE all persons at all times to designate, describe and address me by my\nadopted New Name & Title.`;
-      const declarationFour = `IN WITNESS whereof I have hereunto subscribed my adopted and substituted New Name & Title and also my.`;
+      const declarationOne = `HEREBY DECLARE AS FOLLOWS;`;
+      const absolute =
+        "1.   I ABSOLUTELY and entirely renounce, relinquish and abandon the use of my said";
+      const formerNameBreak = `Former Name &`;
+      const titleBreak = "Title";
+      const absoluteTwo =
+        "and assume, adopt and determine to take and use from the date hereof the";
+      const newTitleTwo = "New Name & Title";
+      const inContent = "in";
+      const absoluteThree = "substitution for my";
+      const declarationTwo = `2.    I SHALL AT ALL TIMES hereafter in all records, deeds, documents and other writings and in all\nactions and proceedings as well as in all dealings and transactions and on all occasions whatsoever use and`;
+      const declarationTwoSubscribe = "subscribe the said";
+      const declarationTwoSubscribeName = "as my name in substitution for my";
+      const so = "so";
+      const relinqushed =
+        "relinquished as aforesaid to the intent that I may hereafter be called, known or distinguished by the";
+      const newTitleBreak = "New Name";
+      const newTitleBreakTwo = "& Title";
+      const only = "only and not by the";
+
+      const declarationThree = `3.    I AUTHORISE AND REQUIRE all persons at all times to designate, describe and address me by my`;
+      const adopt = "adopted";
+      const declarationFour = `IN WITNESS whereof I have hereunto subscribed my adopted and substituted`;
+      const declarationFourTwo = "and also my";
       const signed = "SIGNED THIS";
       const dayOf = "DAY OF";
       const yearIn = "IN THE YEAR";
@@ -2587,13 +2924,13 @@ export default async function handler(req, res) {
       deedPage.drawLine({
         start: { x: underlineX5, y: 600 }, // Adjust the y-position for Form Field 3
         end: { x: underlineX6, y: 600 }, // Adjust the y-position for Form Field 3
-        color: rgb(0, 0, 0),
+        color: rgb(0.65, 0.65, 0.65),
         thickness: underlineHeight,
       });
 
       deedPage.drawText(deedFormTextPlaceHolder, {
         x: 60,
-        y: 600,
+        y: 603,
         width: textWidth,
         height: textHeight,
         size: 12,
@@ -2615,6 +2952,84 @@ export default async function handler(req, res) {
         font: timesRomanFont,
       });
 
+      deedPage.drawText(absolute, {
+        x: 30,
+        y: 560,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(formerNameBreak, {
+        x: 453,
+        y: 560,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+      deedPage.drawText(titleBreak, {
+        x: 30,
+        y: 548,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+      deedPage.drawText(absoluteTwo, {
+        x: 58,
+        y: 548,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(newTitleTwo, {
+        x: 415,
+        y: 548,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+      deedPage.drawText(inContent, {
+        x: 520,
+        y: 548,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(absoluteThree, {
+        x: 30,
+        y: 536,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
       deedPage.drawText(declarationTwo, {
         x: 30,
         y: 500,
@@ -2626,6 +3041,108 @@ export default async function handler(req, res) {
         // font: customFont,
         font: timesRomanFont,
       });
+
+      deedPage.drawText(declarationTwoSubscribe, {
+        x: 30,
+        y: 473,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(newTitleTwo, {
+        x: 120,
+        y: 473,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(declarationTwoSubscribeName, {
+        x: 210,
+        y: 473,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(formerTitle, {
+        x: 380,
+        y: 473,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+
+      deedPage.drawText(so, {
+        x: 500,
+        y: 473,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(relinqushed, {
+        x: 30,
+        y: 461,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(newTitleBreak, {
+        x: 510,
+        y: 461,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFontHeading,
+      });
+
+      deedPage.drawText(newTitleBreakTwo, {
+        x: 30,
+        y: 449,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFontHeading,
+      });
+
+      deedPage.drawText(only, {
+        x: 73,
+        y: 449,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFontHeading,
+      });
+
       deedPage.drawText(declarationThree, {
         x: 30,
         y: 420,
@@ -2638,8 +3155,54 @@ export default async function handler(req, res) {
         font: timesRomanFont,
       });
 
+      deedPage.drawText(adopt, {
+        x: 30,
+        y: 408,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(newTitleTwo, {
+        x: 70,
+        y: 408,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+
       deedPage.drawText(declarationFour, {
         x: 30,
+        y: 370,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(newTitleTwo, {
+        x: 413,
+        y: 370,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+      deedPage.drawText(declarationFourTwo, {
+        x: 515,
         y: 370,
         width: textWidth,
         height: textHeight,
@@ -2769,7 +3332,7 @@ export default async function handler(req, res) {
 
       deedPage.drawText(presence, {
         x: 270,
-        y: 250,
+        y: 240,
         width: textWidth,
         height: textHeight,
         size: 12,
@@ -2781,7 +3344,7 @@ export default async function handler(req, res) {
 
       deedPage.drawText(witness, {
         x: 270,
-        y: 225,
+        y: 190,
         width: textWidth,
         height: textHeight,
         size: 12,
@@ -2792,32 +3355,13 @@ export default async function handler(req, res) {
       });
 
       deedPage.drawLine({
-        start: { x: 370, y: 225 }, // Adjust the y-position for Form Field 3
-        end: { x: 540, y: 225 }, // Adjust the y-position for Form Field 3
+        start: { x: 370, y: 190 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 190 }, // Adjust the y-position for Form Field 3
         color: rgb(0, 0, 0),
         thickness: underlineHeight,
       });
 
       deedPage.drawText("Name", {
-        x: 270,
-        y: 195,
-        width: textWidth,
-        height: textHeight,
-        size: 12,
-        color: rgb(0, 0, 0),
-        lineHeight: fontSize * 1.2,
-        // font: customFont,
-        font: timesRomanFont,
-      });
-
-      deedPage.drawLine({
-        start: { x: 300, y: 195 }, // Adjust the y-position for Form Field 3
-        end: { x: 540, y: 195 }, // Adjust the y-position for Form Field 3
-        color: rgb(0, 0, 0),
-        thickness: underlineHeight,
-      });
-
-      deedPage.drawText("Address", {
         x: 270,
         y: 160,
         width: textWidth,
@@ -2830,27 +3374,15 @@ export default async function handler(req, res) {
       });
 
       deedPage.drawLine({
-        start: { x: 310, y: 160 }, // Adjust the y-position for Form Field 3
+        start: { x: 300, y: 160 }, // Adjust the y-position for Form Field 3
         end: { x: 540, y: 160 }, // Adjust the y-position for Form Field 3
         color: rgb(0, 0, 0),
         thickness: underlineHeight,
       });
-      deedPage.drawLine({
-        start: { x: 270, y: 135 }, // Adjust the y-position for Form Field 3
-        end: { x: 540, y: 135 }, // Adjust the y-position for Form Field 3
-        color: rgb(0, 0, 0),
-        thickness: underlineHeight,
-      });
-      deedPage.drawLine({
-        start: { x: 270, y: 115 }, // Adjust the y-position for Form Field 3
-        end: { x: 540, y: 115 }, // Adjust the y-position for Form Field 3
-        color: rgb(0, 0, 0),
-        thickness: underlineHeight,
-      });
 
-      deedPage.drawText("Occupation", {
+      deedPage.drawText("Address", {
         x: 270,
-        y: 70,
+        y: 130,
         width: textWidth,
         height: textHeight,
         size: 12,
@@ -2861,8 +3393,39 @@ export default async function handler(req, res) {
       });
 
       deedPage.drawLine({
-        start: { x: 320, y: 70 }, // Adjust the y-position for Form Field 3
-        end: { x: 540, y: 70 }, // Adjust the y-position for Form Field 3
+        start: { x: 310, y: 130 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 130 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+      deedPage.drawLine({
+        start: { x: 270, y: 105 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 105 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+      deedPage.drawLine({
+        start: { x: 270, y: 80 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 80 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+
+      deedPage.drawText("Occupation", {
+        x: 270,
+        y: 50,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawLine({
+        start: { x: 330, y: 50 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 50 }, // Adjust the y-position for Form Field 3
         color: rgb(0, 0, 0),
         thickness: underlineHeight,
       });
@@ -2877,7 +3440,7 @@ export default async function handler(req, res) {
       const emblem_certificate_heading = `To All & Sundry whom these presents do concern\n
                Scotland Titles does declare that`;
       //   const emblemCertficateUserName = `${propObject.p_8727183065361._Title1} ${propObject.p_8727183065361._Name1}`;
-      const emblemCertficateUserName = `Lord Large`;
+      const emblemCertficateUserName = `${propObject.p_8727183065361._Title1} ${propObject.p_8727183065361._Name1}`;
       const userNametextWidth = oldEng.widthOfTextAtSize(
         emblemCertficateUserName,
         12
@@ -3352,7 +3915,7 @@ export default async function handler(req, res) {
 
       const pdfUrl = `https://scotlandtitlesapp.com/pdfs/${id}.pdf`;
       console.log(pdfUrl, "pdfUrl");
-    } catch {
+    } catch (error) {
       console.error(error);
       res.status(500).send("An error occurred");
     }
@@ -3621,8 +4184,19 @@ export default async function handler(req, res) {
       const certficateAddress =
         "between Scotland Titles, Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom and";
 
+      //   const certficateUserName = `${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1} of Blairadam`;
       const certficateUserName = `${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1} of Blairadam`;
 
+      //   const emblemCertficateUserName = `${propObject.p_8727183065361._Title1} ${propObject.p_8727183065361._Name1}`;
+      const certificateUserNametextWidth = oldEng.widthOfTextAtSize(
+        certficateUserName,
+        12
+      );
+
+      const certificateHalfOfWord = certificateUserNametextWidth / 2;
+      const certificateStartingPosition =
+        (pagetwo.getWidth() - certificateUserNametextWidth) / 2;
+      const certificateX = certificateStartingPosition - certificateHalfOfWord;
       const certificateAddressTwo = `(hereafter to be proclaimed as “THE ${propObject.p_8727183196433._Title1}”), care of Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom`;
 
       const certificateText = `The Scotland Titles Estate in Fife, Scotland, hereinafter referred to as “THE ESTATE”,\nhas been partitioned into dedicated souvenir plots of land.\n\nTHE LORD has petitioned unto Scotland Titles on this day their intention to\npurchase, and Scotland Titles has determined to accept the disposition of a plot of\nland within THE ESTATE, at Cantsdam, hereafter referred to as “THE LAND”.\n\nScotland Titles, in CONSIDERATION of all monies due to be paid to us by THE\n ${propObject.p_8727183196433._Title1}, of which we have received of in full, we do hereby DISCHARGE unto them\nand DISPONE to and in perpetuity in favour of THE ${propObject.p_8727183196433._Title1} and to their future\nassignees the whole of THE LAND but always with pedestrian access only over THE\nESTATE; such rights of vehicular access are reserved to Scotland Titles and its\nsuccessors in title plus any and all others authorised by it; THE LORD covenants not\nto dispose of THE LAND in part only.\n\nScotland Titles is a trading name of Blairdam Corporation PA. Terms and Conditions,\nand this CERTIFICATE shall be governed by the Law of Scotland.`;
@@ -3737,7 +4311,7 @@ export default async function handler(req, res) {
       });
 
       pagetwo.drawText(certficateUserName, {
-        x: 215,
+        x: certificateX,
         y: 470,
         width: textWidth,
         height: textHeight,
@@ -3791,35 +4365,31 @@ export default async function handler(req, res) {
       const SubHeading = "Deed of Change of Name and Title (Deed Poll)";
       const formerTitle = "Former Name & Title";
       const newTitle = "(New Name & Title)";
-
-      const underlineHeight = 1;
+      const underlineHeight = 0.5;
       const underlineY = 680; // Adjust the y-position as needed
 
       // Adjust the x-positions as needed for each form field
-      const underlineX7 = 410; // For Form Field 1
-      const underlineX8 = 470;
+
       const underlineX1 = 240; // For Form Field 1
       const underlineX2 = 320; // For Form Field 1
       const underlineX3 = 110; // For Form Field 2
       const underlineX4 = 180; // For Form Field 2
-      const underlineX5 = 60; // For Form Field 3
+      const underlineX5 = 50; // For Form Field 3
       const underlineX6 = 580; // For Form Field 3
       const deedFormTextPlaceHolder = "Home Address";
       // const formerNameAndTitle="Former Name & Title"
       // const newNameAndTitle="New Name & Title"
 
       const positions = [
-        { x: 110, y: 710 }, //first
-        { x: 125, y: 528 }, //second
-        { x: 365, y: 475 },
-        // { x: 375, y: 420 },
+        // { x: 110, y: 710 }, //first
+        { x: 125, y: 536 }, //second
+        // { x: 395, y: 473 },
         { x: 30, y: 355 }, //in witneess
-        // { x: 630, y: 400 },
 
         // Add more positions as needed
       ];
       positions.forEach((position) => {
-        deedPage.drawText(formerTitle, {
+        deedPage.drawText(`${formerTitle}.`, {
           x: position.x,
           y: position.y,
           size: 12,
@@ -3830,10 +4400,44 @@ export default async function handler(req, res) {
           font: timesRomanFontHeading,
         });
       });
+      //   const formertextWidth = timesRomanFontHeading.widthOfTextAtSize(
+      //     formerTitle,
+      //     12
+      //   );
+      //   const sideWidthAndFormerWidth = formertextWidth + 40;
+      //   const addFormerAndTotal = sideWidthAndFormerWidth - deedPage.getWidth();
+      //   console.log(addFormerAndTotal, "addFormerAndTotal");
+
+      const deedUserNameWidth = `of ${propObject.p_8727183196433._Name1}`;
+      const formertextWidth = timesRomanFontHeading.widthOfTextAtSize(
+        deedUserNameWidth,
+        12
+      );
+      console.log(formertextWidth, "formertextWidth");
+      const totalWidth = formertextWidth + 35;
+
+      const deedNewNameWidth = `now ${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1}`;
+      const newtextWidth = timesRomanFontHeading.widthOfTextAtSize(
+        deedNewNameWidth,
+        12
+      );
+
+      const newTotalTextWidth = newtextWidth + 30;
+
+      deedPage.drawText(`(${formerTitle})`, {
+        x: totalWidth,
+        y: 710,
+        size: 12,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFontHeading,
+      });
 
       deedPage.drawText(formerTitle, {
-        x: 270,
-        y: 450,
+        x: 175,
+        y: 449,
         size: 12,
         width: textWidth,
         height: textHeight,
@@ -3853,8 +4457,8 @@ export default async function handler(req, res) {
       //   font: timesRomanFontHeading,
       // });
       deedPage.drawText(newTitle, {
-        x: 140,
-        y: 680,
+        x: newTotalTextWidth,
+        y: 683,
         size: 12,
         width: textWidth,
         height: textHeight,
@@ -3864,10 +4468,30 @@ export default async function handler(req, res) {
       });
 
       const deedFormText = `of ${propObject.p_8727183196433._Name1}\n\nnow ${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1}\n\nof`;
-      const declarationOne = `HEREBY DECLARE AS FOLLOWS;\n\n1.    I ABSOLUTELY and entirely renounce, relinquish and abandon the use of my said Former Name &\nTitle and assume, adopt and determine to take and use from the date hereof the New Name & Title in\nsubstitution for my`;
-      const declarationTwo = `2.    I SHALL AT ALL TIMES hereafter in all records, deeds, documents and other writings and in all\nactions and proceedings as well as in all dealings and transactions and on all occasions whatsoever use and\nsubscribe the said New Name & Title as my name in substitution for my so\nrelinquished as aforesaid to the intent that I may hereafter be called, known or distinguished by the New Name\n& Title only and not by the`;
-      const declarationThree = `3.    I AUTHORISE AND REQUIRE all persons at all times to designate, describe and address me by my\nadopted New Name & Title.`;
-      const declarationFour = `IN WITNESS whereof I have hereunto subscribed my adopted and substituted New Name & Title and also my.`;
+      const declarationOne = `HEREBY DECLARE AS FOLLOWS;`;
+      const absolute =
+        "1.   I ABSOLUTELY and entirely renounce, relinquish and abandon the use of my said";
+      const formerNameBreak = `Former Name &`;
+      const titleBreak = "Title";
+      const absoluteTwo =
+        "and assume, adopt and determine to take and use from the date hereof the";
+      const newTitleTwo = "New Name & Title";
+      const inContent = "in";
+      const absoluteThree = "substitution for my";
+      const declarationTwo = `2.    I SHALL AT ALL TIMES hereafter in all records, deeds, documents and other writings and in all\nactions and proceedings as well as in all dealings and transactions and on all occasions whatsoever use and`;
+      const declarationTwoSubscribe = "subscribe the said";
+      const declarationTwoSubscribeName = "as my name in substitution for my";
+      const so = "so";
+      const relinqushed =
+        "relinquished as aforesaid to the intent that I may hereafter be called, known or distinguished by the";
+      const newTitleBreak = "New Name";
+      const newTitleBreakTwo = "& Title";
+      const only = "only and not by the";
+
+      const declarationThree = `3.    I AUTHORISE AND REQUIRE all persons at all times to designate, describe and address me by my`;
+      const adopt = "adopted";
+      const declarationFour = `IN WITNESS whereof I have hereunto subscribed my adopted and substituted`;
+      const declarationFourTwo = "and also my";
       const signed = "SIGNED THIS";
       const dayOf = "DAY OF";
       const yearIn = "IN THE YEAR";
@@ -3928,13 +4552,13 @@ export default async function handler(req, res) {
       deedPage.drawLine({
         start: { x: underlineX5, y: 600 }, // Adjust the y-position for Form Field 3
         end: { x: underlineX6, y: 600 }, // Adjust the y-position for Form Field 3
-        color: rgb(0, 0, 0),
+        color: rgb(0.65, 0.65, 0.65),
         thickness: underlineHeight,
       });
 
       deedPage.drawText(deedFormTextPlaceHolder, {
         x: 60,
-        y: 600,
+        y: 603,
         width: textWidth,
         height: textHeight,
         size: 12,
@@ -3956,6 +4580,84 @@ export default async function handler(req, res) {
         font: timesRomanFont,
       });
 
+      deedPage.drawText(absolute, {
+        x: 30,
+        y: 560,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(formerNameBreak, {
+        x: 453,
+        y: 560,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+      deedPage.drawText(titleBreak, {
+        x: 30,
+        y: 548,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+      deedPage.drawText(absoluteTwo, {
+        x: 58,
+        y: 548,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(newTitleTwo, {
+        x: 415,
+        y: 548,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+      deedPage.drawText(inContent, {
+        x: 520,
+        y: 548,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(absoluteThree, {
+        x: 30,
+        y: 536,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
       deedPage.drawText(declarationTwo, {
         x: 30,
         y: 500,
@@ -3967,6 +4669,108 @@ export default async function handler(req, res) {
         // font: customFont,
         font: timesRomanFont,
       });
+
+      deedPage.drawText(declarationTwoSubscribe, {
+        x: 30,
+        y: 473,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(newTitleTwo, {
+        x: 120,
+        y: 473,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(declarationTwoSubscribeName, {
+        x: 210,
+        y: 473,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(formerTitle, {
+        x: 380,
+        y: 473,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+
+      deedPage.drawText(so, {
+        x: 500,
+        y: 473,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(relinqushed, {
+        x: 30,
+        y: 461,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(newTitleBreak, {
+        x: 510,
+        y: 461,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFontHeading,
+      });
+
+      deedPage.drawText(newTitleBreakTwo, {
+        x: 30,
+        y: 449,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFontHeading,
+      });
+
+      deedPage.drawText(only, {
+        x: 73,
+        y: 449,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFontHeading,
+      });
+
       deedPage.drawText(declarationThree, {
         x: 30,
         y: 420,
@@ -3979,8 +4783,54 @@ export default async function handler(req, res) {
         font: timesRomanFont,
       });
 
+      deedPage.drawText(adopt, {
+        x: 30,
+        y: 408,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(newTitleTwo, {
+        x: 70,
+        y: 408,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+
       deedPage.drawText(declarationFour, {
         x: 30,
+        y: 370,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(newTitleTwo, {
+        x: 413,
+        y: 370,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+      deedPage.drawText(declarationFourTwo, {
+        x: 515,
         y: 370,
         width: textWidth,
         height: textHeight,
@@ -4110,7 +4960,7 @@ export default async function handler(req, res) {
 
       deedPage.drawText(presence, {
         x: 270,
-        y: 250,
+        y: 240,
         width: textWidth,
         height: textHeight,
         size: 12,
@@ -4122,7 +4972,7 @@ export default async function handler(req, res) {
 
       deedPage.drawText(witness, {
         x: 270,
-        y: 225,
+        y: 190,
         width: textWidth,
         height: textHeight,
         size: 12,
@@ -4133,32 +4983,13 @@ export default async function handler(req, res) {
       });
 
       deedPage.drawLine({
-        start: { x: 370, y: 225 }, // Adjust the y-position for Form Field 3
-        end: { x: 540, y: 225 }, // Adjust the y-position for Form Field 3
+        start: { x: 370, y: 190 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 190 }, // Adjust the y-position for Form Field 3
         color: rgb(0, 0, 0),
         thickness: underlineHeight,
       });
 
       deedPage.drawText("Name", {
-        x: 270,
-        y: 195,
-        width: textWidth,
-        height: textHeight,
-        size: 12,
-        color: rgb(0, 0, 0),
-        lineHeight: fontSize * 1.2,
-        // font: customFont,
-        font: timesRomanFont,
-      });
-
-      deedPage.drawLine({
-        start: { x: 300, y: 195 }, // Adjust the y-position for Form Field 3
-        end: { x: 540, y: 195 }, // Adjust the y-position for Form Field 3
-        color: rgb(0, 0, 0),
-        thickness: underlineHeight,
-      });
-
-      deedPage.drawText("Address", {
         x: 270,
         y: 160,
         width: textWidth,
@@ -4171,27 +5002,15 @@ export default async function handler(req, res) {
       });
 
       deedPage.drawLine({
-        start: { x: 310, y: 160 }, // Adjust the y-position for Form Field 3
+        start: { x: 300, y: 160 }, // Adjust the y-position for Form Field 3
         end: { x: 540, y: 160 }, // Adjust the y-position for Form Field 3
         color: rgb(0, 0, 0),
         thickness: underlineHeight,
       });
-      deedPage.drawLine({
-        start: { x: 270, y: 135 }, // Adjust the y-position for Form Field 3
-        end: { x: 540, y: 135 }, // Adjust the y-position for Form Field 3
-        color: rgb(0, 0, 0),
-        thickness: underlineHeight,
-      });
-      deedPage.drawLine({
-        start: { x: 270, y: 115 }, // Adjust the y-position for Form Field 3
-        end: { x: 540, y: 115 }, // Adjust the y-position for Form Field 3
-        color: rgb(0, 0, 0),
-        thickness: underlineHeight,
-      });
 
-      deedPage.drawText("Occupation", {
+      deedPage.drawText("Address", {
         x: 270,
-        y: 70,
+        y: 130,
         width: textWidth,
         height: textHeight,
         size: 12,
@@ -4202,12 +5021,42 @@ export default async function handler(req, res) {
       });
 
       deedPage.drawLine({
-        start: { x: 320, y: 70 }, // Adjust the y-position for Form Field 3
-        end: { x: 540, y: 70 }, // Adjust the y-position for Form Field 3
+        start: { x: 310, y: 130 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 130 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+      deedPage.drawLine({
+        start: { x: 270, y: 105 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 105 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+      deedPage.drawLine({
+        start: { x: 270, y: 80 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 80 }, // Adjust the y-position for Form Field 3
         color: rgb(0, 0, 0),
         thickness: underlineHeight,
       });
 
+      deedPage.drawText("Occupation", {
+        x: 270,
+        y: 50,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawLine({
+        start: { x: 330, y: 50 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 50 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
       //tartan ============
 
       const tartanCertificate = pdfDoc.addPage([595, 842]);
@@ -4263,8 +5112,7 @@ export default async function handler(req, res) {
 
       const tartanTestimony = "In Testimony whereof";
       const tartanTestimonyDescription = "we have subscribed these";
-      const tartanTestimonyDescriptionTwo =
-        "presents and the seal of our office is affixed hereto at Scotland\nTitles this day in this year of the reign of our sovereign Charles\nthe Third, by the Grace of God, of the United Kingdom of\nGreat Britain and Northern Ireland, King, Head of the\nCommonwealth, Defender of the Faith, and in the Year of our\nLord stated henceforth.";
+      const tartanTestimonyDescriptionTwo = `presents and the seal of our office is affixed hereto at Scotland\nTitles this day in this year of the reign of our sovereign Charles\nthe Third, by the Grace of God, of the United Kingdom of\nGreat Britain and Northern Ireland, King, Head of the\nCommonwealth, Defender of the Faith, and in the Year of our\n${propObject.p_8727183032593._Title1} stated henceforth.`;
 
       const tartanSigned = "Signed";
 
@@ -4807,8 +5655,6 @@ export default async function handler(req, res) {
       const pagetwo = pdfDoc.addPage([842, 595]);
       const deedPage = pdfDoc.addPage([595, 842]);
 
-      const courierBoldFont = await pdfDoc.embedFont(StandardFonts.Courier);
-
       const filePath = path.resolve("./public", "images", "scotland_log.png");
       const fontBytes = fs.readFileSync(
         path.join("./utils", "fonts", "OLDENGL.TTF")
@@ -5070,8 +5916,19 @@ export default async function handler(req, res) {
       const certificateHeading = "Certificate of Disposition and Proclamation";
       const certficateAddress =
         "between Scotland Titles, Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom and";
+      //   const certficateUserName = `${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1} of Blairadam`;
       const certficateUserName = `${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1} of Blairadam`;
 
+      //   const emblemCertficateUserName = `${propObject.p_8727183065361._Title1} ${propObject.p_8727183065361._Name1}`;
+      const certificateUserNametextWidth = oldEng.widthOfTextAtSize(
+        certficateUserName,
+        12
+      );
+
+      const certificateHalfOfWord = certificateUserNametextWidth / 2;
+      const certificateStartingPosition =
+        (pagetwo.getWidth() - certificateUserNametextWidth) / 2;
+      const certificateX = certificateStartingPosition - certificateHalfOfWord;
       const certificateAddressTwo = `(hereafter to be proclaimed as “THE ${propObject.p_8727183196433._Title1}”), care of Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom`;
 
       const certificateText = `The Scotland Titles Estate in Fife, Scotland, hereinafter referred to as “THE ESTATE”,\nhas been partitioned into dedicated souvenir plots of land.\n\nTHE LORD has petitioned unto Scotland Titles on this day their intention to\npurchase, and Scotland Titles has determined to accept the disposition of a plot of\nland within THE ESTATE, at Cantsdam, hereafter referred to as “THE LAND”.\n\nScotland Titles, in CONSIDERATION of all monies due to be paid to us by THE\n ${propObject.p_8727183196433._Title1}, of which we have received of in full, we do hereby DISCHARGE unto them\nand DISPONE to and in perpetuity in favour of THE ${propObject.p_8727183196433._Title1} and to their future\nassignees the whole of THE LAND but always with pedestrian access only over THE\nESTATE; such rights of vehicular access are reserved to Scotland Titles and its\nsuccessors in title plus any and all others authorised by it; THE LORD covenants not\nto dispose of THE LAND in part only.\n\nScotland Titles is a trading name of Blairdam Corporation PA. Terms and Conditions,\nand this CERTIFICATE shall be governed by the Law of Scotland.`;
@@ -5186,7 +6043,7 @@ export default async function handler(req, res) {
       });
 
       pagetwo.drawText(certficateUserName, {
-        x: 215,
+        x: certificateX,
         y: 470,
         width: textWidth,
         height: textHeight,
@@ -5240,35 +6097,31 @@ export default async function handler(req, res) {
       const SubHeading = "Deed of Change of Name and Title (Deed Poll)";
       const formerTitle = "Former Name & Title";
       const newTitle = "(New Name & Title)";
-
-      const underlineHeight = 1;
+      const underlineHeight = 0.5;
       const underlineY = 680; // Adjust the y-position as needed
 
       // Adjust the x-positions as needed for each form field
-      const underlineX7 = 410; // For Form Field 1
-      const underlineX8 = 470;
+
       const underlineX1 = 240; // For Form Field 1
       const underlineX2 = 320; // For Form Field 1
       const underlineX3 = 110; // For Form Field 2
       const underlineX4 = 180; // For Form Field 2
-      const underlineX5 = 60; // For Form Field 3
+      const underlineX5 = 50; // For Form Field 3
       const underlineX6 = 580; // For Form Field 3
       const deedFormTextPlaceHolder = "Home Address";
       // const formerNameAndTitle="Former Name & Title"
       // const newNameAndTitle="New Name & Title"
 
       const positions = [
-        { x: 110, y: 710 }, //first
-        { x: 125, y: 528 }, //second
-        { x: 365, y: 475 },
-        // { x: 375, y: 420 },
+        // { x: 110, y: 710 }, //first
+        { x: 125, y: 536 }, //second
+        // { x: 395, y: 473 },
         { x: 30, y: 355 }, //in witneess
-        // { x: 630, y: 400 },
 
         // Add more positions as needed
       ];
       positions.forEach((position) => {
-        deedPage.drawText(formerTitle, {
+        deedPage.drawText(`${formerTitle}.`, {
           x: position.x,
           y: position.y,
           size: 12,
@@ -5279,10 +6132,44 @@ export default async function handler(req, res) {
           font: timesRomanFontHeading,
         });
       });
+      //   const formertextWidth = timesRomanFontHeading.widthOfTextAtSize(
+      //     formerTitle,
+      //     12
+      //   );
+      //   const sideWidthAndFormerWidth = formertextWidth + 40;
+      //   const addFormerAndTotal = sideWidthAndFormerWidth - deedPage.getWidth();
+      //   console.log(addFormerAndTotal, "addFormerAndTotal");
+
+      const deedUserNameWidth = `of ${propObject.p_8727183196433._Name1}`;
+      const formertextWidth = timesRomanFontHeading.widthOfTextAtSize(
+        deedUserNameWidth,
+        12
+      );
+      console.log(formertextWidth, "formertextWidth");
+      const totalWidth = formertextWidth + 35;
+
+      const deedNewNameWidth = `now ${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1}`;
+      const newtextWidth = timesRomanFontHeading.widthOfTextAtSize(
+        deedNewNameWidth,
+        12
+      );
+
+      const newTotalTextWidth = newtextWidth + 30;
+
+      deedPage.drawText(`(${formerTitle})`, {
+        x: totalWidth,
+        y: 710,
+        size: 12,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFontHeading,
+      });
 
       deedPage.drawText(formerTitle, {
-        x: 270,
-        y: 450,
+        x: 175,
+        y: 449,
         size: 12,
         width: textWidth,
         height: textHeight,
@@ -5302,8 +6189,8 @@ export default async function handler(req, res) {
       //   font: timesRomanFontHeading,
       // });
       deedPage.drawText(newTitle, {
-        x: 140,
-        y: 680,
+        x: newTotalTextWidth,
+        y: 683,
         size: 12,
         width: textWidth,
         height: textHeight,
@@ -5313,10 +6200,30 @@ export default async function handler(req, res) {
       });
 
       const deedFormText = `of ${propObject.p_8727183196433._Name1}\n\nnow ${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1}\n\nof`;
-      const declarationOne = `HEREBY DECLARE AS FOLLOWS;\n\n1.    I ABSOLUTELY and entirely renounce, relinquish and abandon the use of my said Former Name &\nTitle and assume, adopt and determine to take and use from the date hereof the New Name & Title in\nsubstitution for my`;
-      const declarationTwo = `2.    I SHALL AT ALL TIMES hereafter in all records, deeds, documents and other writings and in all\nactions and proceedings as well as in all dealings and transactions and on all occasions whatsoever use and\nsubscribe the said New Name & Title as my name in substitution for my so\nrelinquished as aforesaid to the intent that I may hereafter be called, known or distinguished by the New Name\n& Title only and not by the`;
-      const declarationThree = `3.    I AUTHORISE AND REQUIRE all persons at all times to designate, describe and address me by my\nadopted New Name & Title.`;
-      const declarationFour = `IN WITNESS whereof I have hereunto subscribed my adopted and substituted New Name & Title and also my.`;
+      const declarationOne = `HEREBY DECLARE AS FOLLOWS;`;
+      const absolute =
+        "1.   I ABSOLUTELY and entirely renounce, relinquish and abandon the use of my said";
+      const formerNameBreak = `Former Name &`;
+      const titleBreak = "Title";
+      const absoluteTwo =
+        "and assume, adopt and determine to take and use from the date hereof the";
+      const newTitleTwo = "New Name & Title";
+      const inContent = "in";
+      const absoluteThree = "substitution for my";
+      const declarationTwo = `2.    I SHALL AT ALL TIMES hereafter in all records, deeds, documents and other writings and in all\nactions and proceedings as well as in all dealings and transactions and on all occasions whatsoever use and`;
+      const declarationTwoSubscribe = "subscribe the said";
+      const declarationTwoSubscribeName = "as my name in substitution for my";
+      const so = "so";
+      const relinqushed =
+        "relinquished as aforesaid to the intent that I may hereafter be called, known or distinguished by the";
+      const newTitleBreak = "New Name";
+      const newTitleBreakTwo = "& Title";
+      const only = "only and not by the";
+
+      const declarationThree = `3.    I AUTHORISE AND REQUIRE all persons at all times to designate, describe and address me by my`;
+      const adopt = "adopted";
+      const declarationFour = `IN WITNESS whereof I have hereunto subscribed my adopted and substituted`;
+      const declarationFourTwo = "and also my";
       const signed = "SIGNED THIS";
       const dayOf = "DAY OF";
       const yearIn = "IN THE YEAR";
@@ -5377,13 +6284,13 @@ export default async function handler(req, res) {
       deedPage.drawLine({
         start: { x: underlineX5, y: 600 }, // Adjust the y-position for Form Field 3
         end: { x: underlineX6, y: 600 }, // Adjust the y-position for Form Field 3
-        color: rgb(0, 0, 0),
+        color: rgb(0.65, 0.65, 0.65),
         thickness: underlineHeight,
       });
 
       deedPage.drawText(deedFormTextPlaceHolder, {
         x: 60,
-        y: 600,
+        y: 603,
         width: textWidth,
         height: textHeight,
         size: 12,
@@ -5405,6 +6312,84 @@ export default async function handler(req, res) {
         font: timesRomanFont,
       });
 
+      deedPage.drawText(absolute, {
+        x: 30,
+        y: 560,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(formerNameBreak, {
+        x: 453,
+        y: 560,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+      deedPage.drawText(titleBreak, {
+        x: 30,
+        y: 548,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+      deedPage.drawText(absoluteTwo, {
+        x: 58,
+        y: 548,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(newTitleTwo, {
+        x: 415,
+        y: 548,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+      deedPage.drawText(inContent, {
+        x: 520,
+        y: 548,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(absoluteThree, {
+        x: 30,
+        y: 536,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
       deedPage.drawText(declarationTwo, {
         x: 30,
         y: 500,
@@ -5416,6 +6401,108 @@ export default async function handler(req, res) {
         // font: customFont,
         font: timesRomanFont,
       });
+
+      deedPage.drawText(declarationTwoSubscribe, {
+        x: 30,
+        y: 473,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(newTitleTwo, {
+        x: 120,
+        y: 473,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(declarationTwoSubscribeName, {
+        x: 210,
+        y: 473,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(formerTitle, {
+        x: 380,
+        y: 473,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+
+      deedPage.drawText(so, {
+        x: 500,
+        y: 473,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(relinqushed, {
+        x: 30,
+        y: 461,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(newTitleBreak, {
+        x: 510,
+        y: 461,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFontHeading,
+      });
+
+      deedPage.drawText(newTitleBreakTwo, {
+        x: 30,
+        y: 449,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFontHeading,
+      });
+
+      deedPage.drawText(only, {
+        x: 73,
+        y: 449,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFontHeading,
+      });
+
       deedPage.drawText(declarationThree, {
         x: 30,
         y: 420,
@@ -5428,8 +6515,54 @@ export default async function handler(req, res) {
         font: timesRomanFont,
       });
 
+      deedPage.drawText(adopt, {
+        x: 30,
+        y: 408,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(newTitleTwo, {
+        x: 70,
+        y: 408,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+
       deedPage.drawText(declarationFour, {
         x: 30,
+        y: 370,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(newTitleTwo, {
+        x: 413,
+        y: 370,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+      deedPage.drawText(declarationFourTwo, {
+        x: 515,
         y: 370,
         width: textWidth,
         height: textHeight,
@@ -5559,7 +6692,7 @@ export default async function handler(req, res) {
 
       deedPage.drawText(presence, {
         x: 270,
-        y: 250,
+        y: 240,
         width: textWidth,
         height: textHeight,
         size: 12,
@@ -5571,7 +6704,7 @@ export default async function handler(req, res) {
 
       deedPage.drawText(witness, {
         x: 270,
-        y: 225,
+        y: 190,
         width: textWidth,
         height: textHeight,
         size: 12,
@@ -5582,32 +6715,13 @@ export default async function handler(req, res) {
       });
 
       deedPage.drawLine({
-        start: { x: 370, y: 225 }, // Adjust the y-position for Form Field 3
-        end: { x: 540, y: 225 }, // Adjust the y-position for Form Field 3
+        start: { x: 370, y: 190 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 190 }, // Adjust the y-position for Form Field 3
         color: rgb(0, 0, 0),
         thickness: underlineHeight,
       });
 
       deedPage.drawText("Name", {
-        x: 270,
-        y: 195,
-        width: textWidth,
-        height: textHeight,
-        size: 12,
-        color: rgb(0, 0, 0),
-        lineHeight: fontSize * 1.2,
-        // font: customFont,
-        font: timesRomanFont,
-      });
-
-      deedPage.drawLine({
-        start: { x: 300, y: 195 }, // Adjust the y-position for Form Field 3
-        end: { x: 540, y: 195 }, // Adjust the y-position for Form Field 3
-        color: rgb(0, 0, 0),
-        thickness: underlineHeight,
-      });
-
-      deedPage.drawText("Address", {
         x: 270,
         y: 160,
         width: textWidth,
@@ -5620,27 +6734,15 @@ export default async function handler(req, res) {
       });
 
       deedPage.drawLine({
-        start: { x: 310, y: 160 }, // Adjust the y-position for Form Field 3
+        start: { x: 300, y: 160 }, // Adjust the y-position for Form Field 3
         end: { x: 540, y: 160 }, // Adjust the y-position for Form Field 3
         color: rgb(0, 0, 0),
         thickness: underlineHeight,
       });
-      deedPage.drawLine({
-        start: { x: 270, y: 135 }, // Adjust the y-position for Form Field 3
-        end: { x: 540, y: 135 }, // Adjust the y-position for Form Field 3
-        color: rgb(0, 0, 0),
-        thickness: underlineHeight,
-      });
-      deedPage.drawLine({
-        start: { x: 270, y: 115 }, // Adjust the y-position for Form Field 3
-        end: { x: 540, y: 115 }, // Adjust the y-position for Form Field 3
-        color: rgb(0, 0, 0),
-        thickness: underlineHeight,
-      });
 
-      deedPage.drawText("Occupation", {
+      deedPage.drawText("Address", {
         x: 270,
-        y: 70,
+        y: 130,
         width: textWidth,
         height: textHeight,
         size: 12,
@@ -5651,8 +6753,39 @@ export default async function handler(req, res) {
       });
 
       deedPage.drawLine({
-        start: { x: 320, y: 70 }, // Adjust the y-position for Form Field 3
-        end: { x: 540, y: 70 }, // Adjust the y-position for Form Field 3
+        start: { x: 310, y: 130 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 130 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+      deedPage.drawLine({
+        start: { x: 270, y: 105 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 105 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+      deedPage.drawLine({
+        start: { x: 270, y: 80 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 80 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+
+      deedPage.drawText("Occupation", {
+        x: 270,
+        y: 50,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawLine({
+        start: { x: 330, y: 50 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 50 }, // Adjust the y-position for Form Field 3
         color: rgb(0, 0, 0),
         thickness: underlineHeight,
       });
@@ -6229,8 +7362,7 @@ export default async function handler(req, res) {
 
       const tartanTestimony = "In Testimony whereof";
       const tartanTestimonyDescription = "we have subscribed these";
-      const tartanTestimonyDescriptionTwo =
-        "presents and the seal of our office is affixed hereto at Scotland\nTitles this day in this year of the reign of our sovereign Charles\nthe Third, by the Grace of God, of the United Kingdom of\nGreat Britain and Northern Ireland, King, Head of the\nCommonwealth, Defender of the Faith, and in the Year of our\nLord stated henceforth.";
+      const tartanTestimonyDescriptionTwo = `presents and the seal of our office is affixed hereto at Scotland\nTitles this day in this year of the reign of our sovereign Charles\nthe Third, by the Grace of God, of the United Kingdom of\nGreat Britain and Northern Ireland, King, Head of the\nCommonwealth, Defender of the Faith, and in the Year of our\n${propObject.p_8727183032593._Title1} stated henceforth.`;
 
       const tartanSigned = "Signed";
 
