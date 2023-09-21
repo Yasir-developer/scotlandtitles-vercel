@@ -59,13 +59,11 @@ export default async function handler(req, res) {
       const pagetwo = pdfDoc.addPage([842, 595]);
       const deedPage = pdfDoc.addPage([595, 842]);
 
-      const courierBoldFont = await pdfDoc.embedFont(StandardFonts.Courier);
-
+      const filePath = path.resolve("./public", "images", "scotland_log.png");
       const fontBytes = fs.readFileSync(
         path.join("./utils", "fonts", "OLDENGL.TTF")
       );
       const customFont = await pdfDoc.embedFont(fontBytes);
-      const filePath = path.resolve("./public", "images", "scotland_log.png");
 
       const imgBuffer = fs.readFileSync(filePath);
       // console.log(imgBuffer, "imgBuffer");
@@ -111,7 +109,7 @@ export default async function handler(req, res) {
       );
 
       page.drawText(propObject.p_8727183196433._Date, {
-        x: 80,
+        x: 70,
         y: 710,
         size: fontSize,
         width: textWidth,
@@ -121,7 +119,7 @@ export default async function handler(req, res) {
         font: timesRomanFont,
       });
       page.drawText(heading, {
-        x: 80,
+        x: 70,
         y: 650,
         width: textWidth,
         height: textHeight,
@@ -133,7 +131,7 @@ export default async function handler(req, res) {
       });
 
       page.drawText(content, {
-        x: 80,
+        x: 70,
         y: 620,
         width: textWidth,
         height: textHeight,
@@ -144,7 +142,7 @@ export default async function handler(req, res) {
       });
 
       page.drawText(welcomeContent, {
-        x: 250,
+        x: 240,
         y: 320,
         width: textWidth,
         height: textHeight,
@@ -155,7 +153,7 @@ export default async function handler(req, res) {
       });
 
       page.drawText(welcomeSignContent, {
-        x: 80,
+        x: 70,
         y: 250,
         width: textWidth,
         height: textHeight,
@@ -166,14 +164,14 @@ export default async function handler(req, res) {
       });
 
       page.drawImage(welcome_emblem_signature, {
-        x: 180,
+        x: 170,
         y: 210,
         height: 70,
         width: 50,
       });
 
       page.drawText(facebookContent, {
-        x: 80,
+        x: 70,
         y: 170,
         width: textWidth,
         height: textHeight,
@@ -184,7 +182,7 @@ export default async function handler(req, res) {
       });
 
       page.drawText(facebookLink, {
-        x: 130,
+        x: 120,
         y: 170,
         width: textWidth,
         height: textHeight,
@@ -194,14 +192,14 @@ export default async function handler(req, res) {
         font: timesRomanFont,
       });
       page.drawLine({
-        start: { x: 130, y: 165 }, // Adjust the y-position for Form Field 3
-        end: { x: 225, y: 165 }, // Adjust the y-position for Form Field 3
+        start: { x: 120, y: 165 }, // Adjust the y-position for Form Field 3
+        end: { x: 215, y: 165 }, // Adjust the y-position for Form Field 3
         color: rgb(0.027, 0.388, 0.756),
         thickness: 0.5,
       });
 
       page.drawText(scotalndTitleAddress, {
-        x: 130,
+        x: 120,
         y: 70,
         width: textWidth,
         height: textHeight,
@@ -212,7 +210,7 @@ export default async function handler(req, res) {
       });
 
       page.drawText("info@scotlandtitles.com", {
-        x: 160,
+        x: 150,
         y: 50,
         width: textWidth,
         height: textHeight,
@@ -222,14 +220,14 @@ export default async function handler(req, res) {
         font: timesRomanFont,
       });
       page.drawLine({
-        start: { x: 160, y: 45 }, // Adjust the y-position for Form Field 3
-        end: { x: 270, y: 45 }, // Adjust the y-position for Form Field 3
+        start: { x: 150, y: 45 }, // Adjust the y-position for Form Field 3
+        end: { x: 260, y: 45 }, // Adjust the y-position for Form Field 3
         color: rgb(0.027, 0.388, 0.756),
         thickness: 0.5,
       });
 
       page.drawText("www.ScotlandTitles.com", {
-        x: 360,
+        x: 350,
         y: 50,
         width: textWidth,
         height: textHeight,
@@ -239,18 +237,17 @@ export default async function handler(req, res) {
         font: timesRomanFont,
       });
       page.drawLine({
-        start: { x: 360, y: 45 }, // Adjust the y-position for Form Field 3
-        end: { x: 465, y: 45 }, // Adjust the y-position for Form Field 3
+        start: { x: 350, y: 45 }, // Adjust the y-position for Form Field 3
+        end: { x: 460, y: 45 }, // Adjust the y-position for Form Field 3
         color: rgb(0.027, 0.388, 0.756),
         thickness: 0.5,
       });
       page.drawImage(img, {
-        x: 450,
+        x: 440,
         y: 690,
         width: pngDims.width,
         height: pngDims.height,
       });
-
       const filePathTwo = path.resolve("./public", "images", "pdf-bg.jpg");
 
       const imgBufferTwo = fs.readFileSync(filePathTwo);
@@ -2306,6 +2303,7 @@ export default async function handler(req, res) {
       const customFont = await pdfDoc.embedFont(fontBytes);
 
       const imgBuffer = fs.readFileSync(filePath);
+      // console.log(imgBuffer, "imgBuffer");
       const img = await pdfDoc.embedPng(imgBuffer);
       const pngDims = img.scale(0.25);
 
@@ -2316,9 +2314,13 @@ export default async function handler(req, res) {
       );
       const welcom_signature_Buffer = fs.readFileSync(welcomeSignPath);
 
+      // console.log(imgBuffer, "imgBuffer");
       const welcome_emblem_signature = await pdfDoc.embedPng(
         welcom_signature_Buffer
       );
+
+      // const date = pdfDate;
+      // const date = "22-5-2024";
 
       const heading = `Land with reference number 321323223 ${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1} of\nBlairadam`;
       const content = `Please find enclosed your Certificate of Disposition and Proclamation confirming you now own Land\nwithin a Scottish Estate . You may choose to adopt the traditional Scottish title of ${propObject.p_8727183196433._Title1} as a sign of\nrespect, or the English language equivalent.\n\nYour land is located within our Estate with street address of Kingseat Road (off Cantsdam Road),\nCantsdam, Kelty, Fife, Scotland KY12 0SW. Your plot of land is located beside Kingseat Road single\ntrack road that leads north from the B912 Cantsdam Road.\n\nYou can view the land online. The following coordinates will show you the centre of the Estate;\n\nGoogle Maps type in  coordinates 56.1215718, - 3.3856475\nOrdinance Survey 10 Figure Grid Reference NT 13956 92954\nX Easting 313956 , Y Northing 692954\n\nWe hope that you have the opportunity to visit your land, and to enjoy the Scottish countryside as a\n${propObject.p_8727183196433._Title1} of Scotland . You can keep up to date via our Facebook page at fb.me/ScotlandTitles\n\nI very much hope that owning a piece of Scotland is something that will give you a sense of pride, and\nwould like to take this opportunity to thank you for choosing Scotland Titles`; // const page = document.getPage(0);
@@ -2344,7 +2346,7 @@ export default async function handler(req, res) {
       );
 
       page.drawText(propObject.p_8727183196433._Date, {
-        x: 80,
+        x: 70,
         y: 710,
         size: fontSize,
         width: textWidth,
@@ -2354,7 +2356,7 @@ export default async function handler(req, res) {
         font: timesRomanFont,
       });
       page.drawText(heading, {
-        x: 80,
+        x: 70,
         y: 650,
         width: textWidth,
         height: textHeight,
@@ -2366,7 +2368,7 @@ export default async function handler(req, res) {
       });
 
       page.drawText(content, {
-        x: 80,
+        x: 70,
         y: 620,
         width: textWidth,
         height: textHeight,
@@ -2377,7 +2379,7 @@ export default async function handler(req, res) {
       });
 
       page.drawText(welcomeContent, {
-        x: 250,
+        x: 240,
         y: 320,
         width: textWidth,
         height: textHeight,
@@ -2388,7 +2390,7 @@ export default async function handler(req, res) {
       });
 
       page.drawText(welcomeSignContent, {
-        x: 80,
+        x: 70,
         y: 250,
         width: textWidth,
         height: textHeight,
@@ -2399,14 +2401,14 @@ export default async function handler(req, res) {
       });
 
       page.drawImage(welcome_emblem_signature, {
-        x: 180,
+        x: 170,
         y: 210,
         height: 70,
         width: 50,
       });
 
       page.drawText(facebookContent, {
-        x: 80,
+        x: 70,
         y: 170,
         width: textWidth,
         height: textHeight,
@@ -2417,7 +2419,7 @@ export default async function handler(req, res) {
       });
 
       page.drawText(facebookLink, {
-        x: 130,
+        x: 120,
         y: 170,
         width: textWidth,
         height: textHeight,
@@ -2427,14 +2429,14 @@ export default async function handler(req, res) {
         font: timesRomanFont,
       });
       page.drawLine({
-        start: { x: 130, y: 165 }, // Adjust the y-position for Form Field 3
-        end: { x: 225, y: 165 }, // Adjust the y-position for Form Field 3
+        start: { x: 120, y: 165 }, // Adjust the y-position for Form Field 3
+        end: { x: 215, y: 165 }, // Adjust the y-position for Form Field 3
         color: rgb(0.027, 0.388, 0.756),
         thickness: 0.5,
       });
 
       page.drawText(scotalndTitleAddress, {
-        x: 130,
+        x: 120,
         y: 70,
         width: textWidth,
         height: textHeight,
@@ -2445,7 +2447,7 @@ export default async function handler(req, res) {
       });
 
       page.drawText("info@scotlandtitles.com", {
-        x: 160,
+        x: 150,
         y: 50,
         width: textWidth,
         height: textHeight,
@@ -2455,14 +2457,14 @@ export default async function handler(req, res) {
         font: timesRomanFont,
       });
       page.drawLine({
-        start: { x: 160, y: 45 }, // Adjust the y-position for Form Field 3
-        end: { x: 270, y: 45 }, // Adjust the y-position for Form Field 3
+        start: { x: 150, y: 45 }, // Adjust the y-position for Form Field 3
+        end: { x: 260, y: 45 }, // Adjust the y-position for Form Field 3
         color: rgb(0.027, 0.388, 0.756),
         thickness: 0.5,
       });
 
       page.drawText("www.ScotlandTitles.com", {
-        x: 360,
+        x: 350,
         y: 50,
         width: textWidth,
         height: textHeight,
@@ -2472,18 +2474,17 @@ export default async function handler(req, res) {
         font: timesRomanFont,
       });
       page.drawLine({
-        start: { x: 360, y: 45 }, // Adjust the y-position for Form Field 3
-        end: { x: 465, y: 45 }, // Adjust the y-position for Form Field 3
+        start: { x: 350, y: 45 }, // Adjust the y-position for Form Field 3
+        end: { x: 460, y: 45 }, // Adjust the y-position for Form Field 3
         color: rgb(0.027, 0.388, 0.756),
         thickness: 0.5,
       });
       page.drawImage(img, {
-        x: 450,
+        x: 440,
         y: 690,
         width: pngDims.width,
         height: pngDims.height,
       });
-
       const filePathTwo = path.resolve("./public", "images", "pdf-bg.jpg");
 
       const imgBufferTwo = fs.readFileSync(filePathTwo);
@@ -3934,6 +3935,7 @@ export default async function handler(req, res) {
       const customFont = await pdfDoc.embedFont(fontBytes);
 
       const imgBuffer = fs.readFileSync(filePath);
+      // console.log(imgBuffer, "imgBuffer");
       const img = await pdfDoc.embedPng(imgBuffer);
       const pngDims = img.scale(0.25);
 
@@ -3944,9 +3946,13 @@ export default async function handler(req, res) {
       );
       const welcom_signature_Buffer = fs.readFileSync(welcomeSignPath);
 
+      // console.log(imgBuffer, "imgBuffer");
       const welcome_emblem_signature = await pdfDoc.embedPng(
         welcom_signature_Buffer
       );
+
+      // const date = pdfDate;
+      // const date = "22-5-2024";
 
       const heading = `Land with reference number 321323223 ${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1} of\nBlairadam`;
       const content = `Please find enclosed your Certificate of Disposition and Proclamation confirming you now own Land\nwithin a Scottish Estate . You may choose to adopt the traditional Scottish title of ${propObject.p_8727183196433._Title1} as a sign of\nrespect, or the English language equivalent.\n\nYour land is located within our Estate with street address of Kingseat Road (off Cantsdam Road),\nCantsdam, Kelty, Fife, Scotland KY12 0SW. Your plot of land is located beside Kingseat Road single\ntrack road that leads north from the B912 Cantsdam Road.\n\nYou can view the land online. The following coordinates will show you the centre of the Estate;\n\nGoogle Maps type in  coordinates 56.1215718, - 3.3856475\nOrdinance Survey 10 Figure Grid Reference NT 13956 92954\nX Easting 313956 , Y Northing 692954\n\nWe hope that you have the opportunity to visit your land, and to enjoy the Scottish countryside as a\n${propObject.p_8727183196433._Title1} of Scotland . You can keep up to date via our Facebook page at fb.me/ScotlandTitles\n\nI very much hope that owning a piece of Scotland is something that will give you a sense of pride, and\nwould like to take this opportunity to thank you for choosing Scotland Titles`; // const page = document.getPage(0);
@@ -3972,7 +3978,7 @@ export default async function handler(req, res) {
       );
 
       page.drawText(propObject.p_8727183196433._Date, {
-        x: 80,
+        x: 70,
         y: 710,
         size: fontSize,
         width: textWidth,
@@ -3982,7 +3988,7 @@ export default async function handler(req, res) {
         font: timesRomanFont,
       });
       page.drawText(heading, {
-        x: 80,
+        x: 70,
         y: 650,
         width: textWidth,
         height: textHeight,
@@ -3994,7 +4000,7 @@ export default async function handler(req, res) {
       });
 
       page.drawText(content, {
-        x: 80,
+        x: 70,
         y: 620,
         width: textWidth,
         height: textHeight,
@@ -4005,7 +4011,7 @@ export default async function handler(req, res) {
       });
 
       page.drawText(welcomeContent, {
-        x: 250,
+        x: 240,
         y: 320,
         width: textWidth,
         height: textHeight,
@@ -4016,7 +4022,7 @@ export default async function handler(req, res) {
       });
 
       page.drawText(welcomeSignContent, {
-        x: 80,
+        x: 70,
         y: 250,
         width: textWidth,
         height: textHeight,
@@ -4027,14 +4033,14 @@ export default async function handler(req, res) {
       });
 
       page.drawImage(welcome_emblem_signature, {
-        x: 180,
+        x: 170,
         y: 210,
         height: 70,
         width: 50,
       });
 
       page.drawText(facebookContent, {
-        x: 80,
+        x: 70,
         y: 170,
         width: textWidth,
         height: textHeight,
@@ -4045,7 +4051,7 @@ export default async function handler(req, res) {
       });
 
       page.drawText(facebookLink, {
-        x: 130,
+        x: 120,
         y: 170,
         width: textWidth,
         height: textHeight,
@@ -4055,14 +4061,14 @@ export default async function handler(req, res) {
         font: timesRomanFont,
       });
       page.drawLine({
-        start: { x: 130, y: 165 }, // Adjust the y-position for Form Field 3
-        end: { x: 225, y: 165 }, // Adjust the y-position for Form Field 3
+        start: { x: 120, y: 165 }, // Adjust the y-position for Form Field 3
+        end: { x: 215, y: 165 }, // Adjust the y-position for Form Field 3
         color: rgb(0.027, 0.388, 0.756),
         thickness: 0.5,
       });
 
       page.drawText(scotalndTitleAddress, {
-        x: 130,
+        x: 120,
         y: 70,
         width: textWidth,
         height: textHeight,
@@ -4073,7 +4079,7 @@ export default async function handler(req, res) {
       });
 
       page.drawText("info@scotlandtitles.com", {
-        x: 160,
+        x: 150,
         y: 50,
         width: textWidth,
         height: textHeight,
@@ -4083,14 +4089,14 @@ export default async function handler(req, res) {
         font: timesRomanFont,
       });
       page.drawLine({
-        start: { x: 160, y: 45 }, // Adjust the y-position for Form Field 3
-        end: { x: 270, y: 45 }, // Adjust the y-position for Form Field 3
+        start: { x: 150, y: 45 }, // Adjust the y-position for Form Field 3
+        end: { x: 260, y: 45 }, // Adjust the y-position for Form Field 3
         color: rgb(0.027, 0.388, 0.756),
         thickness: 0.5,
       });
 
       page.drawText("www.ScotlandTitles.com", {
-        x: 360,
+        x: 350,
         y: 50,
         width: textWidth,
         height: textHeight,
@@ -4100,13 +4106,13 @@ export default async function handler(req, res) {
         font: timesRomanFont,
       });
       page.drawLine({
-        start: { x: 360, y: 45 }, // Adjust the y-position for Form Field 3
-        end: { x: 465, y: 45 }, // Adjust the y-position for Form Field 3
+        start: { x: 350, y: 45 }, // Adjust the y-position for Form Field 3
+        end: { x: 460, y: 45 }, // Adjust the y-position for Form Field 3
         color: rgb(0.027, 0.388, 0.756),
         thickness: 0.5,
       });
       page.drawImage(img, {
-        x: 450,
+        x: 440,
         y: 690,
         width: pngDims.width,
         height: pngDims.height,
@@ -4224,7 +4230,7 @@ export default async function handler(req, res) {
 
       const monthName = monthNames[dateObj.getMonth()];
 
-      const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18′′N , 003°23′08′′W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is 13334\n\nThe size of THE LAND is one square foot\n\nDate of Entry of THE LAND is as the date of this CERTIFICATE\n\nThis Disposition is signed for and on behalf of Scotland Titles and witnessed on the\n${day} Day of ${monthName} ${year}`;
+      const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07'18''N , 003°23'08''W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is 13334\n\nThe size of THE LAND is one square foot\n\nDate of Entry of THE LAND is as the date of this CERTIFICATE\n\nThis Disposition is signed for and on behalf of Scotland Titles and witnessed on the\n${day} Day of ${monthName} ${year}`;
       pagetwo.drawImage(imgBg, {
         width: pagetwo.getWidth(),
         height: pagetwo.getHeight(),
@@ -5705,7 +5711,7 @@ export default async function handler(req, res) {
       );
 
       page.drawText(propObject.p_8727183196433._Date, {
-        x: 80,
+        x: 70,
         y: 710,
         size: fontSize,
         width: textWidth,
@@ -5715,7 +5721,7 @@ export default async function handler(req, res) {
         font: timesRomanFont,
       });
       page.drawText(heading, {
-        x: 80,
+        x: 70,
         y: 650,
         width: textWidth,
         height: textHeight,
@@ -5727,7 +5733,7 @@ export default async function handler(req, res) {
       });
 
       page.drawText(content, {
-        x: 80,
+        x: 70,
         y: 620,
         width: textWidth,
         height: textHeight,
@@ -5738,7 +5744,7 @@ export default async function handler(req, res) {
       });
 
       page.drawText(welcomeContent, {
-        x: 250,
+        x: 240,
         y: 320,
         width: textWidth,
         height: textHeight,
@@ -5749,7 +5755,7 @@ export default async function handler(req, res) {
       });
 
       page.drawText(welcomeSignContent, {
-        x: 80,
+        x: 70,
         y: 250,
         width: textWidth,
         height: textHeight,
@@ -5760,14 +5766,14 @@ export default async function handler(req, res) {
       });
 
       page.drawImage(welcome_emblem_signature, {
-        x: 180,
+        x: 170,
         y: 210,
         height: 70,
         width: 50,
       });
 
       page.drawText(facebookContent, {
-        x: 80,
+        x: 70,
         y: 170,
         width: textWidth,
         height: textHeight,
@@ -5778,7 +5784,7 @@ export default async function handler(req, res) {
       });
 
       page.drawText(facebookLink, {
-        x: 130,
+        x: 120,
         y: 170,
         width: textWidth,
         height: textHeight,
@@ -5788,14 +5794,14 @@ export default async function handler(req, res) {
         font: timesRomanFont,
       });
       page.drawLine({
-        start: { x: 130, y: 165 }, // Adjust the y-position for Form Field 3
-        end: { x: 225, y: 165 }, // Adjust the y-position for Form Field 3
+        start: { x: 120, y: 165 }, // Adjust the y-position for Form Field 3
+        end: { x: 215, y: 165 }, // Adjust the y-position for Form Field 3
         color: rgb(0.027, 0.388, 0.756),
         thickness: 0.5,
       });
 
       page.drawText(scotalndTitleAddress, {
-        x: 130,
+        x: 120,
         y: 70,
         width: textWidth,
         height: textHeight,
@@ -5806,7 +5812,7 @@ export default async function handler(req, res) {
       });
 
       page.drawText("info@scotlandtitles.com", {
-        x: 160,
+        x: 150,
         y: 50,
         width: textWidth,
         height: textHeight,
@@ -5816,14 +5822,14 @@ export default async function handler(req, res) {
         font: timesRomanFont,
       });
       page.drawLine({
-        start: { x: 160, y: 45 }, // Adjust the y-position for Form Field 3
-        end: { x: 270, y: 45 }, // Adjust the y-position for Form Field 3
+        start: { x: 150, y: 45 }, // Adjust the y-position for Form Field 3
+        end: { x: 260, y: 45 }, // Adjust the y-position for Form Field 3
         color: rgb(0.027, 0.388, 0.756),
         thickness: 0.5,
       });
 
       page.drawText("www.ScotlandTitles.com", {
-        x: 360,
+        x: 350,
         y: 50,
         width: textWidth,
         height: textHeight,
@@ -5833,13 +5839,13 @@ export default async function handler(req, res) {
         font: timesRomanFont,
       });
       page.drawLine({
-        start: { x: 360, y: 45 }, // Adjust the y-position for Form Field 3
-        end: { x: 465, y: 45 }, // Adjust the y-position for Form Field 3
+        start: { x: 350, y: 45 }, // Adjust the y-position for Form Field 3
+        end: { x: 460, y: 45 }, // Adjust the y-position for Form Field 3
         color: rgb(0.027, 0.388, 0.756),
         thickness: 0.5,
       });
       page.drawImage(img, {
-        x: 450,
+        x: 440,
         y: 690,
         width: pngDims.width,
         height: pngDims.height,
@@ -7931,6 +7937,7 @@ export default async function handler(req, res) {
     }
   };
   if (email && req.body.line_items.length > 0) {
+    console.log(req.body, "==================req body==============");
     let pId = [];
     let pProperties = {};
 
