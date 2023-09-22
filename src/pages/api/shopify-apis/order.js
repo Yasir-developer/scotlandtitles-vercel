@@ -19,7 +19,7 @@ export default async function handler(req, res) {
     password: "hP2PTSSotW!I",
   });
 
-  const { id, email, created_at } = req.body;
+  const { id, email, created_at, order_number } = req.body;
 
   const pdfDoc = await PDFDocument.create();
   pdfDoc.registerFontkit(fontkit);
@@ -78,7 +78,7 @@ export default async function handler(req, res) {
         welcom_signature_Buffer
       );
 
-      const heading = `Land with reference number 321323223 ${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1} of\nBlairadam`;
+      const heading = `Land with reference number ${order_number} ${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1} of\nBlairadam`;
       const content = `Please find enclosed your Certificate of Disposition and Proclamation confirming you now own Land\nwithin a Scottish Estate . You may choose to adopt the traditional Scottish title of ${propObject.p_8727183196433._Title1} as a sign of\nrespect, or the English language equivalent.\n\nYour land is located within our Estate with street address of Kingseat Road (off Cantsdam Road),\nCantsdam, Kelty, Fife, Scotland KY12 0SW. Your plot of land is located beside Kingseat Road single\ntrack road that leads north from the B912 Cantsdam Road.\n\nYou can view the land online. The following coordinates will show you the centre of the Estate;\n\nGoogle Maps type in  coordinates 56.1215718, - 3.3856475\nOrdinance Survey 10 Figure Grid Reference NT 13956 92954\nX Easting 313956 , Y Northing 692954\n\nWe hope that you have the opportunity to visit your land, and to enjoy the Scottish countryside as a\n${propObject.p_8727183196433._Title1} of Scotland . You can keep up to date via our Facebook page at fb.me/ScotlandTitles\n\nI very much hope that owning a piece of Scotland is something that will give you a sense of pride, and\nwould like to take this opportunity to thank you for choosing Scotland Titles`; // const page = document.getPage(0);
       const welcomeContent = `Welcome to Scotland!`; // const page = document.getPage(0);
       const welcomeSignContent = `Signed for\nand on behalf of\nScotland Titles`; // const page = document.getPage(0);
@@ -324,9 +324,9 @@ export default async function handler(req, res) {
         (pagetwo.getWidth() - certificateUserNametextWidth) / 2;
       const certificateX = certificateStartingPosition - certificateHalfOfWord;
 
-      const certificateAddressTwo = `(hereafter to be proclaimed as “THE ${propObject.p_8727183196433._Title1}”), care of Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom`;
+      const certificateAddressTwo = `(hereafter to be proclaimed as “THE ${propObject.p_8727183196433._Title1.toUpperCase()}”), care of Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom`;
 
-      const certificateText = `The Scotland Titles Estate in Fife, Scotland, hereinafter referred to as “THE ESTATE”,\nhas been partitioned into dedicated souvenir plots of land.\n\nTHE LORD has petitioned unto Scotland Titles on this day their intention to\npurchase, and Scotland Titles has determined to accept the disposition of a plot of\nland within THE ESTATE, at Cantsdam, hereafter referred to as “THE LAND”.\n\nScotland Titles, in CONSIDERATION of all monies due to be paid to us by THE\n ${propObject.p_8727183196433._Title1}, of which we have received of in full, we do hereby DISCHARGE unto them\nand DISPONE to and in perpetuity in favour of THE ${propObject.p_8727183196433._Title1} and to their future\nassignees the whole of THE LAND but always with pedestrian access only over THE\nESTATE; such rights of vehicular access are reserved to Scotland Titles and its\nsuccessors in title plus any and all others authorised by it; THE LORD covenants not\nto dispose of THE LAND in part only.\n\nScotland Titles is a trading name of Blairdam Corporation PA. Terms and Conditions,\nand this CERTIFICATE shall be governed by the Law of Scotland.`;
+      const certificateText = `The Scotland Titles Estate in Fife, Scotland, hereinafter referred to as “THE ESTATE”,\nhas been partitioned into dedicated souvenir plots of land.\n\nTHE ${propObject.p_8727183196433._Title1.toUpperCase()} has petitioned unto Scotland Titles on this day their intention to\npurchase, and Scotland Titles has determined to accept the disposition of a plot of\nland within THE ESTATE, at Cantsdam, hereafter referred to as “THE LAND”.\n\nScotland Titles, in CONSIDERATION of all monies due to be paid to us by THE\n${propObject.p_8727183196433._Title1.toUpperCase()}, of which we have received of in full, we do hereby DISCHARGE unto them\nand DISPONE to and in perpetuity in favour of THE ${propObject.p_8727183196433._Title1.toUpperCase()} and to their future\nassignees the whole of THE LAND but always with pedestrian access only over THE\nESTATE; such rights of vehicular access are reserved to Scotland Titles and its\nsuccessors in title plus any and all others authorised by it; THE ${propObject.p_8727183196433._Title1.toUpperCase()} covenants not\nto dispose of THE LAND in part only.\n\nScotland Titles is a trading name of Blairdam Corporation PA. Terms and Conditions,\nand this CERTIFICATE shall be governed by the Law of Scotland.`;
 
       const datee = propObject.p_8727183196433._Date;
       const dateObj = new Date(datee);
@@ -350,10 +350,28 @@ export default async function handler(req, res) {
       ];
 
       const monthName = monthNames[dateObj.getMonth()];
+      let titledayWithSuffix;
 
+      if (day >= 11 && day <= 13) {
+        titledayWithSuffix = `${day}th`;
+      } else {
+        switch (day % 10) {
+          case 1:
+            titledayWithSuffix = `${day}st`;
+            break;
+          case 2:
+            titledayWithSuffix = `${day}nd`;
+            break;
+          case 3:
+            titledayWithSuffix = `${day}rd`;
+            break;
+          default:
+            titledayWithSuffix = `${day}th`;
+        }
+      }
       const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18′′N , 003°23′08′′W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is 13334\n\nThe size of THE LAND is ${
         propObject.p_8727183196433.size
-      } square foot\n\nDate of Entry of THE LAND is as the date of this CERTIFICATE\n\nThis Disposition is signed for and on behalf of Scotland Titles and witnessed on the\n${day} Day of ${monthName} ${year}`;
+      } square foot\n\nDate of Entry of THE LAND is as the date of this CERTIFICATE\n\nThis Disposition is signed for and on behalf of Scotland Titles and witnessed on the\n${titledayWithSuffix} Day of ${monthName} ${year}`;
       pagetwo.drawImage(imgBg, {
         width: pagetwo.getWidth(),
         height: pagetwo.getHeight(),
@@ -1220,7 +1238,7 @@ export default async function handler(req, res) {
       const videlicit = "Videlicit:";
 
       const emblemCertificateVidelicitText = `BY DEMONSTRATION OF WHICH ENSIGNS`;
-      const emblemCertificateVidelicitTextTwo = `ARMORIAL THE SAID PETITIONER IS, AMONGST ALL\nNOBLES AND IN ALL PLACES OF HONOUR, TO BE\nTAKEN, NUMBERED, ACCOUNTED AND RECEIVED AS A\n${propObject.p_8727183065361._Title1} OF SCOTLAND,\n\n`;
+      const emblemCertificateVidelicitTextTwo = `ARMORIAL THE SAID PETITIONER IS, AMONGST ALL\nNOBLES AND IN ALL PLACES OF HONOUR, TO BE\nTAKEN, NUMBERED, ACCOUNTED AND RECEIVED AS A\n${propObject.p_8727183065361._Title1.toUpperCase()} OF SCOTLAND,\n\n`;
 
       const testimony = "In Testimony Whereof:";
 
@@ -1235,7 +1253,7 @@ export default async function handler(req, res) {
 
       const Scilicet = "Scilicet";
       const scilicetSubDescription = "BY VIRTUE OF OWNERSHIP OF THE LAND IN ";
-      const ScilicetDescription = `SCOTLAND AND IN PARTICULAR THE LAND DESCRIBED\nABOVE WITHIN THE KINGDOM OF FIFE BY CANTSDAM\nAS FURTHER DESCRIBEDIN THE CERTIFICATE OF\nDISPOSITION AND PROCLAMATION, THE PETITIONER\nMAY HENCEFORTH AND IN PERPETUITY BE KNOWN BY\nTHE STYLE OF ${propObject.p_8727183065361._Title1} AND IN PARTICULAR ${propObject.p_8727183065361._Name1} OF\nBLAIRADAM.`;
+      const ScilicetDescription = `SCOTLAND AND IN PARTICULAR THE LAND DESCRIBED\nABOVE WITHIN THE KINGDOM OF FIFE BY CANTSDAM\nAS FURTHER DESCRIBEDIN THE CERTIFICATE OF\nDISPOSITION AND PROCLAMATION, THE PETITIONER\nMAY HENCEFORTH AND IN PERPETUITY BE KNOWN BY\nTHE STYLE OF ${propObject.p_8727183065361._Title1.toUpperCase()} AND IN PARTICULAR ${propObject.p_8727183065361._Title1.toUpperCase()} OF\nBLAIRADAM.`;
       //Signed content
 
       const emblemSigned = "Signed";
@@ -1267,21 +1285,21 @@ export default async function handler(req, res) {
       const emblemmonthName = monthNames[dateObj.getMonth()];
       let dayWithSuffix;
 
-      if (day >= 11 && day <= 13) {
+      if (emblemday >= 11 && emblemday <= 13) {
         dayWithSuffix = `${day}th`;
       } else {
-        switch (day % 10) {
+        switch (emblemday % 10) {
           case 1:
-            dayWithSuffix = `${day}st`;
+            dayWithSuffix = `${emblemday}st`;
             break;
           case 2:
-            dayWithSuffix = `${day}nd`;
+            dayWithSuffix = `${emblemday}nd`;
             break;
           case 3:
-            dayWithSuffix = `${day}rd`;
+            dayWithSuffix = `${emblemday}rd`;
             break;
           default:
-            dayWithSuffix = `${day}th`;
+            dayWithSuffix = `${emblemday}th`;
         }
       }
       const dateContent = `THIS ${dayWithSuffix} DAY OF ${emblemmonthName} IN THE YEAR ${emblemyear}`;
@@ -1355,7 +1373,7 @@ export default async function handler(req, res) {
 
       emblemCertificate.drawImage(certificateMid, {
         x: 250,
-        y: 610,
+        y: 630,
         width: ertificateMidpngDims.width,
         height: ertificateMidpngDims.height,
       });
@@ -1787,8 +1805,8 @@ export default async function handler(req, res) {
       const tartandatee = propObject.p_8727183032593._Date;
       const tartandateObj = new Date(tartandatee);
       const tartanyear = tartandateObj.getFullYear();
-      const tartanmonth = String(dateObj.getMonth() + 1).padStart(2, "0"); // Adding 1 because months are 0-indexed
-      const tartanday = String(dateObj.getDate()).padStart(2, "0");
+      const tartanmonth = String(tartandateObj.getMonth() + 1).padStart(2, "0"); // Adding 1 because months are 0-indexed
+      const tartanday = String(tartandateObj.getDate()).padStart(2, "0");
       //   const
 
       // const monthNames = [
@@ -1806,7 +1824,7 @@ export default async function handler(req, res) {
       //   "DECEMBER",
       // ];
 
-      const tartanmonthName = monthNames[dateObj.getMonth()];
+      const tartanmonthName = monthNames[tartandateObj.getMonth()];
       let tartandayWithSuffix;
 
       if (tartanday >= 11 && tartanday <= 13) {
@@ -2269,11 +2287,11 @@ export default async function handler(req, res) {
       pdfStream.push(pdfBytes);
       pdfStream.push(null); // End of stream
 
-      const remotePath = `/pdfs/${id}.pdf`;
+      const remotePath = `/pdfs/${order_number}.pdf`;
       await client.uploadFrom(pdfStream, remotePath);
       client.close();
 
-      const pdfUrl = `https://scotlandtitlesapp.com/pdfs/${id}.pdf`;
+      const pdfUrl = `https://scotlandtitlesapp.com/pdfs/${order_number}.pdf`;
       console.log(pdfUrl, "pdfUrl");
       // return res.status(200).json({ pdfUrl });
       //   res.send(pdfBytes);
@@ -2315,7 +2333,7 @@ export default async function handler(req, res) {
       // const date = pdfDate;
       // const date = "22-5-2024";
 
-      const heading = `Land with reference number 321323223 ${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1} of\nBlairadam`;
+      const heading = `Land with reference number ${order_number} ${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1} of\nBlairadam`;
       const content = `Please find enclosed your Certificate of Disposition and Proclamation confirming you now own Land\nwithin a Scottish Estate . You may choose to adopt the traditional Scottish title of ${propObject.p_8727183196433._Title1} as a sign of\nrespect, or the English language equivalent.\n\nYour land is located within our Estate with street address of Kingseat Road (off Cantsdam Road),\nCantsdam, Kelty, Fife, Scotland KY12 0SW. Your plot of land is located beside Kingseat Road single\ntrack road that leads north from the B912 Cantsdam Road.\n\nYou can view the land online. The following coordinates will show you the centre of the Estate;\n\nGoogle Maps type in  coordinates 56.1215718, - 3.3856475\nOrdinance Survey 10 Figure Grid Reference NT 13956 92954\nX Easting 313956 , Y Northing 692954\n\nWe hope that you have the opportunity to visit your land, and to enjoy the Scottish countryside as a\n${propObject.p_8727183196433._Title1} of Scotland . You can keep up to date via our Facebook page at fb.me/ScotlandTitles\n\nI very much hope that owning a piece of Scotland is something that will give you a sense of pride, and\nwould like to take this opportunity to thank you for choosing Scotland Titles`; // const page = document.getPage(0);
       const welcomeContent = `Welcome to Scotland!`; // const page = document.getPage(0);
       const welcomeSignContent = `Signed for\nand on behalf of\nScotland Titles`; // const page = document.getPage(0);
@@ -2564,9 +2582,10 @@ export default async function handler(req, res) {
       const certificateStartingPosition =
         (pagetwo.getWidth() - certificateUserNametextWidth) / 2;
       const certificateX = certificateStartingPosition - certificateHalfOfWord;
-      const certificateAddressTwo = `(hereafter to be proclaimed as “THE ${propObject.p_8727183196433._Title1}”), care of Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom`;
+      //   const title= propObject.p_8727183196433._Title1.toUpperCase()
+      const certificateAddressTwo = `(hereafter to be proclaimed as “THE ${propObject.p_8727183196433._Title1.toUpperCase()}”), care of Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom`;
 
-      const certificateText = `The Scotland Titles Estate in Fife, Scotland, hereinafter referred to as “THE ESTATE”,\nhas been partitioned into dedicated souvenir plots of land.\n\nTHE LORD has petitioned unto Scotland Titles on this day their intention to\npurchase, and Scotland Titles has determined to accept the disposition of a plot of\nland within THE ESTATE, at Cantsdam, hereafter referred to as “THE LAND”.\n\nScotland Titles, in CONSIDERATION of all monies due to be paid to us by THE\n ${propObject.p_8727183196433._Title1}, of which we have received of in full, we do hereby DISCHARGE unto them\nand DISPONE to and in perpetuity in favour of THE ${propObject.p_8727183196433._Title1} and to their future\nassignees the whole of THE LAND but always with pedestrian access only over THE\nESTATE; such rights of vehicular access are reserved to Scotland Titles and its\nsuccessors in title plus any and all others authorised by it; THE LORD covenants not\nto dispose of THE LAND in part only.\n\nScotland Titles is a trading name of Blairdam Corporation PA. Terms and Conditions,\nand this CERTIFICATE shall be governed by the Law of Scotland.`;
+      const certificateText = `The Scotland Titles Estate in Fife, Scotland, hereinafter referred to as “THE ESTATE”,\nhas been partitioned into dedicated souvenir plots of land.\n\nTHE ${propObject.p_8727183196433._Title1.toUpperCase()} has petitioned unto Scotland Titles on this day their intention to\npurchase, and Scotland Titles has determined to accept the disposition of a plot of\nland within THE ESTATE, at Cantsdam, hereafter referred to as “THE LAND”.\n\nScotland Titles, in CONSIDERATION of all monies due to be paid to us by THE\n${propObject.p_8727183196433._Title1.toUpperCase()}, of which we have received of in full, we do hereby DISCHARGE unto them\nand DISPONE to and in perpetuity in favour of THE ${propObject.p_8727183196433._Title1.toUpperCase()} and to their future\nassignees the whole of THE LAND but always with pedestrian access only over THE\nESTATE; such rights of vehicular access are reserved to Scotland Titles and its\nsuccessors in title plus any and all others authorised by it; THE ${propObject.p_8727183196433._Title1.toUpperCase()} covenants not\nto dispose of THE LAND in part only.\n\nScotland Titles is a trading name of Blairdam Corporation PA. Terms and Conditions,\nand this CERTIFICATE shall be governed by the Law of Scotland.`;
 
       const datee = propObject.p_8727183196433._Date;
       const dateObj = new Date(datee);
@@ -2591,9 +2610,29 @@ export default async function handler(req, res) {
 
       const monthName = monthNames[dateObj.getMonth()];
 
+      let titledayWithSuffix;
+
+      if (day >= 11 && day <= 13) {
+        titledayWithSuffix = `${day}th`;
+      } else {
+        switch (day % 10) {
+          case 1:
+            titledayWithSuffix = `${day}st`;
+            break;
+          case 2:
+            titledayWithSuffix = `${day}nd`;
+            break;
+          case 3:
+            titledayWithSuffix = `${day}rd`;
+            break;
+          default:
+            titledayWithSuffix = `${day}th`;
+        }
+      }
+
       const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18′′N , 003°23′08′′W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is 13334\n\nThe size of THE LAND is ${
         propObject.p_8727183196433.size
-      } square foot\n\nDate of Entry of THE LAND is as the date of this CERTIFICATE\n\nThis Disposition is signed for and on behalf of Scotland Titles and witnessed on the\n${day} Day of ${monthName} ${year}`;
+      } square foot\n\nDate of Entry of THE LAND is as the date of this CERTIFICATE\n\nThis Disposition is signed for and on behalf of Scotland Titles and witnessed on the\n${titledayWithSuffix} Day of ${monthName} ${year}`;
       pagetwo.drawImage(imgBg, {
         width: pagetwo.getWidth(),
         height: pagetwo.getHeight(),
@@ -3459,7 +3498,7 @@ export default async function handler(req, res) {
       const videlicit = "Videlicit:";
 
       const emblemCertificateVidelicitText = `BY DEMONSTRATION OF WHICH ENSIGNS`;
-      const emblemCertificateVidelicitTextTwo = `ARMORIAL THE SAID PETITIONER IS, AMONGST ALL\nNOBLES AND IN ALL PLACES OF HONOUR, TO BE\nTAKEN, NUMBERED, ACCOUNTED AND RECEIVED AS A\n${propObject.p_8727183065361._Title1} OF SCOTLAND,\n\n`;
+      const emblemCertificateVidelicitTextTwo = `ARMORIAL THE SAID PETITIONER IS, AMONGST ALL\nNOBLES AND IN ALL PLACES OF HONOUR, TO BE\nTAKEN, NUMBERED, ACCOUNTED AND RECEIVED AS A\n${propObject.p_8727183065361._Title1.toUpperCase()} OF SCOTLAND,\n\n`;
 
       const testimony = "In Testimony Whereof:";
 
@@ -3474,7 +3513,7 @@ export default async function handler(req, res) {
 
       const Scilicet = "Scilicet";
       const scilicetSubDescription = "BY VIRTUE OF OWNERSHIP OF THE LAND IN ";
-      const ScilicetDescription = `SCOTLAND AND IN PARTICULAR THE LAND DESCRIBED\nABOVE WITHIN THE KINGDOM OF FIFE BY CANTSDAM\nAS FURTHER DESCRIBEDIN THE CERTIFICATE OF\nDISPOSITION AND PROCLAMATION, THE PETITIONER\nMAY HENCEFORTH AND IN PERPETUITY BE KNOWN BY\nTHE STYLE OF ${propObject.p_8727183065361._Title1} AND IN PARTICULAR ${propObject.p_8727183065361._Name1} OF\nBLAIRADAM.`;
+      const ScilicetDescription = `SCOTLAND AND IN PARTICULAR THE LAND DESCRIBED\nABOVE WITHIN THE KINGDOM OF FIFE BY CANTSDAM\nAS FURTHER DESCRIBEDIN THE CERTIFICATE OF\nDISPOSITION AND PROCLAMATION, THE PETITIONER\nMAY HENCEFORTH AND IN PERPETUITY BE KNOWN BY\nTHE STYLE OF ${propObject.p_8727183065361._Title1.toUpperCase()} AND IN PARTICULAR ${propObject.p_8727183065361._Title1.toUpperCase()} OF\nBLAIRADAM.`;
       //Signed content
 
       const emblemSigned = "Signed";
@@ -3503,7 +3542,7 @@ export default async function handler(req, res) {
       //     "DECEMBER",
       //   ];
 
-      const emblemmonthName = monthNames[dateObj.getMonth()];
+      const emblemmonthName = monthNames[emblemdateObj.getMonth()];
       let dayWithSuffix;
 
       if (day >= 11 && day <= 13) {
@@ -3594,7 +3633,7 @@ export default async function handler(req, res) {
 
       emblemCertificate.drawImage(certificateMid, {
         x: 250,
-        y: 610,
+        y: 630,
         width: ertificateMidpngDims.width,
         height: ertificateMidpngDims.height,
       });
@@ -3904,11 +3943,11 @@ export default async function handler(req, res) {
       pdfStream.push(pdfBytes);
       pdfStream.push(null); // End of stream
 
-      const remotePath = `/pdfs/${id}.pdf`;
+      const remotePath = `/pdfs/${order_number}.pdf`;
       await client.uploadFrom(pdfStream, remotePath);
       client.close();
 
-      const pdfUrl = `https://scotlandtitlesapp.com/pdfs/${id}.pdf`;
+      const pdfUrl = `https://scotlandtitlesapp.com/pdfs/${order_number}.pdf`;
       console.log(pdfUrl, "pdfUrl");
     } catch (error) {
       console.error(error);
@@ -3948,7 +3987,7 @@ export default async function handler(req, res) {
       // const date = pdfDate;
       // const date = "22-5-2024";
 
-      const heading = `Land with reference number 321323223 ${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1} of\nBlairadam`;
+      const heading = `Land with reference number ${order_number} ${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1} of\nBlairadam`;
       const content = `Please find enclosed your Certificate of Disposition and Proclamation confirming you now own Land\nwithin a Scottish Estate . You may choose to adopt the traditional Scottish title of ${propObject.p_8727183196433._Title1} as a sign of\nrespect, or the English language equivalent.\n\nYour land is located within our Estate with street address of Kingseat Road (off Cantsdam Road),\nCantsdam, Kelty, Fife, Scotland KY12 0SW. Your plot of land is located beside Kingseat Road single\ntrack road that leads north from the B912 Cantsdam Road.\n\nYou can view the land online. The following coordinates will show you the centre of the Estate;\n\nGoogle Maps type in  coordinates 56.1215718, - 3.3856475\nOrdinance Survey 10 Figure Grid Reference NT 13956 92954\nX Easting 313956 , Y Northing 692954\n\nWe hope that you have the opportunity to visit your land, and to enjoy the Scottish countryside as a\n${propObject.p_8727183196433._Title1} of Scotland . You can keep up to date via our Facebook page at fb.me/ScotlandTitles\n\nI very much hope that owning a piece of Scotland is something that will give you a sense of pride, and\nwould like to take this opportunity to thank you for choosing Scotland Titles`; // const page = document.getPage(0);
       const welcomeContent = `Welcome to Scotland!`; // const page = document.getPage(0);
       const welcomeSignContent = `Signed for\nand on behalf of\nScotland Titles`; // const page = document.getPage(0);
@@ -4197,9 +4236,9 @@ export default async function handler(req, res) {
       const certificateStartingPosition =
         (pagetwo.getWidth() - certificateUserNametextWidth) / 2;
       const certificateX = certificateStartingPosition - certificateHalfOfWord;
-      const certificateAddressTwo = `(hereafter to be proclaimed as “THE ${propObject.p_8727183196433._Title1}”), care of Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom`;
+      const certificateAddressTwo = `(hereafter to be proclaimed as “THE ${propObject.p_8727183196433._Title1.toUpperCase()}”), care of Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom`;
 
-      const certificateText = `The Scotland Titles Estate in Fife, Scotland, hereinafter referred to as “THE ESTATE”,\nhas been partitioned into dedicated souvenir plots of land.\n\nTHE LORD has petitioned unto Scotland Titles on this day their intention to\npurchase, and Scotland Titles has determined to accept the disposition of a plot of\nland within THE ESTATE, at Cantsdam, hereafter referred to as “THE LAND”.\n\nScotland Titles, in CONSIDERATION of all monies due to be paid to us by THE\n ${propObject.p_8727183196433._Title1}, of which we have received of in full, we do hereby DISCHARGE unto them\nand DISPONE to and in perpetuity in favour of THE ${propObject.p_8727183196433._Title1} and to their future\nassignees the whole of THE LAND but always with pedestrian access only over THE\nESTATE; such rights of vehicular access are reserved to Scotland Titles and its\nsuccessors in title plus any and all others authorised by it; THE LORD covenants not\nto dispose of THE LAND in part only.\n\nScotland Titles is a trading name of Blairdam Corporation PA. Terms and Conditions,\nand this CERTIFICATE shall be governed by the Law of Scotland.`;
+      const certificateText = `The Scotland Titles Estate in Fife, Scotland, hereinafter referred to as “THE ESTATE”,\nhas been partitioned into dedicated souvenir plots of land.\n\nTHE ${propObject.p_8727183196433._Title1.toUpperCase()} has petitioned unto Scotland Titles on this day their intention to\npurchase, and Scotland Titles has determined to accept the disposition of a plot of\nland within THE ESTATE, at Cantsdam, hereafter referred to as “THE LAND”.\n\nScotland Titles, in CONSIDERATION of all monies due to be paid to us by THE\n${propObject.p_8727183196433._Title1.toUpperCase()}, of which we have received of in full, we do hereby DISCHARGE unto them\nand DISPONE to and in perpetuity in favour of THE ${propObject.p_8727183196433._Title1.toUpperCase()} and to their future\nassignees the whole of THE LAND but always with pedestrian access only over THE\nESTATE; such rights of vehicular access are reserved to Scotland Titles and its\nsuccessors in title plus any and all others authorised by it; THE ${propObject.p_8727183196433._Title1.toUpperCase()} covenants not\nto dispose of THE LAND in part only.\n\nScotland Titles is a trading name of Blairdam Corporation PA. Terms and Conditions,\nand this CERTIFICATE shall be governed by the Law of Scotland.`;
 
       const datee = propObject.p_8727183196433._Date;
       const dateObj = new Date(datee);
@@ -4224,7 +4263,27 @@ export default async function handler(req, res) {
 
       const monthName = monthNames[dateObj.getMonth()];
 
-      const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07'18''N , 003°23'08''W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is 13334\n\nThe size of THE LAND is ${propObject.p_8727183196433.size} square foot\n\nDate of Entry of THE LAND is as the date of this CERTIFICATE\n\nThis Disposition is signed for and on behalf of Scotland Titles and witnessed on the\n${day} Day of ${monthName} ${year}`;
+      let titledayWithSuffix;
+
+      if (day >= 11 && day <= 13) {
+        titledayWithSuffix = `${day}th`;
+      } else {
+        switch (day % 10) {
+          case 1:
+            titledayWithSuffix = `${day}st`;
+            break;
+          case 2:
+            titledayWithSuffix = `${day}nd`;
+            break;
+          case 3:
+            titledayWithSuffix = `${day}rd`;
+            break;
+          default:
+            titledayWithSuffix = `${day}th`;
+        }
+      }
+
+      const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07'18''N , 003°23'08''W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is 13334\n\nThe size of THE LAND is ${propObject.p_8727183196433.size} square foot\n\nDate of Entry of THE LAND is as the date of this CERTIFICATE\n\nThis Disposition is signed for and on behalf of Scotland Titles and witnessed on the\n${titledayWithSuffix} Day of ${monthName} ${year}`;
       pagetwo.drawImage(imgBg, {
         width: pagetwo.getWidth(),
         height: pagetwo.getHeight(),
@@ -5155,8 +5214,8 @@ export default async function handler(req, res) {
       const tartandatee = propObject.p_8727183032593._Date;
       const tartandateObj = new Date(tartandatee);
       const tartanyear = tartandateObj.getFullYear();
-      const tartanmonth = String(dateObj.getMonth() + 1).padStart(2, "0"); // Adding 1 because months are 0-indexed
-      const tartanday = String(dateObj.getDate()).padStart(2, "0");
+      const tartanmonth = String(tartandateObj.getMonth() + 1).padStart(2, "0"); // Adding 1 because months are 0-indexed
+      const tartanday = String(tartandateObj.getDate()).padStart(2, "0");
       //   const
 
       //   const monthNames = [
@@ -5636,11 +5695,11 @@ export default async function handler(req, res) {
       pdfStream.push(pdfBytes);
       pdfStream.push(null); // End of stream
 
-      const remotePath = `/pdfs/${id}.pdf`;
+      const remotePath = `/pdfs/${order_number}.pdf`;
       await client.uploadFrom(pdfStream, remotePath);
       client.close();
 
-      const pdfUrl = `https://scotlandtitlesapp.com/pdfs/${id}.pdf`;
+      const pdfUrl = `https://scotlandtitlesapp.com/pdfs/${order_number}.pdf`;
       console.log(pdfUrl, "pdfUrl");
     } catch (error) {
       console.error(error);
@@ -5680,7 +5739,7 @@ export default async function handler(req, res) {
       // const date = pdfDate;
       // const date = "22-5-2024";
 
-      const heading = `Land with reference number 321323223 ${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1} of\nBlairadam`;
+      const heading = `Land with reference number ${order_number} ${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1} of\nBlairadam`;
       const content = `Please find enclosed your Certificate of Disposition and Proclamation confirming you now own Land\nwithin a Scottish Estate . You may choose to adopt the traditional Scottish title of ${propObject.p_8727183196433._Title1} as a sign of\nrespect, or the English language equivalent.\n\nYour land is located within our Estate with street address of Kingseat Road (off Cantsdam Road),\nCantsdam, Kelty, Fife, Scotland KY12 0SW. Your plot of land is located beside Kingseat Road single\ntrack road that leads north from the B912 Cantsdam Road.\n\nYou can view the land online. The following coordinates will show you the centre of the Estate;\n\nGoogle Maps type in  coordinates 56.1215718, - 3.3856475\nOrdinance Survey 10 Figure Grid Reference NT 13956 92954\nX Easting 313956 , Y Northing 692954\n\nWe hope that you have the opportunity to visit your land, and to enjoy the Scottish countryside as a\n${propObject.p_8727183196433._Title1} of Scotland . You can keep up to date via our Facebook page at fb.me/ScotlandTitles\n\nI very much hope that owning a piece of Scotland is something that will give you a sense of pride, and\nwould like to take this opportunity to thank you for choosing Scotland Titles`; // const page = document.getPage(0);
       const welcomeContent = `Welcome to Scotland!`; // const page = document.getPage(0);
       const welcomeSignContent = `Signed for\nand on behalf of\nScotland Titles`; // const page = document.getPage(0);
@@ -5928,9 +5987,9 @@ export default async function handler(req, res) {
       const certificateStartingPosition =
         (pagetwo.getWidth() - certificateUserNametextWidth) / 2;
       const certificateX = certificateStartingPosition - certificateHalfOfWord;
-      const certificateAddressTwo = `(hereafter to be proclaimed as “THE ${propObject.p_8727183196433._Title1}”), care of Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom`;
+      const certificateAddressTwo = `(hereafter to be proclaimed as “THE ${propObject.p_8727183196433._Title1.toUpperCase()}”), care of Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom`;
 
-      const certificateText = `The Scotland Titles Estate in Fife, Scotland, hereinafter referred to as “THE ESTATE”,\nhas been partitioned into dedicated souvenir plots of land.\n\nTHE LORD has petitioned unto Scotland Titles on this day their intention to\npurchase, and Scotland Titles has determined to accept the disposition of a plot of\nland within THE ESTATE, at Cantsdam, hereafter referred to as “THE LAND”.\n\nScotland Titles, in CONSIDERATION of all monies due to be paid to us by THE\n ${propObject.p_8727183196433._Title1}, of which we have received of in full, we do hereby DISCHARGE unto them\nand DISPONE to and in perpetuity in favour of THE ${propObject.p_8727183196433._Title1} and to their future\nassignees the whole of THE LAND but always with pedestrian access only over THE\nESTATE; such rights of vehicular access are reserved to Scotland Titles and its\nsuccessors in title plus any and all others authorised by it; THE LORD covenants not\nto dispose of THE LAND in part only.\n\nScotland Titles is a trading name of Blairdam Corporation PA. Terms and Conditions,\nand this CERTIFICATE shall be governed by the Law of Scotland.`;
+      const certificateText = `The Scotland Titles Estate in Fife, Scotland, hereinafter referred to as “THE ESTATE”,\nhas been partitioned into dedicated souvenir plots of land.\n\nTHE ${propObject.p_8727183196433._Title1.toUpperCase()} has petitioned unto Scotland Titles on this day their intention to\npurchase, and Scotland Titles has determined to accept the disposition of a plot of\nland within THE ESTATE, at Cantsdam, hereafter referred to as “THE LAND”.\n\nScotland Titles, in CONSIDERATION of all monies due to be paid to us by THE\n${propObject.p_8727183196433._Title1.toUpperCase()}, of which we have received of in full, we do hereby DISCHARGE unto them\nand DISPONE to and in perpetuity in favour of THE ${propObject.p_8727183196433._Title1.toUpperCase()} and to their future\nassignees the whole of THE LAND but always with pedestrian access only over THE\nESTATE; such rights of vehicular access are reserved to Scotland Titles and its\nsuccessors in title plus any and all others authorised by it; THE ${propObject.p_8727183196433._Title1.toUpperCase()} covenants not\nto dispose of THE LAND in part only.\n\nScotland Titles is a trading name of Blairdam Corporation PA. Terms and Conditions,\nand this CERTIFICATE shall be governed by the Law of Scotland.`;
 
       const datee = propObject.p_8727183196433._Date;
       const dateObj = new Date(datee);
@@ -5954,10 +6013,28 @@ export default async function handler(req, res) {
       ];
 
       const monthName = monthNames[dateObj.getMonth()];
+      let titledayWithSuffix;
 
+      if (day >= 11 && day <= 13) {
+        titledayWithSuffix = `${day}th`;
+      } else {
+        switch (day % 10) {
+          case 1:
+            titledayWithSuffix = `${day}st`;
+            break;
+          case 2:
+            titledayWithSuffix = `${day}nd`;
+            break;
+          case 3:
+            titledayWithSuffix = `${day}rd`;
+            break;
+          default:
+            titledayWithSuffix = `${day}th`;
+        }
+      }
       const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18′′N , 003°23′08′′W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is 13334\n\nThe size of THE LAND is ${
         propObject.p_8727183196433.size
-      } square foot\n\nDate of Entry of THE LAND is as the date of this CERTIFICATE\n\nThis Disposition is signed for and on behalf of Scotland Titles and witnessed on the\n${day} Day of ${monthName} ${year}`;
+      } square foot\n\nDate of Entry of THE LAND is as the date of this CERTIFICATE\n\nThis Disposition is signed for and on behalf of Scotland Titles and witnessed on the\n${titledayWithSuffix} Day of ${monthName} ${year}`;
       pagetwo.drawImage(imgBg, {
         width: pagetwo.getWidth(),
         height: pagetwo.getHeight(),
@@ -6798,11 +6875,11 @@ export default async function handler(req, res) {
       pdfStream.push(pdfBytes);
       pdfStream.push(null); // End of stream
 
-      const remotePath = `/pdfs/${id}.pdf`;
+      const remotePath = `/pdfs/${order_number}.pdf`;
       await client.uploadFrom(pdfStream, remotePath);
       client.close();
 
-      const pdfUrl = `https://scotlandtitlesapp.com/pdfs/${id}.pdf`;
+      const pdfUrl = `https://scotlandtitlesapp.com/pdfs/${order_number}.pdf`;
 
       console.log(pdfUrl, "pdfUrl");
     } catch (error) {
@@ -6823,7 +6900,7 @@ export default async function handler(req, res) {
       const emblem_certificate_heading = `To All & Sundry whom these presents do concern\n
                  Scotland Titles does declare that`;
       //   const emblemCertficateUserName = `${propObject.p_8727183065361._Title1} ${propObject.p_8727183065361._Name1}`;
-      const emblemCertficateUserName = `Lord ${propObject.p_8727183065361._Title1} ${propObject.p_8727183065361._Name1}`;
+      const emblemCertficateUserName = `${propObject.p_8727183065361._Title1} ${propObject.p_8727183065361._Name1}`;
       const userNametextWidth = oldEng.widthOfTextAtSize(
         emblemCertficateUserName,
         12
@@ -6847,7 +6924,7 @@ export default async function handler(req, res) {
       const videlicit = "Videlicit:";
 
       const emblemCertificateVidelicitText = `BY DEMONSTRATION OF WHICH ENSIGNS`;
-      const emblemCertificateVidelicitTextTwo = `ARMORIAL THE SAID PETITIONER IS, AMONGST ALL\nNOBLES AND IN ALL PLACES OF HONOUR, TO BE\nTAKEN, NUMBERED, ACCOUNTED AND RECEIVED AS A\n${propObject.p_8727183065361._Title1} OF SCOTLAND,\n\n`;
+      const emblemCertificateVidelicitTextTwo = `ARMORIAL THE SAID PETITIONER IS, AMONGST ALL\nNOBLES AND IN ALL PLACES OF HONOUR, TO BE\nTAKEN, NUMBERED, ACCOUNTED AND RECEIVED AS A\n${propObject.p_8727183065361._Title1.toUpperCase()} OF SCOTLAND,\n\n`;
 
       const testimony = "In Testimony Whereof:";
 
@@ -6862,7 +6939,7 @@ export default async function handler(req, res) {
 
       const Scilicet = "Scilicet";
       const scilicetSubDescription = "BY VIRTUE OF OWNERSHIP OF THE LAND IN ";
-      const ScilicetDescription = `SCOTLAND AND IN PARTICULAR THE LAND DESCRIBED\nABOVE WITHIN THE KINGDOM OF FIFE BY CANTSDAM\nAS FURTHER DESCRIBEDIN THE CERTIFICATE OF\nDISPOSITION AND PROCLAMATION, THE PETITIONER\nMAY HENCEFORTH AND IN PERPETUITY BE KNOWN BY\nTHE STYLE OF ${propObject.p_8727183065361._Title1} AND IN PARTICULAR ${propObject.p_8727183065361._Name1} OF\nBLAIRADAM.`;
+      const ScilicetDescription = `SCOTLAND AND IN PARTICULAR THE LAND DESCRIBED\nABOVE WITHIN THE KINGDOM OF FIFE BY CANTSDAM\nAS FURTHER DESCRIBEDIN THE CERTIFICATE OF\nDISPOSITION AND PROCLAMATION, THE PETITIONER\nMAY HENCEFORTH AND IN PERPETUITY BE KNOWN BY\nTHE STYLE OF ${propObject.p_8727183065361._Title1.toUpperCase()} AND IN PARTICULAR ${propObject.p_8727183065361._Title1.toUpperCase()} OF\nBLAIRADAM.`;
       //Signed content
 
       const emblemSigned = "Signed";
@@ -6904,7 +6981,7 @@ export default async function handler(req, res) {
       let dayWithSuffix;
 
       if (emblemday >= 11 && emblemday <= 13) {
-        dayWithSuffix = `${day}th`;
+        dayWithSuffix = `${emblemday}th`;
       } else {
         switch (emblemday % 10) {
           case 1:
@@ -6945,7 +7022,7 @@ export default async function handler(req, res) {
 
       const imgBufferFour = fs.readFileSync(filePathFour);
       const certificateMid = await pdfDoc.embedPng(imgBufferFour);
-      const ertificateMidpngDims = certificateMid.scale(0.22);
+      const ertificateMidpngDims = certificateMid.scale(0.3);
 
       const emblemlogoPath = path.resolve(
         "./public",
@@ -6985,7 +7062,7 @@ export default async function handler(req, res) {
 
       emblemCertificate.drawImage(certificateMid, {
         x: 250,
-        y: 610,
+        y: 630,
         width: ertificateMidpngDims.width,
         height: ertificateMidpngDims.height,
       });
@@ -7295,11 +7372,11 @@ export default async function handler(req, res) {
       pdfStream.push(pdfBytes);
       pdfStream.push(null); // End of stream
 
-      const remotePath = `/pdfs/${id}.pdf`;
+      const remotePath = `/pdfs/${order_number}.pdf`;
       await client.uploadFrom(pdfStream, remotePath);
       client.close();
 
-      const pdfUrl = `https://scotlandtitlesapp.com/pdfs/${id}.pdf`;
+      const pdfUrl = `https://scotlandtitlesapp.com/pdfs/${order_number}.pdf`;
       console.log(pdfUrl, "pdfUrl");
     } catch (error) {
       console.error(error);
@@ -7919,11 +7996,11 @@ export default async function handler(req, res) {
       pdfStream.push(pdfBytes);
       pdfStream.push(null); // End of stream
 
-      const remotePath = `/pdfs/${id}.pdf`;
+      const remotePath = `/pdfs/${order_number}.pdf`;
       await client.uploadFrom(pdfStream, remotePath);
       client.close();
 
-      const pdfUrl = `https://scotlandtitlesapp.com/pdfs/${id}.pdf`;
+      const pdfUrl = `https://scotlandtitlesapp.com/pdfs/${order_number}.pdf`;
 
       console.log(pdfUrl, "pdfUrl");
     } catch (error) {
@@ -7934,7 +8011,7 @@ export default async function handler(req, res) {
   let size;
 
   if (email && req.body.line_items.length > 0) {
-    // console.log(req.body, "==================req body==============");
+    console.log(req.body, "==================req body==============");
     let pId = [];
     let pProperties = {};
 
