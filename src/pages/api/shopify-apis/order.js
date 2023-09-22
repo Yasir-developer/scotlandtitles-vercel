@@ -49,11 +49,9 @@ export default async function handler(req, res) {
 
   //=========================== end global variables ===========================
 
-  //   const titleAndEmblemAndTartan = async (title, name, date) => {
   const titleAndEmblemAndTartan = async (propObject) => {
     console.log(propObject);
-    // console.log(p_8727183196433._Title1);
-    // return;
+
     try {
       const page = pdfDoc.addPage([595, 842]);
       const pagetwo = pdfDoc.addPage([842, 595]);
@@ -66,7 +64,6 @@ export default async function handler(req, res) {
       const customFont = await pdfDoc.embedFont(fontBytes);
 
       const imgBuffer = fs.readFileSync(filePath);
-      // console.log(imgBuffer, "imgBuffer");
       const img = await pdfDoc.embedPng(imgBuffer);
       const pngDims = img.scale(0.25);
 
@@ -77,13 +74,9 @@ export default async function handler(req, res) {
       );
       const welcom_signature_Buffer = fs.readFileSync(welcomeSignPath);
 
-      // console.log(imgBuffer, "imgBuffer");
       const welcome_emblem_signature = await pdfDoc.embedPng(
         welcom_signature_Buffer
       );
-
-      // const date = pdfDate;
-      // const date = "22-5-2024";
 
       const heading = `Land with reference number 321323223 ${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1} of\nBlairadam`;
       const content = `Please find enclosed your Certificate of Disposition and Proclamation confirming you now own Land\nwithin a Scottish Estate . You may choose to adopt the traditional Scottish title of ${propObject.p_8727183196433._Title1} as a sign of\nrespect, or the English language equivalent.\n\nYour land is located within our Estate with street address of Kingseat Road (off Cantsdam Road),\nCantsdam, Kelty, Fife, Scotland KY12 0SW. Your plot of land is located beside Kingseat Road single\ntrack road that leads north from the B912 Cantsdam Road.\n\nYou can view the land online. The following coordinates will show you the centre of the Estate;\n\nGoogle Maps type in  coordinates 56.1215718, - 3.3856475\nOrdinance Survey 10 Figure Grid Reference NT 13956 92954\nX Easting 313956 , Y Northing 692954\n\nWe hope that you have the opportunity to visit your land, and to enjoy the Scottish countryside as a\n${propObject.p_8727183196433._Title1} of Scotland . You can keep up to date via our Facebook page at fb.me/ScotlandTitles\n\nI very much hope that owning a piece of Scotland is something that will give you a sense of pride, and\nwould like to take this opportunity to thank you for choosing Scotland Titles`; // const page = document.getPage(0);
@@ -126,7 +119,6 @@ export default async function handler(req, res) {
         size: headingFontSize,
         color: rgb(0, 0, 0),
         lineHeight: fontSize * 1.2,
-        // font: customFont,
         font: timesRomanFontHeading,
       });
 
@@ -275,7 +267,7 @@ export default async function handler(req, res) {
       // console.log(imgBuffer, "imgBuffer");
       const ribbonImg = await pdfDoc.embedPng(imgBufferRibbon);
 
-      const pngDimsRibbon = ribbonImg.scale(0.25);
+      const pngDimsRibbon = ribbonImg.scale(0.3);
 
       const filePathYellow = path.resolve(
         "./public",
@@ -359,21 +351,23 @@ export default async function handler(req, res) {
 
       const monthName = monthNames[dateObj.getMonth()];
 
-      const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18′′N , 003°23′08′′W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is 13334\n\nThe size of THE LAND is one square foot\n\nDate of Entry of THE LAND is as the date of this CERTIFICATE\n\nThis Disposition is signed for and on behalf of Scotland Titles and witnessed on the\n${day} Day of ${monthName} ${year}`;
+      const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18′′N , 003°23′08′′W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is 13334\n\nThe size of THE LAND is ${
+        propObject.p_8727183196433.size
+      } square foot\n\nDate of Entry of THE LAND is as the date of this CERTIFICATE\n\nThis Disposition is signed for and on behalf of Scotland Titles and witnessed on the\n${day} Day of ${monthName} ${year}`;
       pagetwo.drawImage(imgBg, {
         width: pagetwo.getWidth(),
         height: pagetwo.getHeight(),
       });
 
       pagetwo.drawImage(yellow_middle, {
-        x: 430,
+        x: 380,
         y: 405,
         width: ertificateMidpngDims.width,
         height: ertificateMidpngDims.height,
       });
       pagetwo.drawImage(ribbonImg, {
         x: 30,
-        y: 430,
+        y: 410,
         width: pngDimsRibbon.width,
         height: pngDimsRibbon.height,
       });
@@ -384,11 +378,10 @@ export default async function handler(req, res) {
         width: stampPngDims.width,
         height: stampPngDims.height,
       });
-
       pagetwo.drawImage(Signaturetwo, {
-        x: 600,
+        x: 580,
         y: 70,
-        height: 50,
+        height: 30,
         width: 100,
       });
 
@@ -407,8 +400,8 @@ export default async function handler(req, res) {
       pagetwo.drawImage(welcome_emblem_signature, {
         x: 500,
         y: 70,
-        height: 70,
-        width: 50,
+        height: 50,
+        width: 30,
       });
 
       pagetwo.drawText("Signed", {
@@ -469,7 +462,7 @@ export default async function handler(req, res) {
       });
 
       pagetwo.drawText(certificateText, {
-        x: 80,
+        x: 60,
         y: 370,
         width: textWidth,
         height: textHeight,
@@ -481,7 +474,7 @@ export default async function handler(req, res) {
       });
 
       pagetwo.drawText(certificateTextTwo, {
-        x: 480,
+        x: 460,
         y: 370,
         width: textWidth,
         height: textHeight,
@@ -2485,6 +2478,7 @@ export default async function handler(req, res) {
         width: pngDims.width,
         height: pngDims.height,
       });
+
       const filePathTwo = path.resolve("./public", "images", "pdf-bg.jpg");
 
       const imgBufferTwo = fs.readFileSync(filePathTwo);
@@ -2512,7 +2506,7 @@ export default async function handler(req, res) {
       // console.log(imgBuffer, "imgBuffer");
       const ribbonImg = await pdfDoc.embedPng(imgBufferRibbon);
 
-      const pngDimsRibbon = ribbonImg.scale(0.25);
+      const pngDimsRibbon = ribbonImg.scale(0.3);
 
       const filePathYellow = path.resolve(
         "./public",
@@ -2542,7 +2536,7 @@ export default async function handler(req, res) {
 
       const imgBufferFour = fs.readFileSync(filePathFour);
       const certificateMid = await pdfDoc.embedPng(imgBufferFour);
-      const ertificateMidpngDims = certificateMid.scale(0.25);
+      const ertificateMidpngDims = certificateMid.scale(0.3);
 
       const fontTwo = fs.readFileSync(
         path.join("./utils", "fonts", "Goudy-Bold Regular.ttf")
@@ -2597,21 +2591,23 @@ export default async function handler(req, res) {
 
       const monthName = monthNames[dateObj.getMonth()];
 
-      const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18′′N , 003°23′08′′W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is 13334\n\nThe size of THE LAND is one square foot\n\nDate of Entry of THE LAND is as the date of this CERTIFICATE\n\nThis Disposition is signed for and on behalf of Scotland Titles and witnessed on the\n${day} Day of ${monthName} ${year}`;
+      const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18′′N , 003°23′08′′W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is 13334\n\nThe size of THE LAND is ${
+        propObject.p_8727183196433.size
+      } square foot\n\nDate of Entry of THE LAND is as the date of this CERTIFICATE\n\nThis Disposition is signed for and on behalf of Scotland Titles and witnessed on the\n${day} Day of ${monthName} ${year}`;
       pagetwo.drawImage(imgBg, {
         width: pagetwo.getWidth(),
         height: pagetwo.getHeight(),
       });
 
       pagetwo.drawImage(yellow_middle, {
-        x: 430,
+        x: 380,
         y: 405,
         width: ertificateMidpngDims.width,
         height: ertificateMidpngDims.height,
       });
       pagetwo.drawImage(ribbonImg, {
         x: 30,
-        y: 430,
+        y: 410,
         width: pngDimsRibbon.width,
         height: pngDimsRibbon.height,
       });
@@ -2622,11 +2618,10 @@ export default async function handler(req, res) {
         width: stampPngDims.width,
         height: stampPngDims.height,
       });
-
       pagetwo.drawImage(Signaturetwo, {
-        x: 600,
+        x: 580,
         y: 70,
-        height: 50,
+        height: 30,
         width: 100,
       });
 
@@ -2645,7 +2640,7 @@ export default async function handler(req, res) {
       pagetwo.drawImage(welcome_emblem_signature, {
         x: 500,
         y: 70,
-        height: 70,
+        height: 50,
         width: 30,
       });
 
@@ -2707,7 +2702,7 @@ export default async function handler(req, res) {
       });
 
       pagetwo.drawText(certificateText, {
-        x: 80,
+        x: 60,
         y: 370,
         width: textWidth,
         height: textHeight,
@@ -2719,7 +2714,7 @@ export default async function handler(req, res) {
       });
 
       pagetwo.drawText(certificateTextTwo, {
-        x: 480,
+        x: 460,
         y: 370,
         width: textWidth,
         height: textHeight,
@@ -2729,7 +2724,6 @@ export default async function handler(req, res) {
         // font: customFont,
         font: tempusFont,
       });
-
       const timesRomanItalicFontHeading = await pdfDoc.embedFont(
         StandardFonts.TimesRomanItalic
       );
@@ -4145,7 +4139,7 @@ export default async function handler(req, res) {
       // console.log(imgBuffer, "imgBuffer");
       const ribbonImg = await pdfDoc.embedPng(imgBufferRibbon);
 
-      const pngDimsRibbon = ribbonImg.scale(0.25);
+      const pngDimsRibbon = ribbonImg.scale(0.3);
 
       const filePathYellow = path.resolve(
         "./public",
@@ -4175,7 +4169,7 @@ export default async function handler(req, res) {
 
       const imgBufferFour = fs.readFileSync(filePathFour);
       const certificateMid = await pdfDoc.embedPng(imgBufferFour);
-      const ertificateMidpngDims = certificateMid.scale(0.25);
+      const ertificateMidpngDims = certificateMid.scale(0.3);
 
       const fontTwo = fs.readFileSync(
         path.join("./utils", "fonts", "Goudy-Bold Regular.ttf")
@@ -4230,21 +4224,21 @@ export default async function handler(req, res) {
 
       const monthName = monthNames[dateObj.getMonth()];
 
-      const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07'18''N , 003°23'08''W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is 13334\n\nThe size of THE LAND is one square foot\n\nDate of Entry of THE LAND is as the date of this CERTIFICATE\n\nThis Disposition is signed for and on behalf of Scotland Titles and witnessed on the\n${day} Day of ${monthName} ${year}`;
+      const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07'18''N , 003°23'08''W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is 13334\n\nThe size of THE LAND is ${propObject.p_8727183196433.size} square foot\n\nDate of Entry of THE LAND is as the date of this CERTIFICATE\n\nThis Disposition is signed for and on behalf of Scotland Titles and witnessed on the\n${day} Day of ${monthName} ${year}`;
       pagetwo.drawImage(imgBg, {
         width: pagetwo.getWidth(),
         height: pagetwo.getHeight(),
       });
 
       pagetwo.drawImage(yellow_middle, {
-        x: 430,
+        x: 380,
         y: 405,
         width: ertificateMidpngDims.width,
         height: ertificateMidpngDims.height,
       });
       pagetwo.drawImage(ribbonImg, {
         x: 30,
-        y: 430,
+        y: 410,
         width: pngDimsRibbon.width,
         height: pngDimsRibbon.height,
       });
@@ -4255,11 +4249,10 @@ export default async function handler(req, res) {
         width: stampPngDims.width,
         height: stampPngDims.height,
       });
-
       pagetwo.drawImage(Signaturetwo, {
-        x: 600,
+        x: 580,
         y: 70,
-        height: 50,
+        height: 30,
         width: 100,
       });
 
@@ -4278,7 +4271,7 @@ export default async function handler(req, res) {
       pagetwo.drawImage(welcome_emblem_signature, {
         x: 500,
         y: 70,
-        height: 70,
+        height: 50,
         width: 30,
       });
 
@@ -4340,7 +4333,7 @@ export default async function handler(req, res) {
       });
 
       pagetwo.drawText(certificateText, {
-        x: 80,
+        x: 60,
         y: 370,
         width: textWidth,
         height: textHeight,
@@ -4352,7 +4345,7 @@ export default async function handler(req, res) {
       });
 
       pagetwo.drawText(certificateTextTwo, {
-        x: 480,
+        x: 460,
         y: 370,
         width: textWidth,
         height: textHeight,
@@ -5878,7 +5871,7 @@ export default async function handler(req, res) {
       // console.log(imgBuffer, "imgBuffer");
       const ribbonImg = await pdfDoc.embedPng(imgBufferRibbon);
 
-      const pngDimsRibbon = ribbonImg.scale(0.25);
+      const pngDimsRibbon = ribbonImg.scale(0.3);
 
       const filePathYellow = path.resolve(
         "./public",
@@ -5908,7 +5901,7 @@ export default async function handler(req, res) {
 
       const imgBufferFour = fs.readFileSync(filePathFour);
       const certificateMid = await pdfDoc.embedPng(imgBufferFour);
-      const ertificateMidpngDims = certificateMid.scale(0.25);
+      const ertificateMidpngDims = certificateMid.scale(0.3);
 
       const fontTwo = fs.readFileSync(
         path.join("./utils", "fonts", "Goudy-Bold Regular.ttf")
@@ -5962,21 +5955,23 @@ export default async function handler(req, res) {
 
       const monthName = monthNames[dateObj.getMonth()];
 
-      const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18′′N , 003°23′08′′W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is 13334\n\nThe size of THE LAND is one square foot\n\nDate of Entry of THE LAND is as the date of this CERTIFICATE\n\nThis Disposition is signed for and on behalf of Scotland Titles and witnessed on the\n${day} Day of ${monthName} ${year}`;
+      const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18′′N , 003°23′08′′W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is 13334\n\nThe size of THE LAND is ${
+        propObject.p_8727183196433.size
+      } square foot\n\nDate of Entry of THE LAND is as the date of this CERTIFICATE\n\nThis Disposition is signed for and on behalf of Scotland Titles and witnessed on the\n${day} Day of ${monthName} ${year}`;
       pagetwo.drawImage(imgBg, {
         width: pagetwo.getWidth(),
         height: pagetwo.getHeight(),
       });
 
       pagetwo.drawImage(yellow_middle, {
-        x: 430,
+        x: 380,
         y: 405,
         width: ertificateMidpngDims.width,
         height: ertificateMidpngDims.height,
       });
       pagetwo.drawImage(ribbonImg, {
         x: 30,
-        y: 430,
+        y: 410,
         width: pngDimsRibbon.width,
         height: pngDimsRibbon.height,
       });
@@ -5989,9 +5984,9 @@ export default async function handler(req, res) {
       });
 
       pagetwo.drawImage(Signaturetwo, {
-        x: 600,
+        x: 580,
         y: 70,
-        height: 50,
+        height: 30,
         width: 100,
       });
 
@@ -6010,7 +6005,7 @@ export default async function handler(req, res) {
       pagetwo.drawImage(welcome_emblem_signature, {
         x: 500,
         y: 70,
-        height: 70,
+        height: 50,
         width: 30,
       });
 
@@ -6072,7 +6067,7 @@ export default async function handler(req, res) {
       });
 
       pagetwo.drawText(certificateText, {
-        x: 80,
+        x: 60,
         y: 370,
         width: textWidth,
         height: textHeight,
@@ -6084,7 +6079,7 @@ export default async function handler(req, res) {
       });
 
       pagetwo.drawText(certificateTextTwo, {
-        x: 480,
+        x: 460,
         y: 370,
         width: textWidth,
         height: textHeight,
@@ -7936,8 +7931,10 @@ export default async function handler(req, res) {
       res.status(500).send("An error occurred");
     }
   };
+  let size;
+
   if (email && req.body.line_items.length > 0) {
-    console.log(req.body, "==================req body==============");
+    // console.log(req.body, "==================req body==============");
     let pId = [];
     let pProperties = {};
 
@@ -7948,6 +7945,11 @@ export default async function handler(req, res) {
 
       pId.push(item.product_id);
       pProperties["p_" + item.product_id] = item.properties;
+      if (pId.includes(titlePackId)) {
+        const word = item.variant_title.split(" ");
+        size = word[0];
+        console.log(size, "sizesizesize");
+      }
       console.log(item.properties, "item.properties =================");
     });
 
@@ -8011,6 +8013,7 @@ export default async function handler(req, res) {
             _Title1: resultObjectTitlePack._Title1,
             _Name1: resultObjectTitlePack._Name1,
             _Date: resultObjectTitlePack._Date,
+            size: size,
           },
           p_8727183065361: {
             _Title1: resultObjectEmblum._Title1,
@@ -8040,6 +8043,7 @@ export default async function handler(req, res) {
         );
         for (const obj of pProperties["p_8727183196433"]) {
           resultObjectTitlePack[obj.name] = obj.value;
+          console.log(obj.value, "obj.value");
         }
       }
       if (pProperties["p_8727183065361"]) {
@@ -8065,6 +8069,7 @@ export default async function handler(req, res) {
             _Title1: resultObjectTitlePack._Title1,
             _Name1: resultObjectTitlePack._Name1,
             _Date: resultObjectTitlePack._Date,
+            size: size,
           },
           p_8727183065361: {
             _Title1: resultObjectEmblum._Title1,
@@ -8104,14 +8109,12 @@ export default async function handler(req, res) {
         // resultObjectEmblum._Title1 == "Lord" &&
         // resultObjectTatran._Title1 == "Lord"
       ) {
-        // let title1 = resultObject._Title1;
-        // let name1 = resultObject._Name1;
-        // onlyLord();
         const propertiesObj = {
           p_8727183196433: {
             _Title1: resultObjectTitlePack._Title1,
             _Name1: resultObjectTitlePack._Name1,
             _Date: resultObjectTitlePack._Date,
+            size: size,
           },
           p_8727183032593: {
             _Title1: resultObjectTatran._Title1,
@@ -8140,6 +8143,7 @@ export default async function handler(req, res) {
             _Title1: resultObjectTitlePack._Title1,
             _Name1: resultObjectTitlePack._Name1,
             _Date: resultObjectTitlePack._Date,
+            size: size,
           },
         };
         titlePack(propertiesObj);
@@ -8168,7 +8172,7 @@ export default async function handler(req, res) {
         };
         onlyEmblem(propertiesObj);
       }
-    } else if (tartanId) {
+    } else if (pId.includes(tartanId)) {
       let resultObjectTatran = {};
       let namesArrayTatran = "";
 
