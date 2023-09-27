@@ -500,20 +500,20 @@ export default async function handler(req, res) {
       let titledayWithSuffix;
 
       if (day >= 11 && day <= 13) {
-        titledayWithSuffix = `${day}th`;
+        titledayWithSuffix = `${day}TH`;
       } else {
         switch (day % 10) {
           case 1:
-            titledayWithSuffix = `${day}st`;
+            titledayWithSuffix = `${day}ST`;
             break;
           case 2:
-            titledayWithSuffix = `${day}nd`;
+            titledayWithSuffix = `${day}ND`;
             break;
           case 3:
-            titledayWithSuffix = `${day}rd`;
+            titledayWithSuffix = `${day}RD`;
             break;
           default:
-            titledayWithSuffix = `${day}th`;
+            titledayWithSuffix = `${day}TH`;
         }
       }
       const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18′′N , 003°23′08′′W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is ${order_number}\n\nThe size of THE LAND is ${
@@ -2016,15 +2016,15 @@ export default async function handler(req, res) {
         propObject.p_8727183065361._Name1
       } ${propObject.p_8727183065361._Title2 ? "&" : ""}`;
 
-      const userNametextWidth = oldEng.widthOfTextAtSize(
+      const userfirstNametextWidth = oldEng.widthOfTextAtSize(
         emblemCertficateUserName,
         12
       );
 
-      const halfOfWord = userNametextWidth / 2;
-      const startingPosition =
-        (emblemCertificate.getWidth() - userNametextWidth) / 2;
-      const x = startingPosition - halfOfWord;
+      const firstHalfOfWord = userfirstNametextWidth / 2;
+      const firstStartingPosition =
+        (emblemCertificate.getWidth() - userfirstNametextWidth) / 2;
+      const firstX = firstStartingPosition - firstHalfOfWord;
 
       const emblememblemCertficateUserNameTwo = `${
         propObject.p_8727183065361._Title2
@@ -2106,20 +2106,20 @@ export default async function handler(req, res) {
       let dayWithSuffix;
 
       if (emblemday >= 11 && emblemday <= 13) {
-        dayWithSuffix = `${emblemday}th`;
+        dayWithSuffix = `${emblemday}TH`;
       } else {
         switch (emblemday % 10) {
           case 1:
-            dayWithSuffix = `${emblemday}st`;
+            dayWithSuffix = `${emblemday}ST`;
             break;
           case 2:
-            dayWithSuffix = `${emblemday}nd`;
+            dayWithSuffix = `${emblemday}ND`;
             break;
           case 3:
-            dayWithSuffix = `${emblemday}rd`;
+            dayWithSuffix = `${emblemday}RD`;
             break;
           default:
-            dayWithSuffix = `${emblemday}th`;
+            dayWithSuffix = `${emblemday}TH`;
         }
       }
       const dateContent = `THIS ${dayWithSuffix} DAY OF ${emblemmonthName} IN THE YEAR ${emblemyear}`;
@@ -2199,7 +2199,7 @@ export default async function handler(req, res) {
 
       emblemCertificate.drawText(emblemCertficateUserName, {
         // x: 200,
-        x: x,
+        x: firstX,
         y: 670,
         width: textWidth,
         height: textHeight,
@@ -2434,7 +2434,7 @@ export default async function handler(req, res) {
       //SIGNED
       emblemCertificate.drawText(emblemSigned, {
         x: 150,
-        y: 110,
+        y: 120,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -2488,17 +2488,39 @@ export default async function handler(req, res) {
       const tartanCertificate = pdfDoc.addPage([595, 842]);
 
       const tartan_certificate_heading = `To Whomsoever These Presents Do Concern`;
-      const tartanCertficateUserName = `${propObject.p_8727183032593._Title1} ${propObject.p_8727183032593._Name1}`;
-      const tartanUserNametextWidth = oldEng.widthOfTextAtSize(
+      //   const tartanCertficateUserName = `${propObject.p_8727183032593._Title1} ${propObject.p_8727183032593._Name1}`;
+      const tartanCertficateUserName = `${propObject.p_8727183032593._Title1} ${
+        propObject.p_8727183032593._Name1
+      } ${propObject.p_8727183032593._Title2 ? "&" : ""}`;
+      const userNametextWidth = oldEng.widthOfTextAtSize(
         tartanCertficateUserName,
         12
       );
 
-      const tartanHalfOfWord = tartanUserNametextWidth / 2;
-      const tartansStartingPosition =
-        (tartanCertificate.getWidth() - tartanUserNametextWidth) / 2;
-      const tartanX = tartansStartingPosition - tartanHalfOfWord;
-      const declare = "Does Declare";
+      const halfOfWord = userNametextWidth / 2;
+      const startingPosition =
+        (tartanCertificate.getWidth() - userNametextWidth) / 2;
+      const x = startingPosition - halfOfWord;
+
+      const tartanCertficateUserNameTwo = `${
+        propObject.p_8727183032593._Title2
+          ? `${propObject.p_8727183032593._Title2} ${propObject.p_8727183032593._Name2}`
+          : ""
+      }`;
+
+      const tartanuserNameTwotextWidth = oldEng.widthOfTextAtSize(
+        tartanCertficateUserNameTwo,
+        12
+      );
+
+      const tartanHalfOfWordTwo = tartanuserNameTwotextWidth / 2;
+      const tartanStartingPositionTwo =
+        (tartanCertificate.getWidth() - tartanuserNameTwotextWidth) / 2;
+      const tartanTwox = tartanStartingPositionTwo - tartanHalfOfWordTwo;
+
+      const declare = `${
+        propObject.p_8727183032593._Title2 ? "Do" : "Does"
+      } Declare`;
       const Allegiance = "Clan Allegiance";
       const prey = "and Prey to Wear";
 
@@ -2511,17 +2533,27 @@ export default async function handler(req, res) {
       const know = "Let It Be Known";
 
       const tartanCertificateknowText = `that the said by virtue of ownership`;
-      const tartanCertificateknowTextTwo = `of Land in Scotland and in particular the Land within the\nKingdom of Fife by Cantsdam as described in the Disposition\nand Certificate of Sale, the Petitioner is henceforth and in\nperpetuity amongst all nobles and in all places of honour, to\nbe taken, numbered, accounted and received as a ${propObject.p_8727183032593._Title1} of\nScotland,\n\n`;
+      const tartanCertificateknowTextTwo = `of Land in Scotland and in particular the Land within the\nKingdom of Fife by Cantsdam as described in the Disposition\nand Certificate of Sale, the ${
+        propObject.p_8727183032593._Title2 ? "Petitioner are" : "Petitioner is"
+      } henceforth and in\nperpetuity amongst all nobles and in all places of honour, to\nbe taken, numbered, accounted and received as a ${
+        propObject.p_8727183032593._Title2 ? "Lairds" : "Laird"
+      } of\nScotland,\n\n`;
 
       const Therefore = "Know Ye Therefore";
 
-      const tartanCertificateThereforeText = `that the Petitioner having preyed`;
+      const tartanCertificateThereforeText = `that the ${
+        propObject.p_8727183032593._Title2 ? "Petitioners" : "Petitioner"
+      } having preyed`;
       const tartanCertificateThereforeTextTwo = `that there might be granted unto them to use such Scottish\nTartan as set in law during the dress act of 1746 as repealed in\n1782 and thereinafter adopted, acknowledged and recognised\nas the symbolic National Dress of Scotland,\n\n`;
 
       const scotlantTiles = "Scilicet that Scotland Titles";
 
-      const tartanCertificateScotlantTilesText = `has assigned, and do by`;
-      const tartanCertificateScotlantTilesTextTwo = `these presents assign, ratify and confirm unto the Petitioner\nthe following ensemble robes in such tartan as is depicted\nupon the margin sinister hereof, and award unto the\nPetitioner the rights to use, wear, display and earasay such\nregistered Scottish Tartan in exchange for their sworn\nallegiance to the Clan of Scotland,\n\n`;
+      const tartanCertificateScotlantTilesText = `has assigned, and do`;
+      const tartanCertificateScotlantTilesTextTwo = `by these presents assign, ratify and confirm unto the ${
+        propObject.p_8727183032593._Title2 ? "Petitioners" : "Petitioner"
+      }\nthe following ensemble robes in such tartan as is depicted\nupon the margin sinister hereof, and award unto the\n${
+        propObject.p_8727183032593._Title2 ? "Petitioners" : "Petitioner"
+      } the rights to use, wear, display and earasay such\nregistered Scottish Tartan in exchange for their sworn\nallegiance to the Clan of Scotland,\n\n`;
 
       const Tartan = "Videlicet such Tartan";
       const tartanCertificateText = "as is official and certified as set";
@@ -2530,7 +2562,11 @@ export default async function handler(req, res) {
       const demostration = "By demonstration of";
 
       const demonstrationText = " which ensemble robes the said";
-      const demonstrationTextTwo = `Petitioner is, amongst all nobles and in all places of honour, to\nbe received as a ${propObject.p_8727183032593._Title1} of Scotland,`; //Signed content
+      const demonstrationTextTwo = `${
+        propObject.p_8727183032593._Title2 ? "Petitioner are" : "Petitioner is"
+      }, amongst all nobles and in all places of honour, to\nbe received as a ${
+        propObject.p_8727183032593._Title2 ? "Lairds" : "Laird"
+      } of Scotland,`; //Signed content
 
       const tartanFurther = "Furthermore by ownership";
       const tartanFurtherDescription = "of lands in Scotland, the";
@@ -2576,39 +2612,6 @@ export default async function handler(req, res) {
       // console.log(imgBuffer, "imgBuffer");
       const tartan_signature = await pdfDoc.embedPng(tartan_signature_Buffer);
 
-      //   const filePath = path.resolve("./public", "images", "scotland_log.png");
-
-      //   const imgBuffer = fs.readFileSync(filePath);
-      //   // console.log(imgBuffer, "imgBuffer");
-      //   const img = await pdfDoc.embedPng(imgBuffer);
-      //   const pngDims = img.scale(0.25);
-      //   const filePathThree = path.resolve(
-      //     "./public",
-      //     "images",
-      //     "certificate-stamp.png"
-      //   );
-
-      //   const filePathFour = path.resolve(
-      //     "./public",
-      //     "images",
-      //     "certificate-mid.png"
-      //   );
-
-      //   const imgBufferFour = fs.readFileSync(filePathFour);
-      //   const certificateMid = await pdfDoc.embedPng(imgBufferFour);
-      //   const ertificateMidpngDims = certificateMid.scale(0.22);
-
-      //   const imgBufferThree = fs.readFileSync(filePathThree);
-      //   // console.log(imgBuffer, "imgBuffer");
-      //   const stampImg = await pdfDoc.embedPng(imgBufferThree);
-      //   const stampPngDims = stampImg.scale(0.3);
-
-      //   const textWidth = tartanCertificate.getWidth() - 100; // Adjust the width as needed
-      //   const textHeight = tartanCertificate.getHeight() - 50;
-
-      //   const dateText = "Date";
-      //   // const dateString = '2023-09-30';
-      //   // const [year, month, day] = date.split('-');
       const tartandatee = propObject.p_8727183032593._Date;
       const tartandateObj = new Date(tartandatee);
       const tartanyear = tartandateObj.getFullYear();
@@ -2616,44 +2619,27 @@ export default async function handler(req, res) {
       const tartanday = String(tartandateObj.getDate()).padStart(2, "0");
       //   const
 
-      // const monthNames = [
-      //   "JANUARY",
-      //   "FEBRUARY",
-      //   "MARCH",
-      //   "APRIL",
-      //   "MAY",
-      //   "JUNE",
-      //   "JULY",
-      //   "AUGUST",
-      //   "SEPTEMBER",
-      //   "OCTOBER",
-      //   "NOVEMBER",
-      //   "DECEMBER",
-      // ];
-
       const tartanmonthName = monthNames[tartandateObj.getMonth()];
       let tartandayWithSuffix;
 
       if (tartanday >= 11 && tartanday <= 13) {
-        tartandayWithSuffix = `${tartanday}th`;
+        tartandayWithSuffix = `${tartanday}TH`;
       } else {
         switch (tartanday % 10) {
           case 1:
-            tartandayWithSuffix = `${tartanday}st`;
+            tartandayWithSuffix = `${tartanday}ST`;
             break;
           case 2:
-            tartandayWithSuffix = `${tartanday}nd`;
+            tartandayWithSuffix = `${tartanday}ND`;
             break;
           case 3:
-            tartandayWithSuffix = `${tartanday}rd`;
+            tartandayWithSuffix = `${tartanday}RD`;
             break;
           default:
-            tartandayWithSuffix = `${tartanday}th`;
+            tartandayWithSuffix = `${tartanday}TH`;
         }
       }
       const TartandateContent = `THIS ${tartandayWithSuffix} DAY OF ${tartanmonthName} IN THE YEAR ${tartanyear}`;
-      //   const copyright =
-      //     "All content, layout, artwork and illustrations copyright Scotland Titles 2021 and subject to licence";
 
       tartanCertificate.drawImage(tartan_bg, {
         width: tartanCertificate.getWidth(),
@@ -2662,14 +2648,14 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawImage(img, {
         x: 500,
-        y: 740,
+        y: 710,
         width: pngDims.width,
         height: pngDims.height,
       });
 
       tartanCertificate.drawImage(stampImg, {
-        x: 500,
-        y: 80,
+        x: 480,
+        y: 70,
         width: stampPngDims.width,
         height: stampPngDims.height,
       });
@@ -2686,8 +2672,18 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(tartanCertficateUserName, {
-        x: tartanX,
+        x: x,
         y: 720,
+        width: textWidth,
+        height: textHeight,
+        size: 26,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+      tartanCertificate.drawText(tartanCertficateUserNameTwo, {
+        x: tartanTwox,
+        y: 680,
         width: textWidth,
         height: textHeight,
         size: 26,
@@ -2698,7 +2694,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(declare, {
         x: 250,
-        y: 690,
+        y: propObject.p_8727183032593._Title2 ? 650 : 690,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -2709,7 +2705,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(Allegiance, {
         x: 50,
-        y: 660,
+        y: propObject.p_8727183032593._Title2 ? 620 : 660,
         size: 26,
         width: textWidth,
         height: textHeight,
@@ -2720,7 +2716,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(prey, {
         x: 230,
-        y: 660,
+        y: propObject.p_8727183032593._Title2 ? 620 : 660,
         size: 18,
         width: textWidth,
         height: textHeight,
@@ -2731,7 +2727,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(certified, {
         x: 370,
-        y: 660,
+        y: propObject.p_8727183032593._Title2 ? 620 : 660,
         size: 26,
         width: textWidth,
         height: textHeight,
@@ -2743,13 +2739,13 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawImage(certificateMid, {
         x: 230,
-        y: 630,
+        y: propObject.p_8727183032593._Title2 ? 590 : 630,
         width: ertificateMidpngDims.width,
         height: ertificateMidpngDims.height,
       });
       tartanCertificate.drawText(Greeting, {
         x: 20,
-        y: 600,
+        y: 560,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -2760,7 +2756,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanCertificateGreetingText, {
         x: 220,
-        y: 600,
+        y: 560,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -2771,7 +2767,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanCertificateGreetingTextTwo, {
         x: 20,
-        y: 585,
+        y: 545,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -2784,7 +2780,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(know, {
         x: 20,
-        y: 560,
+        y: 520,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -2795,7 +2791,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanCertificateknowText, {
         x: 143,
-        y: 560,
+        y: 520,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -2806,7 +2802,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanCertificateknowTextTwo, {
         x: 20,
-        y: 545,
+        y: 505,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -2819,7 +2815,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(Therefore, {
         x: 20,
-        y: 445,
+        y: 410,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -2829,8 +2825,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(tartanCertificateThereforeText, {
-        x: 150,
-        y: 445,
+        x: 155,
+        y: 410,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -2841,7 +2837,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanCertificateThereforeTextTwo, {
         x: 20,
-        y: 430,
+        y: 395,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -2854,7 +2850,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(scotlantTiles, {
         x: 20,
-        y: 360,
+        y: 320,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -2864,8 +2860,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(tartanCertificateScotlantTilesText, {
-        x: 205,
-        y: 360,
+        x: 208,
+        y: 320,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -2876,7 +2872,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanCertificateScotlantTilesTextTwo, {
         x: 20,
-        y: 345,
+        y: 305,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -2887,7 +2883,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(Tartan, {
         x: 20,
-        y: 260,
+        y: 210,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -2898,7 +2894,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanCertificateText, {
         x: 165,
-        y: 260,
+        y: 210,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -2909,7 +2905,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanCertificateTextTwo, {
         x: 20,
-        y: 245,
+        y: 195,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -2918,42 +2914,42 @@ export default async function handler(req, res) {
         font: tempusFont,
       });
 
-      tartanCertificate.drawText(demostration, {
-        x: 20,
-        y: 180,
-        size: 16,
-        width: textWidth,
-        height: textHeight,
-        color: rgb(0.219, 0.337, 0.137),
-        lineHeight: fontSize * 1.2,
-        font: oldEng,
-      });
+      // tartanCertificate.drawText(demostration, {
+      //   x: 20,
+      //   y: 180,
+      //   size: 16,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   color: rgb(0.219, 0.337, 0.137),
+      //   lineHeight: fontSize * 1.2,
+      //   font: oldEng,
+      // });
 
-      tartanCertificate.drawText(demonstrationText, {
-        x: 155,
-        y: 180,
-        width: textWidth,
-        height: textHeight,
-        size: 10,
-        color: rgb(0, 0, 0),
-        lineHeight: fontSize * 1.2,
-        font: tempusFont,
-      });
+      // tartanCertificate.drawText(demonstrationText, {
+      //   x: 155,
+      //   y: 180,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 10,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: tempusFont,
+      // });
 
-      tartanCertificate.drawText(demonstrationTextTwo, {
-        x: 20,
-        y: 165,
-        width: textWidth,
-        height: textHeight,
-        size: 10,
-        color: rgb(0, 0, 0),
-        lineHeight: fontSize * 1.2,
-        font: tempusFont,
-      });
+      // tartanCertificate.drawText(demonstrationTextTwo, {
+      //   x: 20,
+      //   y: 165,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 10,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: tempusFont,
+      // });
 
       tartanCertificate.drawText("Royal Stewart Hunting", {
         x: 360,
-        y: 600,
+        y: 570,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -2964,14 +2960,14 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawImage(tartan_logo, {
         x: 330,
-        y: 340,
-        height: 250,
-        width: 250,
+        y: 330,
+        height: 230,
+        width: 230,
       });
 
-      tartanCertificate.drawText(tartanFurther, {
+      tartanCertificate.drawText(demostration, {
         x: 310,
-        y: 310,
+        y: 300,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -2980,9 +2976,9 @@ export default async function handler(req, res) {
         font: oldEng,
       });
 
-      tartanCertificate.drawText(tartanFurtherDescription, {
-        x: 485,
-        y: 310,
+      tartanCertificate.drawText(demonstrationText, {
+        x: 445,
+        y: 300,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -2991,9 +2987,9 @@ export default async function handler(req, res) {
         font: tempusFont,
       });
 
-      tartanCertificate.drawText(tartanFurtherDescriptionTwo, {
+      tartanCertificate.drawText(demonstrationTextTwo, {
         x: 310,
-        y: 295,
+        y: 285,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -3004,7 +3000,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanTestimony, {
         x: 310,
-        y: 260,
+        y: 250,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -3014,8 +3010,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(tartanTestimonyDescription, {
-        x: 455,
-        y: 260,
+        x: 460,
+        y: 250,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -3026,7 +3022,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanTestimonyDescriptionTwo, {
         x: 310,
-        y: 245,
+        y: 235,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -3038,7 +3034,7 @@ export default async function handler(req, res) {
       //SIGNED
       tartanCertificate.drawText(tartanSigned, {
         x: 150,
-        y: 100,
+        y: 120,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -3049,7 +3045,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(dateText, {
         x: 170,
-        y: 70,
+        y: 90,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -3060,7 +3056,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(TartandateContent, {
         x: 210,
-        y: 70,
+        y: 90,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -3071,7 +3067,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(copyright, {
         x: 190,
-        y: 60,
+        y: 80,
         width: textWidth,
         height: textHeight,
         size: 6,
@@ -3082,19 +3078,23 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawImage(tartan_signature, {
         x: 210,
-        y: 90,
+        y: 100,
         height: 50,
         width: 30,
       });
+      console.log("before pdf save");
 
       const pdfBytes = await pdfDoc.save();
 
       const pdfStream = new Readable();
 
       pdfStream.push(pdfBytes);
+      console.log("push pdf save");
+
       pdfStream.push(null); // End of stream
 
       const remotePath = `/pdfs/${order_number}.pdf`;
+      console.log("remote path");
       await client.uploadFrom(pdfStream, remotePath);
       client.close();
 
@@ -3543,20 +3543,20 @@ export default async function handler(req, res) {
       let titledayWithSuffix;
 
       if (day >= 11 && day <= 13) {
-        titledayWithSuffix = `${day}th`;
+        titledayWithSuffix = `${day}TH`;
       } else {
         switch (day % 10) {
           case 1:
-            titledayWithSuffix = `${day}st`;
+            titledayWithSuffix = `${day}ST`;
             break;
           case 2:
-            titledayWithSuffix = `${day}nd`;
+            titledayWithSuffix = `${day}ND`;
             break;
           case 3:
-            titledayWithSuffix = `${day}rd`;
+            titledayWithSuffix = `${day}RD`;
             break;
           default:
-            titledayWithSuffix = `${day}th`;
+            titledayWithSuffix = `${day}TH`;
         }
       }
       const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18′′N , 003°23′08′′W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is ${order_number}\n\nThe size of THE LAND is ${
@@ -5150,20 +5150,20 @@ export default async function handler(req, res) {
       let dayWithSuffix;
 
       if (emblemday >= 11 && emblemday <= 13) {
-        dayWithSuffix = `${emblemday}th`;
+        dayWithSuffix = `${emblemday}TH`;
       } else {
         switch (emblemday % 10) {
           case 1:
-            dayWithSuffix = `${emblemday}st`;
+            dayWithSuffix = `${emblemday}ST`;
             break;
           case 2:
-            dayWithSuffix = `${emblemday}nd`;
+            dayWithSuffix = `${emblemday}ND`;
             break;
           case 3:
-            dayWithSuffix = `${emblemday}rd`;
+            dayWithSuffix = `${emblemday}RD`;
             break;
           default:
-            dayWithSuffix = `${emblemday}th`;
+            dayWithSuffix = `${emblemday}TH`;
         }
       }
       const dateContent = `THIS ${dayWithSuffix} DAY OF ${emblemmonthName} IN THE YEAR ${emblemyear}`;
@@ -5478,7 +5478,7 @@ export default async function handler(req, res) {
       //SIGNED
       emblemCertificate.drawText(emblemSigned, {
         x: 150,
-        y: 110,
+        y: 120,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -5979,20 +5979,20 @@ export default async function handler(req, res) {
       let titledayWithSuffix;
 
       if (day >= 11 && day <= 13) {
-        titledayWithSuffix = `${day}th`;
+        titledayWithSuffix = `${day}TH`;
       } else {
         switch (day % 10) {
           case 1:
-            titledayWithSuffix = `${day}st`;
+            titledayWithSuffix = `${day}ST`;
             break;
           case 2:
-            titledayWithSuffix = `${day}nd`;
+            titledayWithSuffix = `${day}ND`;
             break;
           case 3:
-            titledayWithSuffix = `${day}rd`;
+            titledayWithSuffix = `${day}RD`;
             break;
           default:
-            titledayWithSuffix = `${day}th`;
+            titledayWithSuffix = `${day}TH`;
         }
       }
       const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18′′N , 003°23′08′′W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is ${order_number}\n\nThe size of THE LAND is ${
@@ -7489,7 +7489,10 @@ export default async function handler(req, res) {
       const tartanCertificate = pdfDoc.addPage([595, 842]);
 
       const tartan_certificate_heading = `To Whomsoever These Presents Do Concern`;
-      const tartanCertficateUserName = `${propObject.p_8727183032593._Title1} ${propObject.p_8727183032593._Name1}`;
+      //   const tartanCertficateUserName = `${propObject.p_8727183032593._Title1} ${propObject.p_8727183032593._Name1}`;
+      const tartanCertficateUserName = `${propObject.p_8727183032593._Title1} ${
+        propObject.p_8727183032593._Name1
+      } ${propObject.p_8727183032593._Title2 ? "&" : ""}`;
       const userNametextWidth = oldEng.widthOfTextAtSize(
         tartanCertficateUserName,
         12
@@ -7499,7 +7502,25 @@ export default async function handler(req, res) {
       const startingPosition =
         (tartanCertificate.getWidth() - userNametextWidth) / 2;
       const x = startingPosition - halfOfWord;
-      const declare = "Does Declare";
+
+      const tartanCertficateUserNameTwo = `${
+        propObject.p_8727183032593._Title2
+          ? `${propObject.p_8727183032593._Title2} ${propObject.p_8727183032593._Name2}`
+          : ""
+      }`;
+
+      const tartanuserNameTwotextWidth = oldEng.widthOfTextAtSize(
+        tartanCertficateUserNameTwo,
+        12
+      );
+
+      const tartanHalfOfWordTwo = tartanuserNameTwotextWidth / 2;
+      const tartanStartingPositionTwo =
+        (tartanCertificate.getWidth() - tartanuserNameTwotextWidth) / 2;
+      const tartanTwox = tartanStartingPositionTwo - tartanHalfOfWordTwo;
+      const declare = `${
+        propObject.p_8727183032593._Title2 ? "Do" : "Does"
+      } Declare`;
       const Allegiance = "Clan Allegiance";
       const prey = "and Prey to Wear";
 
@@ -7512,17 +7533,27 @@ export default async function handler(req, res) {
       const know = "Let It Be Known";
 
       const tartanCertificateknowText = `that the said by virtue of ownership`;
-      const tartanCertificateknowTextTwo = `of Land in Scotland and in particular the Land within the\nKingdom of Fife by Cantsdam as described in the Disposition\nand Certificate of Sale, the Petitioner is henceforth and in\nperpetuity amongst all nobles and in all places of honour, to\nbe taken, numbered, accounted and received as a ${propObject.p_8727183032593._Title1} of\nScotland,\n\n`;
+      const tartanCertificateknowTextTwo = `of Land in Scotland and in particular the Land within the\nKingdom of Fife by Cantsdam as described in the Disposition\nand Certificate of Sale, the ${
+        propObject.p_8727183032593._Title2 ? "Petitioner are" : "Petitioner is"
+      } henceforth and in\nperpetuity amongst all nobles and in all places of honour, to\nbe taken, numbered, accounted and received as a ${
+        propObject.p_8727183032593._Title2 ? "Lairds" : "Laird"
+      } of\nScotland,\n\n`;
 
       const Therefore = "Know Ye Therefore";
 
-      const tartanCertificateThereforeText = `that the Petitioner having preyed`;
+      const tartanCertificateThereforeText = `that the ${
+        propObject.p_8727183032593._Title2 ? "Petitioners" : "Petitioner"
+      } having preyed`;
       const tartanCertificateThereforeTextTwo = `that there might be granted unto them to use such Scottish\nTartan as set in law during the dress act of 1746 as repealed in\n1782 and thereinafter adopted, acknowledged and recognised\nas the symbolic National Dress of Scotland,\n\n`;
 
       const scotlantTiles = "Scilicet that Scotland Titles";
 
-      const tartanCertificateScotlantTilesText = `has assigned, and do by`;
-      const tartanCertificateScotlantTilesTextTwo = `these presents assign, ratify and confirm unto the Petitioner\nthe following ensemble robes in such tartan as is depicted\nupon the margin sinister hereof, and award unto the\nPetitioner the rights to use, wear, display and earasay such\nregistered Scottish Tartan in exchange for their sworn\nallegiance to the Clan of Scotland,\n\n`;
+      const tartanCertificateScotlantTilesText = `has assigned, and do`;
+      const tartanCertificateScotlantTilesTextTwo = `by these presents assign, ratify and confirm unto the ${
+        propObject.p_8727183032593._Title2 ? "Petitioners" : "Petitioner"
+      }\nthe following ensemble robes in such tartan as is depicted\nupon the margin sinister hereof, and award unto the\n${
+        propObject.p_8727183032593._Title2 ? "Petitioners" : "Petitioner"
+      } the rights to use, wear, display and earasay such\nregistered Scottish Tartan in exchange for their sworn\nallegiance to the Clan of Scotland,\n\n`;
 
       const Tartan = "Videlicet such Tartan";
       const tartanCertificateText = "as is official and certified as set";
@@ -7531,7 +7562,11 @@ export default async function handler(req, res) {
       const demostration = "By demonstration of";
 
       const demonstrationText = " which ensemble robes the said";
-      const demonstrationTextTwo = `Petitioner is, amongst all nobles and in all places of honour, to\nbe received as a ${propObject.p_8727183032593._Title1} of Scotland,`; //Signed content
+      const demonstrationTextTwo = `${
+        propObject.p_8727183032593._Title2 ? "Petitioner are" : "Petitioner is"
+      }, amongst all nobles and in all places of honour, to\nbe received as a ${
+        propObject.p_8727183032593._Title2 ? "Lairds" : "Laird"
+      } of Scotland,`; //Signed content
 
       const tartanFurther = "Furthermore by ownership";
       const tartanFurtherDescription = "of lands in Scotland, the";
@@ -7585,41 +7620,25 @@ export default async function handler(req, res) {
       const tartanyear = tartandateObj.getFullYear();
       const tartanmonth = String(tartandateObj.getMonth() + 1).padStart(2, "0"); // Adding 1 because months are 0-indexed
       const tartanday = String(tartandateObj.getDate()).padStart(2, "0");
-      //   const
-
-      //   const monthNames = [
-      //     "JANUARY",
-      //     "FEBRUARY",
-      //     "MARCH",
-      //     "APRIL",
-      //     "MAY",
-      //     "JUNE",
-      //     "JULY",
-      //     "AUGUST",
-      //     "SEPTEMBER",
-      //     "OCTOBER",
-      //     "NOVEMBER",
-      //     "DECEMBER",
-      //   ];
 
       const tartanmonthName = monthNames[tartandateObj.getMonth()];
       let tartandayWithSuffix;
 
       if (tartanday >= 11 && tartanday <= 13) {
-        tartandayWithSuffix = `${tartanday}th`;
+        tartandayWithSuffix = `${tartanday}TH`;
       } else {
         switch (tartanday % 10) {
           case 1:
-            tartandayWithSuffix = `${tartanday}st`;
+            tartandayWithSuffix = `${tartanday}ST`;
             break;
           case 2:
-            tartandayWithSuffix = `${tartanday}nd`;
+            tartandayWithSuffix = `${tartanday}ND`;
             break;
           case 3:
-            tartandayWithSuffix = `${tartanday}rd`;
+            tartandayWithSuffix = `${tartanday}RD`;
             break;
           default:
-            tartandayWithSuffix = `${tartanday}th`;
+            tartandayWithSuffix = `${tartanday}TH`;
         }
       }
       const TartandateContent = `THIS ${tartandayWithSuffix} DAY OF ${tartanmonthName} IN THE YEAR ${tartanyear}`;
@@ -7633,14 +7652,14 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawImage(img, {
         x: 500,
-        y: 740,
+        y: 710,
         width: pngDims.width,
         height: pngDims.height,
       });
 
       tartanCertificate.drawImage(stampImg, {
-        x: 500,
-        y: 80,
+        x: 480,
+        y: 70,
         width: stampPngDims.width,
         height: stampPngDims.height,
       });
@@ -7666,10 +7685,20 @@ export default async function handler(req, res) {
         lineHeight: fontSize * 1.2,
         font: oldEng,
       });
+      tartanCertificate.drawText(tartanCertficateUserNameTwo, {
+        x: tartanTwox,
+        y: 680,
+        width: textWidth,
+        height: textHeight,
+        size: 26,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
 
       tartanCertificate.drawText(declare, {
         x: 250,
-        y: 690,
+        y: propObject.p_8727183032593._Title2 ? 650 : 690,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -7680,7 +7709,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(Allegiance, {
         x: 50,
-        y: 660,
+        y: propObject.p_8727183032593._Title2 ? 620 : 660,
         size: 26,
         width: textWidth,
         height: textHeight,
@@ -7691,7 +7720,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(prey, {
         x: 230,
-        y: 660,
+        y: propObject.p_8727183032593._Title2 ? 620 : 660,
         size: 18,
         width: textWidth,
         height: textHeight,
@@ -7702,7 +7731,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(certified, {
         x: 370,
-        y: 660,
+        y: propObject.p_8727183032593._Title2 ? 620 : 660,
         size: 26,
         width: textWidth,
         height: textHeight,
@@ -7714,13 +7743,13 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawImage(certificateMid, {
         x: 230,
-        y: 630,
+        y: propObject.p_8727183032593._Title2 ? 590 : 630,
         width: ertificateMidpngDims.width,
         height: ertificateMidpngDims.height,
       });
       tartanCertificate.drawText(Greeting, {
         x: 20,
-        y: 600,
+        y: 560,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -7731,7 +7760,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanCertificateGreetingText, {
         x: 220,
-        y: 600,
+        y: 560,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -7742,7 +7771,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanCertificateGreetingTextTwo, {
         x: 20,
-        y: 585,
+        y: 545,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -7755,7 +7784,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(know, {
         x: 20,
-        y: 560,
+        y: 520,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -7766,7 +7795,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanCertificateknowText, {
         x: 143,
-        y: 560,
+        y: 520,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -7777,7 +7806,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanCertificateknowTextTwo, {
         x: 20,
-        y: 545,
+        y: 505,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -7790,7 +7819,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(Therefore, {
         x: 20,
-        y: 445,
+        y: 410,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -7800,8 +7829,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(tartanCertificateThereforeText, {
-        x: 150,
-        y: 445,
+        x: 155,
+        y: 410,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -7812,7 +7841,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanCertificateThereforeTextTwo, {
         x: 20,
-        y: 430,
+        y: 395,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -7825,7 +7854,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(scotlantTiles, {
         x: 20,
-        y: 360,
+        y: 320,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -7835,8 +7864,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(tartanCertificateScotlantTilesText, {
-        x: 205,
-        y: 360,
+        x: 208,
+        y: 320,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -7847,7 +7876,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanCertificateScotlantTilesTextTwo, {
         x: 20,
-        y: 345,
+        y: 305,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -7858,7 +7887,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(Tartan, {
         x: 20,
-        y: 260,
+        y: 210,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -7869,7 +7898,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanCertificateText, {
         x: 165,
-        y: 260,
+        y: 210,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -7880,7 +7909,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanCertificateTextTwo, {
         x: 20,
-        y: 245,
+        y: 195,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -7889,42 +7918,42 @@ export default async function handler(req, res) {
         font: tempusFont,
       });
 
-      tartanCertificate.drawText(demostration, {
-        x: 20,
-        y: 180,
-        size: 16,
-        width: textWidth,
-        height: textHeight,
-        color: rgb(0.219, 0.337, 0.137),
-        lineHeight: fontSize * 1.2,
-        font: oldEng,
-      });
+      // tartanCertificate.drawText(demostration, {
+      //   x: 20,
+      //   y: 180,
+      //   size: 16,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   color: rgb(0.219, 0.337, 0.137),
+      //   lineHeight: fontSize * 1.2,
+      //   font: oldEng,
+      // });
 
-      tartanCertificate.drawText(demonstrationText, {
-        x: 155,
-        y: 180,
-        width: textWidth,
-        height: textHeight,
-        size: 10,
-        color: rgb(0, 0, 0),
-        lineHeight: fontSize * 1.2,
-        font: tempusFont,
-      });
+      // tartanCertificate.drawText(demonstrationText, {
+      //   x: 155,
+      //   y: 180,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 10,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: tempusFont,
+      // });
 
-      tartanCertificate.drawText(demonstrationTextTwo, {
-        x: 20,
-        y: 165,
-        width: textWidth,
-        height: textHeight,
-        size: 10,
-        color: rgb(0, 0, 0),
-        lineHeight: fontSize * 1.2,
-        font: tempusFont,
-      });
+      // tartanCertificate.drawText(demonstrationTextTwo, {
+      //   x: 20,
+      //   y: 165,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 10,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: tempusFont,
+      // });
 
       tartanCertificate.drawText("Royal Stewart Hunting", {
         x: 360,
-        y: 600,
+        y: 570,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -7935,14 +7964,14 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawImage(tartan_logo, {
         x: 330,
-        y: 340,
-        height: 250,
-        width: 250,
+        y: 330,
+        height: 230,
+        width: 230,
       });
 
-      tartanCertificate.drawText(tartanFurther, {
+      tartanCertificate.drawText(demostration, {
         x: 310,
-        y: 310,
+        y: 300,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -7951,9 +7980,9 @@ export default async function handler(req, res) {
         font: oldEng,
       });
 
-      tartanCertificate.drawText(tartanFurtherDescription, {
-        x: 485,
-        y: 310,
+      tartanCertificate.drawText(demonstrationText, {
+        x: 445,
+        y: 300,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -7962,9 +7991,9 @@ export default async function handler(req, res) {
         font: tempusFont,
       });
 
-      tartanCertificate.drawText(tartanFurtherDescriptionTwo, {
+      tartanCertificate.drawText(demonstrationTextTwo, {
         x: 310,
-        y: 295,
+        y: 285,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -7975,7 +8004,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanTestimony, {
         x: 310,
-        y: 260,
+        y: 250,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -7985,8 +8014,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(tartanTestimonyDescription, {
-        x: 455,
-        y: 260,
+        x: 460,
+        y: 250,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -7997,7 +8026,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanTestimonyDescriptionTwo, {
         x: 310,
-        y: 245,
+        y: 235,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -8009,7 +8038,7 @@ export default async function handler(req, res) {
       //SIGNED
       tartanCertificate.drawText(tartanSigned, {
         x: 150,
-        y: 100,
+        y: 120,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -8020,7 +8049,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(dateText, {
         x: 170,
-        y: 70,
+        y: 90,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -8031,7 +8060,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(TartandateContent, {
         x: 210,
-        y: 70,
+        y: 90,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -8042,7 +8071,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(copyright, {
         x: 190,
-        y: 60,
+        y: 80,
         width: textWidth,
         height: textHeight,
         size: 6,
@@ -8053,7 +8082,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawImage(tartan_signature, {
         x: 210,
-        y: 90,
+        y: 100,
         height: 50,
         width: 30,
       });
@@ -8511,20 +8540,20 @@ export default async function handler(req, res) {
       let titledayWithSuffix;
 
       if (day >= 11 && day <= 13) {
-        titledayWithSuffix = `${day}th`;
+        titledayWithSuffix = `${day}TH`;
       } else {
         switch (day % 10) {
           case 1:
-            titledayWithSuffix = `${day}st`;
+            titledayWithSuffix = `${day}ST`;
             break;
           case 2:
-            titledayWithSuffix = `${day}nd`;
+            titledayWithSuffix = `${day}ND`;
             break;
           case 3:
-            titledayWithSuffix = `${day}rd`;
+            titledayWithSuffix = `${day}RD`;
             break;
           default:
-            titledayWithSuffix = `${day}th`;
+            titledayWithSuffix = `${day}TH`;
         }
       }
       const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18′′N , 003°23′08′′W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is ${order_number}\n\nThe size of THE LAND is ${
@@ -10165,20 +10194,20 @@ export default async function handler(req, res) {
       let dayWithSuffix;
 
       if (emblemday >= 11 && emblemday <= 13) {
-        dayWithSuffix = `${emblemday}th`;
+        dayWithSuffix = `${emblemday}TH`;
       } else {
         switch (emblemday % 10) {
           case 1:
-            dayWithSuffix = `${emblemday}st`;
+            dayWithSuffix = `${emblemday}ST`;
             break;
           case 2:
-            dayWithSuffix = `${emblemday}nd`;
+            dayWithSuffix = `${emblemday}ND`;
             break;
           case 3:
-            dayWithSuffix = `${emblemday}rd`;
+            dayWithSuffix = `${emblemday}RD`;
             break;
           default:
-            dayWithSuffix = `${emblemday}th`;
+            dayWithSuffix = `${emblemday}TH`;
         }
       }
       const dateContent = `THIS ${dayWithSuffix} DAY OF ${emblemmonthName} IN THE YEAR ${emblemyear}`;
@@ -10511,7 +10540,7 @@ export default async function handler(req, res) {
       //SIGNED
       emblemCertificate.drawText(emblemSigned, {
         x: 150,
-        y: 110,
+        y: 120,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -10582,10 +10611,13 @@ export default async function handler(req, res) {
   const onlyTartan = async (propObject) => {
     try {
       const tartanCertificate = pdfDoc.addPage([595, 842]);
+      // const tartanCerificatePrinted = pdfDoc.addPage([595, 842]);
 
       const tartan_certificate_heading = `To Whomsoever These Presents Do Concern`;
       //   const tartanCertficateUserName = `${propObject.p_8727183032593._Title1} ${propObject.p_8727183032593._Name1}`;
-      const tartanCertficateUserName = `${propObject.p_8727183032593._Title1} ${propObject.p_8727183032593._Name1}`;
+      const tartanCertficateUserName = `${propObject.p_8727183032593._Title1} ${
+        propObject.p_8727183032593._Name1
+      } ${propObject.p_8727183032593._Title2 ? "&" : ""}`;
       const userNametextWidth = oldEng.widthOfTextAtSize(
         tartanCertficateUserName,
         12
@@ -10595,7 +10627,25 @@ export default async function handler(req, res) {
       const startingPosition =
         (tartanCertificate.getWidth() - userNametextWidth) / 2;
       const x = startingPosition - halfOfWord;
-      const declare = "Does Declare";
+
+      const tartanCertficateUserNameTwo = `${
+        propObject.p_8727183032593._Title2
+          ? `${propObject.p_8727183032593._Title2} ${propObject.p_8727183032593._Name2}`
+          : ""
+      }`;
+
+      const tartanuserNameTwotextWidth = oldEng.widthOfTextAtSize(
+        tartanCertficateUserNameTwo,
+        12
+      );
+
+      const tartanHalfOfWordTwo = tartanuserNameTwotextWidth / 2;
+      const tartanStartingPositionTwo =
+        (tartanCertificate.getWidth() - tartanuserNameTwotextWidth) / 2;
+      const tartanTwox = tartanStartingPositionTwo - tartanHalfOfWordTwo;
+      const declare = `${
+        propObject.p_8727183032593._Title2 ? "Do" : "Does"
+      } Declare`;
       const Allegiance = "Clan Allegiance";
       const prey = "and Prey to Wear";
 
@@ -10608,17 +10658,27 @@ export default async function handler(req, res) {
       const know = "Let It Be Known";
 
       const tartanCertificateknowText = `that the said by virtue of ownership`;
-      const tartanCertificateknowTextTwo = `of Land in Scotland and in particular the Land within the\nKingdom of Fife by Cantsdam as described in the Disposition\nand Certificate of Sale, the Petitioner is henceforth and in\nperpetuity amongst all nobles and in all places of honour, to\nbe taken, numbered, accounted and received as a ${propObject.p_8727183032593._Title1} of\nScotland,\n\n`;
+      const tartanCertificateknowTextTwo = `of Land in Scotland and in particular the Land within the\nKingdom of Fife by Cantsdam as described in the Disposition\nand Certificate of Sale, the ${
+        propObject.p_8727183032593._Title2 ? "Petitioner are" : "Petitioner is"
+      } henceforth and in\nperpetuity amongst all nobles and in all places of honour, to\nbe taken, numbered, accounted and received as a ${
+        propObject.p_8727183032593._Title2 ? "Lairds" : "Laird"
+      } of\nScotland,\n\n`;
 
       const Therefore = "Know Ye Therefore";
 
-      const tartanCertificateThereforeText = `that the Petitioner having preyed`;
+      const tartanCertificateThereforeText = `that the ${
+        propObject.p_8727183032593._Title2 ? "Petitioners" : "Petitioner"
+      } having preyed`;
       const tartanCertificateThereforeTextTwo = `that there might be granted unto them to use such Scottish\nTartan as set in law during the dress act of 1746 as repealed in\n1782 and thereinafter adopted, acknowledged and recognised\nas the symbolic National Dress of Scotland,\n\n`;
 
       const scotlantTiles = "Scilicet that Scotland Titles";
 
-      const tartanCertificateScotlantTilesText = `has assigned, and do by`;
-      const tartanCertificateScotlantTilesTextTwo = `these presents assign, ratify and confirm unto the Petitioner\nthe following ensemble robes in such tartan as is depicted\nupon the margin sinister hereof, and award unto the\nPetitioner the rights to use, wear, display and earasay such\nregistered Scottish Tartan in exchange for their sworn\nallegiance to the Clan of Scotland,\n\n`;
+      const tartanCertificateScotlantTilesText = `has assigned, and do`;
+      const tartanCertificateScotlantTilesTextTwo = `by these presents assign, ratify and confirm unto the ${
+        propObject.p_8727183032593._Title2 ? "Petitioners" : "Petitioner"
+      }\nthe following ensemble robes in such tartan as is depicted\nupon the margin sinister hereof, and award unto the\n${
+        propObject.p_8727183032593._Title2 ? "Petitioners" : "Petitioner"
+      } the rights to use, wear, display and earasay such\nregistered Scottish Tartan in exchange for their sworn\nallegiance to the Clan of Scotland,\n\n`;
 
       const Tartan = "Videlicet such Tartan";
       const tartanCertificateText = "as is official and certified as set";
@@ -10627,7 +10687,11 @@ export default async function handler(req, res) {
       const demostration = "By demonstration of";
 
       const demonstrationText = " which ensemble robes the said";
-      const demonstrationTextTwo = `Petitioner is, amongst all nobles and in all places of honour, to\nbe received as a ${propObject.p_8727183032593._Title1} of Scotland,`; //Signed content
+      const demonstrationTextTwo = `${
+        propObject.p_8727183032593._Title2 ? "Petitioner are" : "Petitioner is"
+      }, amongst all nobles and in all places of honour, to\nbe received as a ${
+        propObject.p_8727183032593._Title2 ? "Lairds" : "Laird"
+      } of Scotland,`; //Signed content
 
       const tartanFurther = "Furthermore by ownership";
       const tartanFurtherDescription = "of lands in Scotland, the";
@@ -10732,20 +10796,20 @@ export default async function handler(req, res) {
       let tartandayWithSuffix;
 
       if (tartanday >= 11 && tartanday <= 13) {
-        tartandayWithSuffix = `${tartanday}th`;
+        tartandayWithSuffix = `${tartanday}TH`;
       } else {
         switch (tartanday % 10) {
           case 1:
-            tartandayWithSuffix = `${tartanday}st`;
+            tartandayWithSuffix = `${tartanday}ST`;
             break;
           case 2:
-            tartandayWithSuffix = `${tartanday}nd`;
+            tartandayWithSuffix = `${tartanday}ND`;
             break;
           case 3:
-            tartandayWithSuffix = `${tartanday}rd`;
+            tartandayWithSuffix = `${tartanday}RD`;
             break;
           default:
-            tartandayWithSuffix = `${tartanday}th`;
+            tartandayWithSuffix = `${tartanday}TH`;
         }
       }
       const TartandateContent = `THIS ${tartandayWithSuffix} DAY OF ${tartanmonthName} IN THE YEAR ${tartanyear}`;
@@ -10759,14 +10823,14 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawImage(img, {
         x: 500,
-        y: 740,
+        y: 710,
         width: pngDims.width,
         height: pngDims.height,
       });
 
       tartanCertificate.drawImage(stampImg, {
-        x: 500,
-        y: 80,
+        x: 480,
+        y: 70,
         width: stampPngDims.width,
         height: stampPngDims.height,
       });
@@ -10792,10 +10856,20 @@ export default async function handler(req, res) {
         lineHeight: fontSize * 1.2,
         font: oldEng,
       });
+      tartanCertificate.drawText(tartanCertficateUserNameTwo, {
+        x: tartanTwox,
+        y: 680,
+        width: textWidth,
+        height: textHeight,
+        size: 26,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
 
       tartanCertificate.drawText(declare, {
         x: 250,
-        y: 690,
+        y: propObject.p_8727183032593._Title2 ? 650 : 690,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -10806,7 +10880,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(Allegiance, {
         x: 50,
-        y: 660,
+        y: propObject.p_8727183032593._Title2 ? 620 : 660,
         size: 26,
         width: textWidth,
         height: textHeight,
@@ -10817,7 +10891,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(prey, {
         x: 230,
-        y: 660,
+        y: propObject.p_8727183032593._Title2 ? 620 : 660,
         size: 18,
         width: textWidth,
         height: textHeight,
@@ -10828,7 +10902,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(certified, {
         x: 370,
-        y: 660,
+        y: propObject.p_8727183032593._Title2 ? 620 : 660,
         size: 26,
         width: textWidth,
         height: textHeight,
@@ -10840,13 +10914,13 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawImage(certificateMid, {
         x: 230,
-        y: 630,
+        y: propObject.p_8727183032593._Title2 ? 590 : 630,
         width: ertificateMidpngDims.width,
         height: ertificateMidpngDims.height,
       });
       tartanCertificate.drawText(Greeting, {
         x: 20,
-        y: 600,
+        y: 560,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -10857,7 +10931,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanCertificateGreetingText, {
         x: 220,
-        y: 600,
+        y: 560,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -10868,7 +10942,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanCertificateGreetingTextTwo, {
         x: 20,
-        y: 585,
+        y: 545,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -10881,7 +10955,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(know, {
         x: 20,
-        y: 560,
+        y: 520,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -10892,7 +10966,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanCertificateknowText, {
         x: 143,
-        y: 560,
+        y: 520,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -10903,7 +10977,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanCertificateknowTextTwo, {
         x: 20,
-        y: 545,
+        y: 505,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -10916,7 +10990,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(Therefore, {
         x: 20,
-        y: 445,
+        y: 410,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -10926,8 +11000,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(tartanCertificateThereforeText, {
-        x: 150,
-        y: 445,
+        x: 155,
+        y: 410,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -10938,7 +11012,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanCertificateThereforeTextTwo, {
         x: 20,
-        y: 430,
+        y: 395,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -10951,7 +11025,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(scotlantTiles, {
         x: 20,
-        y: 360,
+        y: 320,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -10961,8 +11035,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(tartanCertificateScotlantTilesText, {
-        x: 205,
-        y: 360,
+        x: 208,
+        y: 320,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -10973,7 +11047,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanCertificateScotlantTilesTextTwo, {
         x: 20,
-        y: 345,
+        y: 305,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -10984,7 +11058,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(Tartan, {
         x: 20,
-        y: 260,
+        y: 210,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -10995,7 +11069,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanCertificateText, {
         x: 165,
-        y: 260,
+        y: 210,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -11006,7 +11080,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanCertificateTextTwo, {
         x: 20,
-        y: 245,
+        y: 195,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -11015,42 +11089,42 @@ export default async function handler(req, res) {
         font: tempusFont,
       });
 
-      tartanCertificate.drawText(demostration, {
-        x: 20,
-        y: 180,
-        size: 16,
-        width: textWidth,
-        height: textHeight,
-        color: rgb(0.219, 0.337, 0.137),
-        lineHeight: fontSize * 1.2,
-        font: oldEng,
-      });
+      // tartanCertificate.drawText(demostration, {
+      //   x: 20,
+      //   y: 180,
+      //   size: 16,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   color: rgb(0.219, 0.337, 0.137),
+      //   lineHeight: fontSize * 1.2,
+      //   font: oldEng,
+      // });
 
-      tartanCertificate.drawText(demonstrationText, {
-        x: 155,
-        y: 180,
-        width: textWidth,
-        height: textHeight,
-        size: 10,
-        color: rgb(0, 0, 0),
-        lineHeight: fontSize * 1.2,
-        font: tempusFont,
-      });
+      // tartanCertificate.drawText(demonstrationText, {
+      //   x: 155,
+      //   y: 180,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 10,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: tempusFont,
+      // });
 
-      tartanCertificate.drawText(demonstrationTextTwo, {
-        x: 20,
-        y: 165,
-        width: textWidth,
-        height: textHeight,
-        size: 10,
-        color: rgb(0, 0, 0),
-        lineHeight: fontSize * 1.2,
-        font: tempusFont,
-      });
+      // tartanCertificate.drawText(demonstrationTextTwo, {
+      //   x: 20,
+      //   y: 165,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 10,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: tempusFont,
+      // });
 
       tartanCertificate.drawText("Royal Stewart Hunting", {
         x: 360,
-        y: 600,
+        y: 570,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -11061,14 +11135,14 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawImage(tartan_logo, {
         x: 330,
-        y: 340,
-        height: 250,
-        width: 250,
+        y: 330,
+        height: 230,
+        width: 230,
       });
 
-      tartanCertificate.drawText(tartanFurther, {
+      tartanCertificate.drawText(demostration, {
         x: 310,
-        y: 310,
+        y: 300,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -11077,9 +11151,9 @@ export default async function handler(req, res) {
         font: oldEng,
       });
 
-      tartanCertificate.drawText(tartanFurtherDescription, {
-        x: 485,
-        y: 310,
+      tartanCertificate.drawText(demonstrationText, {
+        x: 445,
+        y: 300,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -11088,9 +11162,9 @@ export default async function handler(req, res) {
         font: tempusFont,
       });
 
-      tartanCertificate.drawText(tartanFurtherDescriptionTwo, {
+      tartanCertificate.drawText(demonstrationTextTwo, {
         x: 310,
-        y: 295,
+        y: 285,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -11101,7 +11175,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanTestimony, {
         x: 310,
-        y: 260,
+        y: 250,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -11111,8 +11185,8 @@ export default async function handler(req, res) {
       });
 
       tartanCertificate.drawText(tartanTestimonyDescription, {
-        x: 455,
-        y: 260,
+        x: 460,
+        y: 250,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -11123,7 +11197,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(tartanTestimonyDescriptionTwo, {
         x: 310,
-        y: 245,
+        y: 235,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -11135,7 +11209,7 @@ export default async function handler(req, res) {
       //SIGNED
       tartanCertificate.drawText(tartanSigned, {
         x: 150,
-        y: 100,
+        y: 120,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -11146,7 +11220,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(dateText, {
         x: 170,
-        y: 70,
+        y: 90,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -11157,7 +11231,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(TartandateContent, {
         x: 210,
-        y: 70,
+        y: 90,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -11168,7 +11242,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(copyright, {
         x: 190,
-        y: 60,
+        y: 80,
         width: textWidth,
         height: textHeight,
         size: 6,
@@ -11179,10 +11253,454 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawImage(tartan_signature, {
         x: 210,
-        y: 90,
+        y: 100,
         height: 50,
         width: 30,
       });
+
+      //tartan Certificate Printed
+
+      // tartanCerificatePrinted.drawImage(tartan_bg, {
+      //   width: tartanCerificatePrinted.getWidth(),
+      //   height: tartanCerificatePrinted.getHeight(),
+      // });
+
+      // tartanCerificatePrinted.drawImage(img, {
+      //   x: 500,
+      //   y: 710,
+      //   width: pngDims.width,
+      //   height: pngDims.height,
+      // });
+
+      // tartanCerificatePrinted.drawImage(stampImg, {
+      //   x: 480,
+      //   y: 70,
+      //   width: stampPngDims.width,
+      //   height: stampPngDims.height,
+      // });
+
+      // tartanCerificatePrinted.drawText(tartan_certificate_heading, {
+      //   x: 150,
+      //   y: 750,
+      //   size: 16,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   color: rgb(0.219, 0.337, 0.137),
+      //   lineHeight: fontSize * 1.2,
+      //   font: oldEng,
+      // });
+
+      // tartanCerificatePrinted.drawText(tartanCertficateUserName, {
+      //   x: x,
+      //   y: 720,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 26,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: oldEng,
+      // });
+      // tartanCerificatePrinted.drawText(tartanCertficateUserNameTwo, {
+      //   x: tartanTwox,
+      //   y: 680,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 26,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: oldEng,
+      // });
+
+      // tartanCerificatePrinted.drawText(declare, {
+      //   x: 250,
+      //   y: propObject.p_8727183032593._Title2 ? 650 : 690,
+      //   size: 16,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   color: rgb(0.219, 0.337, 0.137),
+      //   lineHeight: fontSize * 1.2,
+      //   font: oldEng,
+      // });
+
+      // tartanCerificatePrinted.drawText(Allegiance, {
+      //   x: 50,
+      //   y: propObject.p_8727183032593._Title2 ? 620 : 660,
+      //   size: 26,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   color: rgb(0.054, 0.027, 0.301),
+      //   lineHeight: fontSize * 1.2,
+      //   font: oldEng,
+      // });
+
+      // tartanCerificatePrinted.drawText(prey, {
+      //   x: 230,
+      //   y: propObject.p_8727183032593._Title2 ? 620 : 660,
+      //   size: 18,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   color: rgb(0.219, 0.337, 0.137),
+      //   lineHeight: fontSize * 1.2,
+      //   font: oldEng,
+      // });
+
+      // tartanCerificatePrinted.drawText(certified, {
+      //   x: 370,
+      //   y: propObject.p_8727183032593._Title2 ? 620 : 660,
+      //   size: 26,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   color: rgb(0.054, 0.027, 0.301),
+
+      //   lineHeight: fontSize * 1.2,
+      //   font: oldEng,
+      // });
+
+      // tartanCerificatePrinted.drawImage(certificateMid, {
+      //   x: 230,
+      //   y: propObject.p_8727183032593._Title2 ? 590 : 630,
+      //   width: ertificateMidpngDims.width,
+      //   height: ertificateMidpngDims.height,
+      // });
+      // tartanCerificatePrinted.drawText(Greeting, {
+      //   x: 20,
+      //   y: 560,
+      //   size: 16,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   color: rgb(0.219, 0.337, 0.137),
+      //   lineHeight: fontSize * 1.2,
+      //   font: oldEng,
+      // });
+
+      // tartanCerificatePrinted.drawText(tartanCertificateGreetingText, {
+      //   x: 220,
+      //   y: 560,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 10,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: tempusFont,
+      // });
+
+      // tartanCerificatePrinted.drawText(tartanCertificateGreetingTextTwo, {
+      //   x: 20,
+      //   y: 545,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 10,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: tempusFont,
+      // });
+
+      // //shewen text
+
+      // tartanCerificatePrinted.drawText(know, {
+      //   x: 20,
+      //   y: 520,
+      //   size: 16,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   color: rgb(0.219, 0.337, 0.137),
+      //   lineHeight: fontSize * 1.2,
+      //   font: oldEng,
+      // });
+
+      // tartanCerificatePrinted.drawText(tartanCertificateknowText, {
+      //   x: 143,
+      //   y: 520,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 10,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: tempusFont,
+      // });
+
+      // tartanCerificatePrinted.drawText(tartanCertificateknowTextTwo, {
+      //   x: 20,
+      //   y: 505,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 10,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: tempusFont,
+      // });
+
+      // //videlict
+
+      // tartanCerificatePrinted.drawText(Therefore, {
+      //   x: 20,
+      //   y: 410,
+      //   size: 16,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   color: rgb(0.219, 0.337, 0.137),
+      //   lineHeight: fontSize * 1.2,
+      //   font: oldEng,
+      // });
+
+      // tartanCerificatePrinted.drawText(tartanCertificateThereforeText, {
+      //   x: 155,
+      //   y: 410,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 10,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: tempusFont,
+      // });
+
+      // tartanCerificatePrinted.drawText(tartanCertificateThereforeTextTwo, {
+      //   x: 20,
+      //   y: 395,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 10,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: tempusFont,
+      // });
+
+      // //In Testimony Whereof
+
+      // tartanCerificatePrinted.drawText(scotlantTiles, {
+      //   x: 20,
+      //   y: 320,
+      //   size: 16,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   color: rgb(0.219, 0.337, 0.137),
+      //   lineHeight: fontSize * 1.2,
+      //   font: oldEng,
+      // });
+
+      // tartanCerificatePrinted.drawText(tartanCertificateScotlantTilesText, {
+      //   x: 208,
+      //   y: 320,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 10,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: tempusFont,
+      // });
+
+      // tartanCerificatePrinted.drawText(tartanCertificateScotlantTilesTextTwo, {
+      //   x: 20,
+      //   y: 305,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 10,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: tempusFont,
+      // });
+
+      // tartanCerificatePrinted.drawText(Tartan, {
+      //   x: 20,
+      //   y: 210,
+      //   size: 16,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   color: rgb(0.219, 0.337, 0.137),
+      //   lineHeight: fontSize * 1.2,
+      //   font: oldEng,
+      // });
+
+      // tartanCerificatePrinted.drawText(tartanCertificateText, {
+      //   x: 165,
+      //   y: 210,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 10,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: tempusFont,
+      // });
+
+      // tartanCerificatePrinted.drawText(tartanCertificateTextTwo, {
+      //   x: 20,
+      //   y: 195,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 10,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: tempusFont,
+      // });
+
+      // // tartanCerificatePrinted.drawText(demostration, {
+      // //   x: 20,
+      // //   y: 180,
+      // //   size: 16,
+      // //   width: textWidth,
+      // //   height: textHeight,
+      // //   color: rgb(0.219, 0.337, 0.137),
+      // //   lineHeight: fontSize * 1.2,
+      // //   font: oldEng,
+      // // });
+
+      // // tartanCerificatePrinted.drawText(demonstrationText, {
+      // //   x: 155,
+      // //   y: 180,
+      // //   width: textWidth,
+      // //   height: textHeight,
+      // //   size: 10,
+      // //   color: rgb(0, 0, 0),
+      // //   lineHeight: fontSize * 1.2,
+      // //   font: tempusFont,
+      // // });
+
+      // // tartanCerificatePrinted.drawText(demonstrationTextTwo, {
+      // //   x: 20,
+      // //   y: 165,
+      // //   width: textWidth,
+      // //   height: textHeight,
+      // //   size: 10,
+      // //   color: rgb(0, 0, 0),
+      // //   lineHeight: fontSize * 1.2,
+      // //   font: tempusFont,
+      // // });
+
+      // tartanCerificatePrinted.drawText("Royal Stewart Hunting", {
+      //   x: 360,
+      //   y: 570,
+      //   size: 16,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   color: rgb(0.219, 0.337, 0.137),
+      //   lineHeight: fontSize * 1.2,
+      //   font: oldEng,
+      // });
+
+      // tartanCerificatePrinted.drawImage(tartan_logo, {
+      //   x: 330,
+      //   y: 330,
+      //   height: 230,
+      //   width: 230,
+      // });
+
+      // tartanCerificatePrinted.drawText(demostration, {
+      //   x: 310,
+      //   y: 300,
+      //   size: 16,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   color: rgb(0.219, 0.337, 0.137),
+      //   lineHeight: fontSize * 1.2,
+      //   font: oldEng,
+      // });
+
+      // tartanCerificatePrinted.drawText(demonstrationText, {
+      //   x: 445,
+      //   y: 300,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 10,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: tempusFont,
+      // });
+
+      // tartanCerificatePrinted.drawText(demonstrationTextTwo, {
+      //   x: 310,
+      //   y: 285,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 10,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: tempusFont,
+      // });
+
+      // tartanCerificatePrinted.drawText(tartanTestimony, {
+      //   x: 310,
+      //   y: 250,
+      //   size: 16,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   color: rgb(0.219, 0.337, 0.137),
+      //   lineHeight: fontSize * 1.2,
+      //   font: oldEng,
+      // });
+
+      // tartanCerificatePrinted.drawText(tartanTestimonyDescription, {
+      //   x: 460,
+      //   y: 250,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 10,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: tempusFont,
+      // });
+
+      // tartanCerificatePrinted.drawText(tartanTestimonyDescriptionTwo, {
+      //   x: 310,
+      //   y: 235,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 10,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: tempusFont,
+      // });
+
+      // //SIGNED
+      // tartanCerificatePrinted.drawText(tartanSigned, {
+      //   x: 150,
+      //   y: 120,
+      //   size: 16,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   color: rgb(0.219, 0.337, 0.137),
+      //   lineHeight: fontSize * 1.2,
+      //   font: oldEng,
+      // });
+
+      // tartanCerificatePrinted.drawText(dateText, {
+      //   x: 170,
+      //   y: 90,
+      //   size: 16,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   color: rgb(0.219, 0.337, 0.137),
+      //   lineHeight: fontSize * 1.2,
+      //   font: oldEng,
+      // });
+
+      // tartanCerificatePrinted.drawText(TartandateContent, {
+      //   x: 210,
+      //   y: 90,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 10,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: tempusFont,
+      // });
+
+      // tartanCerificatePrinted.drawText(copyright, {
+      //   x: 190,
+      //   y: 80,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 6,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: timesRomanFont,
+      // });
+
+      // tartanCerificatePrinted.drawImage(tartan_signature, {
+      //   x: 210,
+      //   y: 100,
+      //   height: 50,
+      //   width: 30,
+      // });
 
       const pdfBytes = await pdfDoc.save();
 
@@ -11204,6 +11722,7 @@ export default async function handler(req, res) {
     }
   };
   let size;
+  let type;
 
   if (email && req.body.line_items.length > 0) {
     console.log(req.body, "==================req body==============");
@@ -11214,12 +11733,15 @@ export default async function handler(req, res) {
 
     req.body.line_items.map((item) => {
       console.log(item, "all itemss");
-
+      // const word = item.variant_title.split(" ");
+      // // size = word[0];
+      // type = word[2]
       pId.push(item.product_id);
       pProperties["p_" + item.product_id] = item.properties;
       if (pId.includes(titlePackId)) {
         const word = item.variant_title.split(" ");
         size = word[0];
+        // type = word[2]
         console.log(size, "sizesizesize");
       }
       console.log(item.properties, "item.properties =================");
@@ -11280,6 +11802,7 @@ export default async function handler(req, res) {
             _Name1: resultObjectTitlePack._Name1,
             _Date: resultObjectTitlePack._Date,
             size: size,
+            type,
           },
           p_8727183065361: {
             _Title1: resultObjectEmblum._Title1,
@@ -11344,6 +11867,32 @@ export default async function handler(req, res) {
           p_8727183032593: {
             _Title1: resultObjectTatran._Title1,
             _Name1: resultObjectTatran._name1,
+            _Date: resultObjectTatran._Date,
+          },
+        };
+        titleAndEmblemAndTartan(propertiesObj);
+      } else {
+        const propertiesObj = {
+          p_8727183196433: {
+            _Title1: resultObjectTitlePack._Title1,
+            _Name1: resultObjectTitlePack._Name1,
+            _Title2: resultObjectTitlePack._Title2,
+            _Name2: resultObjectTitlePack._Name2,
+            _Date: resultObjectTitlePack._Date,
+            size: size,
+          },
+          p_8727183065361: {
+            _Title1: resultObjectEmblum._Title1,
+            _Name1: resultObjectEmblum._Name1,
+            _Title2: resultObjectEmblum._Title2,
+            _Name2: resultObjectEmblum._name2,
+            _Date: resultObjectEmblum._Date,
+          },
+          p_8727183032593: {
+            _Title1: resultObjectTatran._Title1,
+            _Name1: resultObjectTatran._name1,
+            _Title2: resultObjectTatran._Title2,
+            _Name2: resultObjectTatran._name2,
             _Date: resultObjectTatran._Date,
           },
         };
@@ -11657,6 +12206,17 @@ export default async function handler(req, res) {
           p_8727183032593: {
             _Title1: resultObjectTatran._Title1,
             _Name1: resultObjectTatran._name1,
+            _Date: resultObjectTatran._Date,
+          },
+        };
+        onlyTartan(propertiesObj);
+      } else {
+        const propertiesObj = {
+          p_8727183032593: {
+            _Title1: resultObjectTatran._Title1,
+            _Name1: resultObjectTatran._name1,
+            _Title2: resultObjectTatran._Title2,
+            _Name2: resultObjectTatran._name2,
             _Date: resultObjectTatran._Date,
           },
         };
