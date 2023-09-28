@@ -37,7 +37,7 @@ export default async function handler(req, res) {
     StandardFonts.TimesRomanItalic
   );
   const fontTwo = fs.readFileSync(
-    path.join("./utils", "fonts", "Goudy-Bold Regular.ttf")
+    path.join("./utils", "fonts", "Goudy-Bold-Regular.ttf.ttf")
   );
 
   const tempusFont = await pdfDoc.embedFont(fontTwo);
@@ -320,7 +320,7 @@ export default async function handler(req, res) {
       const ertificateMidpngDims = certificateMid.scale(0.3);
 
       const fontTwo = fs.readFileSync(
-        path.join("./utils", "fonts", "Goudy-Bold Regular.ttf")
+        path.join("./utils", "fonts", "Goudy-Bold-Regular.ttf.ttf")
       );
       const tempusFont = await pdfDoc.embedFont(fontTwo);
 
@@ -2089,7 +2089,7 @@ export default async function handler(req, res) {
         propObject.p_8727183065361._Title2 ? "LAIRDS" : "A LAIRD"
       } AND IN PARTICULAR ${
         propObject.p_8727183065361._Title2 ? "LAIRDS" : "A\nLAIRD"
-      } OF\nBLAIRADAM.`;
+      } OF BLAIRADAM.`;
       //Signed content
 
       const emblemSigned = "Signed";
@@ -2174,7 +2174,7 @@ export default async function handler(req, res) {
       });
       emblemCertificate.drawImage(img, {
         x: 40,
-        y: 740,
+        y: 710,
         width: pngDims.width,
         height: pngDims.height,
       });
@@ -3377,7 +3377,7 @@ export default async function handler(req, res) {
       const ertificateMidpngDims = certificateMid.scale(0.3);
 
       const fontTwo = fs.readFileSync(
-        path.join("./utils", "fonts", "Goudy-Bold Regular.ttf")
+        path.join("./utils", "fonts", "Goudy-Bold-Regular.ttf.ttf")
       );
       const tempusFont = await pdfDoc.embedFont(fontTwo);
 
@@ -5813,7 +5813,7 @@ export default async function handler(req, res) {
       const ertificateMidpngDims = certificateMid.scale(0.3);
 
       const fontTwo = fs.readFileSync(
-        path.join("./utils", "fonts", "Goudy-Bold Regular.ttf")
+        path.join("./utils", "fonts", "Goudy-Bold-Regular.ttf.ttf")
       );
       const tempusFont = await pdfDoc.embedFont(fontTwo);
 
@@ -8374,7 +8374,7 @@ export default async function handler(req, res) {
       const ertificateMidpngDims = certificateMid.scale(0.3);
 
       const fontTwo = fs.readFileSync(
-        path.join("./utils", "fonts", "Goudy-Bold Regular.ttf")
+        path.join("./utils", "fonts", "Goudy-Bold-Regular.ttf.ttf")
       );
       const tempusFont = await pdfDoc.embedFont(fontTwo);
 
