@@ -37,7 +37,7 @@ export default async function handler(req, res) {
     StandardFonts.TimesRomanItalic
   );
   const fontTwo = fs.readFileSync(
-    path.join("./utils", "fonts", "Goudy-Bold-Regular.ttf.ttf")
+    path.join("./utils", "fonts", "Goudy-Bold-Regular.ttf")
   );
 
   const tempusFont = await pdfDoc.embedFont(fontTwo);
@@ -320,7 +320,7 @@ export default async function handler(req, res) {
       const ertificateMidpngDims = certificateMid.scale(0.3);
 
       const fontTwo = fs.readFileSync(
-        path.join("./utils", "fonts", "Goudy-Bold-Regular.ttf.ttf")
+        path.join("./utils", "fonts", "Goudy-Bold-Regular.ttf")
       );
       const tempusFont = await pdfDoc.embedFont(fontTwo);
 
@@ -2010,7 +2010,7 @@ export default async function handler(req, res) {
       const emblemCertificate = pdfDoc.addPage([595, 842]);
 
       const emblem_certificate_heading = `To All & Sundry whom these presents do concern\n
-                 Scotland Titles does declare that`;
+              Scotland Titles does declare that`;
 
       const emblemCertficateUserName = `${propObject.p_8727183065361._Title1} ${
         propObject.p_8727183065361._Name1
@@ -2088,8 +2088,8 @@ export default async function handler(req, res) {
       }\nMAY HENCEFORTH AND IN PERPETUITY BE KNOWN BY\nTHE STYLE OF ${
         propObject.p_8727183065361._Title2 ? "LAIRDS" : "A LAIRD"
       } AND IN PARTICULAR ${
-        propObject.p_8727183065361._Title2 ? "LAIRDS" : "A\nLAIRD"
-      } OF BLAIRADAM.`;
+        propObject.p_8727183065361._Title2 ? "LAIRDS" : "LAIRD"
+      } OF\nBLAIRADAM.`;
       //Signed content
 
       const emblemSigned = "Signed";
@@ -2187,7 +2187,7 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(emblem_certificate_heading, {
-        x: 150,
+        x: 140,
         y: 730,
         size: 16,
         width: textWidth,
@@ -2683,7 +2683,7 @@ export default async function handler(req, res) {
       });
       tartanCertificate.drawText(tartanCertficateUserNameTwo, {
         x: tartanTwox,
-        y: 680,
+        y: 690,
         width: textWidth,
         height: textHeight,
         size: 26,
@@ -2694,7 +2694,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(declare, {
         x: 250,
-        y: propObject.p_8727183032593._Title2 ? 650 : 690,
+        y: propObject.p_8727183032593._Title2 ? 665 : 690,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -2705,7 +2705,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(Allegiance, {
         x: 50,
-        y: propObject.p_8727183032593._Title2 ? 620 : 660,
+        y: propObject.p_8727183032593._Title2 ? 640 : 660,
         size: 26,
         width: textWidth,
         height: textHeight,
@@ -2716,7 +2716,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(prey, {
         x: 230,
-        y: propObject.p_8727183032593._Title2 ? 620 : 660,
+        y: propObject.p_8727183032593._Title2 ? 640 : 660,
         size: 18,
         width: textWidth,
         height: textHeight,
@@ -2727,7 +2727,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(certified, {
         x: 370,
-        y: propObject.p_8727183032593._Title2 ? 620 : 660,
+        y: propObject.p_8727183032593._Title2 ? 640 : 660,
         size: 26,
         width: textWidth,
         height: textHeight,
@@ -2739,10 +2739,11 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawImage(certificateMid, {
         x: 230,
-        y: propObject.p_8727183032593._Title2 ? 590 : 630,
+        y: propObject.p_8727183032593._Title2 ? 600 : 630,
         width: ertificateMidpngDims.width,
         height: ertificateMidpngDims.height,
       });
+
       tartanCertificate.drawText(Greeting, {
         x: 20,
         y: 560,
@@ -3377,7 +3378,7 @@ export default async function handler(req, res) {
       const ertificateMidpngDims = certificateMid.scale(0.3);
 
       const fontTwo = fs.readFileSync(
-        path.join("./utils", "fonts", "Goudy-Bold-Regular.ttf.ttf")
+        path.join("./utils", "fonts", "Goudy-Bold-Regular.ttf")
       );
       const tempusFont = await pdfDoc.embedFont(fontTwo);
 
@@ -5054,7 +5055,7 @@ export default async function handler(req, res) {
       const emblemCertificate = pdfDoc.addPage([595, 842]);
 
       const emblem_certificate_heading = `To All & Sundry whom these presents do concern\n
-                 Scotland Titles does declare that`;
+              Scotland Titles does declare that`;
 
       const emblemCertficateUserName = `${propObject.p_8727183065361._Title1} ${
         propObject.p_8727183065361._Name1
@@ -5130,9 +5131,9 @@ export default async function handler(req, res) {
       const ScilicetDescription = `SCOTLAND AND IN PARTICULAR THE LAND DESCRIBED\nABOVE WITHIN THE KINGDOM OF FIFE BY CANTSDAM\nAS FURTHER DESCRIBEDIN THE CERTIFICATE OF\nDISPOSITION AND PROCLAMATION, THE ${
         propObject.p_8727183065361._Title2 ? "PETITIONERS" : "PETITIONER"
       }\nMAY HENCEFORTH AND IN PERPETUITY BE KNOWN BY\nTHE STYLE OF ${
-        propObject.p_8727183065361._Title2 ? "LAIRDS" : "A\nLAIRD"
+        propObject.p_8727183065361._Title2 ? "LAIRDS" : "A LAIRD"
       } AND IN PARTICULAR ${
-        propObject.p_8727183065361._Title2 ? "LAIRDS" : "A\nLAIRD"
+        propObject.p_8727183065361._Title2 ? "LAIRDS" : "LAIRD"
       } OF\nBLAIRADAM.`;
       //Signed content
 
@@ -5218,7 +5219,7 @@ export default async function handler(req, res) {
       });
       emblemCertificate.drawImage(img, {
         x: 40,
-        y: 740,
+        y: 710,
         width: pngDims.width,
         height: pngDims.height,
       });
@@ -5231,7 +5232,7 @@ export default async function handler(req, res) {
       });
 
       emblemCertificate.drawText(emblem_certificate_heading, {
-        x: 150,
+        x: 140,
         y: 730,
         size: 16,
         width: textWidth,
@@ -5813,7 +5814,7 @@ export default async function handler(req, res) {
       const ertificateMidpngDims = certificateMid.scale(0.3);
 
       const fontTwo = fs.readFileSync(
-        path.join("./utils", "fonts", "Goudy-Bold-Regular.ttf.ttf")
+        path.join("./utils", "fonts", "Goudy-Bold-Regular.ttf")
       );
       const tempusFont = await pdfDoc.embedFont(fontTwo);
 
@@ -7685,9 +7686,10 @@ export default async function handler(req, res) {
         lineHeight: fontSize * 1.2,
         font: oldEng,
       });
+
       tartanCertificate.drawText(tartanCertficateUserNameTwo, {
         x: tartanTwox,
-        y: 680,
+        y: 690,
         width: textWidth,
         height: textHeight,
         size: 26,
@@ -7698,7 +7700,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(declare, {
         x: 250,
-        y: propObject.p_8727183032593._Title2 ? 650 : 690,
+        y: propObject.p_8727183032593._Title2 ? 665 : 690,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -7709,7 +7711,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(Allegiance, {
         x: 50,
-        y: propObject.p_8727183032593._Title2 ? 620 : 660,
+        y: propObject.p_8727183032593._Title2 ? 640 : 660,
         size: 26,
         width: textWidth,
         height: textHeight,
@@ -7720,7 +7722,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(prey, {
         x: 230,
-        y: propObject.p_8727183032593._Title2 ? 620 : 660,
+        y: propObject.p_8727183032593._Title2 ? 640 : 660,
         size: 18,
         width: textWidth,
         height: textHeight,
@@ -7731,7 +7733,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(certified, {
         x: 370,
-        y: propObject.p_8727183032593._Title2 ? 620 : 660,
+        y: propObject.p_8727183032593._Title2 ? 640 : 660,
         size: 26,
         width: textWidth,
         height: textHeight,
@@ -7743,7 +7745,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawImage(certificateMid, {
         x: 230,
-        y: propObject.p_8727183032593._Title2 ? 590 : 630,
+        y: propObject.p_8727183032593._Title2 ? 600 : 630,
         width: ertificateMidpngDims.width,
         height: ertificateMidpngDims.height,
       });
@@ -8374,7 +8376,7 @@ export default async function handler(req, res) {
       const ertificateMidpngDims = certificateMid.scale(0.3);
 
       const fontTwo = fs.readFileSync(
-        path.join("./utils", "fonts", "Goudy-Bold-Regular.ttf.ttf")
+        path.join("./utils", "fonts", "Goudy-Bold-Regular.ttf")
       );
       const tempusFont = await pdfDoc.embedFont(fontTwo);
 
@@ -10074,7 +10076,7 @@ export default async function handler(req, res) {
       const emblemCertificate = pdfDoc.addPage([595, 842]);
 
       const emblem_certificate_heading = `To All & Sundry whom these presents do concern\n
-                 Scotland Titles does declare that`;
+              Scotland Titles does declare that`;
 
       const emblemCertficateUserName = `${propObject.p_8727183065361._Title1} ${
         propObject.p_8727183065361._Name1
@@ -10150,9 +10152,9 @@ export default async function handler(req, res) {
       const ScilicetDescription = `SCOTLAND AND IN PARTICULAR THE LAND DESCRIBED\nABOVE WITHIN THE KINGDOM OF FIFE BY CANTSDAM\nAS FURTHER DESCRIBEDIN THE CERTIFICATE OF\nDISPOSITION AND PROCLAMATION, THE ${
         propObject.p_8727183065361._Title2 ? "PETITIONERS" : "PETITIONER"
       }\nMAY HENCEFORTH AND IN PERPETUITY BE KNOWN BY\nTHE STYLE OF ${
-        propObject.p_8727183065361._Title2 ? "LAIRDS" : "A\nLAIRD"
+        propObject.p_8727183065361._Title2 ? "LAIRDS" : "A LAIRD"
       } AND IN PARTICULAR ${
-        propObject.p_8727183065361._Title2 ? "LAIRDS" : "A\nLAIRD"
+        propObject.p_8727183065361._Title2 ? "LAIRDS" : "LAIRD"
       } OF\nBLAIRADAM.`;
       //Signed content
 
@@ -10280,7 +10282,7 @@ export default async function handler(req, res) {
       });
       emblemCertificate.drawImage(img, {
         x: 40,
-        y: 740,
+        y: 710,
         width: pngDims.width,
         height: pngDims.height,
       });
@@ -10858,7 +10860,7 @@ export default async function handler(req, res) {
       });
       tartanCertificate.drawText(tartanCertficateUserNameTwo, {
         x: tartanTwox,
-        y: 680,
+        y: 690,
         width: textWidth,
         height: textHeight,
         size: 26,
@@ -10869,7 +10871,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(declare, {
         x: 250,
-        y: propObject.p_8727183032593._Title2 ? 650 : 690,
+        y: propObject.p_8727183032593._Title2 ? 665 : 690,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -10880,7 +10882,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(Allegiance, {
         x: 50,
-        y: propObject.p_8727183032593._Title2 ? 620 : 660,
+        y: propObject.p_8727183032593._Title2 ? 640 : 660,
         size: 26,
         width: textWidth,
         height: textHeight,
@@ -10891,7 +10893,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(prey, {
         x: 230,
-        y: propObject.p_8727183032593._Title2 ? 620 : 660,
+        y: propObject.p_8727183032593._Title2 ? 640 : 660,
         size: 18,
         width: textWidth,
         height: textHeight,
@@ -10902,7 +10904,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(certified, {
         x: 370,
-        y: propObject.p_8727183032593._Title2 ? 620 : 660,
+        y: propObject.p_8727183032593._Title2 ? 640 : 660,
         size: 26,
         width: textWidth,
         height: textHeight,
@@ -10914,7 +10916,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawImage(certificateMid, {
         x: 230,
-        y: propObject.p_8727183032593._Title2 ? 590 : 630,
+        y: propObject.p_8727183032593._Title2 ? 600 : 630,
         width: ertificateMidpngDims.width,
         height: ertificateMidpngDims.height,
       });
