@@ -355,6 +355,16 @@ export default async function handler(req, res) {
       const certificateStartingPosition =
         (pagetwo.getWidth() - certificateUserNametextWidth) / 2;
       const certificateX = certificateStartingPosition - certificateHalfOfWord;
+
+      const certificateUserNameTwotextWidth = oldEng.widthOfTextAtSize(
+        certficateUserNameTwo,
+        12
+      );
+      const certificateTwoHalfOfWord = certificateUserNameTwotextWidth / 2;
+      const certificateTwoStartingPosition =
+        (pagetwo.getWidth() - certificateUserNameTwotextWidth) / 2;
+      const certificateTwoX =
+        certificateTwoStartingPosition - certificateTwoHalfOfWord;
       let titleConditions = "";
       console.log(
         propObject.p_8727183196433._Title2,
@@ -629,7 +639,7 @@ export default async function handler(req, res) {
           });
 
         pagetwo.drawText(certficateUserNameTwo, {
-          x: certificateX,
+          x: certificateTwoX,
           y: 435,
           width: textWidth,
           height: textHeight,
@@ -3046,7 +3056,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(dateText, {
         x: 170,
-        y: 90,
+        y: 80,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -3057,7 +3067,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(TartandateContent, {
         x: 210,
-        y: 90,
+        y: 80,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -3068,7 +3078,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(copyright, {
         x: 190,
-        y: 80,
+        y: 70,
         width: textWidth,
         height: textHeight,
         size: 6,
@@ -3413,6 +3423,17 @@ export default async function handler(req, res) {
       const certificateStartingPosition =
         (pagetwo.getWidth() - certificateUserNametextWidth) / 2;
       const certificateX = certificateStartingPosition - certificateHalfOfWord;
+
+      const certificateUserNameTwotextWidth = oldEng.widthOfTextAtSize(
+        certficateUserNameTwo,
+        12
+      );
+      const certificateTwoHalfOfWord = certificateUserNameTwotextWidth / 2;
+      const certificateTwoStartingPosition =
+        (pagetwo.getWidth() - certificateUserNameTwotextWidth) / 2;
+      const certificateTwoX =
+        certificateTwoStartingPosition - certificateTwoHalfOfWord;
+
       var titleConditions = "";
 
       if (
@@ -3673,7 +3694,7 @@ export default async function handler(req, res) {
           });
 
         pagetwo.drawText(certficateUserNameTwo, {
-          x: certificateX,
+          x: certificateTwoX,
           y: 435,
           width: textWidth,
           height: textHeight,
@@ -5848,6 +5869,16 @@ export default async function handler(req, res) {
       const certificateStartingPosition =
         (pagetwo.getWidth() - certificateUserNametextWidth) / 2;
       const certificateX = certificateStartingPosition - certificateHalfOfWord;
+      const certificateUserNameTwotextWidth = oldEng.widthOfTextAtSize(
+        certficateUserNameTwo,
+        12
+      );
+      const certificateTwoHalfOfWord = certificateUserNameTwotextWidth / 2;
+      const certificateTwoStartingPosition =
+        (pagetwo.getWidth() - certificateUserNameTwotextWidth) / 2;
+      const certificateTwoX =
+        certificateTwoStartingPosition - certificateTwoHalfOfWord;
+
       var titleConditions = "";
 
       if (
@@ -6109,7 +6140,7 @@ export default async function handler(req, res) {
           });
 
         pagetwo.drawText(certficateUserNameTwo, {
-          x: certificateX,
+          x: certificateTwoX,
           y: 435,
           width: textWidth,
           height: textHeight,
@@ -8048,10 +8079,9 @@ export default async function handler(req, res) {
         lineHeight: fontSize * 1.2,
         font: oldEng,
       });
-
       tartanCertificate.drawText(dateText, {
         x: 170,
-        y: 90,
+        y: 80,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -8062,7 +8092,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(TartandateContent, {
         x: 210,
-        y: 90,
+        y: 80,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -8073,7 +8103,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(copyright, {
         x: 190,
-        y: 80,
+        y: 70,
         width: textWidth,
         height: textHeight,
         size: 6,
@@ -8411,6 +8441,17 @@ export default async function handler(req, res) {
       const certificateStartingPosition =
         (pagetwo.getWidth() - certificateUserNametextWidth) / 2;
       const certificateX = certificateStartingPosition - certificateHalfOfWord;
+
+      const certificateUserNameTwotextWidth = oldEng.widthOfTextAtSize(
+        certficateUserNameTwo,
+        12
+      );
+      const certificateTwoHalfOfWord = certificateUserNameTwotextWidth / 2;
+      const certificateTwoStartingPosition =
+        (pagetwo.getWidth() - certificateUserNameTwotextWidth) / 2;
+      const certificateTwoX =
+        certificateTwoStartingPosition - certificateTwoHalfOfWord;
+
       var titleConditions = "";
 
       if (
@@ -8671,7 +8712,7 @@ export default async function handler(req, res) {
           });
 
         pagetwo.drawText(certficateUserNameTwo, {
-          x: certificateX,
+          x: certificateTwoX,
           y: 435,
           width: textWidth,
           height: textHeight,
@@ -11222,7 +11263,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(dateText, {
         x: 170,
-        y: 90,
+        y: 80,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -11233,7 +11274,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(TartandateContent, {
         x: 210,
-        y: 90,
+        y: 80,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -11244,7 +11285,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(copyright, {
         x: 190,
-        y: 80,
+        y: 70,
         width: textWidth,
         height: textHeight,
         size: 6,
