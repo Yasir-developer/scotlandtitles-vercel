@@ -11,7 +11,11 @@ export default async function handler(req, res) {
   if (req.method === "GET") {
     console.log(path.join(process.cwd(), "public", "demo.json"));
     // path.join(process.cwd(), "public", "demo.json")
-
+    const fontTwo = fs.readFileSync(
+      // path.join(__dirname + "../../../../utils/fonts/demo.json")
+      // "https://scotlandtitlesapp.com/pdfs/Goudy-Bold-Regular.ttf"
+      path.join(process.cwd(), "public", "demo.json")
+    );
     // const collection = db.collection('co'); // Replace with your collection name
     // const data = await collection.find({}).toArray();
     // res.status(200).json(data);
