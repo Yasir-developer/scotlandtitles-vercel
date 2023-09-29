@@ -37,14 +37,14 @@ export default async function handler(req, res) {
     StandardFonts.TimesRomanItalic
   );
   const fontTwo = fs.readFileSync(
-    path.join("./utils", "fonts", "OLDENGL.TTF")
+    path.join(__dirname + "fonts", "OLDENGL.TTF")
     // "https://scotlandtitlesapp.com/pdfs/Goudy-Bold-Regular.ttf"
     // path.join(process.cwd(), "public", "Goudy-Bold-Regular.ttf")
   );
-  // console.log(
-  //   path.join(process.cwd(), "public", "Goudy-Bold-Regular.ttf"),
-  //   "kdmaskldmsakdnksdna"
-  // );
+  console.log(
+    path.join(__dirname + "fonts", "OLDENGL.TTF"),
+    "kdmaskldmsakdnksdna"
+  );
 
   const tempusFont = await pdfDoc.embedFont(fontTwo);
 
