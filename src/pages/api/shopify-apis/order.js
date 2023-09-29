@@ -37,9 +37,10 @@ export default async function handler(req, res) {
     StandardFonts.TimesRomanItalic
   );
   const fontTwo = fs.readFileSync(
-    path.join(__dirname + "../../../../utils/fonts/demo.json")
+    // path.join(__dirname + "../../../../utils/fonts/demo.json")
     // "https://scotlandtitlesapp.com/pdfs/Goudy-Bold-Regular.ttf"
-    // path.join(process.cwd(), "public", "Goudy-Bold-Regular.ttf")
+    // path.join(process.cwd(), "public", "demo.json")
+    path.join(process.cwd(), "public", "Goudy-Bold-Regular.ttf")
   );
   console.log(
     path.join(__dirname + "fonts", "OLDENGL.TTF"),
