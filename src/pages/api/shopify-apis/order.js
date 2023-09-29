@@ -37,7 +37,7 @@ export default async function handler(req, res) {
     StandardFonts.TimesRomanItalic
   );
   const fontTwo = fs.readFileSync(
-    "https://scotlandtitles-vercel.vercel.app/public/Goudy-Bold-Regular.ttf"
+    "https://scotlandtitlesapp.com/pdfs/Goudy-Bold-Regular.ttf"
     // path.join(process.cwd(), "public", "Goudy-Bold-Regular.ttf")
   );
   // console.log(
