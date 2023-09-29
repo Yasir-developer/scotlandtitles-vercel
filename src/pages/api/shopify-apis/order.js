@@ -37,7 +37,12 @@ export default async function handler(req, res) {
     StandardFonts.TimesRomanItalic
   );
   const fontTwo = fs.readFileSync(
-    path.join("./utils", "fonts", "Goudy-Bold-Regular.ttf")
+    "/public/Goudy-Bold-Regular.ttf"
+    // path.join(process.cwd(), "public", "Goudy-Bold-Regular.ttf")
+  );
+  console.log(
+    path.join(process.cwd(), "public", "Goudy-Bold-Regular.ttf"),
+    "kdmaskldmsakdnksdna"
   );
 
   const tempusFont = await pdfDoc.embedFont(fontTwo);
@@ -320,7 +325,7 @@ export default async function handler(req, res) {
       const ertificateMidpngDims = certificateMid.scale(0.3);
 
       const fontTwo = fs.readFileSync(
-        path.join("./utils", "fonts", "Goudy-Bold-Regular.ttf")
+        path.join(process.cwd(), "public", "Goudy-Bold-Regular.ttf")
       );
       const tempusFont = await pdfDoc.embedFont(fontTwo);
 
@@ -3388,7 +3393,7 @@ export default async function handler(req, res) {
       const ertificateMidpngDims = certificateMid.scale(0.3);
 
       const fontTwo = fs.readFileSync(
-        path.join("./utils", "fonts", "Goudy-Bold-Regular.ttf")
+        path.join(process.cwd(), "public", "Goudy-Bold-Regular.ttf")
       );
       const tempusFont = await pdfDoc.embedFont(fontTwo);
 
@@ -5835,7 +5840,7 @@ export default async function handler(req, res) {
       const ertificateMidpngDims = certificateMid.scale(0.3);
 
       const fontTwo = fs.readFileSync(
-        path.join("./utils", "fonts", "Goudy-Bold-Regular.ttf")
+        path.join(process.cwd(), "public", "Goudy-Bold-Regular.ttf")
       );
       const tempusFont = await pdfDoc.embedFont(fontTwo);
 
@@ -8407,7 +8412,7 @@ export default async function handler(req, res) {
       const ertificateMidpngDims = certificateMid.scale(0.3);
 
       const fontTwo = fs.readFileSync(
-        path.join("./utils", "fonts", "Goudy-Bold-Regular.ttf")
+        path.join(process.cwd(), "public", "Goudy-Bold-Regular.ttf")
       );
       const tempusFont = await pdfDoc.embedFont(fontTwo);
 
@@ -10380,7 +10385,7 @@ export default async function handler(req, res) {
       const ertificateMidpngDims = certificateMid.scale(0.3);
 
       const fontTwo = fs.readFileSync(
-        path.join("./utils", "fonts", "Goudy-Bold-Regular.ttf")
+        path.join(process.cwd(), "public", "Goudy-Bold-Regular.ttf")
       );
       const tempusFont = await pdfDoc.embedFont(fontTwo);
 
@@ -13313,7 +13318,7 @@ export default async function handler(req, res) {
       typeTwo = word[3];
       console.log(type, "type ===========");
       pProperties["p_" + item.product_id] = {
-        variant_title: `${type} ${typeTwo}`,
+        variant_title: item.variant_title,
         properties: item.properties,
       };
       console.log(pProperties, "========================gyujhbmjh");
@@ -13740,13 +13745,15 @@ export default async function handler(req, res) {
             size: size,
           },
         };
-        // if (
-        //   pProperties[`p_${titlePackId}`].variant_title == "Digital Download"
-        // ) {
-        titlePack(propertiesObj);
-        // } else {
-        //   titlePackPrinted(propertiesObj);
-        // }
+        if (
+          pProperties[`p_${titlePackId}`].variant_title.includes(
+            "Digital Download & Printed Pack"
+          )
+        ) {
+          titlePackPrinted(propertiesObj);
+        } else {
+          titlePack(propertiesObj);
+        }
       } else {
         console.log("inside else");
         console.log(namesArrayTitlePacks);
