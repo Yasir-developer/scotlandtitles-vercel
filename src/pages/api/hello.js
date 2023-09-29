@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     const fontTwo = fs.readFileSync(
       // path.join(__dirname + "../../../../utils/fonts/demo.json")
       // "https://scotlandtitlesapp.com/pdfs/Goudy-Bold-Regular.ttf"
-      path.join(process.cwd(), "public", "demo.json")
+      path.join(process.cwd(), "public", "Goudy-Bold-Regular.ttf")
     );
     // const collection = db.collection('co'); // Replace with your collection name
     // const data = await collection.find({}).toArray();
