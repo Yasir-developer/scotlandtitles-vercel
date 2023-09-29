@@ -15,8 +15,8 @@ export default async function handler(req, res) {
   await client.access({
     host: "92.205.12.5",
     port: 21, // FTP port
-    user: process.env.USER,
-    password: process.env.PASSWORD,
+    user: "yasir-ftp@scotlandtitlesapp.com",
+    password: "hP2PTSSotW!I",
   });
 
   const { id, email, created_at, order_number } = req.body;
