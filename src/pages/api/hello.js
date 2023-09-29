@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   const db = await connectToDatabase();
 
   if (req.method === "GET") {
-    console.log(path.join(process.cwd(), "public", "demo.json"));
+    console.log(path.join(process.cwd(), "public", "Goudy-Bold-Regular.ttf"));
     // path.join(process.cwd(), "public", "demo.json")
     const fontTwo = fs.readFileSync(
       // path.join(__dirname + "../../../../utils/fonts/demo.json")
