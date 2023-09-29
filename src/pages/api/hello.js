@@ -8,6 +8,7 @@ import fs from "fs";
 import { degrees, PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import fontkit from "@pdf-lib/fontkit";
 import * as ftp from "basic-ftp";
+import { Readable } from "stream";
 
 export default async function handler(req, res) {
   const client = new ftp.Client();
