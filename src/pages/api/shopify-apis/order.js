@@ -40,10 +40,10 @@ export default async function handler(req, res) {
     "/public/Goudy-Bold-Regular.ttf"
     // path.join(process.cwd(), "public", "Goudy-Bold-Regular.ttf")
   );
-  console.log(
-    path.join(process.cwd(), "public", "Goudy-Bold-Regular.ttf"),
-    "kdmaskldmsakdnksdna"
-  );
+  // console.log(
+  //   path.join(process.cwd(), "public", "Goudy-Bold-Regular.ttf"),
+  //   "kdmaskldmsakdnksdna"
+  // );
 
   const tempusFont = await pdfDoc.embedFont(fontTwo);
 
