@@ -9,7 +9,8 @@ export default async function handler(req, res) {
   const db = await connectToDatabase();
 
   if (req.method === "GET") {
-    console.log(path.join(process.cwd(), "public", "Goudy-Bold-Regular.ttf"));
+    console.log(path.join(process.cwd(), "public", "demo.json"));
+    // path.join(process.cwd(), "public", "demo.json")
 
     // const collection = db.collection('co'); // Replace with your collection name
     // const data = await collection.find({}).toArray();
