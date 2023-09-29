@@ -12,12 +12,17 @@ import { Readable } from "stream";
 
 export default async function handler(req, res) {
   const client = new ftp.Client();
+  // process
+  console.log(process.env.HOST, "HOST");
+  console.log(process.env.USER, "HOST");
+  console.log(process.env.HOST, "HOST");
+  console.log(process.env.PASSWORD, "HOST");
 
   await client.access({
-    host: "92.205.12.5",
+    host: process.env.HOST,
     port: 21, // FTP port
-    user: "yasir-ftp@scotlandtitlesapp.com",
-    password: "hP2PTSSotW!I",
+    user: process.env.USER,
+    password: process.env.PASSWORD,
   });
   const db = await connectToDatabase();
 

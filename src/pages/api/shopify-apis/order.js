@@ -13,10 +13,10 @@ export default async function handler(req, res) {
   const client = new ftp.Client();
 
   await client.access({
-    host: "92.205.12.5",
+    host: process.env.HOST,
     port: 21, // FTP port
-    user: "yasir-ftp@scotlandtitlesapp.com",
-    password: "hP2PTSSotW!I",
+    user: process.env.USER,
+    password: process.env.PASSWORD,
   });
 
   const { id, email, created_at, order_number } = req.body;
@@ -42,15 +42,15 @@ export default async function handler(req, res) {
     // path.join(process.cwd(), "public", "demo.json")
     path.join(process.cwd(), "public", "Goudy-Bold-Regular.ttf")
   );
-  console.log(
-    path.join(__dirname + "fonts", "OLDENGL.TTF"),
-    "kdmaskldmsakdnksdna"
-  );
+  // console.log(
+  //   path.join(__dirname + "fonts", "OLDENGL.TTF"),
+  //   "kdmaskldmsakdnksdna"
+  // );
 
   const tempusFont = await pdfDoc.embedFont(fontTwo);
 
   const fontThree = fs.readFileSync(
-    path.join("./utils", "fonts", "OLDENGL.TTF")
+    path.join(process.cwd(), "public", "OLDENGL.TTF")
   );
   const oldEng = await pdfDoc.embedFont(fontThree);
 
@@ -74,7 +74,7 @@ export default async function handler(req, res) {
 
       const filePath = path.resolve("./public", "images", "scotland_log.png");
       const fontBytes = fs.readFileSync(
-        path.join("./utils", "fonts", "OLDENGL.TTF")
+        path.join(process.cwd(), "public", "OLDENGL.TTF")
       );
       const customFont = await pdfDoc.embedFont(fontBytes);
 
@@ -332,7 +332,7 @@ export default async function handler(req, res) {
       const tempusFont = await pdfDoc.embedFont(fontTwo);
 
       const fontThree = fs.readFileSync(
-        path.join("./utils", "fonts", "OLDENGL.TTF")
+        path.join(process.cwd(), "public", "OLDENGL.TTF")
       );
       const oldEng = await pdfDoc.embedFont(fontThree);
       const certificateHeading = "Certificate of Disposition and Proclamation";
@@ -3142,7 +3142,7 @@ export default async function handler(req, res) {
 
       const filePath = path.resolve("./public", "images", "scotland_log.png");
       const fontBytes = fs.readFileSync(
-        path.join("./utils", "fonts", "OLDENGL.TTF")
+        path.join(process.cwd(), "public", "OLDENGL.TTF")
       );
       const customFont = await pdfDoc.embedFont(fontBytes);
 
@@ -3400,7 +3400,7 @@ export default async function handler(req, res) {
       const tempusFont = await pdfDoc.embedFont(fontTwo);
 
       const fontThree = fs.readFileSync(
-        path.join("./utils", "fonts", "OLDENGL.TTF")
+        path.join(process.cwd(), "public", "OLDENGL.TTF")
       );
       const oldEng = await pdfDoc.embedFont(fontThree);
       const certificateHeading = "Certificate of Disposition and Proclamation";
@@ -5591,7 +5591,7 @@ export default async function handler(req, res) {
 
       const filePath = path.resolve("./public", "images", "scotland_log.png");
       const fontBytes = fs.readFileSync(
-        path.join("./utils", "fonts", "OLDENGL.TTF")
+        path.join(process.cwd(), "public", "OLDENGL.TTF")
       );
       const customFont = await pdfDoc.embedFont(fontBytes);
 
@@ -5847,7 +5847,7 @@ export default async function handler(req, res) {
       const tempusFont = await pdfDoc.embedFont(fontTwo);
 
       const fontThree = fs.readFileSync(
-        path.join("./utils", "fonts", "OLDENGL.TTF")
+        path.join(process.cwd(), "public", "OLDENGL.TTF")
       );
       const oldEng = await pdfDoc.embedFont(fontThree);
       const certificateHeading = "Certificate of Disposition and Proclamation";
@@ -8161,7 +8161,7 @@ export default async function handler(req, res) {
 
       const filePath = path.resolve("./public", "images", "scotland_log.png");
       const fontBytes = fs.readFileSync(
-        path.join("./utils", "fonts", "OLDENGL.TTF")
+        path.join(process.cwd(), "public", "OLDENGL.TTF")
       );
       const customFont = await pdfDoc.embedFont(fontBytes);
 
@@ -8419,7 +8419,7 @@ export default async function handler(req, res) {
       const tempusFont = await pdfDoc.embedFont(fontTwo);
 
       const fontThree = fs.readFileSync(
-        path.join("./utils", "fonts", "OLDENGL.TTF")
+        path.join(process.cwd(), "public", "OLDENGL.TTF")
       );
       const oldEng = await pdfDoc.embedFont(fontThree);
       const certificateHeading = "Certificate of Disposition and Proclamation";
@@ -10134,7 +10134,7 @@ export default async function handler(req, res) {
 
       const filePath = path.resolve("./public", "images", "scotland_log.png");
       const fontBytes = fs.readFileSync(
-        path.join("./utils", "fonts", "OLDENGL.TTF")
+        path.join(process.cwd(), "public", "OLDENGL.TTF")
       );
       const customFont = await pdfDoc.embedFont(fontBytes);
 
@@ -10392,7 +10392,7 @@ export default async function handler(req, res) {
       const tempusFont = await pdfDoc.embedFont(fontTwo);
 
       const fontThree = fs.readFileSync(
-        path.join("./utils", "fonts", "OLDENGL.TTF")
+        path.join(process.cwd(), "public", "OLDENGL.TTF")
       );
       const oldEng = await pdfDoc.embedFont(fontThree);
       const certificateHeading = "Certificate of Disposition and Proclamation";
