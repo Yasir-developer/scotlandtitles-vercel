@@ -4,6 +4,7 @@
 import connectToDatabase from "../../../db";
 import path from "path";
 // import { connectToDatabase } from '../../path-to-mongodb.js';
+import fs from "fs";
 
 export default async function handler(req, res) {
   const db = await connectToDatabase();
