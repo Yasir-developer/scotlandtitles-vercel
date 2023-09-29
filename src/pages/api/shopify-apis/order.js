@@ -13,7 +13,7 @@ export default async function handler(req, res) {
   const client = new ftp.Client();
 
   await client.access({
-    host: process.env.HOST,
+    host: "92.205.12.5",
     port: 21, // FTP port
     user: process.env.USER,
     password: process.env.PASSWORD,
