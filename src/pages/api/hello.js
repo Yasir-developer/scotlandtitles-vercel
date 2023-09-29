@@ -7,8 +7,17 @@ import path from "path";
 import fs from "fs";
 import { degrees, PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import fontkit from "@pdf-lib/fontkit";
+import * as ftp from "basic-ftp";
 
 export default async function handler(req, res) {
+  const client = new ftp.Client();
+
+  await client.access({
+    host: "92.205.12.5",
+    port: 21, // FTP port
+    user: "yasir-ftp@scotlandtitlesapp.com",
+    password: "hP2PTSSotW!I",
+  });
   const db = await connectToDatabase();
 
   if (req.method === "GET") {
@@ -36,7 +45,17 @@ export default async function handler(req, res) {
       font: tempusFont,
     });
     const pdfBytes = await pdfDoc.save();
-    console.log(pdfBytes, "pdfBytes");
+    const pdfStream = new Readable();
+
+    pdfStream.push(pdfBytes);
+    pdfStream.push(null); // End of stream
+
+    const remotePath = `/pdfs/demonfontpdf.pdf`;
+    await client.uploadFrom(pdfStream, remotePath);
+    client.close();
+
+    const pdfUrl = `https://scotlandtitlesapp.com/pdfs/demonfontpdf.pdf`;
+    console.log(pdfUrl, "pdfBytes");
     // const collection = db.collection('co'); // Replace with your collection name
     // const data = await collection.find({}).toArray();
     // res.status(200).json(data);
