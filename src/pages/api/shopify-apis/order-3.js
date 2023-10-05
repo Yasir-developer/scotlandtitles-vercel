@@ -2,7 +2,7 @@ import { degrees, PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import fs from "fs";
 import * as ftp from "basic-ftp";
 import { Readable } from "stream";
-import doctorimg from "../../../../public/images/doctor-2.jpg";
+// import doctorimg from "../../../../public/images/doctor-2.jpg";
 import path from "path";
 import fontkit from "@pdf-lib/fontkit";
 
