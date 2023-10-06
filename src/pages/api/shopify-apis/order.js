@@ -11,6 +11,7 @@ export default async function handler(req, res) {
   const titlePackId = 8727183196433;
   const emblemId = 8727183065361;
   const tartanId = 8727183032593;
+  const freeTartanId = 8727182704913;
   const client = new ftp.Client();
 
   await client.access({
@@ -99,10 +100,10 @@ export default async function handler(req, res) {
           var pagetwo = pdfDoc.addPage([842, 595]);
           var deedPage = pdfDoc.addPage([595, 842]);
           var deedPageTwo = pdfDoc.addPage([595, 842]);
-          var printedPage = pdfDoc.addPage([595, 842]);
-          var printedpagetwo = pdfDoc.addPage([842, 595]);
-          var printeddeedPage = pdfDoc.addPage([595, 842]);
-          // var printeddeedPageTwo = pdfDocPrinted.addPage([595, 842]);
+          var printedPage = pdfDocPrinted.addPage([595, 842]);
+          var printedpagetwo = pdfDocPrinted.addPage([842, 595]);
+          var printeddeedPage = pdfDocPrinted.addPage([595, 842]);
+          var printeddeedPageTwo = pdfDocPrinted.addPage([595, 842]);
         } else {
           var page = pdfDoc.addPage([595, 842]);
           var pagetwo = pdfDoc.addPage([842, 595]);
@@ -2650,19 +2651,909 @@ export default async function handler(req, res) {
         });
       }
 
+      if (propObject.p_8727183196433.variant.includes("Printed Pack")) {
+        console.log(propObject.p_8727183196433.variant);
+        printedPage.drawText("Title printed ", {
+          x: 70,
+          y: 710,
+          size: fontSize,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFont,
+        });
+
+        printedPage.drawText(propObject.p_8727183196433._Date, {
+          x: 70,
+          y: 710,
+          size: fontSize,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFont,
+        });
+        printedPage.drawText(heading, {
+          x: 70,
+          y: 650,
+          width: textWidth,
+          height: textHeight,
+          size: headingFontSize,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFontHeading,
+        });
+
+        printedPage.drawText(content, {
+          x: 70,
+          y: 620,
+          width: textWidth,
+          height: textHeight,
+          size: fontSize,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFont,
+        });
+
+        printedPage.drawText(welcomeContent, {
+          x: 240,
+          y: 320,
+          width: textWidth,
+          height: textHeight,
+          size: 14,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFont,
+        });
+
+        printedPage.drawText(welcomeSignContent, {
+          x: 70,
+          y: 250,
+          width: textWidth,
+          height: textHeight,
+          size: 14,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanItalicFont,
+        });
+
+        printedPage.drawImage(welcome_emblem_signature, {
+          x: 170,
+          y: 210,
+          height: 70,
+          width: 50,
+        });
+
+        printedPage.drawText(facebookContent, {
+          x: 70,
+          y: 170,
+          width: textWidth,
+          height: textHeight,
+          size: 11,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFont,
+        });
+
+        printedPage.drawText(facebookLink, {
+          x: 120,
+          y: 170,
+          width: textWidth,
+          height: textHeight,
+          size: 11,
+          color: rgb(0.027, 0.388, 0.756),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFont,
+        });
+        printedPage.drawLine({
+          start: { x: 120, y: 165 }, // Adjust the y-position for Form Field 3
+          end: { x: 215, y: 165 }, // Adjust the y-position for Form Field 3
+          color: rgb(0.027, 0.388, 0.756),
+          thickness: 0.5,
+        });
+
+        printedPage.drawText(scotalndTitleAddress, {
+          x: 120,
+          y: 70,
+          width: textWidth,
+          height: textHeight,
+          size: 11,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFont,
+        });
+
+        printedPage.drawText("info@scotlandtitles.com", {
+          x: 150,
+          y: 50,
+          width: textWidth,
+          height: textHeight,
+          size: 11,
+          color: rgb(0.027, 0.388, 0.756),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFont,
+        });
+        printedPage.drawLine({
+          start: { x: 150, y: 45 }, // Adjust the y-position for Form Field 3
+          end: { x: 260, y: 45 }, // Adjust the y-position for Form Field 3
+          color: rgb(0.027, 0.388, 0.756),
+          thickness: 0.5,
+        });
+
+        printedPage.drawText("www.ScotlandTitles.com", {
+          x: 350,
+          y: 50,
+          width: textWidth,
+          height: textHeight,
+          size: 11,
+          color: rgb(0.027, 0.388, 0.756),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFont,
+        });
+        printedPage.drawLine({
+          start: { x: 350, y: 45 }, // Adjust the y-position for Form Field 3
+          end: { x: 460, y: 45 }, // Adjust the y-position for Form Field 3
+          color: rgb(0.027, 0.388, 0.756),
+          thickness: 0.5,
+        });
+        printedPage.drawImage(img, {
+          x: 440,
+          y: 690,
+          width: pngDims.width,
+          height: pngDims.height,
+        });
+
+        printedpagetwo.drawImage(yellow_middle, {
+          x: 380,
+          y: propObject.p_8727183196433._Title2 ? 385 : 405,
+          width: ertificateMidpngDims.width,
+          height: ertificateMidpngDims.height,
+        });
+        printedpagetwo.drawImage(ribbonImg, {
+          x: 30,
+          y: 410,
+          width: pngDimsRibbon.width,
+          height: pngDimsRibbon.height,
+        });
+
+        printedpagetwo.drawImage(stampImg, {
+          x: 720,
+          y: 70,
+          width: stampPngDims.width,
+          height: stampPngDims.height,
+        });
+
+        printedpagetwo.drawImage(Signaturetwo, {
+          x: 580,
+          y: 70,
+          height: 30,
+          width: 100,
+        });
+
+        printedpagetwo.drawText("Witnessed", {
+          x: 600,
+          y: 60,
+          width: textWidth,
+          height: textHeight,
+          size: 10,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFont,
+          // font: customFont,
+          // font: tempusFont,
+        });
+
+        printedpagetwo.drawImage(welcome_emblem_signature, {
+          x: 500,
+          y: 70,
+          height: 50,
+          width: 30,
+        });
+
+        printedpagetwo.drawText("Signed", {
+          x: 500,
+          y: 60,
+          width: textWidth,
+          height: textHeight,
+          size: 10,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFont,
+        });
+
+        printedpagetwo.drawText(certificateHeading, {
+          x: 200,
+          y: 520,
+          size: 26,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEng,
+        });
+        printedpagetwo.drawText(certficateAddress, {
+          x: 220,
+          y: 500,
+          width: textWidth,
+          height: textHeight,
+          size: 10,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFont,
+        });
+
+        printedpagetwo.drawText(certficateUserName, {
+          x: certificateX,
+          y: 470,
+          width: textWidth,
+          height: textHeight,
+          size: 24,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: oldEng,
+        });
+        {
+          propObject.p_8727183196433._Title2 &&
+            printedpagetwo.drawText(and, {
+              x: 400,
+              y: 460,
+              width: textWidth,
+              height: textHeight,
+              size: 10,
+              color: rgb(0, 0, 0),
+              lineHeight: fontSize * 1.2,
+              font: tempusFont,
+            });
+
+          printedpagetwo.drawText(certficateUserNameTwo, {
+            x: certificateTwoX,
+            y: 435,
+            width: textWidth,
+            height: textHeight,
+            size: 24,
+            color: rgb(0, 0, 0),
+            lineHeight: fontSize * 1.2,
+            font: oldEng,
+          });
+        }
+        printedpagetwo.drawText(certificateAddressTwo, {
+          x: 195,
+          y: propObject.p_8727183196433._Title2 ? 415 : 450,
+          width: textWidth,
+          height: textHeight,
+          size: 10,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFont,
+        });
+
+        printedpagetwo.drawText(certificateText, {
+          x: 60,
+          y: 370,
+          width: textWidth,
+          height: textHeight,
+          size: 10,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFont,
+        });
+
+        printedpagetwo.drawText(certificateTextTwo, {
+          x: 460,
+          y: 370,
+          width: textWidth,
+          height: textHeight,
+          size: 10,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFont,
+        });
+
+        // printed deed page start =========================
+
+        printeddeedPage.drawText(`(${formerTitle})`, {
+          x: totalWidth,
+          y: 710,
+          size: 12,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFontHeading,
+        });
+
+        printeddeedPage.drawText(formerTitle, {
+          x: 175,
+          y: 449,
+          size: 12,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFontHeading,
+        });
+
+        printeddeedPage.drawText(newTitle, {
+          x: newTotalTextWidth,
+          y: 683,
+          size: 12,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFontHeading,
+        });
+        printeddeedPage.drawText(MainHeading, {
+          x: 200,
+          y: 750,
+          size: 20,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFontHeading,
+        });
+        printeddeedPage.drawText(SubHeading, {
+          x: 180,
+          y: 730,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        printeddeedPage.drawText(deedFormText, {
+          x: 30,
+          y: 710,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        printeddeedPage.drawText(deedFormText, {
+          x: 30,
+          y: 710,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        printeddeedPage.drawLine({
+          start: { x: underlineX5, y: 600 }, // Adjust the y-position for Form Field 3
+          end: { x: underlineX6, y: 600 }, // Adjust the y-position for Form Field 3
+          color: rgb(0.65, 0.65, 0.65),
+          thickness: underlineHeight,
+        });
+
+        printeddeedPage.drawText(deedFormTextPlaceHolder, {
+          x: 60,
+          y: 603,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0.65, 0.65, 0.65),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanItalicFont,
+        });
+
+        printeddeedPage.drawText(declarationOne, {
+          x: 30,
+          y: 580,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        printeddeedPage.drawText(absolute, {
+          x: 30,
+          y: 560,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+        printeddeedPage.drawText(formerNameBreak, {
+          x: 453,
+          y: 560,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFontHeading,
+        });
+        printeddeedPage.drawText(titleBreak, {
+          x: 30,
+          y: 548,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFontHeading,
+        });
+        printeddeedPage.drawText(absoluteTwo, {
+          x: 58,
+          y: 548,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+        printeddeedPage.drawText(newTitleTwo, {
+          x: 415,
+          y: 548,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFontHeading,
+        });
+        printeddeedPage.drawText(inContent, {
+          x: 520,
+          y: 548,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+        printeddeedPage.drawText(absoluteThree, {
+          x: 30,
+          y: 536,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        printeddeedPage.drawText(declarationTwo, {
+          x: 30,
+          y: 500,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        printeddeedPage.drawText(declarationTwoSubscribe, {
+          x: 30,
+          y: 473,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+        printeddeedPage.drawText(newTitleTwo, {
+          x: 120,
+          y: 473,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        printeddeedPage.drawText(declarationTwoSubscribeName, {
+          x: 210,
+          y: 473,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        printeddeedPage.drawText(formerTitle, {
+          x: 380,
+          y: 473,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFontHeading,
+        });
+
+        printeddeedPage.drawText(so, {
+          x: 500,
+          y: 473,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFont,
+        });
+
+        printeddeedPage.drawText(relinqushed, {
+          x: 30,
+          y: 461,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFont,
+        });
+        printeddeedPage.drawText(newTitleBreak, {
+          x: 510,
+          y: 461,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFontHeading,
+        });
+
+        printeddeedPage.drawText(newTitleBreakTwo, {
+          x: 30,
+          y: 449,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFontHeading,
+        });
+
+        printeddeedPage.drawText(only, {
+          x: 73,
+          y: 449,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFontHeading,
+        });
+
+        printeddeedPage.drawText(declarationThree, {
+          x: 30,
+          y: 420,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        printeddeedPage.drawText(adopt, {
+          x: 30,
+          y: 408,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        printeddeedPage.drawText(newTitleTwo, {
+          x: 70,
+          y: 408,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFontHeading,
+        });
+
+        printeddeedPage.drawText(declarationFour, {
+          x: 30,
+          y: 370,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+        printeddeedPage.drawText(newTitleTwo, {
+          x: 413,
+          y: 370,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFontHeading,
+        });
+        printeddeedPage.drawText(declarationFourTwo, {
+          x: 515,
+          y: 370,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        printeddeedPage.drawText(signed, {
+          x: 30,
+          y: 300,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+        printeddeedPage.drawLine({
+          start: { x: underlineX3, y: 300 }, // Adjust the y-position for Form Field 3
+          end: { x: underlineX4, y: 300 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
+
+        printeddeedPage.drawText(dayOf, {
+          x: 190,
+          y: 300,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        printeddeedPage.drawLine({
+          start: { x: underlineX1, y: 300 }, // Adjust the y-position for Form Field 3
+          end: { x: underlineX2, y: 300 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
+
+        printeddeedPage.drawText(yearIn, {
+          x: 330,
+          y: 300,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        printeddeedPage.drawText(signedAs, {
+          x: 30,
+          y: 270,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        printeddeedPage.drawLine({
+          start: { x: 30, y: 200 }, // Adjust the y-position for Form Field 3
+          end: { x: 250, y: 200 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
+        printeddeedPage.drawText(signPlaceHolder, {
+          x: 40,
+          y: 190,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0.65, 0.65, 0.65),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanItalicFont,
+        });
+
+        printeddeedPage.drawLine({
+          start: { x: 30, y: 170 }, // Adjust the y-position for Form Field 3
+          end: { x: 250, y: 170 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
+
+        printeddeedPage.drawText(lordName, {
+          x: 40,
+          y: 155,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        printeddeedPage.drawLine({
+          start: { x: 30, y: 90 }, // Adjust the y-position for Form Field 3
+          end: { x: 250, y: 90 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
+
+        printeddeedPage.drawText(formerName, {
+          x: 40,
+          y: 75,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        printeddeedPage.drawText(presence, {
+          x: 270,
+          y: 240,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        printeddeedPage.drawText(witness, {
+          x: 270,
+          y: 190,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        printeddeedPage.drawLine({
+          start: { x: 370, y: 190 }, // Adjust the y-position for Form Field 3
+          end: { x: 540, y: 190 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
+
+        printeddeedPage.drawText("Name", {
+          x: 270,
+          y: 160,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        printeddeedPage.drawLine({
+          start: { x: 300, y: 160 }, // Adjust the y-position for Form Field 3
+          end: { x: 540, y: 160 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
+
+        printeddeedPage.drawText("Address", {
+          x: 270,
+          y: 130,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        printeddeedPage.drawLine({
+          start: { x: 310, y: 130 }, // Adjust the y-position for Form Field 3
+          end: { x: 540, y: 130 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
+        printeddeedPage.drawLine({
+          start: { x: 270, y: 105 }, // Adjust the y-position for Form Field 3
+          end: { x: 540, y: 105 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
+        printeddeedPage.drawLine({
+          start: { x: 270, y: 80 }, // Adjust the y-position for Form Field 3
+          end: { x: 540, y: 80 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
+
+        printeddeedPage.drawText("Occupation", {
+          x: 270,
+          y: 50,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        printeddeedPage.drawLine({
+          start: { x: 330, y: 50 }, // Adjust the y-position for Form Field 3
+          end: { x: 540, y: 50 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
+      }
+
       if (propObject.p_8727183196433._Title2) {
-        // positions.forEach((position) => {
-        //   printeddeedPageTwo.drawText(`${formerTitle}.`, {
-        //     x: position.x,
-        //     y: position.y,
-        //     size: 12,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     font: timesRomanFontHeading,
-        //   });
-        // });
+        positions.forEach((position) => {
+          printeddeedPageTwo.drawText(`${formerTitle}.`, {
+            x: position.x,
+            y: position.y,
+            size: 12,
+            width: textWidth,
+            height: textHeight,
+            color: rgb(0, 0, 0),
+            lineHeight: fontSize * 1.2,
+            font: timesRomanFontHeading,
+          });
+        });
 
         const deedTwoUserNameWidth = `of ${propObject.p_8727183196433._Name2}`;
         const formerDeedTwotextWidth = timesRomanFontHeading.widthOfTextAtSize(
@@ -2680,20 +3571,31 @@ export default async function handler(req, res) {
 
         const newDeedTwoTotalTextWidth = newDeedTwotextWidth + 30;
 
-        // printeddeedPageTwo.drawText(`(${formerTitle})`, {
-        //   x: totalWidthDeedTwo,
-        //   y: 710,
-        //   size: 12,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   font: timesRomanFontHeading,
-        // });
+        printeddeedPageTwo.drawText(`(${formerTitle})`, {
+          x: totalWidthDeedTwo,
+          y: 710,
+          size: 12,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFontHeading,
+        });
+
+        printeddeedPageTwo.drawText(formerTitle, {
+          x: 175,
+          y: 449,
+          size: 12,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFontHeading,
+        });
 
         // printeddeedPageTwo.drawText(formerTitle, {
-        //   x: 175,
-        //   y: 449,
+        //   x:
+        //   y:
         //   size: 12,
         //   width: textWidth,
         //   height: textHeight,
@@ -2701,1480 +3603,5277 @@ export default async function handler(req, res) {
         //   lineHeight: fontSize * 1.2,
         //   font: timesRomanFontHeading,
         // });
+        printeddeedPageTwo.drawText(newTitle, {
+          x: newDeedTwoTotalTextWidth,
+          y: 683,
+          size: 12,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFontHeading,
+        });
 
-        // // printeddeedPageTwo.drawText(formerTitle, {
-        // //   x:
-        // //   y:
-        // //   size: 12,
-        // //   width: textWidth,
-        // //   height: textHeight,
-        // //   color: rgb(0, 0, 0),
-        // //   lineHeight: fontSize * 1.2,
-        // //   font: timesRomanFontHeading,
-        // // });
-        // printeddeedPageTwo.drawText(newTitle, {
-        //   x: newDeedTwoTotalTextWidth,
-        //   y: 683,
-        //   size: 12,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   font: timesRomanFontHeading,
-        // });
+        const deedFormTextTwo = `of ${propObject.p_8727183196433._Name2}\n\nnow ${propObject.p_8727183196433._Title2} ${propObject.p_8727183196433._Name2}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_8727183196433._Title2} ${propObject.p_8727183196433._Name2}\n\nof`;
 
-        // const deedFormTextTwo = `of ${propObject.p_8727183196433._Name2}\n\nnow ${propObject.p_8727183196433._Title2} ${propObject.p_8727183196433._Name2}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_8727183196433._Title2} ${propObject.p_8727183196433._Name2}\n\nof`;
+        const lordNameTwo = `${propObject.p_8727183196433._Title2} ${propObject.p_8727183196433._Name2}\n\nFormerly known as`;
+        const formerNameTwo = `${propObject.p_8727183196433._Name2}`;
 
-        // const lordNameTwo = `${propObject.p_8727183196433._Title2} ${propObject.p_8727183196433._Name2}\n\nFormerly known as`;
-        // const formerNameTwo = `${propObject.p_8727183196433._Name2}`;
+        printeddeedPageTwo.drawText(MainHeading, {
+          x: 200,
+          y: 750,
+          size: 20,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFontHeading,
+        });
+        printeddeedPageTwo.drawText(SubHeading, {
+          x: 180,
+          y: 730,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
 
-        // printeddeedPageTwo.drawText(MainHeading, {
-        //   x: 200,
-        //   y: 750,
-        //   size: 20,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   font: timesRomanFontHeading,
-        // });
-        // printeddeedPageTwo.drawText(SubHeading, {
-        //   x: 180,
-        //   y: 730,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFont,
-        // });
+        printeddeedPageTwo.drawText(deedFormTextTwo, {
+          x: 30,
+          y: 710,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
 
-        // printeddeedPageTwo.drawText(deedFormTextTwo, {
-        //   x: 30,
-        //   y: 710,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFont,
-        // });
+        printeddeedPageTwo.drawText(deedFormTextTwo, {
+          x: 30,
+          y: 710,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
 
-        // printeddeedPageTwo.drawText(deedFormTextTwo, {
-        //   x: 30,
-        //   y: 710,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFont,
-        // });
+        printeddeedPageTwo.drawLine({
+          start: { x: underlineX5, y: 600 }, // Adjust the y-position for Form Field 3
+          end: { x: underlineX6, y: 600 }, // Adjust the y-position for Form Field 3
+          color: rgb(0.65, 0.65, 0.65),
+          thickness: underlineHeight,
+        });
 
-        // printeddeedPageTwo.drawLine({
-        //   start: { x: underlineX5, y: 600 }, // Adjust the y-position for Form Field 3
-        //   end: { x: underlineX6, y: 600 }, // Adjust the y-position for Form Field 3
-        //   color: rgb(0.65, 0.65, 0.65),
-        //   thickness: underlineHeight,
-        // });
+        printeddeedPageTwo.drawText(deedFormTextPlaceHolder, {
+          x: 60,
+          y: 603,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0.65, 0.65, 0.65),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanItalicFont,
+        });
 
-        // printeddeedPageTwo.drawText(deedFormTextPlaceHolder, {
-        //   x: 60,
-        //   y: 603,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0.65, 0.65, 0.65),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanItalicFont,
-        // });
+        printeddeedPageTwo.drawText(declarationOne, {
+          x: 30,
+          y: 580,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
 
-        // printeddeedPageTwo.drawText(declarationOne, {
-        //   x: 30,
-        //   y: 580,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFont,
-        // });
+        printeddeedPageTwo.drawText(absolute, {
+          x: 30,
+          y: 560,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+        printeddeedPageTwo.drawText(formerNameBreak, {
+          x: 453,
+          y: 560,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFontHeading,
+        });
+        printeddeedPageTwo.drawText(titleBreak, {
+          x: 30,
+          y: 548,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFontHeading,
+        });
+        printeddeedPageTwo.drawText(absoluteTwo, {
+          x: 58,
+          y: 548,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+        printeddeedPageTwo.drawText(newTitleTwo, {
+          x: 415,
+          y: 548,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFontHeading,
+        });
+        printeddeedPageTwo.drawText(inContent, {
+          x: 520,
+          y: 548,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+        printeddeedPageTwo.drawText(absoluteThree, {
+          x: 30,
+          y: 536,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
 
-        // printeddeedPageTwo.drawText(absolute, {
-        //   x: 30,
-        //   y: 560,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFont,
-        // });
-        // printeddeedPageTwo.drawText(formerNameBreak, {
-        //   x: 453,
-        //   y: 560,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFontHeading,
-        // });
-        // printeddeedPageTwo.drawText(titleBreak, {
-        //   x: 30,
-        //   y: 548,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFontHeading,
-        // });
-        // printeddeedPageTwo.drawText(absoluteTwo, {
-        //   x: 58,
-        //   y: 548,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFont,
-        // });
-        // printeddeedPageTwo.drawText(newTitleTwo, {
-        //   x: 415,
-        //   y: 548,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFontHeading,
-        // });
-        // printeddeedPageTwo.drawText(inContent, {
-        //   x: 520,
-        //   y: 548,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFont,
-        // });
-        // printeddeedPageTwo.drawText(absoluteThree, {
-        //   x: 30,
-        //   y: 536,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFont,
-        // });
+        printeddeedPageTwo.drawText(declarationTwo, {
+          x: 30,
+          y: 500,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
 
-        // printeddeedPageTwo.drawText(declarationTwo, {
-        //   x: 30,
-        //   y: 500,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFont,
-        // });
+        printeddeedPageTwo.drawText(declarationTwoSubscribe, {
+          x: 30,
+          y: 473,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+        printeddeedPageTwo.drawText(newTitleTwo, {
+          x: 120,
+          y: 473,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
 
-        // printeddeedPageTwo.drawText(declarationTwoSubscribe, {
-        //   x: 30,
-        //   y: 473,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFont,
-        // });
-        // printeddeedPageTwo.drawText(newTitleTwo, {
-        //   x: 120,
-        //   y: 473,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFont,
-        // });
+        printeddeedPageTwo.drawText(declarationTwoSubscribeName, {
+          x: 210,
+          y: 473,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
 
-        // printeddeedPageTwo.drawText(declarationTwoSubscribeName, {
-        //   x: 210,
-        //   y: 473,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFont,
-        // });
+        printeddeedPageTwo.drawText(formerTitle, {
+          x: 380,
+          y: 473,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFontHeading,
+        });
 
-        // printeddeedPageTwo.drawText(formerTitle, {
-        //   x: 380,
-        //   y: 473,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFontHeading,
-        // });
+        printeddeedPageTwo.drawText(so, {
+          x: 500,
+          y: 473,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFont,
+        });
 
-        // printeddeedPageTwo.drawText(so, {
-        //   x: 500,
-        //   y: 473,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   font: timesRomanFont,
-        // });
+        printeddeedPageTwo.drawText(relinqushed, {
+          x: 30,
+          y: 461,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFont,
+        });
+        printeddeedPageTwo.drawText(newTitleBreak, {
+          x: 510,
+          y: 461,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFontHeading,
+        });
 
-        // printeddeedPageTwo.drawText(relinqushed, {
-        //   x: 30,
-        //   y: 461,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   font: timesRomanFont,
-        // });
-        // printeddeedPageTwo.drawText(newTitleBreak, {
-        //   x: 510,
-        //   y: 461,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   font: timesRomanFontHeading,
-        // });
+        printeddeedPageTwo.drawText(newTitleBreakTwo, {
+          x: 30,
+          y: 449,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFontHeading,
+        });
 
-        // printeddeedPageTwo.drawText(newTitleBreakTwo, {
-        //   x: 30,
-        //   y: 449,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   font: timesRomanFontHeading,
-        // });
+        printeddeedPageTwo.drawText(only, {
+          x: 73,
+          y: 449,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFontHeading,
+        });
 
-        // printeddeedPageTwo.drawText(only, {
-        //   x: 73,
-        //   y: 449,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   font: timesRomanFontHeading,
-        // });
+        printeddeedPageTwo.drawText(declarationThree, {
+          x: 30,
+          y: 420,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
 
-        // printeddeedPageTwo.drawText(declarationThree, {
-        //   x: 30,
-        //   y: 420,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFont,
-        // });
+        printeddeedPageTwo.drawText(adopt, {
+          x: 30,
+          y: 408,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
 
-        // printeddeedPageTwo.drawText(adopt, {
-        //   x: 30,
-        //   y: 408,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFont,
-        // });
+        printeddeedPageTwo.drawText(newTitleTwo, {
+          x: 70,
+          y: 408,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFontHeading,
+        });
 
-        // printeddeedPageTwo.drawText(newTitleTwo, {
-        //   x: 70,
-        //   y: 408,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFontHeading,
-        // });
+        printeddeedPageTwo.drawText(declarationFour, {
+          x: 30,
+          y: 370,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+        printeddeedPageTwo.drawText(newTitleTwo, {
+          x: 413,
+          y: 370,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFontHeading,
+        });
+        printeddeedPageTwo.drawText(declarationFourTwo, {
+          x: 515,
+          y: 370,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
 
-        // printeddeedPageTwo.drawText(declarationFour, {
-        //   x: 30,
-        //   y: 370,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFont,
-        // });
-        // printeddeedPageTwo.drawText(newTitleTwo, {
-        //   x: 413,
-        //   y: 370,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFontHeading,
-        // });
-        // printeddeedPageTwo.drawText(declarationFourTwo, {
-        //   x: 515,
-        //   y: 370,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFont,
-        // });
+        printeddeedPageTwo.drawText(signed, {
+          x: 30,
+          y: 300,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+        printeddeedPageTwo.drawLine({
+          start: { x: underlineX3, y: 300 }, // Adjust the y-position for Form Field 3
+          end: { x: underlineX4, y: 300 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
 
-        // printeddeedPageTwo.drawText(signed, {
-        //   x: 30,
-        //   y: 300,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFont,
-        // });
-        // printeddeedPageTwo.drawLine({
-        //   start: { x: underlineX3, y: 300 }, // Adjust the y-position for Form Field 3
-        //   end: { x: underlineX4, y: 300 }, // Adjust the y-position for Form Field 3
-        //   color: rgb(0, 0, 0),
-        //   thickness: underlineHeight,
-        // });
+        printeddeedPageTwo.drawText(dayOf, {
+          x: 190,
+          y: 300,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
 
-        // printeddeedPageTwo.drawText(dayOf, {
-        //   x: 190,
-        //   y: 300,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFont,
-        // });
+        printeddeedPageTwo.drawLine({
+          start: { x: underlineX1, y: 300 }, // Adjust the y-position for Form Field 3
+          end: { x: underlineX2, y: 300 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
 
-        // printeddeedPageTwo.drawLine({
-        //   start: { x: underlineX1, y: 300 }, // Adjust the y-position for Form Field 3
-        //   end: { x: underlineX2, y: 300 }, // Adjust the y-position for Form Field 3
-        //   color: rgb(0, 0, 0),
-        //   thickness: underlineHeight,
-        // });
+        printeddeedPageTwo.drawText(yearIn, {
+          x: 330,
+          y: 300,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
 
-        // printeddeedPageTwo.drawText(yearIn, {
-        //   x: 330,
-        //   y: 300,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFont,
-        // });
+        printeddeedPageTwo.drawText(signedAs, {
+          x: 30,
+          y: 270,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
 
-        // printeddeedPageTwo.drawText(signedAs, {
-        //   x: 30,
-        //   y: 270,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFont,
-        // });
+        printeddeedPageTwo.drawLine({
+          start: { x: 30, y: 200 }, // Adjust the y-position for Form Field 3
+          end: { x: 250, y: 200 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
+        printeddeedPageTwo.drawText(signPlaceHolder, {
+          x: 40,
+          y: 190,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0.65, 0.65, 0.65),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanItalicFont,
+        });
 
-        // printeddeedPageTwo.drawLine({
-        //   start: { x: 30, y: 200 }, // Adjust the y-position for Form Field 3
-        //   end: { x: 250, y: 200 }, // Adjust the y-position for Form Field 3
-        //   color: rgb(0, 0, 0),
-        //   thickness: underlineHeight,
-        // });
-        // printeddeedPageTwo.drawText(signPlaceHolder, {
-        //   x: 40,
-        //   y: 190,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0.65, 0.65, 0.65),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanItalicFont,
-        // });
+        printeddeedPageTwo.drawLine({
+          start: { x: 30, y: 170 }, // Adjust the y-position for Form Field 3
+          end: { x: 250, y: 170 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
 
-        // printeddeedPageTwo.drawLine({
-        //   start: { x: 30, y: 170 }, // Adjust the y-position for Form Field 3
-        //   end: { x: 250, y: 170 }, // Adjust the y-position for Form Field 3
-        //   color: rgb(0, 0, 0),
-        //   thickness: underlineHeight,
-        // });
+        printeddeedPageTwo.drawText(lordNameTwo, {
+          x: 40,
+          y: 155,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
 
-        // printeddeedPageTwo.drawText(lordNameTwo, {
-        //   x: 40,
-        //   y: 155,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFont,
-        // });
+        printeddeedPageTwo.drawLine({
+          start: { x: 30, y: 90 }, // Adjust the y-position for Form Field 3
+          end: { x: 250, y: 90 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
 
-        // printeddeedPageTwo.drawLine({
-        //   start: { x: 30, y: 90 }, // Adjust the y-position for Form Field 3
-        //   end: { x: 250, y: 90 }, // Adjust the y-position for Form Field 3
-        //   color: rgb(0, 0, 0),
-        //   thickness: underlineHeight,
-        // });
+        printeddeedPageTwo.drawText(formerNameTwo, {
+          x: 40,
+          y: 75,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
 
-        // printeddeedPageTwo.drawText(formerNameTwo, {
-        //   x: 40,
-        //   y: 75,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFont,
-        // });
+        printeddeedPageTwo.drawText(presence, {
+          x: 270,
+          y: 240,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
 
-        // printeddeedPageTwo.drawText(presence, {
-        //   x: 270,
-        //   y: 240,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFont,
-        // });
+        printeddeedPageTwo.drawText(witness, {
+          x: 270,
+          y: 190,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
 
-        // printeddeedPageTwo.drawText(witness, {
-        //   x: 270,
-        //   y: 190,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFont,
-        // });
+        printeddeedPageTwo.drawLine({
+          start: { x: 370, y: 190 }, // Adjust the y-position for Form Field 3
+          end: { x: 540, y: 190 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
 
-        // printeddeedPageTwo.drawLine({
-        //   start: { x: 370, y: 190 }, // Adjust the y-position for Form Field 3
-        //   end: { x: 540, y: 190 }, // Adjust the y-position for Form Field 3
-        //   color: rgb(0, 0, 0),
-        //   thickness: underlineHeight,
-        // });
+        printeddeedPageTwo.drawText("Name", {
+          x: 270,
+          y: 160,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
 
-        // printeddeedPageTwo.drawText("Name", {
-        //   x: 270,
-        //   y: 160,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFont,
-        // });
+        printeddeedPageTwo.drawLine({
+          start: { x: 300, y: 160 }, // Adjust the y-position for Form Field 3
+          end: { x: 540, y: 160 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
 
-        // printeddeedPageTwo.drawLine({
-        //   start: { x: 300, y: 160 }, // Adjust the y-position for Form Field 3
-        //   end: { x: 540, y: 160 }, // Adjust the y-position for Form Field 3
-        //   color: rgb(0, 0, 0),
-        //   thickness: underlineHeight,
-        // });
+        printeddeedPageTwo.drawText("Address", {
+          x: 270,
+          y: 130,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
 
-        // printeddeedPageTwo.drawText("Address", {
-        //   x: 270,
-        //   y: 130,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFont,
-        // });
+        printeddeedPageTwo.drawLine({
+          start: { x: 310, y: 130 }, // Adjust the y-position for Form Field 3
+          end: { x: 540, y: 130 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
+        printeddeedPageTwo.drawLine({
+          start: { x: 270, y: 105 }, // Adjust the y-position for Form Field 3
+          end: { x: 540, y: 105 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
+        printeddeedPageTwo.drawLine({
+          start: { x: 270, y: 80 }, // Adjust the y-position for Form Field 3
+          end: { x: 540, y: 80 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
 
-        // printeddeedPageTwo.drawLine({
-        //   start: { x: 310, y: 130 }, // Adjust the y-position for Form Field 3
-        //   end: { x: 540, y: 130 }, // Adjust the y-position for Form Field 3
-        //   color: rgb(0, 0, 0),
-        //   thickness: underlineHeight,
-        // });
-        // printeddeedPageTwo.drawLine({
-        //   start: { x: 270, y: 105 }, // Adjust the y-position for Form Field 3
-        //   end: { x: 540, y: 105 }, // Adjust the y-position for Form Field 3
-        //   color: rgb(0, 0, 0),
-        //   thickness: underlineHeight,
-        // });
-        // printeddeedPageTwo.drawLine({
-        //   start: { x: 270, y: 80 }, // Adjust the y-position for Form Field 3
-        //   end: { x: 540, y: 80 }, // Adjust the y-position for Form Field 3
-        //   color: rgb(0, 0, 0),
-        //   thickness: underlineHeight,
-        // });
+        printeddeedPageTwo.drawText("Occupation", {
+          x: 270,
+          y: 50,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
 
-        // printeddeedPageTwo.drawText("Occupation", {
-        //   x: 270,
-        //   y: 50,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 12,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   // font: customFont,
-        //   font: timesRomanFont,
-        // });
-
-        // printeddeedPageTwo.drawLine({
-        //   start: { x: 330, y: 50 }, // Adjust the y-position for Form Field 3
-        //   end: { x: 540, y: 50 }, // Adjust the y-position for Form Field 3
-        //   color: rgb(0, 0, 0),
-        //   thickness: underlineHeight,
-        // });
+        printeddeedPageTwo.drawLine({
+          start: { x: 330, y: 50 }, // Adjust the y-position for Form Field 3
+          end: { x: 540, y: 50 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
 
         //=============== printeddeedPageTwo ended=====================
-
-        // if (propObject.p_8727183196433.variant.includes("Printed Pack")) {
-        //   console.log(propObject.p_8727183196433.variant);
-        //   printedPage.drawText("Title printed ", {
-        //     x: 70,
-        //     y: 710,
-        //     size: fontSize,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     font: timesRomanFont,
-        //   });
-
-        //   printedPage.drawText(propObject.p_8727183196433._Date, {
-        //     x: 70,
-        //     y: 710,
-        //     size: fontSize,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     font: timesRomanFont,
-        //   });
-        //   printedPage.drawText(heading, {
-        //     x: 70,
-        //     y: 650,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: headingFontSize,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFontHeading,
-        //   });
-
-        //   printedPage.drawText(content, {
-        //     x: 70,
-        //     y: 620,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: fontSize,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     font: timesRomanFont,
-        //   });
-
-        //   printedPage.drawText(welcomeContent, {
-        //     x: 240,
-        //     y: 320,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 14,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     font: timesRomanFont,
-        //   });
-
-        //   printedPage.drawText(welcomeSignContent, {
-        //     x: 70,
-        //     y: 250,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 14,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     font: timesRomanItalicFont,
-        //   });
-
-        //   printedPage.drawImage(welcome_emblem_signature, {
-        //     x: 170,
-        //     y: 210,
-        //     height: 70,
-        //     width: 50,
-        //   });
-
-        //   printedPage.drawText(facebookContent, {
-        //     x: 70,
-        //     y: 170,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 11,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     font: timesRomanFont,
-        //   });
-
-        //   printedPage.drawText(facebookLink, {
-        //     x: 120,
-        //     y: 170,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 11,
-        //     color: rgb(0.027, 0.388, 0.756),
-        //     lineHeight: fontSize * 1.2,
-        //     font: timesRomanFont,
-        //   });
-        //   printedPage.drawLine({
-        //     start: { x: 120, y: 165 }, // Adjust the y-position for Form Field 3
-        //     end: { x: 215, y: 165 }, // Adjust the y-position for Form Field 3
-        //     color: rgb(0.027, 0.388, 0.756),
-        //     thickness: 0.5,
-        //   });
-
-        //   printedPage.drawText(scotalndTitleAddress, {
-        //     x: 120,
-        //     y: 70,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 11,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     font: timesRomanFont,
-        //   });
-
-        //   printedPage.drawText("info@scotlandtitles.com", {
-        //     x: 150,
-        //     y: 50,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 11,
-        //     color: rgb(0.027, 0.388, 0.756),
-        //     lineHeight: fontSize * 1.2,
-        //     font: timesRomanFont,
-        //   });
-        //   printedPage.drawLine({
-        //     start: { x: 150, y: 45 }, // Adjust the y-position for Form Field 3
-        //     end: { x: 260, y: 45 }, // Adjust the y-position for Form Field 3
-        //     color: rgb(0.027, 0.388, 0.756),
-        //     thickness: 0.5,
-        //   });
-
-        //   printedPage.drawText("www.ScotlandTitles.com", {
-        //     x: 350,
-        //     y: 50,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 11,
-        //     color: rgb(0.027, 0.388, 0.756),
-        //     lineHeight: fontSize * 1.2,
-        //     font: timesRomanFont,
-        //   });
-        //   printedPage.drawLine({
-        //     start: { x: 350, y: 45 }, // Adjust the y-position for Form Field 3
-        //     end: { x: 460, y: 45 }, // Adjust the y-position for Form Field 3
-        //     color: rgb(0.027, 0.388, 0.756),
-        //     thickness: 0.5,
-        //   });
-        //   printedPage.drawImage(img, {
-        //     x: 440,
-        //     y: 690,
-        //     width: pngDims.width,
-        //     height: pngDims.height,
-        //   });
-
-        //   printedpagetwo.drawImage(yellow_middle, {
-        //     x: 380,
-        //     y: propObject.p_8727183196433._Title2 ? 385 : 405,
-        //     width: ertificateMidpngDims.width,
-        //     height: ertificateMidpngDims.height,
-        //   });
-        //   printedpagetwo.drawImage(ribbonImg, {
-        //     x: 30,
-        //     y: 410,
-        //     width: pngDimsRibbon.width,
-        //     height: pngDimsRibbon.height,
-        //   });
-
-        //   printedpagetwo.drawImage(stampImg, {
-        //     x: 720,
-        //     y: 70,
-        //     width: stampPngDims.width,
-        //     height: stampPngDims.height,
-        //   });
-
-        //   printedpagetwo.drawImage(Signaturetwo, {
-        //     x: 580,
-        //     y: 70,
-        //     height: 30,
-        //     width: 100,
-        //   });
-
-        //   printedpagetwo.drawText("Witnessed", {
-        //     x: 600,
-        //     y: 60,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 10,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     font: tempusFont,
-        //     // font: customFont,
-        //     // font: tempusFont,
-        //   });
-
-        //   printedpagetwo.drawImage(welcome_emblem_signature, {
-        //     x: 500,
-        //     y: 70,
-        //     height: 50,
-        //     width: 30,
-        //   });
-
-        //   printedpagetwo.drawText("Signed", {
-        //     x: 500,
-        //     y: 60,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 10,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     font: tempusFont,
-        //   });
-
-        //   printedpagetwo.drawText(certificateHeading, {
-        //     x: 200,
-        //     y: 520,
-        //     size: 26,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     color: rgb(0.219, 0.337, 0.137),
-        //     lineHeight: fontSize * 1.2,
-        //     font: oldEng,
-        //   });
-        //   printedpagetwo.drawText(certficateAddress, {
-        //     x: 220,
-        //     y: 500,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 10,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     font: tempusFont,
-        //   });
-
-        //   printedpagetwo.drawText(certficateUserName, {
-        //     x: certificateX,
-        //     y: 470,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 24,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     font: oldEng,
-        //   });
-        //   {
-        //     propObject.p_8727183196433._Title2 &&
-        //       printedpagetwo.drawText(and, {
-        //         x: 400,
-        //         y: 460,
-        //         width: textWidth,
-        //         height: textHeight,
-        //         size: 10,
-        //         color: rgb(0, 0, 0),
-        //         lineHeight: fontSize * 1.2,
-        //         font: tempusFont,
-        //       });
-
-        //     printedpagetwo.drawText(certficateUserNameTwo, {
-        //       x: certificateTwoX,
-        //       y: 435,
-        //       width: textWidth,
-        //       height: textHeight,
-        //       size: 24,
-        //       color: rgb(0, 0, 0),
-        //       lineHeight: fontSize * 1.2,
-        //       font: oldEng,
-        //     });
-        //   }
-        //   printedpagetwo.drawText(certificateAddressTwo, {
-        //     x: 195,
-        //     y: propObject.p_8727183196433._Title2 ? 415 : 450,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 10,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     font: tempusFont,
-        //   });
-
-        //   printedpagetwo.drawText(certificateText, {
-        //     x: 60,
-        //     y: 370,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 10,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     font: tempusFont,
-        //   });
-
-        //   printedpagetwo.drawText(certificateTextTwo, {
-        //     x: 460,
-        //     y: 370,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 10,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     font: tempusFont,
-        //   });
-
-        //   // printed deed page start =========================
-
-        //   printeddeedPage.drawText(`(${formerTitle})`, {
-        //     x: totalWidth,
-        //     y: 710,
-        //     size: 12,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     font: timesRomanFontHeading,
-        //   });
-
-        //   printeddeedPage.drawText(formerTitle, {
-        //     x: 175,
-        //     y: 449,
-        //     size: 12,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     font: timesRomanFontHeading,
-        //   });
-
-        //   printeddeedPage.drawText(newTitle, {
-        //     x: newTotalTextWidth,
-        //     y: 683,
-        //     size: 12,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     font: timesRomanFontHeading,
-        //   });
-        //   printeddeedPage.drawText(MainHeading, {
-        //     x: 200,
-        //     y: 750,
-        //     size: 20,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     font: timesRomanFontHeading,
-        //   });
-        //   printeddeedPage.drawText(SubHeading, {
-        //     x: 180,
-        //     y: 730,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFont,
-        //   });
-
-        //   printeddeedPage.drawText(deedFormText, {
-        //     x: 30,
-        //     y: 710,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFont,
-        //   });
-
-        //   printeddeedPage.drawText(deedFormText, {
-        //     x: 30,
-        //     y: 710,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFont,
-        //   });
-
-        //   printeddeedPage.drawLine({
-        //     start: { x: underlineX5, y: 600 }, // Adjust the y-position for Form Field 3
-        //     end: { x: underlineX6, y: 600 }, // Adjust the y-position for Form Field 3
-        //     color: rgb(0.65, 0.65, 0.65),
-        //     thickness: underlineHeight,
-        //   });
-
-        //   printeddeedPage.drawText(deedFormTextPlaceHolder, {
-        //     x: 60,
-        //     y: 603,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0.65, 0.65, 0.65),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanItalicFont,
-        //   });
-
-        //   printeddeedPage.drawText(declarationOne, {
-        //     x: 30,
-        //     y: 580,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFont,
-        //   });
-
-        //   printeddeedPage.drawText(absolute, {
-        //     x: 30,
-        //     y: 560,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFont,
-        //   });
-        //   printeddeedPage.drawText(formerNameBreak, {
-        //     x: 453,
-        //     y: 560,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFontHeading,
-        //   });
-        //   printeddeedPage.drawText(titleBreak, {
-        //     x: 30,
-        //     y: 548,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFontHeading,
-        //   });
-        //   printeddeedPage.drawText(absoluteTwo, {
-        //     x: 58,
-        //     y: 548,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFont,
-        //   });
-        //   printeddeedPage.drawText(newTitleTwo, {
-        //     x: 415,
-        //     y: 548,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFontHeading,
-        //   });
-        //   printeddeedPage.drawText(inContent, {
-        //     x: 520,
-        //     y: 548,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFont,
-        //   });
-        //   printeddeedPage.drawText(absoluteThree, {
-        //     x: 30,
-        //     y: 536,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFont,
-        //   });
-
-        //   printeddeedPage.drawText(declarationTwo, {
-        //     x: 30,
-        //     y: 500,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFont,
-        //   });
-
-        //   printeddeedPage.drawText(declarationTwoSubscribe, {
-        //     x: 30,
-        //     y: 473,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFont,
-        //   });
-        //   printeddeedPage.drawText(newTitleTwo, {
-        //     x: 120,
-        //     y: 473,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFont,
-        //   });
-
-        //   printeddeedPage.drawText(declarationTwoSubscribeName, {
-        //     x: 210,
-        //     y: 473,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFont,
-        //   });
-
-        //   printeddeedPage.drawText(formerTitle, {
-        //     x: 380,
-        //     y: 473,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFontHeading,
-        //   });
-
-        //   printeddeedPage.drawText(so, {
-        //     x: 500,
-        //     y: 473,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     font: timesRomanFont,
-        //   });
-
-        //   printeddeedPage.drawText(relinqushed, {
-        //     x: 30,
-        //     y: 461,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     font: timesRomanFont,
-        //   });
-        //   printeddeedPage.drawText(newTitleBreak, {
-        //     x: 510,
-        //     y: 461,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     font: timesRomanFontHeading,
-        //   });
-
-        //   printeddeedPage.drawText(newTitleBreakTwo, {
-        //     x: 30,
-        //     y: 449,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     font: timesRomanFontHeading,
-        //   });
-
-        //   printeddeedPage.drawText(only, {
-        //     x: 73,
-        //     y: 449,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     font: timesRomanFontHeading,
-        //   });
-
-        //   printeddeedPage.drawText(declarationThree, {
-        //     x: 30,
-        //     y: 420,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFont,
-        //   });
-
-        //   printeddeedPage.drawText(adopt, {
-        //     x: 30,
-        //     y: 408,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFont,
-        //   });
-
-        //   printeddeedPage.drawText(newTitleTwo, {
-        //     x: 70,
-        //     y: 408,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFontHeading,
-        //   });
-
-        //   printeddeedPage.drawText(declarationFour, {
-        //     x: 30,
-        //     y: 370,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFont,
-        //   });
-        //   printeddeedPage.drawText(newTitleTwo, {
-        //     x: 413,
-        //     y: 370,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFontHeading,
-        //   });
-        //   printeddeedPage.drawText(declarationFourTwo, {
-        //     x: 515,
-        //     y: 370,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFont,
-        //   });
-
-        //   printeddeedPage.drawText(signed, {
-        //     x: 30,
-        //     y: 300,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFont,
-        //   });
-        //   printeddeedPage.drawLine({
-        //     start: { x: underlineX3, y: 300 }, // Adjust the y-position for Form Field 3
-        //     end: { x: underlineX4, y: 300 }, // Adjust the y-position for Form Field 3
-        //     color: rgb(0, 0, 0),
-        //     thickness: underlineHeight,
-        //   });
-
-        //   printeddeedPage.drawText(dayOf, {
-        //     x: 190,
-        //     y: 300,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFont,
-        //   });
-
-        //   printeddeedPage.drawLine({
-        //     start: { x: underlineX1, y: 300 }, // Adjust the y-position for Form Field 3
-        //     end: { x: underlineX2, y: 300 }, // Adjust the y-position for Form Field 3
-        //     color: rgb(0, 0, 0),
-        //     thickness: underlineHeight,
-        //   });
-
-        //   printeddeedPage.drawText(yearIn, {
-        //     x: 330,
-        //     y: 300,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFont,
-        //   });
-
-        //   printeddeedPage.drawText(signedAs, {
-        //     x: 30,
-        //     y: 270,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFont,
-        //   });
-
-        //   printeddeedPage.drawLine({
-        //     start: { x: 30, y: 200 }, // Adjust the y-position for Form Field 3
-        //     end: { x: 250, y: 200 }, // Adjust the y-position for Form Field 3
-        //     color: rgb(0, 0, 0),
-        //     thickness: underlineHeight,
-        //   });
-        //   printeddeedPage.drawText(signPlaceHolder, {
-        //     x: 40,
-        //     y: 190,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0.65, 0.65, 0.65),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanItalicFont,
-        //   });
-
-        //   printeddeedPage.drawLine({
-        //     start: { x: 30, y: 170 }, // Adjust the y-position for Form Field 3
-        //     end: { x: 250, y: 170 }, // Adjust the y-position for Form Field 3
-        //     color: rgb(0, 0, 0),
-        //     thickness: underlineHeight,
-        //   });
-
-        //   printeddeedPage.drawText(lordName, {
-        //     x: 40,
-        //     y: 155,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFont,
-        //   });
-
-        //   printeddeedPage.drawLine({
-        //     start: { x: 30, y: 90 }, // Adjust the y-position for Form Field 3
-        //     end: { x: 250, y: 90 }, // Adjust the y-position for Form Field 3
-        //     color: rgb(0, 0, 0),
-        //     thickness: underlineHeight,
-        //   });
-
-        //   printeddeedPage.drawText(formerName, {
-        //     x: 40,
-        //     y: 75,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFont,
-        //   });
-
-        //   printeddeedPage.drawText(presence, {
-        //     x: 270,
-        //     y: 240,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFont,
-        //   });
-
-        //   printeddeedPage.drawText(witness, {
-        //     x: 270,
-        //     y: 190,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFont,
-        //   });
-
-        //   printeddeedPage.drawLine({
-        //     start: { x: 370, y: 190 }, // Adjust the y-position for Form Field 3
-        //     end: { x: 540, y: 190 }, // Adjust the y-position for Form Field 3
-        //     color: rgb(0, 0, 0),
-        //     thickness: underlineHeight,
-        //   });
-
-        //   printeddeedPage.drawText("Name", {
-        //     x: 270,
-        //     y: 160,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFont,
-        //   });
-
-        //   printeddeedPage.drawLine({
-        //     start: { x: 300, y: 160 }, // Adjust the y-position for Form Field 3
-        //     end: { x: 540, y: 160 }, // Adjust the y-position for Form Field 3
-        //     color: rgb(0, 0, 0),
-        //     thickness: underlineHeight,
-        //   });
-
-        //   printeddeedPage.drawText("Address", {
-        //     x: 270,
-        //     y: 130,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFont,
-        //   });
-
-        //   printeddeedPage.drawLine({
-        //     start: { x: 310, y: 130 }, // Adjust the y-position for Form Field 3
-        //     end: { x: 540, y: 130 }, // Adjust the y-position for Form Field 3
-        //     color: rgb(0, 0, 0),
-        //     thickness: underlineHeight,
-        //   });
-        //   printeddeedPage.drawLine({
-        //     start: { x: 270, y: 105 }, // Adjust the y-position for Form Field 3
-        //     end: { x: 540, y: 105 }, // Adjust the y-position for Form Field 3
-        //     color: rgb(0, 0, 0),
-        //     thickness: underlineHeight,
-        //   });
-        //   printeddeedPage.drawLine({
-        //     start: { x: 270, y: 80 }, // Adjust the y-position for Form Field 3
-        //     end: { x: 540, y: 80 }, // Adjust the y-position for Form Field 3
-        //     color: rgb(0, 0, 0),
-        //     thickness: underlineHeight,
-        //   });
-
-        //   printeddeedPage.drawText("Occupation", {
-        //     x: 270,
-        //     y: 50,
-        //     width: textWidth,
-        //     height: textHeight,
-        //     size: 12,
-        //     color: rgb(0, 0, 0),
-        //     lineHeight: fontSize * 1.2,
-        //     // font: customFont,
-        //     font: timesRomanFont,
-        //   });
-
-        //   printeddeedPage.drawLine({
-        //     start: { x: 330, y: 50 }, // Adjust the y-position for Form Field 3
-        //     end: { x: 540, y: 50 }, // Adjust the y-position for Form Field 3
-        //     color: rgb(0, 0, 0),
-        //     thickness: underlineHeight,
-        //   });
-        // }
+        // return res.status(200).send("Success");
       }
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("An error occurred");
+    }
+  };
+
+  const titlePackWithFreeTartan = async (propObject) => {
+    console.log(propObject, "titlePackWithFreeTartan propObject");
+
+    try {
+      if (propObject.p_8727182704913.variant.includes("Printed Pack")) {
+        var type = true;
+        console.log("Printed Pack =============");
+        if (propObject.p_8727182704913._Title2) {
+          console.log("herrrrrrrrrrrrreeeeee");
+          var page = pdfDoc.addPage([595, 842]);
+          var pagetwo = pdfDoc.addPage([842, 595]);
+          var deedPage = pdfDoc.addPage([595, 842]);
+          var deedPageTwo = pdfDoc.addPage([595, 842]);
+          var tartanCertificate = pdfDoc.addPage([595, 842]);
+
+          var printedPage = pdfDocPrinted.addPage([595, 842]);
+          var printedpagetwo = pdfDocPrinted.addPage([842, 595]);
+          var printeddeedPage = pdfDocPrinted.addPage([595, 842]);
+          var printeddeedPageTwo = pdfDocPrinted.addPage([595, 842]);
+        } else {
+          var page = pdfDoc.addPage([595, 842]);
+          var pagetwo = pdfDoc.addPage([842, 595]);
+          var deedPage = pdfDoc.addPage([595, 842]);
+          var tartanCertificate = pdfDoc.addPage([595, 842]);
+
+          var printedPage = pdfDoc.addPage([595, 842]);
+          var printedpagetwo = pdfDoc.addPage([842, 595]);
+
+          // var printeddeedPage = pdfDocPrinted.addPage([595, 842]);
+        }
+      } else {
+        type = false;
+        if (propObject.p_8727182704913._Title2) {
+          console.log("herrrrrrrrrrrrreeeeee");
+          var page = pdfDoc.addPage([595, 842]);
+          var pagetwo = pdfDoc.addPage([842, 595]);
+          var deedPage = pdfDoc.addPage([595, 842]);
+          var deedPageTwo = pdfDoc.addPage([595, 842]);
+          var tartanCertificate = pdfDoc.addPage([595, 842]);
+
+          // var printedPage = pdfDoc.addPage([595, 842]);
+
+          // var printedPage = pdfDoc.addPage([595, 842]);
+        } else {
+          var page = pdfDoc.addPage([595, 842]);
+          var pagetwo = pdfDoc.addPage([842, 595]);
+          var deedPage = pdfDoc.addPage([595, 842]);
+          var tartanCertificate = pdfDoc.addPage([595, 842]);
+        }
+      }
+      const filePath = path.resolve("./public", "images", "scotland_log.png");
+      const fontBytes = fs.readFileSync(
+        path.join(process.cwd(), "public", "OLDENGL.TTF")
+      );
+      const customFont = await pdfDoc.embedFont(fontBytes);
+
+      const imgBuffer = fs.readFileSync(filePath);
+      // console.log(imgBuffer, "imgBuffer");
+      const img = await pdfDoc.embedPng(imgBuffer);
+      const pngDims = img.scale(0.25);
+
+      const welcomeSignPath = path.resolve(
+        "./public",
+        "images",
+        "g_signature.png"
+      );
+      const welcom_signature_Buffer = fs.readFileSync(welcomeSignPath);
+
+      // console.log(imgBuffer, "imgBuffer");
+      const welcome_emblem_signature = await pdfDoc.embedPng(
+        welcom_signature_Buffer
+      );
+
+      const heading = `Land with reference number ${order_number} - ${
+        propObject.p_8727182704913.reference
+      } ${propObject.p_8727182704913._Title1} ${
+        propObject.p_8727182704913._Name1
+      } ${
+        propObject.p_8727182704913._Title2
+          ? `& ${propObject.p_8727182704913._Title2}\n${propObject.p_8727182704913._Name2}`
+          : ""
+      } of ${!propObject.p_8727182704913._Name2 ? `\n` : ""}Blairadam`;
+      const content = `Please find enclosed your Certificate of Disposition and Proclamation confirming you now own Land\nwithin a Scottish Estate . You may choose to adopt the traditional Scottish title of ${propObject.p_8727182704913._Title1} as a sign of\nrespect, or the English language equivalent.\n\nYour land is located within our Estate with street address of Kingseat Road (off Cantsdam Road),\nCantsdam, Kelty, Fife, Scotland KY12 0SW. Your plot of land is located beside Kingseat Road single\ntrack road that leads north from the B912 Cantsdam Road.\n\nYou can view the land online. The following coordinates will show you the centre of the Estate;\n\nGoogle Maps type in  coordinates 56.1215718, - 3.3856475\nOrdinance Survey 10 Figure Grid Reference NT 13956 92954\nX Easting 313956 , Y Northing 692954\n\nWe hope that you have the opportunity to visit your land, and to enjoy the Scottish countryside as a\n${propObject.p_8727182704913._Title1} of Scotland . You can keep up to date via our Facebook page at fb.me/ScotlandTitles\n\nI very much hope that owning a piece of Scotland is something that will give you a sense of pride, and\nwould like to take this opportunity to thank you for choosing Scotland Titles`; // const page = document.getPage(0);
+      const welcomeContent = `Welcome to Scotland!`; // const page = document.getPage(0);
+      const welcomeSignContent = `Signed for\nand on behalf of\nScotland Titles`; // const page = document.getPage(0);
+      const facebookContent = `Facebook:`; // const page = document.getPage(0);
+      const facebookLink = `fb.me/ScotlandTitles`; // const page = document.getPage(0);
+      const scotalndTitleAddress = `Scotland Titles, Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom`; // const page = document.getPage(0);
+
+      //Font work
+
+      const fontSize = 11;
+      const headingFontSize = 14;
+      const textWidth = page.getWidth() - 100; // Adjust the width as needed
+      const textHeight = page.getHeight() - 50;
+      //   page.moveTo(72, 570);
+
+      page.drawText(propObject.p_8727182704913._Date, {
+        x: 70,
+        y: 710,
+        size: fontSize,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFont,
+      });
+      page.drawText(heading, {
+        x: 70,
+        y: 650,
+        width: textWidth,
+        height: textHeight,
+        size: headingFontSize,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+
+      page.drawText(content, {
+        x: 70,
+        y: 620,
+        width: textWidth,
+        height: textHeight,
+        size: fontSize,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFont,
+      });
+
+      page.drawText(welcomeContent, {
+        x: 240,
+        y: 320,
+        width: textWidth,
+        height: textHeight,
+        size: 14,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFont,
+      });
+
+      page.drawText(welcomeSignContent, {
+        x: 70,
+        y: 250,
+        width: textWidth,
+        height: textHeight,
+        size: 14,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanItalicFont,
+      });
+
+      page.drawImage(welcome_emblem_signature, {
+        x: 170,
+        y: 210,
+        height: 70,
+        width: 50,
+      });
+
+      page.drawText(facebookContent, {
+        x: 70,
+        y: 170,
+        width: textWidth,
+        height: textHeight,
+        size: 11,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFont,
+      });
+
+      page.drawText(facebookLink, {
+        x: 120,
+        y: 170,
+        width: textWidth,
+        height: textHeight,
+        size: 11,
+        color: rgb(0.027, 0.388, 0.756),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFont,
+      });
+      page.drawLine({
+        start: { x: 120, y: 165 }, // Adjust the y-position for Form Field 3
+        end: { x: 215, y: 165 }, // Adjust the y-position for Form Field 3
+        color: rgb(0.027, 0.388, 0.756),
+        thickness: 0.5,
+      });
+
+      page.drawText(scotalndTitleAddress, {
+        x: 120,
+        y: 70,
+        width: textWidth,
+        height: textHeight,
+        size: 11,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFont,
+      });
+
+      page.drawText("info@scotlandtitles.com", {
+        x: 150,
+        y: 50,
+        width: textWidth,
+        height: textHeight,
+        size: 11,
+        color: rgb(0.027, 0.388, 0.756),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFont,
+      });
+      page.drawLine({
+        start: { x: 150, y: 45 }, // Adjust the y-position for Form Field 3
+        end: { x: 260, y: 45 }, // Adjust the y-position for Form Field 3
+        color: rgb(0.027, 0.388, 0.756),
+        thickness: 0.5,
+      });
+
+      page.drawText("www.ScotlandTitles.com", {
+        x: 350,
+        y: 50,
+        width: textWidth,
+        height: textHeight,
+        size: 11,
+        color: rgb(0.027, 0.388, 0.756),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFont,
+      });
+      page.drawLine({
+        start: { x: 350, y: 45 }, // Adjust the y-position for Form Field 3
+        end: { x: 460, y: 45 }, // Adjust the y-position for Form Field 3
+        color: rgb(0.027, 0.388, 0.756),
+        thickness: 0.5,
+      });
+      page.drawImage(img, {
+        x: 440,
+        y: 690,
+        width: pngDims.width,
+        height: pngDims.height,
+      });
+
+      //Certificate title
+
+      const filePathTwo = path.resolve("./public", "images", "pdf-bg.jpg");
+
+      const imgBufferTwo = fs.readFileSync(filePathTwo);
+      // console.log(imgBuffer, "imgBuffer");
+      const imgBg = await pdfDoc.embedJpg(imgBufferTwo);
+
+      const filePathThree = path.resolve(
+        "./public",
+        "images",
+        "certificate-stamp.png"
+      );
+
+      const imgBufferThree = fs.readFileSync(filePathThree);
+      // console.log(imgBuffer, "imgBuffer");
+      const stampImg = await pdfDoc.embedPng(imgBufferThree);
+      const stampPngDims = stampImg.scale(0.3);
+
+      const filePathRibbon = path.resolve(
+        "./public",
+        "images",
+        "scotland_ribbon.png"
+      );
+
+      const imgBufferRibbon = fs.readFileSync(filePathRibbon);
+      // console.log(imgBuffer, "imgBuffer");
+      const ribbonImg = await pdfDoc.embedPng(imgBufferRibbon);
+
+      const pngDimsRibbon = ribbonImg.scale(0.3);
+
+      const filePathYellow = path.resolve(
+        "./public",
+        "images",
+        "yellow_middle.png"
+      );
+
+      const imgBufferYellowMiddle = fs.readFileSync(filePathYellow);
+      // console.log(imgBuffer, "imgBuffer");
+      const yellow_middle = await pdfDoc.embedPng(imgBufferYellowMiddle);
+      const filePathSignaturetwo = path.resolve(
+        "./public",
+        "images",
+        "signTwo.png"
+      );
+      const imgBufferSignaturetwo = fs.readFileSync(filePathSignaturetwo);
+      // console.log(imgBuffer, "imgBuffer");
+      const Signaturetwo = await pdfDoc.embedPng(imgBufferSignaturetwo);
+      const SignaturetwodimsRibbon = ribbonImg.scale(0.25);
+
+      // console.log(imgBuffer, "imgBuffer");
+      const filePathFour = path.resolve(
+        "./public",
+        "images",
+        "certificate-mid.png"
+      );
+
+      const imgBufferFour = fs.readFileSync(filePathFour);
+      const certificateMid = await pdfDoc.embedPng(imgBufferFour);
+      const ertificateMidpngDims = certificateMid.scale(0.3);
+
+      // const fontTwo = fs.readFileSync(
+      //   path.join(process.cwd(), "public", "Goudy-Bold-Regular.ttf")
+      // );
+      // const tempusFont = await pdfDoc.embedFont(fontTwo);
+
+      // const fontThree = fs.readFileSync(
+      //   path.join(process.cwd(), "public", "OLDENGL.TTF")
+      // );
+      // const oldEng = await pdfDoc.embedFont(fontThree);
+      const certificateHeading = "Certificate of Disposition and Proclamation";
+      const certficateAddress =
+        "between Scotland Titles, Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom and";
+      //   const certficateUserName = `${propObject.p_8727182704913._Title1} ${propObject.p_8727182704913._Name1} of Blairadam`;
+      const certficateUserName = `${propObject.p_8727182704913._Title1} ${propObject.p_8727182704913._Name1} of Blairadam`;
+
+      const and = "and";
+      const certficateUserNameTwo = `${
+        propObject.p_8727182704913._Title2
+          ? propObject.p_8727182704913._Title2
+          : ""
+      } ${
+        propObject.p_8727182704913._Title2
+          ? propObject.p_8727182704913._Name2
+          : ""
+      } ${propObject.p_8727182704913._Title2 ? `of Blairadam` : ""}`;
+
+      //   const emblemCertficateUserName = `${propObject.p_8727183065361._Title1} ${propObject.p_8727183065361._Name1}`;
+      const certificateUserNametextWidth = oldEng.widthOfTextAtSize(
+        certficateUserName,
+        12
+      );
+      const addressTitle = propObject.p_8727182704913._Title1;
+      const certificateHalfOfWord = certificateUserNametextWidth / 2;
+      const certificateStartingPosition =
+        (pagetwo.getWidth() - certificateUserNametextWidth) / 2;
+      const certificateX = certificateStartingPosition - certificateHalfOfWord;
+
+      const certificateUserNameTwotextWidth = oldEng.widthOfTextAtSize(
+        certficateUserNameTwo,
+        12
+      );
+      const certificateTwoHalfOfWord = certificateUserNameTwotextWidth / 2;
+      const certificateTwoStartingPosition =
+        (pagetwo.getWidth() - certificateUserNameTwotextWidth) / 2;
+      const certificateTwoX =
+        certificateTwoStartingPosition - certificateTwoHalfOfWord;
+
+      var titleConditions = "";
+
+      if (
+        !propObject.p_8727182704913._Title2 &&
+        propObject.p_8727182704913._Title1
+      ) {
+        if (propObject.p_8727182704913._Title1 == "Lord") {
+          titleConditions = "LORD";
+        } else if (propObject.p_8727182704913._Title1 == "Laird") {
+          titleConditions = "LAIRD";
+        } else if (propObject.p_8727182704913._Title1 == "Lady") {
+          titleConditions = "LADY";
+        }
+      } else if (
+        propObject.p_8727182704913._Title2 &&
+        propObject.p_8727182704913._Title1
+      ) {
+        if (
+          propObject.p_8727182704913._Title1 == "Lord" &&
+          propObject.p_8727182704913._Title2 == "Lord"
+        ) {
+          titleConditions = "LORDS";
+        } else if (
+          propObject.p_8727182704913._Title1 == "Laird" &&
+          propObject.p_8727182704913._Title2 == "Laird"
+        ) {
+          titleConditions = "LAIRDS";
+        } else if (
+          propObject.p_8727182704913._Title1 == "Lady" &&
+          propObject.p_8727182704913._Title2 == "Lady"
+        ) {
+          titleConditions = "LADIES";
+        } else if (
+          propObject.p_8727182704913._Title1 == "Lord" &&
+          propObject.p_8727182704913._Title2 == "Lady"
+        ) {
+          titleConditions = "LORD AND LADY";
+        } else if (
+          propObject.p_8727182704913._Title1 == "Lord" &&
+          propObject.p_8727182704913._Title2 == "Laird"
+        ) {
+          titleConditions = "LORD AND LAIRD";
+        } else if (
+          propObject.p_8727182704913._Title1 == "Lady" &&
+          propObject.p_8727182704913._Title2 == "Laird"
+        ) {
+          titleConditions = "LADY AND LAIRD";
+        }
+      }
+      const certificateAddressTwo = `(hereafter to be proclaimed as “THE ${titleConditions}”), care of Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom`;
+
+      const certificateText = `The Scotland Titles Estate in Fife, Scotland, hereinafter referred to as “THE ESTATE”,\nhas been partitioned into dedicated souvenir plots of land.\n\nTHE ${titleConditions} ${
+        propObject.p_8727182704913._Title2 ? "have" : "has"
+      } petitioned unto Scotland Titles on this day their ${
+        titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LORD AND LAIRD" ||
+        titleConditions == "LORD AND LADY"
+          ? "\nintention to"
+          : "intention to\n"
+      }purchase, and Scotland Titles has determined to accept the disposition ${
+        titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LORD AND LAIRD" ||
+        titleConditions == "LORD AND LADY"
+          ? "\nof a plot of"
+          : "of a plot of\n"
+      }land within THE ESTATE, at Cantsdam, hereafter referred to as “THE ${
+        titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LORD AND LAIRD" ||
+        titleConditions == "LORD AND LADY"
+          ? "\nLAND"
+          : "LAND"
+      }”.\n\nScotland Titles, in CONSIDERATION of all monies due to be paid to us by THE\n${titleConditions}, of which we have received of in full, we do hereby DISCHARGE ${
+        titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LORD AND LAIRD" ||
+        titleConditions == "LORD AND LADY"
+          ? "\nunto them"
+          : "unto them\n"
+      }and DISPONE to and in perpetuity in favour of THE ${titleConditions} ${
+        titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LORD AND LAIRD" ||
+        titleConditions == "LORD AND LADY"
+          ? "\nand to their future"
+          : "and to their future\n"
+      }assignees the whole of THE LAND but always with ${
+        titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LORD AND LAIRD" ||
+        titleConditions == "LORD AND LADY"
+          ? "pedestrian\naccess only over THE "
+          : "pedestrian access only over THE\n"
+      }ESTATE; such rights of vehicular access are reserved ${
+        titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LORD AND LAIRD" ||
+        titleConditions == "LORD AND LADY"
+          ? "\nto Scotland Titles and its"
+          : "to Scotland Titles and its\n"
+      }successors in title plus any and all others authorised by it; ${
+        titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LORD AND LAIRD" ||
+        titleConditions == "LORD AND LADY"
+          ? `\nTHE ${titleConditions} ${
+              propObject.p_8727182704913._Title2 ? "covenant" : "covenants"
+            } not`
+          : `THE ${titleConditions} ${
+              propObject.p_8727182704913._Title2 ? "covenant" : "covenants"
+            } not\n`
+      } to dispose of THE LAND in part only.\n\nScotland Titles is a trading name of Blairdam Corporation PA. Terms and Conditions,\nand this CERTIFICATE shall be governed by the Law of Scotland.`;
+      const datee = propObject.p_8727182704913._Date;
+      const dateObj = new Date(datee);
+      const year = dateObj.getFullYear();
+      const month = String(dateObj.getMonth() + 1).padStart(2, "0"); // Adding 1 because months are 0-indexed
+      const day = String(dateObj.getDate()).padStart(2, "0");
+
+      const monthNames = [
+        "JANUARY",
+        "FEBRUARY",
+        "MARCH",
+        "APRIL",
+        "MAY",
+        "JUNE",
+        "JULY",
+        "AUGUST",
+        "SEPTEMBER",
+        "OCTOBER",
+        "NOVEMBER",
+        "DECEMBER",
+      ];
+
+      const monthName = monthNames[dateObj.getMonth()];
+      let titledayWithSuffix;
+
+      if (day >= 11 && day <= 13) {
+        titledayWithSuffix = `${day}TH`;
+      } else {
+        switch (day % 10) {
+          case 1:
+            titledayWithSuffix = `${day}ST`;
+            break;
+          case 2:
+            titledayWithSuffix = `${day}ND`;
+            break;
+          case 3:
+            titledayWithSuffix = `${day}RD`;
+            break;
+          default:
+            titledayWithSuffix = `${day}TH`;
+        }
+      }
+      const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18′′N , 003°23′08′′W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is ${order_number} - ${
+        propObject.p_8727182704913.reference
+      }\n\nThe size of THE LAND is ${
+        propObject.p_8727182704913.size
+      } square foot\n\nDate of Entry of THE LAND is as the date of this CERTIFICATE\n\nThis Disposition is signed for and on behalf of Scotland Titles and witnessed on the\n${titledayWithSuffix} Day of ${monthName} ${year}`;
+      pagetwo.drawImage(imgBg, {
+        width: pagetwo.getWidth(),
+        height: pagetwo.getHeight(),
+      });
+
+      pagetwo.drawImage(yellow_middle, {
+        x: 380,
+        y: propObject.p_8727182704913._Title2 ? 385 : 405,
+        width: ertificateMidpngDims.width,
+        height: ertificateMidpngDims.height,
+      });
+      pagetwo.drawImage(ribbonImg, {
+        x: 30,
+        y: 410,
+        width: pngDimsRibbon.width,
+        height: pngDimsRibbon.height,
+      });
+
+      pagetwo.drawImage(stampImg, {
+        x: 720,
+        y: 70,
+        width: stampPngDims.width,
+        height: stampPngDims.height,
+      });
+
+      pagetwo.drawImage(Signaturetwo, {
+        x: 580,
+        y: 70,
+        height: 30,
+        width: 100,
+      });
+
+      pagetwo.drawText("Witnessed", {
+        x: 600,
+        y: 60,
+        width: textWidth,
+        height: textHeight,
+        size: 10,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+        // font: customFont,
+        // font: tempusFont,
+      });
+
+      pagetwo.drawImage(welcome_emblem_signature, {
+        x: 500,
+        y: 70,
+        height: 50,
+        width: 30,
+      });
+
+      pagetwo.drawText("Signed", {
+        x: 500,
+        y: 60,
+        width: textWidth,
+        height: textHeight,
+        size: 10,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      pagetwo.drawText(certificateHeading, {
+        x: 200,
+        y: 520,
+        size: 26,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0.219, 0.337, 0.137),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+      pagetwo.drawText(certficateAddress, {
+        x: 220,
+        y: 500,
+        width: textWidth,
+        height: textHeight,
+        size: 10,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      pagetwo.drawText(certficateUserName, {
+        x: certificateX,
+        y: 470,
+        width: textWidth,
+        height: textHeight,
+        size: 24,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+      {
+        propObject.p_8727182704913._Title2 &&
+          pagetwo.drawText(and, {
+            x: 400,
+            y: 460,
+            width: textWidth,
+            height: textHeight,
+            size: 10,
+            color: rgb(0, 0, 0),
+            lineHeight: fontSize * 1.2,
+            font: tempusFont,
+          });
+
+        pagetwo.drawText(certficateUserNameTwo, {
+          x: certificateTwoX,
+          y: 435,
+          width: textWidth,
+          height: textHeight,
+          size: 24,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: oldEng,
+        });
+      }
+      pagetwo.drawText(certificateAddressTwo, {
+        x: 195,
+        y: propObject.p_8727182704913._Title2 ? 415 : 450,
+        width: textWidth,
+        height: textHeight,
+        size: 10,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      pagetwo.drawText(certificateText, {
+        x: 60,
+        y: 370,
+        width: textWidth,
+        height: textHeight,
+        size: 10,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      pagetwo.drawText(certificateTextTwo, {
+        x: 460,
+        y: 370,
+        width: textWidth,
+        height: textHeight,
+        size: 10,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      //printed pagetwo  ========
+
+      //deed page one
+
+      // const timesRomanItalicFontHeading = await pdfDoc.embedFont(
+      //   StandardFonts.TimesRomanItalic
+      // );
+
+      const MainHeading = "Master Title Deed";
+      const SubHeading = "Deed of Change of Name and Title (Deed Poll)";
+      const formerTitle = "Former Name & Title";
+      const newTitle = "(New Name & Title)";
+      const underlineHeight = 0.5;
+      const underlineY = 680; // Adjust the y-position as needed
+
+      // Adjust the x-positions as needed for each form field
+
+      const underlineX1 = 240; // For Form Field 1
+      const underlineX2 = 320; // For Form Field 1
+      const underlineX3 = 110; // For Form Field 2
+      const underlineX4 = 180; // For Form Field 2
+      const underlineX5 = 50; // For Form Field 3
+      const underlineX6 = 580; // For Form Field 3
+      const deedFormTextPlaceHolder = "Home Address";
+      // const formerNameAndTitle="Former Name & Title"
+      // const newNameAndTitle="New Name & Title"
+
+      const positions = [
+        // { x: 110, y: 710 }, //first
+        { x: 125, y: 536 }, //second
+        // { x: 395, y: 473 },
+        { x: 30, y: 355 }, //in witneess
+
+        // Add more positions as needed
+      ];
+      positions.forEach((position) => {
+        deedPage.drawText(`${formerTitle}.`, {
+          x: position.x,
+          y: position.y,
+          size: 12,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFontHeading,
+        });
+      });
+
+      const deedUserNameWidth = `of ${propObject.p_8727182704913._Name1}`;
+      const formertextWidth = timesRomanFontHeading.widthOfTextAtSize(
+        deedUserNameWidth,
+        12
+      );
+      console.log(formertextWidth, "formertextWidth");
+      const totalWidth = formertextWidth + 35;
+
+      const deedNewNameWidth = `now ${propObject.p_8727182704913._Title1} ${propObject.p_8727182704913._Name1}`;
+      const newtextWidth = timesRomanFontHeading.widthOfTextAtSize(
+        deedNewNameWidth,
+        12
+      );
+
+      const newTotalTextWidth = newtextWidth + 30;
+
+      deedPage.drawText(`(${formerTitle})`, {
+        x: totalWidth,
+        y: 710,
+        size: 12,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFontHeading,
+      });
+
+      deedPage.drawText(formerTitle, {
+        x: 175,
+        y: 449,
+        size: 12,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFontHeading,
+      });
+
+      // deedPage.drawText(formerTitle, {
+      //   x:
+      //   y:
+      //   size: 12,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: timesRomanFontHeading,
+      // });
+      deedPage.drawText(newTitle, {
+        x: newTotalTextWidth,
+        y: 683,
+        size: 12,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFontHeading,
+      });
+
+      const deedFormText = `of ${propObject.p_8727182704913._Name1}\n\nnow ${propObject.p_8727182704913._Title1} ${propObject.p_8727182704913._Name1}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_8727182704913._Title1} ${propObject.p_8727182704913._Name1}\n\nof`;
+      const declarationOne = `HEREBY DECLARE AS FOLLOWS;`;
+      const absolute =
+        "1.   I ABSOLUTELY and entirely renounce, relinquish and abandon the use of my said";
+      const formerNameBreak = `Former Name &`;
+      const titleBreak = "Title";
+      const absoluteTwo =
+        "and assume, adopt and determine to take and use from the date hereof the";
+      const newTitleTwo = "New Name & Title";
+      const inContent = "in";
+      const absoluteThree = "substitution for my";
+      const declarationTwo = `2.    I SHALL AT ALL TIMES hereafter in all records, deeds, documents and other writings and in all\nactions and proceedings as well as in all dealings and transactions and on all occasions whatsoever use and`;
+      const declarationTwoSubscribe = "subscribe the said";
+      const declarationTwoSubscribeName = "as my name in substitution for my";
+      const so = "so";
+      const relinqushed =
+        "relinquished as aforesaid to the intent that I may hereafter be called, known or distinguished by the";
+      const newTitleBreak = "New Name";
+      const newTitleBreakTwo = "& Title";
+      const only = "only and not by the";
+
+      const declarationThree = `3.    I AUTHORISE AND REQUIRE all persons at all times to designate, describe and address me by my`;
+      const adopt = "adopted";
+      const declarationFour = `IN WITNESS whereof I have hereunto subscribed my adopted and substituted`;
+      const declarationFourTwo = "and also my";
+      const signed = "SIGNED THIS";
+      const dayOf = "DAY OF";
+      const yearIn = "IN THE YEAR";
+      const signedAs = "SIGNED AS A DEED AND DELIVERED\n\nby the above named";
+      const signPlaceHolder = "Signature";
+      const lordName = `${propObject.p_8727182704913._Title1} ${propObject.p_8727182704913._Name1}\n\nFormerly known as`;
+      const formerName = `${propObject.p_8727182704913._Name1}`;
+
+      const presence = "In the presence of:";
+      const witness = "Witness's signature";
+
+      deedPage.drawText(MainHeading, {
+        x: 200,
+        y: 750,
+        size: 20,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFontHeading,
+      });
+      deedPage.drawText(SubHeading, {
+        x: 180,
+        y: 730,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(deedFormText, {
+        x: 30,
+        y: 710,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(deedFormText, {
+        x: 30,
+        y: 710,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawLine({
+        start: { x: underlineX5, y: 600 }, // Adjust the y-position for Form Field 3
+        end: { x: underlineX6, y: 600 }, // Adjust the y-position for Form Field 3
+        color: rgb(0.65, 0.65, 0.65),
+        thickness: underlineHeight,
+      });
+
+      deedPage.drawText(deedFormTextPlaceHolder, {
+        x: 60,
+        y: 603,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0.65, 0.65, 0.65),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanItalicFont,
+      });
+
+      deedPage.drawText(declarationOne, {
+        x: 30,
+        y: 580,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(absolute, {
+        x: 30,
+        y: 560,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(formerNameBreak, {
+        x: 453,
+        y: 560,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+      deedPage.drawText(titleBreak, {
+        x: 30,
+        y: 548,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+      deedPage.drawText(absoluteTwo, {
+        x: 58,
+        y: 548,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(newTitleTwo, {
+        x: 415,
+        y: 548,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+      deedPage.drawText(inContent, {
+        x: 520,
+        y: 548,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(absoluteThree, {
+        x: 30,
+        y: 536,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(declarationTwo, {
+        x: 30,
+        y: 500,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(declarationTwoSubscribe, {
+        x: 30,
+        y: 473,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(newTitleTwo, {
+        x: 120,
+        y: 473,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(declarationTwoSubscribeName, {
+        x: 210,
+        y: 473,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(formerTitle, {
+        x: 380,
+        y: 473,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+
+      deedPage.drawText(so, {
+        x: 500,
+        y: 473,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(relinqushed, {
+        x: 30,
+        y: 461,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(newTitleBreak, {
+        x: 510,
+        y: 461,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFontHeading,
+      });
+
+      deedPage.drawText(newTitleBreakTwo, {
+        x: 30,
+        y: 449,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFontHeading,
+      });
+
+      deedPage.drawText(only, {
+        x: 73,
+        y: 449,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFontHeading,
+      });
+
+      deedPage.drawText(declarationThree, {
+        x: 30,
+        y: 420,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(adopt, {
+        x: 30,
+        y: 408,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(newTitleTwo, {
+        x: 70,
+        y: 408,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+
+      deedPage.drawText(declarationFour, {
+        x: 30,
+        y: 370,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+      deedPage.drawText(newTitleTwo, {
+        x: 413,
+        y: 370,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFontHeading,
+      });
+      deedPage.drawText(declarationFourTwo, {
+        x: 515,
+        y: 370,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(signed, {
+        x: 30,
+        y: 300,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+      deedPage.drawLine({
+        start: { x: underlineX3, y: 300 }, // Adjust the y-position for Form Field 3
+        end: { x: underlineX4, y: 300 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+
+      deedPage.drawText(dayOf, {
+        x: 190,
+        y: 300,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawLine({
+        start: { x: underlineX1, y: 300 }, // Adjust the y-position for Form Field 3
+        end: { x: underlineX2, y: 300 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+
+      deedPage.drawText(yearIn, {
+        x: 330,
+        y: 300,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(signedAs, {
+        x: 30,
+        y: 270,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawLine({
+        start: { x: 30, y: 200 }, // Adjust the y-position for Form Field 3
+        end: { x: 250, y: 200 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+      deedPage.drawText(signPlaceHolder, {
+        x: 40,
+        y: 190,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0.65, 0.65, 0.65),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanItalicFont,
+      });
+
+      deedPage.drawLine({
+        start: { x: 30, y: 170 }, // Adjust the y-position for Form Field 3
+        end: { x: 250, y: 170 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+
+      deedPage.drawText(lordName, {
+        x: 40,
+        y: 155,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawLine({
+        start: { x: 30, y: 90 }, // Adjust the y-position for Form Field 3
+        end: { x: 250, y: 90 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+
+      deedPage.drawText(formerName, {
+        x: 40,
+        y: 75,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(presence, {
+        x: 270,
+        y: 240,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawText(witness, {
+        x: 270,
+        y: 190,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawLine({
+        start: { x: 370, y: 190 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 190 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+
+      deedPage.drawText("Name", {
+        x: 270,
+        y: 160,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawLine({
+        start: { x: 300, y: 160 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 160 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+
+      deedPage.drawText("Address", {
+        x: 270,
+        y: 130,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawLine({
+        start: { x: 310, y: 130 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 130 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+      deedPage.drawLine({
+        start: { x: 270, y: 105 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 105 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+      deedPage.drawLine({
+        start: { x: 270, y: 80 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 80 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+
+      deedPage.drawText("Occupation", {
+        x: 270,
+        y: 50,
+        width: textWidth,
+        height: textHeight,
+        size: 12,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        // font: customFont,
+        font: timesRomanFont,
+      });
+
+      deedPage.drawLine({
+        start: { x: 330, y: 50 }, // Adjust the y-position for Form Field 3
+        end: { x: 540, y: 50 }, // Adjust the y-position for Form Field 3
+        color: rgb(0, 0, 0),
+        thickness: underlineHeight,
+      });
+
+      // const tartanCerificatePrinted = pdfDoc.addPage([595, 842]);
+
+      const tartan_certificate_heading = `To Whomsoever These Presents Do Concern`;
+      //   const tartanCertficateUserName = `${propObject.p_8727183032593._Title1} ${propObject.p_8727183032593._Name1}`;
+      const tartanCertficateUserName = `${propObject.p_8727182704913._Title1} ${
+        propObject.p_8727182704913._Name1
+      } ${propObject.p_8727182704913._Title2 ? "&" : ""}`;
+      const userNametextWidth = oldEng.widthOfTextAtSize(
+        tartanCertficateUserName,
+        12
+      );
+
+      const halfOfWord = userNametextWidth / 2;
+      const startingPosition =
+        (tartanCertificate.getWidth() - userNametextWidth) / 2;
+      const x = startingPosition - halfOfWord;
+
+      const tartanCertficateUserNameTwo = `${
+        propObject.p_8727182704913._Title2
+          ? `${propObject.p_8727182704913._Title2} ${propObject.p_8727182704913._Name2}`
+          : ""
+      }`;
+
+      const tartanuserNameTwotextWidth = oldEng.widthOfTextAtSize(
+        tartanCertficateUserNameTwo,
+        12
+      );
+
+      const tartanHalfOfWordTwo = tartanuserNameTwotextWidth / 2;
+      const tartanStartingPositionTwo =
+        (tartanCertificate.getWidth() - tartanuserNameTwotextWidth) / 2;
+      const tartanTwox = tartanStartingPositionTwo - tartanHalfOfWordTwo;
+      const declare = `${
+        propObject.p_8727182704913._Title2 ? "Do" : "Does"
+      } Declare`;
+      const Allegiance = "Clan Allegiance";
+      const prey = "and Prey to Wear";
+
+      const certified = "Certified Tartan";
+      const Greeting = "Scotland Titles send Greeting";
+
+      const tartanCertificateGreetingText = `and do declare that`;
+      const tartanCertificateGreetingTextTwo = `having by petition unto us unto this day,\n\n`;
+
+      const know = "Let It Be Known";
+
+      const tartanCertificateknowText = `that the said by virtue of ownership`;
+      const tartanCertificateknowTextTwo = `of Land in Scotland and in particular the Land within the\nKingdom of Fife by Cantsdam as described in the Disposition\nand Certificate of Sale, the ${
+        propObject.p_8727182704913._Title2 ? "Petitioner are" : "Petitioner is"
+      } henceforth and in\nperpetuity amongst all nobles and in all places of honour, to\nbe taken, numbered, accounted and received as a ${
+        propObject.p_8727182704913._Title2 ? "Lairds" : "Laird"
+      } of\nScotland,\n\n`;
+
+      const Therefore = "Know Ye Therefore";
+
+      const tartanCertificateThereforeText = `that the ${
+        propObject.p_8727182704913._Title2 ? "Petitioners" : "Petitioner"
+      } having preyed`;
+      const tartanCertificateThereforeTextTwo = `that there might be granted unto them to use such Scottish\nTartan as set in law during the dress act of 1746 as repealed in\n1782 and thereinafter adopted, acknowledged and recognised\nas the symbolic National Dress of Scotland,\n\n`;
+
+      const scotlantTiles = "Scilicet that Scotland Titles";
+
+      const tartanCertificateScotlantTilesText = `has assigned, and do`;
+      const tartanCertificateScotlantTilesTextTwo = `by these presents assign, ratify and confirm unto the ${
+        propObject.p_8727182704913._Title2 ? "Petitioners" : "Petitioner"
+      }\nthe following ensemble robes in such tartan as is depicted\nupon the margin sinister hereof, and award unto the\n${
+        propObject.p_8727182704913._Title2 ? "Petitioners" : "Petitioner"
+      } the rights to use, wear, display and earasay such\nregistered Scottish Tartan in exchange for their sworn\nallegiance to the Clan of Scotland,\n\n`;
+
+      const Tartan = "Videlicet such Tartan";
+      const tartanCertificateText = "as is official and certified as set";
+      const tartanCertificateTextTwo =
+        "out in the Scottish Register of Tartans act 2008 administered\nby the National Records of Scotland with advice from the\nCourt of the Lord Lyon and the Registrar General for Scotland\nacting as the Keeper of the Scottish Register of Tartans,";
+      const demostration = "By demonstration of";
+
+      const demonstrationText = " which ensemble robes the said";
+      const demonstrationTextTwo = `${
+        propObject.p_8727182704913._Title2 ? "Petitioner are" : "Petitioner is"
+      }, amongst all nobles and in all places of honour, to\nbe received as a ${
+        propObject.p_8727182704913._Title2 ? "Lairds" : "Laird"
+      } of Scotland,`; //Signed content
+
+      const tartanFurther = "Furthermore by ownership";
+      const tartanFurtherDescription = "of lands in Scotland, the";
+      const tartanFurtherDescriptionTwo = `${propObject.p_8727182704913._Title1}, in such display of the proscribed ensemble robes are to\nbe received with honour in all of Scotland,`;
+
+      const tartanTestimony = "In Testimony whereof";
+      const tartanTestimonyDescription = "we have subscribed these";
+      const tartanTestimonyDescriptionTwo = `presents and the seal of our office is affixed hereto at Scotland\nTitles this day in this year of the reign of our sovereign Charles\nthe Third, by the Grace of God, of the United Kingdom of\nGreat Britain and Northern Ireland, King, Head of the\nCommonwealth, Defender of the Faith, and in the Year of our\n${propObject.p_8727182704913._Title1} stated henceforth.`;
+
+      const tartanSigned = "Signed";
+
+      const tartanBgPath = path.resolve("./public", "images", "tartan_bg.png");
+
+      const tartanbg_Buffer = fs.readFileSync(tartanBgPath);
+
+      const tartan_bg = await pdfDoc.embedPng(tartanbg_Buffer);
+
+      const tartanlogoPath = path.resolve(
+        "./public",
+        "images",
+        "tartan_logo.jpg"
+      );
+
+      const tartan_logo_Buffer = fs.readFileSync(tartanlogoPath);
+
+      const tartan_logo = await pdfDoc.embedJpg(tartan_logo_Buffer);
+
+      const tartansignPath = path.resolve(
+        "./public",
+        "images",
+        "g_signature.png"
+      );
+      const tartan_signature_Buffer = fs.readFileSync(tartansignPath);
+
+      // console.log(imgBuffer, "imgBuffer");
+      const tartan_signature = await pdfDoc.embedPng(tartan_signature_Buffer);
+
+      // const filePath = path.resolve("./public", "images", "scotland_log.png");
+
+      // const imgBuffer = fs.readFileSync(filePath);
+      // // console.log(imgBuffer, "imgBuffer");
+      // const img = await pdfDoc.embedPng(imgBuffer);
+      // const pngDims = img.scale(0.25);
+      // const filePathThree = path.resolve(
+      //   "./public",
+      //   "images",
+      //   "certificate-stamp.png"
+      // );
+
+      // const filePathFour = path.resolve(
+      //   "./public",
+      //   "images",
+      //   "certificate-mid.png"
+      // );
+
+      // const imgBufferFour = fs.readFileSync(filePathFour);
+      // const certificateMid = await pdfDoc.embedPng(imgBufferFour);
+      // const ertificateMidpngDims = certificateMid.scale(0.3);
+
+      // const imgBufferThree = fs.readFileSync(filePathThree);
+      // // console.log(imgBuffer, "imgBuffer");
+      // const stampImg = await pdfDoc.embedPng(imgBufferThree);
+      // const stampPngDims = stampImg.scale(0.3);
+
+      // const textWidth = tartanCertificate.getWidth() - 100; // Adjust the width as needed
+      // const textHeight = tartanCertificate.getHeight() - 50;
+
+      const dateText = "Date";
+
+      const tartandatee = propObject.p_8727182704913._Date;
+      const tartandateObj = new Date(tartandatee);
+      const tartanyear = tartandateObj.getFullYear();
+      const tartanmonth = String(tartandateObj.getMonth() + 1).padStart(2, "0"); // Adding 1 because months are 0-indexed
+      const tartanday = String(tartandateObj.getDate()).padStart(2, "0");
+      //   const
+
+      // const monthNames = [
+      //   "JANUARY",
+      //   "FEBRUARY",
+      //   "MARCH",
+      //   "APRIL",
+      //   "MAY",
+      //   "JUNE",
+      //   "JULY",
+      //   "AUGUST",
+      //   "SEPTEMBER",
+      //   "OCTOBER",
+      //   "NOVEMBER",
+      //   "DECEMBER",
+      // ];
+
+      const tartanmonthName = monthNames[tartandateObj.getMonth()];
+      let tartandayWithSuffix;
+
+      if (tartanday >= 11 && tartanday <= 13) {
+        tartandayWithSuffix = `${tartanday}TH`;
+      } else {
+        switch (tartanday % 10) {
+          case 1:
+            tartandayWithSuffix = `${tartanday}ST`;
+            break;
+          case 2:
+            tartandayWithSuffix = `${tartanday}ND`;
+            break;
+          case 3:
+            tartandayWithSuffix = `${tartanday}RD`;
+            break;
+          default:
+            tartandayWithSuffix = `${tartanday}TH`;
+        }
+      }
+      const TartandateContent = `THIS ${tartandayWithSuffix} DAY OF ${tartanmonthName} IN THE YEAR ${tartanyear}`;
+      const copyright =
+        "All content, layout, artwork and illustrations copyright Scotland Titles 2021 and subject to licence";
+
+      tartanCertificate.drawImage(tartan_bg, {
+        width: tartanCertificate.getWidth(),
+        height: tartanCertificate.getHeight(),
+      });
+
+      tartanCertificate.drawImage(img, {
+        x: 500,
+        y: 710,
+        width: pngDims.width,
+        height: pngDims.height,
+      });
+
+      tartanCertificate.drawImage(stampImg, {
+        x: 480,
+        y: 70,
+        width: stampPngDims.width,
+        height: stampPngDims.height,
+      });
+
+      tartanCertificate.drawText(tartanCertficateUserName, {
+        x: x,
+        y: 720,
+        width: textWidth,
+        height: textHeight,
+        size: 26,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+      tartanCertificate.drawText(tartanCertficateUserNameTwo, {
+        x: tartanTwox,
+        y: 690,
+        width: textWidth,
+        height: textHeight,
+        size: 26,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+
+      tartanCertificate.drawText(declare, {
+        x: 250,
+        y: propObject.p_8727182704913._Title2 ? 665 : 690,
+        size: 16,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0.219, 0.337, 0.137),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+
+      tartanCertificate.drawText(Allegiance, {
+        x: 50,
+        y: propObject.p_8727182704913._Title2 ? 640 : 660,
+        size: 26,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0.054, 0.027, 0.301),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+
+      tartanCertificate.drawText(prey, {
+        x: 230,
+        y: propObject.p_8727182704913._Title2 ? 640 : 660,
+        size: 18,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0.219, 0.337, 0.137),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+
+      tartanCertificate.drawText(certified, {
+        x: 370,
+        y: propObject.p_8727182704913._Title2 ? 640 : 660,
+        size: 26,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0.054, 0.027, 0.301),
+
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+
+      tartanCertificate.drawImage(certificateMid, {
+        x: 230,
+        y: propObject.p_8727182704913._Title2 ? 600 : 630,
+        width: ertificateMidpngDims.width,
+        height: ertificateMidpngDims.height,
+      });
+      tartanCertificate.drawText(Greeting, {
+        x: 20,
+        y: 560,
+        size: 16,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0.219, 0.337, 0.137),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+
+      tartanCertificate.drawText(tartanCertificateGreetingText, {
+        x: 220,
+        y: 560,
+        width: textWidth,
+        height: textHeight,
+        size: 10,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      tartanCertificate.drawText(tartanCertificateGreetingTextTwo, {
+        x: 20,
+        y: 545,
+        width: textWidth,
+        height: textHeight,
+        size: 10,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      //shewen text
+
+      tartanCertificate.drawText(know, {
+        x: 20,
+        y: 520,
+        size: 16,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0.219, 0.337, 0.137),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+
+      tartanCertificate.drawText(tartanCertificateknowText, {
+        x: 143,
+        y: 520,
+        width: textWidth,
+        height: textHeight,
+        size: 10,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      tartanCertificate.drawText(tartanCertificateknowTextTwo, {
+        x: 20,
+        y: 505,
+        width: textWidth,
+        height: textHeight,
+        size: 10,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      //videlict
+
+      tartanCertificate.drawText(Therefore, {
+        x: 20,
+        y: 410,
+        size: 16,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0.219, 0.337, 0.137),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+
+      tartanCertificate.drawText(tartanCertificateThereforeText, {
+        x: 155,
+        y: 410,
+        width: textWidth,
+        height: textHeight,
+        size: 10,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      tartanCertificate.drawText(tartanCertificateThereforeTextTwo, {
+        x: 20,
+        y: 395,
+        width: textWidth,
+        height: textHeight,
+        size: 10,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      //In Testimony Whereof
+
+      tartanCertificate.drawText(scotlantTiles, {
+        x: 20,
+        y: 320,
+        size: 16,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0.219, 0.337, 0.137),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+
+      tartanCertificate.drawText(tartanCertificateScotlantTilesText, {
+        x: 208,
+        y: 320,
+        width: textWidth,
+        height: textHeight,
+        size: 10,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      tartanCertificate.drawText(tartanCertificateScotlantTilesTextTwo, {
+        x: 20,
+        y: 305,
+        width: textWidth,
+        height: textHeight,
+        size: 10,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      tartanCertificate.drawText(Tartan, {
+        x: 20,
+        y: 210,
+        size: 16,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0.219, 0.337, 0.137),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+
+      tartanCertificate.drawText(tartanCertificateText, {
+        x: 165,
+        y: 210,
+        width: textWidth,
+        height: textHeight,
+        size: 10,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      tartanCertificate.drawText(tartanCertificateTextTwo, {
+        x: 20,
+        y: 195,
+        width: textWidth,
+        height: textHeight,
+        size: 10,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      tartanCertificate.drawText("Royal Stewart Hunting", {
+        x: 360,
+        y: 570,
+        size: 16,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0.219, 0.337, 0.137),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+
+      tartanCertificate.drawImage(tartan_logo, {
+        x: 330,
+        y: 330,
+        height: 230,
+        width: 230,
+      });
+
+      tartanCertificate.drawText(demostration, {
+        x: 310,
+        y: 300,
+        size: 16,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0.219, 0.337, 0.137),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+
+      tartanCertificate.drawText(demonstrationText, {
+        x: 445,
+        y: 300,
+        width: textWidth,
+        height: textHeight,
+        size: 10,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      tartanCertificate.drawText(demonstrationTextTwo, {
+        x: 310,
+        y: 285,
+        width: textWidth,
+        height: textHeight,
+        size: 10,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      tartanCertificate.drawText(tartanTestimony, {
+        x: 310,
+        y: 250,
+        size: 16,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0.219, 0.337, 0.137),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+
+      tartanCertificate.drawText(tartanTestimonyDescription, {
+        x: 460,
+        y: 250,
+        width: textWidth,
+        height: textHeight,
+        size: 10,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      tartanCertificate.drawText(tartanTestimonyDescriptionTwo, {
+        x: 310,
+        y: 235,
+        width: textWidth,
+        height: textHeight,
+        size: 10,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      //SIGNED
+      tartanCertificate.drawText(tartanSigned, {
+        x: 150,
+        y: 120,
+        size: 16,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0.219, 0.337, 0.137),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+
+      tartanCertificate.drawText(dateText, {
+        x: 170,
+        y: 80,
+        size: 16,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0.219, 0.337, 0.137),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+
+      tartanCertificate.drawText(TartandateContent, {
+        x: 210,
+        y: 80,
+        width: textWidth,
+        height: textHeight,
+        size: 10,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      tartanCertificate.drawText(copyright, {
+        x: 190,
+        y: 70,
+        width: textWidth,
+        height: textHeight,
+        size: 6,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFont,
+      });
+
+      tartanCertificate.drawImage(tartan_signature, {
+        x: 210,
+        y: 100,
+        height: 50,
+        width: 30,
+      });
+
+      // printed deed page start =========================
+
+      // printeddeedPage.drawText(`(${formerTitle})`, {
+      //   x: totalWidth,
+      //   y: 710,
+      //   size: 12,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: timesRomanFontHeading,
+      // });
+
+      // printeddeedPage.drawText(formerTitle, {
+      //   x: 175,
+      //   y: 449,
+      //   size: 12,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: timesRomanFontHeading,
+      // });
+
+      // printeddeedPage.drawText(newTitle, {
+      //   x: newTotalTextWidth,
+      //   y: 683,
+      //   size: 12,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: timesRomanFontHeading,
+      // });
+      // printeddeedPage.drawText(MainHeading, {
+      //   x: 200,
+      //   y: 750,
+      //   size: 20,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: timesRomanFontHeading,
+      // });
+      // printeddeedPage.drawText(SubHeading, {
+      //   x: 180,
+      //   y: 730,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFont,
+      // });
+
+      // printeddeedPage.drawText(deedFormText, {
+      //   x: 30,
+      //   y: 710,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFont,
+      // });
+
+      // printeddeedPage.drawText(deedFormText, {
+      //   x: 30,
+      //   y: 710,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFont,
+      // });
+
+      // printeddeedPage.drawLine({
+      //   start: { x: underlineX5, y: 600 }, // Adjust the y-position for Form Field 3
+      //   end: { x: underlineX6, y: 600 }, // Adjust the y-position for Form Field 3
+      //   color: rgb(0.65, 0.65, 0.65),
+      //   thickness: underlineHeight,
+      // });
+
+      // printeddeedPage.drawText(deedFormTextPlaceHolder, {
+      //   x: 60,
+      //   y: 603,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0.65, 0.65, 0.65),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanItalicFont,
+      // });
+
+      // printeddeedPage.drawText(declarationOne, {
+      //   x: 30,
+      //   y: 580,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFont,
+      // });
+
+      // printeddeedPage.drawText(absolute, {
+      //   x: 30,
+      //   y: 560,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFont,
+      // });
+      // printeddeedPage.drawText(formerNameBreak, {
+      //   x: 453,
+      //   y: 560,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFontHeading,
+      // });
+      // printeddeedPage.drawText(titleBreak, {
+      //   x: 30,
+      //   y: 548,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFontHeading,
+      // });
+      // printeddeedPage.drawText(absoluteTwo, {
+      //   x: 58,
+      //   y: 548,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFont,
+      // });
+      // printeddeedPage.drawText(newTitleTwo, {
+      //   x: 415,
+      //   y: 548,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFontHeading,
+      // });
+      // printeddeedPage.drawText(inContent, {
+      //   x: 520,
+      //   y: 548,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFont,
+      // });
+      // printeddeedPage.drawText(absoluteThree, {
+      //   x: 30,
+      //   y: 536,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFont,
+      // });
+
+      // printeddeedPage.drawText(declarationTwo, {
+      //   x: 30,
+      //   y: 500,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFont,
+      // });
+
+      // printeddeedPage.drawText(declarationTwoSubscribe, {
+      //   x: 30,
+      //   y: 473,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFont,
+      // });
+      // printeddeedPage.drawText(newTitleTwo, {
+      //   x: 120,
+      //   y: 473,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFont,
+      // });
+
+      // printeddeedPage.drawText(declarationTwoSubscribeName, {
+      //   x: 210,
+      //   y: 473,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFont,
+      // });
+
+      // printeddeedPage.drawText(formerTitle, {
+      //   x: 380,
+      //   y: 473,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFontHeading,
+      // });
+
+      // printeddeedPage.drawText(so, {
+      //   x: 500,
+      //   y: 473,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: timesRomanFont,
+      // });
+
+      // printeddeedPage.drawText(relinqushed, {
+      //   x: 30,
+      //   y: 461,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: timesRomanFont,
+      // });
+      // printeddeedPage.drawText(newTitleBreak, {
+      //   x: 510,
+      //   y: 461,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: timesRomanFontHeading,
+      // });
+
+      // printeddeedPage.drawText(newTitleBreakTwo, {
+      //   x: 30,
+      //   y: 449,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: timesRomanFontHeading,
+      // });
+
+      // printeddeedPage.drawText(only, {
+      //   x: 73,
+      //   y: 449,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   font: timesRomanFontHeading,
+      // });
+
+      // printeddeedPage.drawText(declarationThree, {
+      //   x: 30,
+      //   y: 420,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFont,
+      // });
+
+      // printeddeedPage.drawText(adopt, {
+      //   x: 30,
+      //   y: 408,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFont,
+      // });
+
+      // printeddeedPage.drawText(newTitleTwo, {
+      //   x: 70,
+      //   y: 408,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFontHeading,
+      // });
+
+      // printeddeedPage.drawText(declarationFour, {
+      //   x: 30,
+      //   y: 370,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFont,
+      // });
+      // printeddeedPage.drawText(newTitleTwo, {
+      //   x: 413,
+      //   y: 370,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFontHeading,
+      // });
+      // printeddeedPage.drawText(declarationFourTwo, {
+      //   x: 515,
+      //   y: 370,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFont,
+      // });
+
+      // printeddeedPage.drawText(signed, {
+      //   x: 30,
+      //   y: 300,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFont,
+      // });
+      // printeddeedPage.drawLine({
+      //   start: { x: underlineX3, y: 300 }, // Adjust the y-position for Form Field 3
+      //   end: { x: underlineX4, y: 300 }, // Adjust the y-position for Form Field 3
+      //   color: rgb(0, 0, 0),
+      //   thickness: underlineHeight,
+      // });
+
+      // printeddeedPage.drawText(dayOf, {
+      //   x: 190,
+      //   y: 300,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFont,
+      // });
+
+      // printeddeedPage.drawLine({
+      //   start: { x: underlineX1, y: 300 }, // Adjust the y-position for Form Field 3
+      //   end: { x: underlineX2, y: 300 }, // Adjust the y-position for Form Field 3
+      //   color: rgb(0, 0, 0),
+      //   thickness: underlineHeight,
+      // });
+
+      // printeddeedPage.drawText(yearIn, {
+      //   x: 330,
+      //   y: 300,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFont,
+      // });
+
+      // printeddeedPage.drawText(signedAs, {
+      //   x: 30,
+      //   y: 270,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFont,
+      // });
+
+      // printeddeedPage.drawLine({
+      //   start: { x: 30, y: 200 }, // Adjust the y-position for Form Field 3
+      //   end: { x: 250, y: 200 }, // Adjust the y-position for Form Field 3
+      //   color: rgb(0, 0, 0),
+      //   thickness: underlineHeight,
+      // });
+      // printeddeedPage.drawText(signPlaceHolder, {
+      //   x: 40,
+      //   y: 190,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0.65, 0.65, 0.65),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanItalicFont,
+      // });
+
+      // printeddeedPage.drawLine({
+      //   start: { x: 30, y: 170 }, // Adjust the y-position for Form Field 3
+      //   end: { x: 250, y: 170 }, // Adjust the y-position for Form Field 3
+      //   color: rgb(0, 0, 0),
+      //   thickness: underlineHeight,
+      // });
+
+      // printeddeedPage.drawText(lordName, {
+      //   x: 40,
+      //   y: 155,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFont,
+      // });
+
+      // printeddeedPage.drawLine({
+      //   start: { x: 30, y: 90 }, // Adjust the y-position for Form Field 3
+      //   end: { x: 250, y: 90 }, // Adjust the y-position for Form Field 3
+      //   color: rgb(0, 0, 0),
+      //   thickness: underlineHeight,
+      // });
+
+      // printeddeedPage.drawText(formerName, {
+      //   x: 40,
+      //   y: 75,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFont,
+      // });
+
+      // printeddeedPage.drawText(presence, {
+      //   x: 270,
+      //   y: 240,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFont,
+      // });
+
+      // printeddeedPage.drawText(witness, {
+      //   x: 270,
+      //   y: 190,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFont,
+      // });
+
+      // printeddeedPage.drawLine({
+      //   start: { x: 370, y: 190 }, // Adjust the y-position for Form Field 3
+      //   end: { x: 540, y: 190 }, // Adjust the y-position for Form Field 3
+      //   color: rgb(0, 0, 0),
+      //   thickness: underlineHeight,
+      // });
+
+      // printeddeedPage.drawText("Name", {
+      //   x: 270,
+      //   y: 160,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFont,
+      // });
+
+      // printeddeedPage.drawLine({
+      //   start: { x: 300, y: 160 }, // Adjust the y-position for Form Field 3
+      //   end: { x: 540, y: 160 }, // Adjust the y-position for Form Field 3
+      //   color: rgb(0, 0, 0),
+      //   thickness: underlineHeight,
+      // });
+
+      // printeddeedPage.drawText("Address", {
+      //   x: 270,
+      //   y: 130,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFont,
+      // });
+
+      // printeddeedPage.drawLine({
+      //   start: { x: 310, y: 130 }, // Adjust the y-position for Form Field 3
+      //   end: { x: 540, y: 130 }, // Adjust the y-position for Form Field 3
+      //   color: rgb(0, 0, 0),
+      //   thickness: underlineHeight,
+      // });
+      // printeddeedPage.drawLine({
+      //   start: { x: 270, y: 105 }, // Adjust the y-position for Form Field 3
+      //   end: { x: 540, y: 105 }, // Adjust the y-position for Form Field 3
+      //   color: rgb(0, 0, 0),
+      //   thickness: underlineHeight,
+      // });
+      // printeddeedPage.drawLine({
+      //   start: { x: 270, y: 80 }, // Adjust the y-position for Form Field 3
+      //   end: { x: 540, y: 80 }, // Adjust the y-position for Form Field 3
+      //   color: rgb(0, 0, 0),
+      //   thickness: underlineHeight,
+      // });
+
+      // printeddeedPage.drawText("Occupation", {
+      //   x: 270,
+      //   y: 50,
+      //   width: textWidth,
+      //   height: textHeight,
+      //   size: 12,
+      //   color: rgb(0, 0, 0),
+      //   lineHeight: fontSize * 1.2,
+      //   // font: customFont,
+      //   font: timesRomanFont,
+      // });
+
+      // printeddeedPage.drawLine({
+      //   start: { x: 330, y: 50 }, // Adjust the y-position for Form Field 3
+      //   end: { x: 540, y: 50 }, // Adjust the y-position for Form Field 3
+      //   color: rgb(0, 0, 0),
+      //   thickness: underlineHeight,
+      // });
+      //=========================printeddeedPage end==============
+
+      //master deed page two
+      if (propObject.p_8727182704913._Title2) {
+        positions.forEach((position) => {
+          deedPageTwo.drawText(`${formerTitle}.`, {
+            x: position.x,
+            y: position.y,
+            size: 12,
+            width: textWidth,
+            height: textHeight,
+            color: rgb(0, 0, 0),
+            lineHeight: fontSize * 1.2,
+            font: timesRomanFontHeading,
+          });
+        });
+
+        const deedTwoUserNameWidth = `of ${propObject.p_8727182704913._Name2}`;
+        const formerDeedTwotextWidth = timesRomanFontHeading.widthOfTextAtSize(
+          deedTwoUserNameWidth,
+          12
+        );
+        // console.log(formertextWidth, "formertextWidth");
+        const totalWidthDeedTwo = formerDeedTwotextWidth + 35;
+
+        const deedTwoNewNameWidth = `now ${propObject.p_8727182704913._Title2} ${propObject.p_8727182704913._Name2}`;
+        const newDeedTwotextWidth = timesRomanFontHeading.widthOfTextAtSize(
+          deedTwoNewNameWidth,
+          12
+        );
+
+        const newDeedTwoTotalTextWidth = newDeedTwotextWidth + 30;
+
+        deedPageTwo.drawText(`(${formerTitle})`, {
+          x: totalWidthDeedTwo,
+          y: 710,
+          size: 12,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFontHeading,
+        });
+
+        deedPageTwo.drawText(formerTitle, {
+          x: 175,
+          y: 449,
+          size: 12,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFontHeading,
+        });
+
+        // deedPageTwo.drawText(formerTitle, {
+        //   x:
+        //   y:
+        //   size: 12,
+        //   width: textWidth,
+        //   height: textHeight,
+        //   color: rgb(0, 0, 0),
+        //   lineHeight: fontSize * 1.2,
+        //   font: timesRomanFontHeading,
+        // });
+        deedPageTwo.drawText(newTitle, {
+          x: newDeedTwoTotalTextWidth,
+          y: 683,
+          size: 12,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFontHeading,
+        });
+
+        const deedFormTextTwo = `of ${propObject.p_8727182704913._Name2}\n\nnow ${propObject.p_8727182704913._Title2} ${propObject.p_8727182704913._Name2}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_8727182704913._Title2} ${propObject.p_8727182704913._Name2}\n\nof`;
+
+        const lordNameTwo = `${propObject.p_8727182704913._Title2} ${propObject.p_8727182704913._Name2}\n\nFormerly known as`;
+        const formerNameTwo = `${propObject.p_8727182704913._Name2}`;
+
+        deedPageTwo.drawText(MainHeading, {
+          x: 200,
+          y: 750,
+          size: 20,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFontHeading,
+        });
+        deedPageTwo.drawText(SubHeading, {
+          x: 180,
+          y: 730,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        deedPageTwo.drawText(deedFormTextTwo, {
+          x: 30,
+          y: 710,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        deedPageTwo.drawText(deedFormTextTwo, {
+          x: 30,
+          y: 710,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        deedPageTwo.drawLine({
+          start: { x: underlineX5, y: 600 }, // Adjust the y-position for Form Field 3
+          end: { x: underlineX6, y: 600 }, // Adjust the y-position for Form Field 3
+          color: rgb(0.65, 0.65, 0.65),
+          thickness: underlineHeight,
+        });
+
+        deedPageTwo.drawText(deedFormTextPlaceHolder, {
+          x: 60,
+          y: 603,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0.65, 0.65, 0.65),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanItalicFont,
+        });
+
+        deedPageTwo.drawText(declarationOne, {
+          x: 30,
+          y: 580,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        deedPageTwo.drawText(absolute, {
+          x: 30,
+          y: 560,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+        deedPageTwo.drawText(formerNameBreak, {
+          x: 453,
+          y: 560,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFontHeading,
+        });
+        deedPageTwo.drawText(titleBreak, {
+          x: 30,
+          y: 548,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFontHeading,
+        });
+        deedPageTwo.drawText(absoluteTwo, {
+          x: 58,
+          y: 548,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+        deedPageTwo.drawText(newTitleTwo, {
+          x: 415,
+          y: 548,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFontHeading,
+        });
+        deedPageTwo.drawText(inContent, {
+          x: 520,
+          y: 548,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+        deedPageTwo.drawText(absoluteThree, {
+          x: 30,
+          y: 536,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        deedPageTwo.drawText(declarationTwo, {
+          x: 30,
+          y: 500,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        deedPageTwo.drawText(declarationTwoSubscribe, {
+          x: 30,
+          y: 473,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+        deedPageTwo.drawText(newTitleTwo, {
+          x: 120,
+          y: 473,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        deedPageTwo.drawText(declarationTwoSubscribeName, {
+          x: 210,
+          y: 473,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        deedPageTwo.drawText(formerTitle, {
+          x: 380,
+          y: 473,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFontHeading,
+        });
+
+        deedPageTwo.drawText(so, {
+          x: 500,
+          y: 473,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFont,
+        });
+
+        deedPageTwo.drawText(relinqushed, {
+          x: 30,
+          y: 461,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFont,
+        });
+        deedPageTwo.drawText(newTitleBreak, {
+          x: 510,
+          y: 461,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFontHeading,
+        });
+
+        deedPageTwo.drawText(newTitleBreakTwo, {
+          x: 30,
+          y: 449,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFontHeading,
+        });
+
+        deedPageTwo.drawText(only, {
+          x: 73,
+          y: 449,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFontHeading,
+        });
+
+        deedPageTwo.drawText(declarationThree, {
+          x: 30,
+          y: 420,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        deedPageTwo.drawText(adopt, {
+          x: 30,
+          y: 408,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        deedPageTwo.drawText(newTitleTwo, {
+          x: 70,
+          y: 408,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFontHeading,
+        });
+
+        deedPageTwo.drawText(declarationFour, {
+          x: 30,
+          y: 370,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+        deedPageTwo.drawText(newTitleTwo, {
+          x: 413,
+          y: 370,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFontHeading,
+        });
+        deedPageTwo.drawText(declarationFourTwo, {
+          x: 515,
+          y: 370,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        deedPageTwo.drawText(signed, {
+          x: 30,
+          y: 300,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+        deedPageTwo.drawLine({
+          start: { x: underlineX3, y: 300 }, // Adjust the y-position for Form Field 3
+          end: { x: underlineX4, y: 300 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
+
+        deedPageTwo.drawText(dayOf, {
+          x: 190,
+          y: 300,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        deedPageTwo.drawLine({
+          start: { x: underlineX1, y: 300 }, // Adjust the y-position for Form Field 3
+          end: { x: underlineX2, y: 300 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
+
+        deedPageTwo.drawText(yearIn, {
+          x: 330,
+          y: 300,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        deedPageTwo.drawText(signedAs, {
+          x: 30,
+          y: 270,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        deedPageTwo.drawLine({
+          start: { x: 30, y: 200 }, // Adjust the y-position for Form Field 3
+          end: { x: 250, y: 200 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
+        deedPageTwo.drawText(signPlaceHolder, {
+          x: 40,
+          y: 190,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0.65, 0.65, 0.65),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanItalicFont,
+        });
+
+        deedPageTwo.drawLine({
+          start: { x: 30, y: 170 }, // Adjust the y-position for Form Field 3
+          end: { x: 250, y: 170 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
+
+        deedPageTwo.drawText(lordNameTwo, {
+          x: 40,
+          y: 155,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        deedPageTwo.drawLine({
+          start: { x: 30, y: 90 }, // Adjust the y-position for Form Field 3
+          end: { x: 250, y: 90 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
+
+        deedPageTwo.drawText(formerNameTwo, {
+          x: 40,
+          y: 75,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        deedPageTwo.drawText(presence, {
+          x: 270,
+          y: 240,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        deedPageTwo.drawText(witness, {
+          x: 270,
+          y: 190,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        deedPageTwo.drawLine({
+          start: { x: 370, y: 190 }, // Adjust the y-position for Form Field 3
+          end: { x: 540, y: 190 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
+
+        deedPageTwo.drawText("Name", {
+          x: 270,
+          y: 160,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        deedPageTwo.drawLine({
+          start: { x: 300, y: 160 }, // Adjust the y-position for Form Field 3
+          end: { x: 540, y: 160 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
+
+        deedPageTwo.drawText("Address", {
+          x: 270,
+          y: 130,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        deedPageTwo.drawLine({
+          start: { x: 310, y: 130 }, // Adjust the y-position for Form Field 3
+          end: { x: 540, y: 130 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
+        deedPageTwo.drawLine({
+          start: { x: 270, y: 105 }, // Adjust the y-position for Form Field 3
+          end: { x: 540, y: 105 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
+        deedPageTwo.drawLine({
+          start: { x: 270, y: 80 }, // Adjust the y-position for Form Field 3
+          end: { x: 540, y: 80 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
+
+        deedPageTwo.drawText("Occupation", {
+          x: 270,
+          y: 50,
+          width: textWidth,
+          height: textHeight,
+          size: 12,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          // font: customFont,
+          font: timesRomanFont,
+        });
+
+        deedPageTwo.drawLine({
+          start: { x: 330, y: 50 }, // Adjust the y-position for Form Field 3
+          end: { x: 540, y: 50 }, // Adjust the y-position for Form Field 3
+          color: rgb(0, 0, 0),
+          thickness: underlineHeight,
+        });
+      }
+
+      // if (propObject.p_8727182704913.variant.includes("Printed Pack")) {
+      //   console.log(propObject.p_8727182704913.variant);
+      //   printedPage.drawText("Title printed ", {
+      //     x: 70,
+      //     y: 710,
+      //     size: fontSize,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printedPage.drawText(propObject.p_8727182704913._Date, {
+      //     x: 70,
+      //     y: 710,
+      //     size: fontSize,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: timesRomanFont,
+      //   });
+      //   printedPage.drawText(heading, {
+      //     x: 70,
+      //     y: 650,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: headingFontSize,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFontHeading,
+      //   });
+
+      //   printedPage.drawText(content, {
+      //     x: 70,
+      //     y: 620,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: fontSize,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printedPage.drawText(welcomeContent, {
+      //     x: 240,
+      //     y: 320,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 14,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printedPage.drawText(welcomeSignContent, {
+      //     x: 70,
+      //     y: 250,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 14,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: timesRomanItalicFont,
+      //   });
+
+      //   printedPage.drawImage(welcome_emblem_signature, {
+      //     x: 170,
+      //     y: 210,
+      //     height: 70,
+      //     width: 50,
+      //   });
+
+      //   printedPage.drawText(facebookContent, {
+      //     x: 70,
+      //     y: 170,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 11,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printedPage.drawText(facebookLink, {
+      //     x: 120,
+      //     y: 170,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 11,
+      //     color: rgb(0.027, 0.388, 0.756),
+      //     lineHeight: fontSize * 1.2,
+      //     font: timesRomanFont,
+      //   });
+      //   printedPage.drawLine({
+      //     start: { x: 120, y: 165 }, // Adjust the y-position for Form Field 3
+      //     end: { x: 215, y: 165 }, // Adjust the y-position for Form Field 3
+      //     color: rgb(0.027, 0.388, 0.756),
+      //     thickness: 0.5,
+      //   });
+
+      //   printedPage.drawText(scotalndTitleAddress, {
+      //     x: 120,
+      //     y: 70,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 11,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printedPage.drawText("info@scotlandtitles.com", {
+      //     x: 150,
+      //     y: 50,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 11,
+      //     color: rgb(0.027, 0.388, 0.756),
+      //     lineHeight: fontSize * 1.2,
+      //     font: timesRomanFont,
+      //   });
+      //   printedPage.drawLine({
+      //     start: { x: 150, y: 45 }, // Adjust the y-position for Form Field 3
+      //     end: { x: 260, y: 45 }, // Adjust the y-position for Form Field 3
+      //     color: rgb(0.027, 0.388, 0.756),
+      //     thickness: 0.5,
+      //   });
+
+      //   printedPage.drawText("www.ScotlandTitles.com", {
+      //     x: 350,
+      //     y: 50,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 11,
+      //     color: rgb(0.027, 0.388, 0.756),
+      //     lineHeight: fontSize * 1.2,
+      //     font: timesRomanFont,
+      //   });
+      //   printedPage.drawLine({
+      //     start: { x: 350, y: 45 }, // Adjust the y-position for Form Field 3
+      //     end: { x: 460, y: 45 }, // Adjust the y-position for Form Field 3
+      //     color: rgb(0.027, 0.388, 0.756),
+      //     thickness: 0.5,
+      //   });
+      //   printedPage.drawImage(img, {
+      //     x: 440,
+      //     y: 690,
+      //     width: pngDims.width,
+      //     height: pngDims.height,
+      //   });
+
+      //   printedpagetwo.drawImage(yellow_middle, {
+      //     x: 380,
+      //     y: propObject.p_8727182704913._Title2 ? 385 : 405,
+      //     width: ertificateMidpngDims.width,
+      //     height: ertificateMidpngDims.height,
+      //   });
+      //   printedpagetwo.drawImage(ribbonImg, {
+      //     x: 30,
+      //     y: 410,
+      //     width: pngDimsRibbon.width,
+      //     height: pngDimsRibbon.height,
+      //   });
+
+      //   printedpagetwo.drawImage(stampImg, {
+      //     x: 720,
+      //     y: 70,
+      //     width: stampPngDims.width,
+      //     height: stampPngDims.height,
+      //   });
+
+      //   printedpagetwo.drawImage(Signaturetwo, {
+      //     x: 580,
+      //     y: 70,
+      //     height: 30,
+      //     width: 100,
+      //   });
+
+      //   printedpagetwo.drawText("Witnessed", {
+      //     x: 600,
+      //     y: 60,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 10,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: tempusFont,
+      //     // font: customFont,
+      //     // font: tempusFont,
+      //   });
+
+      //   printedpagetwo.drawImage(welcome_emblem_signature, {
+      //     x: 500,
+      //     y: 70,
+      //     height: 50,
+      //     width: 30,
+      //   });
+
+      //   printedpagetwo.drawText("Signed", {
+      //     x: 500,
+      //     y: 60,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 10,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: tempusFont,
+      //   });
+
+      //   printedpagetwo.drawText(certificateHeading, {
+      //     x: 200,
+      //     y: 520,
+      //     size: 26,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     color: rgb(0.219, 0.337, 0.137),
+      //     lineHeight: fontSize * 1.2,
+      //     font: oldEng,
+      //   });
+      //   printedpagetwo.drawText(certficateAddress, {
+      //     x: 220,
+      //     y: 500,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 10,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: tempusFont,
+      //   });
+
+      //   printedpagetwo.drawText(certficateUserName, {
+      //     x: certificateX,
+      //     y: 470,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 24,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: oldEng,
+      //   });
+      //   {
+      //     propObject.p_8727182704913._Title2 &&
+      //       printedpagetwo.drawText(and, {
+      //         x: 400,
+      //         y: 460,
+      //         width: textWidth,
+      //         height: textHeight,
+      //         size: 10,
+      //         color: rgb(0, 0, 0),
+      //         lineHeight: fontSize * 1.2,
+      //         font: tempusFont,
+      //       });
+
+      //     printedpagetwo.drawText(certficateUserNameTwo, {
+      //       x: certificateTwoX,
+      //       y: 435,
+      //       width: textWidth,
+      //       height: textHeight,
+      //       size: 24,
+      //       color: rgb(0, 0, 0),
+      //       lineHeight: fontSize * 1.2,
+      //       font: oldEng,
+      //     });
+      //   }
+      //   printedpagetwo.drawText(certificateAddressTwo, {
+      //     x: 195,
+      //     y: propObject.p_8727182704913._Title2 ? 415 : 450,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 10,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: tempusFont,
+      //   });
+
+      //   printedpagetwo.drawText(certificateText, {
+      //     x: 60,
+      //     y: 370,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 10,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: tempusFont,
+      //   });
+
+      //   printedpagetwo.drawText(certificateTextTwo, {
+      //     x: 460,
+      //     y: 370,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 10,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: tempusFont,
+      //   });
+
+      //   // printed deed page start =========================
+
+      //   printeddeedPage.drawText(`(${formerTitle})`, {
+      //     x: totalWidth,
+      //     y: 710,
+      //     size: 12,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: timesRomanFontHeading,
+      //   });
+
+      //   printeddeedPage.drawText(formerTitle, {
+      //     x: 175,
+      //     y: 449,
+      //     size: 12,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: timesRomanFontHeading,
+      //   });
+
+      //   printeddeedPage.drawText(newTitle, {
+      //     x: newTotalTextWidth,
+      //     y: 683,
+      //     size: 12,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: timesRomanFontHeading,
+      //   });
+      //   printeddeedPage.drawText(MainHeading, {
+      //     x: 200,
+      //     y: 750,
+      //     size: 20,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: timesRomanFontHeading,
+      //   });
+      //   printeddeedPage.drawText(SubHeading, {
+      //     x: 180,
+      //     y: 730,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPage.drawText(deedFormText, {
+      //     x: 30,
+      //     y: 710,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPage.drawText(deedFormText, {
+      //     x: 30,
+      //     y: 710,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPage.drawLine({
+      //     start: { x: underlineX5, y: 600 }, // Adjust the y-position for Form Field 3
+      //     end: { x: underlineX6, y: 600 }, // Adjust the y-position for Form Field 3
+      //     color: rgb(0.65, 0.65, 0.65),
+      //     thickness: underlineHeight,
+      //   });
+
+      //   printeddeedPage.drawText(deedFormTextPlaceHolder, {
+      //     x: 60,
+      //     y: 603,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0.65, 0.65, 0.65),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanItalicFont,
+      //   });
+
+      //   printeddeedPage.drawText(declarationOne, {
+      //     x: 30,
+      //     y: 580,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPage.drawText(absolute, {
+      //     x: 30,
+      //     y: 560,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+      //   printeddeedPage.drawText(formerNameBreak, {
+      //     x: 453,
+      //     y: 560,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFontHeading,
+      //   });
+      //   printeddeedPage.drawText(titleBreak, {
+      //     x: 30,
+      //     y: 548,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFontHeading,
+      //   });
+      //   printeddeedPage.drawText(absoluteTwo, {
+      //     x: 58,
+      //     y: 548,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+      //   printeddeedPage.drawText(newTitleTwo, {
+      //     x: 415,
+      //     y: 548,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFontHeading,
+      //   });
+      //   printeddeedPage.drawText(inContent, {
+      //     x: 520,
+      //     y: 548,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+      //   printeddeedPage.drawText(absoluteThree, {
+      //     x: 30,
+      //     y: 536,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPage.drawText(declarationTwo, {
+      //     x: 30,
+      //     y: 500,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPage.drawText(declarationTwoSubscribe, {
+      //     x: 30,
+      //     y: 473,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+      //   printeddeedPage.drawText(newTitleTwo, {
+      //     x: 120,
+      //     y: 473,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPage.drawText(declarationTwoSubscribeName, {
+      //     x: 210,
+      //     y: 473,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPage.drawText(formerTitle, {
+      //     x: 380,
+      //     y: 473,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFontHeading,
+      //   });
+
+      //   printeddeedPage.drawText(so, {
+      //     x: 500,
+      //     y: 473,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPage.drawText(relinqushed, {
+      //     x: 30,
+      //     y: 461,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: timesRomanFont,
+      //   });
+      //   printeddeedPage.drawText(newTitleBreak, {
+      //     x: 510,
+      //     y: 461,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: timesRomanFontHeading,
+      //   });
+
+      //   printeddeedPage.drawText(newTitleBreakTwo, {
+      //     x: 30,
+      //     y: 449,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: timesRomanFontHeading,
+      //   });
+
+      //   printeddeedPage.drawText(only, {
+      //     x: 73,
+      //     y: 449,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: timesRomanFontHeading,
+      //   });
+
+      //   printeddeedPage.drawText(declarationThree, {
+      //     x: 30,
+      //     y: 420,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPage.drawText(adopt, {
+      //     x: 30,
+      //     y: 408,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPage.drawText(newTitleTwo, {
+      //     x: 70,
+      //     y: 408,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFontHeading,
+      //   });
+
+      //   printeddeedPage.drawText(declarationFour, {
+      //     x: 30,
+      //     y: 370,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+      //   printeddeedPage.drawText(newTitleTwo, {
+      //     x: 413,
+      //     y: 370,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFontHeading,
+      //   });
+      //   printeddeedPage.drawText(declarationFourTwo, {
+      //     x: 515,
+      //     y: 370,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPage.drawText(signed, {
+      //     x: 30,
+      //     y: 300,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+      //   printeddeedPage.drawLine({
+      //     start: { x: underlineX3, y: 300 }, // Adjust the y-position for Form Field 3
+      //     end: { x: underlineX4, y: 300 }, // Adjust the y-position for Form Field 3
+      //     color: rgb(0, 0, 0),
+      //     thickness: underlineHeight,
+      //   });
+
+      //   printeddeedPage.drawText(dayOf, {
+      //     x: 190,
+      //     y: 300,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPage.drawLine({
+      //     start: { x: underlineX1, y: 300 }, // Adjust the y-position for Form Field 3
+      //     end: { x: underlineX2, y: 300 }, // Adjust the y-position for Form Field 3
+      //     color: rgb(0, 0, 0),
+      //     thickness: underlineHeight,
+      //   });
+
+      //   printeddeedPage.drawText(yearIn, {
+      //     x: 330,
+      //     y: 300,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPage.drawText(signedAs, {
+      //     x: 30,
+      //     y: 270,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPage.drawLine({
+      //     start: { x: 30, y: 200 }, // Adjust the y-position for Form Field 3
+      //     end: { x: 250, y: 200 }, // Adjust the y-position for Form Field 3
+      //     color: rgb(0, 0, 0),
+      //     thickness: underlineHeight,
+      //   });
+      //   printeddeedPage.drawText(signPlaceHolder, {
+      //     x: 40,
+      //     y: 190,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0.65, 0.65, 0.65),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanItalicFont,
+      //   });
+
+      //   printeddeedPage.drawLine({
+      //     start: { x: 30, y: 170 }, // Adjust the y-position for Form Field 3
+      //     end: { x: 250, y: 170 }, // Adjust the y-position for Form Field 3
+      //     color: rgb(0, 0, 0),
+      //     thickness: underlineHeight,
+      //   });
+
+      //   printeddeedPage.drawText(lordName, {
+      //     x: 40,
+      //     y: 155,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPage.drawLine({
+      //     start: { x: 30, y: 90 }, // Adjust the y-position for Form Field 3
+      //     end: { x: 250, y: 90 }, // Adjust the y-position for Form Field 3
+      //     color: rgb(0, 0, 0),
+      //     thickness: underlineHeight,
+      //   });
+
+      //   printeddeedPage.drawText(formerName, {
+      //     x: 40,
+      //     y: 75,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPage.drawText(presence, {
+      //     x: 270,
+      //     y: 240,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPage.drawText(witness, {
+      //     x: 270,
+      //     y: 190,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPage.drawLine({
+      //     start: { x: 370, y: 190 }, // Adjust the y-position for Form Field 3
+      //     end: { x: 540, y: 190 }, // Adjust the y-position for Form Field 3
+      //     color: rgb(0, 0, 0),
+      //     thickness: underlineHeight,
+      //   });
+
+      //   printeddeedPage.drawText("Name", {
+      //     x: 270,
+      //     y: 160,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPage.drawLine({
+      //     start: { x: 300, y: 160 }, // Adjust the y-position for Form Field 3
+      //     end: { x: 540, y: 160 }, // Adjust the y-position for Form Field 3
+      //     color: rgb(0, 0, 0),
+      //     thickness: underlineHeight,
+      //   });
+
+      //   printeddeedPage.drawText("Address", {
+      //     x: 270,
+      //     y: 130,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPage.drawLine({
+      //     start: { x: 310, y: 130 }, // Adjust the y-position for Form Field 3
+      //     end: { x: 540, y: 130 }, // Adjust the y-position for Form Field 3
+      //     color: rgb(0, 0, 0),
+      //     thickness: underlineHeight,
+      //   });
+      //   printeddeedPage.drawLine({
+      //     start: { x: 270, y: 105 }, // Adjust the y-position for Form Field 3
+      //     end: { x: 540, y: 105 }, // Adjust the y-position for Form Field 3
+      //     color: rgb(0, 0, 0),
+      //     thickness: underlineHeight,
+      //   });
+      //   printeddeedPage.drawLine({
+      //     start: { x: 270, y: 80 }, // Adjust the y-position for Form Field 3
+      //     end: { x: 540, y: 80 }, // Adjust the y-position for Form Field 3
+      //     color: rgb(0, 0, 0),
+      //     thickness: underlineHeight,
+      //   });
+
+      //   printeddeedPage.drawText("Occupation", {
+      //     x: 270,
+      //     y: 50,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPage.drawLine({
+      //     start: { x: 330, y: 50 }, // Adjust the y-position for Form Field 3
+      //     end: { x: 540, y: 50 }, // Adjust the y-position for Form Field 3
+      //     color: rgb(0, 0, 0),
+      //     thickness: underlineHeight,
+      //   });
+      // }
+
+      // if (propObject.p_8727182704913._Title2) {
+      //   positions.forEach((position) => {
+      //     printeddeedPageTwo.drawText(`${formerTitle}.`, {
+      //       x: position.x,
+      //       y: position.y,
+      //       size: 12,
+      //       width: textWidth,
+      //       height: textHeight,
+      //       color: rgb(0, 0, 0),
+      //       lineHeight: fontSize * 1.2,
+      //       font: timesRomanFontHeading,
+      //     });
+      //   });
+
+      //   const deedTwoUserNameWidth = `of ${propObject.p_8727182704913._Name2}`;
+      //   const formerDeedTwotextWidth = timesRomanFontHeading.widthOfTextAtSize(
+      //     deedTwoUserNameWidth,
+      //     12
+      //   );
+      //   // console.log(formertextWidth, "formertextWidth");
+      //   const totalWidthDeedTwo = formerDeedTwotextWidth + 35;
+
+      //   const deedTwoNewNameWidth = `now ${propObject.p_8727182704913._Title2} ${propObject.p_8727182704913._Name2}`;
+      //   const newDeedTwotextWidth = timesRomanFontHeading.widthOfTextAtSize(
+      //     deedTwoNewNameWidth,
+      //     12
+      //   );
+
+      //   const newDeedTwoTotalTextWidth = newDeedTwotextWidth + 30;
+
+      //   printeddeedPageTwo.drawText(`(${formerTitle})`, {
+      //     x: totalWidthDeedTwo,
+      //     y: 710,
+      //     size: 12,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: timesRomanFontHeading,
+      //   });
+
+      //   printeddeedPageTwo.drawText(formerTitle, {
+      //     x: 175,
+      //     y: 449,
+      //     size: 12,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: timesRomanFontHeading,
+      //   });
+
+      //   // printeddeedPageTwo.drawText(formerTitle, {
+      //   //   x:
+      //   //   y:
+      //   //   size: 12,
+      //   //   width: textWidth,
+      //   //   height: textHeight,
+      //   //   color: rgb(0, 0, 0),
+      //   //   lineHeight: fontSize * 1.2,
+      //   //   font: timesRomanFontHeading,
+      //   // });
+      //   printeddeedPageTwo.drawText(newTitle, {
+      //     x: newDeedTwoTotalTextWidth,
+      //     y: 683,
+      //     size: 12,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: timesRomanFontHeading,
+      //   });
+
+      //   const deedFormTextTwo = `of ${propObject.p_8727182704913._Name2}\n\nnow ${propObject.p_8727182704913._Title2} ${propObject.p_8727182704913._Name2}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_8727182704913._Title2} ${propObject.p_8727182704913._Name2}\n\nof`;
+
+      //   const lordNameTwo = `${propObject.p_8727182704913._Title2} ${propObject.p_8727182704913._Name2}\n\nFormerly known as`;
+      //   const formerNameTwo = `${propObject.p_8727182704913._Name2}`;
+
+      //   printeddeedPageTwo.drawText(MainHeading, {
+      //     x: 200,
+      //     y: 750,
+      //     size: 20,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: timesRomanFontHeading,
+      //   });
+      //   printeddeedPageTwo.drawText(SubHeading, {
+      //     x: 180,
+      //     y: 730,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPageTwo.drawText(deedFormTextTwo, {
+      //     x: 30,
+      //     y: 710,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPageTwo.drawText(deedFormTextTwo, {
+      //     x: 30,
+      //     y: 710,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPageTwo.drawLine({
+      //     start: { x: underlineX5, y: 600 }, // Adjust the y-position for Form Field 3
+      //     end: { x: underlineX6, y: 600 }, // Adjust the y-position for Form Field 3
+      //     color: rgb(0.65, 0.65, 0.65),
+      //     thickness: underlineHeight,
+      //   });
+
+      //   printeddeedPageTwo.drawText(deedFormTextPlaceHolder, {
+      //     x: 60,
+      //     y: 603,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0.65, 0.65, 0.65),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanItalicFont,
+      //   });
+
+      //   printeddeedPageTwo.drawText(declarationOne, {
+      //     x: 30,
+      //     y: 580,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPageTwo.drawText(absolute, {
+      //     x: 30,
+      //     y: 560,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+      //   printeddeedPageTwo.drawText(formerNameBreak, {
+      //     x: 453,
+      //     y: 560,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFontHeading,
+      //   });
+      //   printeddeedPageTwo.drawText(titleBreak, {
+      //     x: 30,
+      //     y: 548,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFontHeading,
+      //   });
+      //   printeddeedPageTwo.drawText(absoluteTwo, {
+      //     x: 58,
+      //     y: 548,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+      //   printeddeedPageTwo.drawText(newTitleTwo, {
+      //     x: 415,
+      //     y: 548,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFontHeading,
+      //   });
+      //   printeddeedPageTwo.drawText(inContent, {
+      //     x: 520,
+      //     y: 548,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+      //   printeddeedPageTwo.drawText(absoluteThree, {
+      //     x: 30,
+      //     y: 536,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPageTwo.drawText(declarationTwo, {
+      //     x: 30,
+      //     y: 500,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPageTwo.drawText(declarationTwoSubscribe, {
+      //     x: 30,
+      //     y: 473,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+      //   printeddeedPageTwo.drawText(newTitleTwo, {
+      //     x: 120,
+      //     y: 473,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPageTwo.drawText(declarationTwoSubscribeName, {
+      //     x: 210,
+      //     y: 473,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPageTwo.drawText(formerTitle, {
+      //     x: 380,
+      //     y: 473,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFontHeading,
+      //   });
+
+      //   printeddeedPageTwo.drawText(so, {
+      //     x: 500,
+      //     y: 473,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPageTwo.drawText(relinqushed, {
+      //     x: 30,
+      //     y: 461,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: timesRomanFont,
+      //   });
+      //   printeddeedPageTwo.drawText(newTitleBreak, {
+      //     x: 510,
+      //     y: 461,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: timesRomanFontHeading,
+      //   });
+
+      //   printeddeedPageTwo.drawText(newTitleBreakTwo, {
+      //     x: 30,
+      //     y: 449,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: timesRomanFontHeading,
+      //   });
+
+      //   printeddeedPageTwo.drawText(only, {
+      //     x: 73,
+      //     y: 449,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     font: timesRomanFontHeading,
+      //   });
+
+      //   printeddeedPageTwo.drawText(declarationThree, {
+      //     x: 30,
+      //     y: 420,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPageTwo.drawText(adopt, {
+      //     x: 30,
+      //     y: 408,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPageTwo.drawText(newTitleTwo, {
+      //     x: 70,
+      //     y: 408,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFontHeading,
+      //   });
+
+      //   printeddeedPageTwo.drawText(declarationFour, {
+      //     x: 30,
+      //     y: 370,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+      //   printeddeedPageTwo.drawText(newTitleTwo, {
+      //     x: 413,
+      //     y: 370,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFontHeading,
+      //   });
+      //   printeddeedPageTwo.drawText(declarationFourTwo, {
+      //     x: 515,
+      //     y: 370,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPageTwo.drawText(signed, {
+      //     x: 30,
+      //     y: 300,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+      //   printeddeedPageTwo.drawLine({
+      //     start: { x: underlineX3, y: 300 }, // Adjust the y-position for Form Field 3
+      //     end: { x: underlineX4, y: 300 }, // Adjust the y-position for Form Field 3
+      //     color: rgb(0, 0, 0),
+      //     thickness: underlineHeight,
+      //   });
+
+      //   printeddeedPageTwo.drawText(dayOf, {
+      //     x: 190,
+      //     y: 300,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPageTwo.drawLine({
+      //     start: { x: underlineX1, y: 300 }, // Adjust the y-position for Form Field 3
+      //     end: { x: underlineX2, y: 300 }, // Adjust the y-position for Form Field 3
+      //     color: rgb(0, 0, 0),
+      //     thickness: underlineHeight,
+      //   });
+
+      //   printeddeedPageTwo.drawText(yearIn, {
+      //     x: 330,
+      //     y: 300,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPageTwo.drawText(signedAs, {
+      //     x: 30,
+      //     y: 270,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPageTwo.drawLine({
+      //     start: { x: 30, y: 200 }, // Adjust the y-position for Form Field 3
+      //     end: { x: 250, y: 200 }, // Adjust the y-position for Form Field 3
+      //     color: rgb(0, 0, 0),
+      //     thickness: underlineHeight,
+      //   });
+      //   printeddeedPageTwo.drawText(signPlaceHolder, {
+      //     x: 40,
+      //     y: 190,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0.65, 0.65, 0.65),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanItalicFont,
+      //   });
+
+      //   printeddeedPageTwo.drawLine({
+      //     start: { x: 30, y: 170 }, // Adjust the y-position for Form Field 3
+      //     end: { x: 250, y: 170 }, // Adjust the y-position for Form Field 3
+      //     color: rgb(0, 0, 0),
+      //     thickness: underlineHeight,
+      //   });
+
+      //   printeddeedPageTwo.drawText(lordNameTwo, {
+      //     x: 40,
+      //     y: 155,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPageTwo.drawLine({
+      //     start: { x: 30, y: 90 }, // Adjust the y-position for Form Field 3
+      //     end: { x: 250, y: 90 }, // Adjust the y-position for Form Field 3
+      //     color: rgb(0, 0, 0),
+      //     thickness: underlineHeight,
+      //   });
+
+      //   printeddeedPageTwo.drawText(formerNameTwo, {
+      //     x: 40,
+      //     y: 75,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPageTwo.drawText(presence, {
+      //     x: 270,
+      //     y: 240,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPageTwo.drawText(witness, {
+      //     x: 270,
+      //     y: 190,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPageTwo.drawLine({
+      //     start: { x: 370, y: 190 }, // Adjust the y-position for Form Field 3
+      //     end: { x: 540, y: 190 }, // Adjust the y-position for Form Field 3
+      //     color: rgb(0, 0, 0),
+      //     thickness: underlineHeight,
+      //   });
+
+      //   printeddeedPageTwo.drawText("Name", {
+      //     x: 270,
+      //     y: 160,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPageTwo.drawLine({
+      //     start: { x: 300, y: 160 }, // Adjust the y-position for Form Field 3
+      //     end: { x: 540, y: 160 }, // Adjust the y-position for Form Field 3
+      //     color: rgb(0, 0, 0),
+      //     thickness: underlineHeight,
+      //   });
+
+      //   printeddeedPageTwo.drawText("Address", {
+      //     x: 270,
+      //     y: 130,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPageTwo.drawLine({
+      //     start: { x: 310, y: 130 }, // Adjust the y-position for Form Field 3
+      //     end: { x: 540, y: 130 }, // Adjust the y-position for Form Field 3
+      //     color: rgb(0, 0, 0),
+      //     thickness: underlineHeight,
+      //   });
+      //   printeddeedPageTwo.drawLine({
+      //     start: { x: 270, y: 105 }, // Adjust the y-position for Form Field 3
+      //     end: { x: 540, y: 105 }, // Adjust the y-position for Form Field 3
+      //     color: rgb(0, 0, 0),
+      //     thickness: underlineHeight,
+      //   });
+      //   printeddeedPageTwo.drawLine({
+      //     start: { x: 270, y: 80 }, // Adjust the y-position for Form Field 3
+      //     end: { x: 540, y: 80 }, // Adjust the y-position for Form Field 3
+      //     color: rgb(0, 0, 0),
+      //     thickness: underlineHeight,
+      //   });
+
+      //   printeddeedPageTwo.drawText("Occupation", {
+      //     x: 270,
+      //     y: 50,
+      //     width: textWidth,
+      //     height: textHeight,
+      //     size: 12,
+      //     color: rgb(0, 0, 0),
+      //     lineHeight: fontSize * 1.2,
+      //     // font: customFont,
+      //     font: timesRomanFont,
+      //   });
+
+      //   printeddeedPageTwo.drawLine({
+      //     start: { x: 330, y: 50 }, // Adjust the y-position for Form Field 3
+      //     end: { x: 540, y: 50 }, // Adjust the y-position for Form Field 3
+      //     color: rgb(0, 0, 0),
+      //     thickness: underlineHeight,
+      //   });
+
+      //   //=============== printeddeedPageTwo ended=====================
+      // }
     } catch (error) {
       console.error(error);
       res.status(500).send("An error occurred");
@@ -5370,7 +10069,7 @@ export default async function handler(req, res) {
             let resultObjectTitlePack = {};
             let namesArrayTitlePacks = "";
 
-            if (pProperties[`p_8727183196433`].properties) {
+            if (pProperties[`p_8727182704913`].properties) {
               namesArrayTitlePacks = pProperties[
                 `p_8727183196433`
               ].properties.map((propItem, index) => propItem.name);
@@ -5491,6 +10190,74 @@ export default async function handler(req, res) {
                   },
                 };
                 onlyTartan(propertiesObj);
+              }
+            }
+          } else if (productId == freeTartanId) {
+            for (let j = 0; j < item.quantity; j++) {
+              let resultObjectTitleFreePack = {};
+              let namesArrayTitleFreePacks = "";
+
+              if (pProperties[`p_8727182704913`].properties) {
+                namesArrayTitleFreePacks = pProperties[
+                  `p_8727182704913`
+                ].properties.map((propItem, index) => propItem.name);
+                for (const obj of pProperties[`p_8727182704913`].properties) {
+                  // console.log(obj, "objobj");
+                  resultObjectTitleFreePack[obj.name] = obj.value;
+                }
+              }
+              size = word[0];
+              console.log(size, "alllll  size");
+
+              if (!namesArrayTitleFreePacks.includes("_Title2")) {
+                const propertiesObj = {
+                  p_8727182704913: {
+                    _Title1: resultObjectTitleFreePack._Title1,
+                    _Name1: resultObjectTitleFreePack._Name1,
+                    _Date: resultObjectTitleFreePack._Date,
+                    variant: pProperties[`p_8727182704913`].variant_title,
+                    size: size,
+                    reference: i++,
+                  },
+
+                  // p_8727183032593: {
+                  //   _Title1: resultObjectTitlePack._Title1,
+                  //   _Name1: resultObjectTitlePack._Name1,
+                  //   _Date: resultObjectTitlePack._Date,
+                  // },
+                };
+
+                // console.log(propertiesObj, "propertiesObj propertiesObj");
+                titlePackWithFreeTartan(propertiesObj);
+                // onlyEmblem(propertiesObj);
+              } else {
+                // console.log("inside else");
+
+                const propertiesObj = {
+                  p_8727182704913: {
+                    _Title1: resultObjectTitleFreePack._Title1,
+                    _Name1: resultObjectTitleFreePack._Name1,
+                    _Title2: resultObjectTitleFreePack._Title2,
+                    _Name2: resultObjectTitleFreePack._Name2,
+                    variant: pProperties[`p_8727182704913`].variant_title,
+
+                    _Date: resultObjectTitleFreePack._Date,
+
+                    size: size,
+                    reference: i++,
+                  },
+
+                  // p_8727183032593: {
+                  //   _Title1: resultObjectTitlePack._Title1,
+                  //   _Name1: resultObjectTitlePack._Name1,
+                  //   _Title2: resultObjectTitlePack._Title2,
+                  //   _Name2: resultObjectTitlePack._Name2,
+                  //   _Date: resultObjectTitlePack._Date,
+                  // },
+                };
+
+                titlePackWithFreeTartan(propertiesObj);
+                // onlyEmblem(propertiesObj);
               }
             }
           }
@@ -6077,11 +10844,10 @@ export default async function handler(req, res) {
       const pdfUrl = `https://scotlandtitlesapp.com/pdfs/${order_number}.pdf`;
 
       console.log(pdfUrl, "pdfUrl");
-      return res.status(200).send({ data: "success pdf" });
 
       // const pageCount = pdfDocPrinted.getPageCount();
-      // console.log(pageCount);
-      // console.log(pdfUrl, "pdfUrl");
+      // // console.log(pageCount);
+      // // console.log(pdfUrl, "pdfUrl");
       // if (pageCount > 0) {
       //   const pdfPrintedBytes = await pdfDocPrinted.save();
       //   // console.log(pdfPrintedBytes, "pdfBytespdfBytes");
@@ -6099,6 +10865,15 @@ export default async function handler(req, res) {
       //   const pdfPrintedUrl = `https://scotlandtitlesapp.com/pdfs/${order_number}-printed.pdf`;
       //   console.log(pdfPrintedUrl, "pdfPrintedUrl");
       // }
+      // const order = new shopify.rest.Order({session: session});
+      // order.id = 450789469;
+      // order.note = "Customer contacted us about a custom engraving on this iPod";
+      // await order.save({
+      //   update: true,
+      // });
+
+      return res.status(200).send({ data: "success pdf" });
+
       // // return res.send("done");
       // res.end();
       // return;
@@ -6108,10 +10883,11 @@ export default async function handler(req, res) {
       // }
     } catch (error) {
       console.log(error, "catch error final");
+      return res.status(500).send({ message: "error" });
     }
   } else {
     console.log("error found ------------");
-    // return res.status(500).send({message:'error'});
+    return res.status(500).send({ message: "error" });
 
     // res.status(200).json({ message: "error found" });
   }
