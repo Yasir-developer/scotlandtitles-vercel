@@ -58,12 +58,10 @@ export default async function handler(req, res) {
         res.status(403).json({ error: e });
       });
   } else {
-    res
-      .status(403)
-      .json({
-        access_token: "unable to match hash",
-        hmac: hmac,
-        cmac: computed_hmac,
-      });
+    res.status(403).json({
+      access_token: "unable to match hash",
+      hmac: hmac,
+      cmac: computed_hmac,
+    });
   }
 }

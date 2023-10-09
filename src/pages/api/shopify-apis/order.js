@@ -86,10 +86,7 @@ export default async function handler(req, res) {
 
   const titlePack = async (propObject) => {
     console.log(propObject, "title pack propObject");
-    // console.log(
-    //   propObject.p_8727183196433.variant.includes("Printed Pack"),
-    //   'propObject.p_8727183196433.variant.includes("Printed Pack")'
-    // );
+
     try {
       if (propObject.p_8727183196433.variant.includes("Printed Pack")) {
         var type = true;
@@ -108,9 +105,9 @@ export default async function handler(req, res) {
           var page = pdfDoc.addPage([595, 842]);
           var pagetwo = pdfDoc.addPage([842, 595]);
           var deedPage = pdfDoc.addPage([595, 842]);
-          var printedPage = pdfDoc.addPage([595, 842]);
-          var printedpagetwo = pdfDoc.addPage([842, 595]);
-          // var printeddeedPage = pdfDocPrinted.addPage([595, 842]);
+          var printedPage = pdfDocPrinted.addPage([595, 842]);
+          var printedpagetwo = pdfDocPrinted.addPage([842, 595]);
+          var printeddeedPage = pdfDocPrinted.addPage([595, 842]);
         }
       } else {
         type = false;
@@ -120,9 +117,6 @@ export default async function handler(req, res) {
           var pagetwo = pdfDoc.addPage([842, 595]);
           var deedPage = pdfDoc.addPage([595, 842]);
           var deedPageTwo = pdfDoc.addPage([595, 842]);
-          // var printedPage = pdfDoc.addPage([595, 842]);
-
-          // var printedPage = pdfDoc.addPage([595, 842]);
         } else {
           var page = pdfDoc.addPage([595, 842]);
           var pagetwo = pdfDoc.addPage([842, 595]);
@@ -130,14 +124,12 @@ export default async function handler(req, res) {
         }
       }
       const filePath = path.resolve("./public", "images", "scotland_log.png");
-      const fontBytes = fs.readFileSync(
-        path.join(process.cwd(), "public", "OLDENGL.TTF")
-      );
-      const customFont = await pdfDoc.embedFont(fontBytes);
 
       const imgBuffer = fs.readFileSync(filePath);
       // console.log(imgBuffer, "imgBuffer");
       const img = await pdfDoc.embedPng(imgBuffer);
+      const img_printed = await pdfDocPrinted.embedPng(imgBuffer);
+
       const pngDims = img.scale(0.25);
 
       const welcomeSignPath = path.resolve(
@@ -152,6 +144,9 @@ export default async function handler(req, res) {
         welcom_signature_Buffer
       );
 
+      const welcome_emblem_signature_printed = await pdfDocPrinted.embedPng(
+        welcom_signature_Buffer
+      );
       const heading = `Land with reference number ${order_number} - ${
         propObject.p_8727183196433.reference
       } ${propObject.p_8727183196433._Title1} ${
@@ -325,6 +320,12 @@ export default async function handler(req, res) {
       // console.log(imgBuffer, "imgBuffer");
       const imgBg = await pdfDoc.embedJpg(imgBufferTwo);
 
+      const border = path.resolve("./public", "images", "borders.jpg");
+
+      const border_Buffer = fs.readFileSync(border);
+
+      const titlePack_borders = await pdfDocPrinted.embedJpg(border_Buffer);
+
       const filePathThree = path.resolve(
         "./public",
         "images",
@@ -334,6 +335,9 @@ export default async function handler(req, res) {
       const imgBufferThree = fs.readFileSync(filePathThree);
       // console.log(imgBuffer, "imgBuffer");
       const stampImg = await pdfDoc.embedPng(imgBufferThree);
+
+      const stampImgPrinted = await pdfDocPrinted.embedPng(imgBufferThree);
+
       const stampPngDims = stampImg.scale(0.3);
 
       const filePathRibbon = path.resolve(
@@ -345,6 +349,7 @@ export default async function handler(req, res) {
       const imgBufferRibbon = fs.readFileSync(filePathRibbon);
       // console.log(imgBuffer, "imgBuffer");
       const ribbonImg = await pdfDoc.embedPng(imgBufferRibbon);
+      const ribbonImgPrinted = await pdfDocPrinted.embedPng(imgBufferRibbon);
 
       const pngDimsRibbon = ribbonImg.scale(0.3);
 
@@ -357,6 +362,10 @@ export default async function handler(req, res) {
       const imgBufferYellowMiddle = fs.readFileSync(filePathYellow);
       // console.log(imgBuffer, "imgBuffer");
       const yellow_middle = await pdfDoc.embedPng(imgBufferYellowMiddle);
+      const yellow_middle_printed = await pdfDocPrinted.embedPng(
+        imgBufferYellowMiddle
+      );
+
       const filePathSignaturetwo = path.resolve(
         "./public",
         "images",
@@ -365,6 +374,10 @@ export default async function handler(req, res) {
       const imgBufferSignaturetwo = fs.readFileSync(filePathSignaturetwo);
       // console.log(imgBuffer, "imgBuffer");
       const Signaturetwo = await pdfDoc.embedPng(imgBufferSignaturetwo);
+      const SignaturetwoPrinted = await pdfDocPrinted.embedPng(
+        imgBufferSignaturetwo
+      );
+
       const SignaturetwodimsRibbon = ribbonImg.scale(0.25);
 
       // console.log(imgBuffer, "imgBuffer");
@@ -376,17 +389,10 @@ export default async function handler(req, res) {
 
       const imgBufferFour = fs.readFileSync(filePathFour);
       const certificateMid = await pdfDoc.embedPng(imgBufferFour);
+      const certificateMidPrinted = await pdfDocPrinted.embedPng(imgBufferFour);
+
       const ertificateMidpngDims = certificateMid.scale(0.3);
 
-      // const fontTwo = fs.readFileSync(
-      //   path.join(process.cwd(), "public", "Goudy-Bold-Regular.ttf")
-      // );
-      // const tempusFont = await pdfDoc.embedFont(fontTwo);
-
-      // const fontThree = fs.readFileSync(
-      //   path.join(process.cwd(), "public", "OLDENGL.TTF")
-      // );
-      // const oldEng = await pdfDoc.embedFont(fontThree);
       const certificateHeading = "Certificate of Disposition and Proclamation";
       const certficateAddress =
         "between Scotland Titles, Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom and";
@@ -732,10 +738,6 @@ export default async function handler(req, res) {
 
       //deed page one
 
-      // const timesRomanItalicFontHeading = await pdfDoc.embedFont(
-      //   StandardFonts.TimesRomanItalic
-      // );
-
       const MainHeading = "Master Title Deed";
       const SubHeading = "Deed of Change of Name and Title (Deed Poll)";
       const formerTitle = "Former Name & Title";
@@ -814,16 +816,6 @@ export default async function handler(req, res) {
         font: timesRomanFontHeading,
       });
 
-      // deedPage.drawText(formerTitle, {
-      //   x:
-      //   y:
-      //   size: 12,
-      //   width: textWidth,
-      //   height: textHeight,
-      //   color: rgb(0, 0, 0),
-      //   lineHeight: fontSize * 1.2,
-      //   font: timesRomanFontHeading,
-      // });
       deedPage.drawText(newTitle, {
         x: newTotalTextWidth,
         y: 683,
@@ -2651,18 +2643,10 @@ export default async function handler(req, res) {
         });
       }
 
+      // =====================================Printed Title Pack started ================================
+
       if (propObject.p_8727183196433.variant.includes("Printed Pack")) {
         console.log(propObject.p_8727183196433.variant);
-        printedPage.drawText("Title printed ", {
-          x: 70,
-          y: 710,
-          size: fontSize,
-          width: textWidth,
-          height: textHeight,
-          color: rgb(0, 0, 0),
-          lineHeight: fontSize * 1.2,
-          font: timesRomanFont,
-        });
 
         printedPage.drawText(propObject.p_8727183196433._Date, {
           x: 70,
@@ -2672,7 +2656,7 @@ export default async function handler(req, res) {
           height: textHeight,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
         printedPage.drawText(heading, {
           x: 70,
@@ -2683,7 +2667,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFontHeading,
+          font: timesRomanFontHeadingPrinted,
         });
 
         printedPage.drawText(content, {
@@ -2694,7 +2678,7 @@ export default async function handler(req, res) {
           size: fontSize,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printedPage.drawText(welcomeContent, {
@@ -2705,7 +2689,7 @@ export default async function handler(req, res) {
           size: 14,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printedPage.drawText(welcomeSignContent, {
@@ -2716,10 +2700,10 @@ export default async function handler(req, res) {
           size: 14,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: timesRomanItalicFont,
+          font: timesRomanItalicFontPrinted,
         });
 
-        printedPage.drawImage(welcome_emblem_signature, {
+        printedPage.drawImage(welcome_emblem_signature_printed, {
           x: 170,
           y: 210,
           height: 70,
@@ -2734,7 +2718,7 @@ export default async function handler(req, res) {
           size: 11,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printedPage.drawText(facebookLink, {
@@ -2745,7 +2729,7 @@ export default async function handler(req, res) {
           size: 11,
           color: rgb(0.027, 0.388, 0.756),
           lineHeight: fontSize * 1.2,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
         printedPage.drawLine({
           start: { x: 120, y: 165 }, // Adjust the y-position for Form Field 3
@@ -2762,7 +2746,7 @@ export default async function handler(req, res) {
           size: 11,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printedPage.drawText("info@scotlandtitles.com", {
@@ -2773,7 +2757,7 @@ export default async function handler(req, res) {
           size: 11,
           color: rgb(0.027, 0.388, 0.756),
           lineHeight: fontSize * 1.2,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
         printedPage.drawLine({
           start: { x: 150, y: 45 }, // Adjust the y-position for Form Field 3
@@ -2790,7 +2774,7 @@ export default async function handler(req, res) {
           size: 11,
           color: rgb(0.027, 0.388, 0.756),
           lineHeight: fontSize * 1.2,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
         printedPage.drawLine({
           start: { x: 350, y: 45 }, // Adjust the y-position for Form Field 3
@@ -2798,34 +2782,39 @@ export default async function handler(req, res) {
           color: rgb(0.027, 0.388, 0.756),
           thickness: 0.5,
         });
-        printedPage.drawImage(img, {
+        printedPage.drawImage(img_printed, {
           x: 440,
           y: 690,
           width: pngDims.width,
           height: pngDims.height,
         });
 
-        printedpagetwo.drawImage(yellow_middle, {
+        printedpagetwo.drawImage(titlePack_borders, {
+          y: 550,
+          width: printedpagetwo.getWidth(),
+          height: 60,
+        });
+        printedpagetwo.drawImage(yellow_middle_printed, {
           x: 380,
           y: propObject.p_8727183196433._Title2 ? 385 : 405,
           width: ertificateMidpngDims.width,
           height: ertificateMidpngDims.height,
         });
-        printedpagetwo.drawImage(ribbonImg, {
+        printedpagetwo.drawImage(ribbonImgPrinted, {
           x: 30,
           y: 410,
           width: pngDimsRibbon.width,
           height: pngDimsRibbon.height,
         });
 
-        printedpagetwo.drawImage(stampImg, {
+        printedpagetwo.drawImage(stampImgPrinted, {
           x: 720,
           y: 70,
           width: stampPngDims.width,
           height: stampPngDims.height,
         });
 
-        printedpagetwo.drawImage(Signaturetwo, {
+        printedpagetwo.drawImage(SignaturetwoPrinted, {
           x: 580,
           y: 70,
           height: 30,
@@ -2840,12 +2829,12 @@ export default async function handler(req, res) {
           size: 10,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: tempusFont,
+          font: tempusFontPrinted,
           // font: customFont,
           // font: tempusFont,
         });
 
-        printedpagetwo.drawImage(welcome_emblem_signature, {
+        printedpagetwo.drawImage(welcome_emblem_signature_printed, {
           x: 500,
           y: 70,
           height: 50,
@@ -2860,7 +2849,7 @@ export default async function handler(req, res) {
           size: 10,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: tempusFont,
+          font: tempusFontPrinted,
         });
 
         printedpagetwo.drawText(certificateHeading, {
@@ -2871,7 +2860,7 @@ export default async function handler(req, res) {
           height: textHeight,
           color: rgb(0.219, 0.337, 0.137),
           lineHeight: fontSize * 1.2,
-          font: oldEng,
+          font: oldEngPrinted,
         });
         printedpagetwo.drawText(certficateAddress, {
           x: 220,
@@ -2881,7 +2870,7 @@ export default async function handler(req, res) {
           size: 10,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: tempusFont,
+          font: tempusFontPrinted,
         });
 
         printedpagetwo.drawText(certficateUserName, {
@@ -2892,7 +2881,7 @@ export default async function handler(req, res) {
           size: 24,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: oldEng,
+          font: oldEngPrinted,
         });
         {
           propObject.p_8727183196433._Title2 &&
@@ -2904,7 +2893,7 @@ export default async function handler(req, res) {
               size: 10,
               color: rgb(0, 0, 0),
               lineHeight: fontSize * 1.2,
-              font: tempusFont,
+              font: tempusFontPrinted,
             });
 
           printedpagetwo.drawText(certficateUserNameTwo, {
@@ -2915,7 +2904,7 @@ export default async function handler(req, res) {
             size: 24,
             color: rgb(0, 0, 0),
             lineHeight: fontSize * 1.2,
-            font: oldEng,
+            font: oldEngPrinted,
           });
         }
         printedpagetwo.drawText(certificateAddressTwo, {
@@ -2926,7 +2915,7 @@ export default async function handler(req, res) {
           size: 10,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: tempusFont,
+          font: tempusFontPrinted,
         });
 
         printedpagetwo.drawText(certificateText, {
@@ -2937,7 +2926,7 @@ export default async function handler(req, res) {
           size: 10,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: tempusFont,
+          font: tempusFontPrinted,
         });
 
         printedpagetwo.drawText(certificateTextTwo, {
@@ -2948,7 +2937,13 @@ export default async function handler(req, res) {
           size: 10,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: tempusFont,
+          font: tempusFontPrinted,
+        });
+
+        printedpagetwo.drawImage(titlePack_borders, {
+          y: 0,
+          width: printedpagetwo.getWidth(),
+          height: 50,
         });
 
         // printed deed page start =========================
@@ -2961,7 +2956,7 @@ export default async function handler(req, res) {
           height: textHeight,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: timesRomanFontHeading,
+          font: timesRomanFontHeadingPrinted,
         });
 
         printeddeedPage.drawText(formerTitle, {
@@ -2972,7 +2967,7 @@ export default async function handler(req, res) {
           height: textHeight,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: timesRomanFontHeading,
+          font: timesRomanFontHeadingPrinted,
         });
 
         printeddeedPage.drawText(newTitle, {
@@ -2983,7 +2978,7 @@ export default async function handler(req, res) {
           height: textHeight,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: timesRomanFontHeading,
+          font: timesRomanFontHeadingPrinted,
         });
         printeddeedPage.drawText(MainHeading, {
           x: 200,
@@ -2993,7 +2988,7 @@ export default async function handler(req, res) {
           height: textHeight,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: timesRomanFontHeading,
+          font: timesRomanFontHeadingPrinted,
         });
         printeddeedPage.drawText(SubHeading, {
           x: 180,
@@ -3004,7 +2999,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPage.drawText(deedFormText, {
@@ -3016,7 +3011,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPage.drawText(deedFormText, {
@@ -3028,7 +3023,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPage.drawLine({
@@ -3047,7 +3042,7 @@ export default async function handler(req, res) {
           color: rgb(0.65, 0.65, 0.65),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanItalicFont,
+          font: timesRomanItalicFontPrinted,
         });
 
         printeddeedPage.drawText(declarationOne, {
@@ -3059,7 +3054,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPage.drawText(absolute, {
@@ -3071,7 +3066,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
         printeddeedPage.drawText(formerNameBreak, {
           x: 453,
@@ -3082,7 +3077,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFontHeading,
+          font: timesRomanFontHeadingPrinted,
         });
         printeddeedPage.drawText(titleBreak, {
           x: 30,
@@ -3093,7 +3088,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFontHeading,
+          font: timesRomanFontHeadingPrinted,
         });
         printeddeedPage.drawText(absoluteTwo, {
           x: 58,
@@ -3104,7 +3099,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
         printeddeedPage.drawText(newTitleTwo, {
           x: 415,
@@ -3115,7 +3110,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFontHeading,
+          font: timesRomanFontHeadingPrinted,
         });
         printeddeedPage.drawText(inContent, {
           x: 520,
@@ -3126,7 +3121,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
         printeddeedPage.drawText(absoluteThree, {
           x: 30,
@@ -3137,7 +3132,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPage.drawText(declarationTwo, {
@@ -3149,7 +3144,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPage.drawText(declarationTwoSubscribe, {
@@ -3161,7 +3156,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
         printeddeedPage.drawText(newTitleTwo, {
           x: 120,
@@ -3172,7 +3167,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPage.drawText(declarationTwoSubscribeName, {
@@ -3184,7 +3179,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPage.drawText(formerTitle, {
@@ -3196,7 +3191,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFontHeading,
+          font: timesRomanFontHeadingPrinted,
         });
 
         printeddeedPage.drawText(so, {
@@ -3207,7 +3202,7 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPage.drawText(relinqushed, {
@@ -3218,7 +3213,7 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
         printeddeedPage.drawText(newTitleBreak, {
           x: 510,
@@ -3228,7 +3223,7 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: timesRomanFontHeading,
+          font: timesRomanFontHeadingPrinted,
         });
 
         printeddeedPage.drawText(newTitleBreakTwo, {
@@ -3239,7 +3234,7 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: timesRomanFontHeading,
+          font: timesRomanFontHeadingPrinted,
         });
 
         printeddeedPage.drawText(only, {
@@ -3250,7 +3245,7 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: timesRomanFontHeading,
+          font: timesRomanFontHeadingPrinted,
         });
 
         printeddeedPage.drawText(declarationThree, {
@@ -3262,7 +3257,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPage.drawText(adopt, {
@@ -3274,7 +3269,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPage.drawText(newTitleTwo, {
@@ -3286,7 +3281,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFontHeading,
+          font: timesRomanFontHeadingPrinted,
         });
 
         printeddeedPage.drawText(declarationFour, {
@@ -3298,7 +3293,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
         printeddeedPage.drawText(newTitleTwo, {
           x: 413,
@@ -3309,7 +3304,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFontHeading,
+          font: timesRomanFontHeadingPrinted,
         });
         printeddeedPage.drawText(declarationFourTwo, {
           x: 515,
@@ -3319,8 +3314,7 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPage.drawText(signed, {
@@ -3331,8 +3325,7 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
         printeddeedPage.drawLine({
           start: { x: underlineX3, y: 300 }, // Adjust the y-position for Form Field 3
@@ -3350,7 +3343,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPage.drawLine({
@@ -3369,7 +3362,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPage.drawText(signedAs, {
@@ -3381,7 +3374,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPage.drawLine({
@@ -3399,7 +3392,7 @@ export default async function handler(req, res) {
           color: rgb(0.65, 0.65, 0.65),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanItalicFont,
+          font: timesRomanItalicFontPrinted,
         });
 
         printeddeedPage.drawLine({
@@ -3418,7 +3411,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPage.drawLine({
@@ -3437,7 +3430,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPage.drawText(presence, {
@@ -3449,7 +3442,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPage.drawText(witness, {
@@ -3461,7 +3454,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPage.drawLine({
@@ -3480,7 +3473,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPage.drawLine({
@@ -3499,7 +3492,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPage.drawLine({
@@ -3530,7 +3523,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPage.drawLine({
@@ -3551,7 +3544,7 @@ export default async function handler(req, res) {
             height: textHeight,
             color: rgb(0, 0, 0),
             lineHeight: fontSize * 1.2,
-            font: timesRomanFontHeading,
+            font: timesRomanFontHeadingPrinted,
           });
         });
 
@@ -3579,7 +3572,7 @@ export default async function handler(req, res) {
           height: textHeight,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: timesRomanFontHeading,
+          font: timesRomanFontHeadingPrinted,
         });
 
         printeddeedPageTwo.drawText(formerTitle, {
@@ -3590,7 +3583,7 @@ export default async function handler(req, res) {
           height: textHeight,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: timesRomanFontHeading,
+          font: timesRomanFontHeadingPrinted,
         });
 
         // printeddeedPageTwo.drawText(formerTitle, {
@@ -3611,7 +3604,7 @@ export default async function handler(req, res) {
           height: textHeight,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: timesRomanFontHeading,
+          font: timesRomanFontHeadingPrinted,
         });
 
         const deedFormTextTwo = `of ${propObject.p_8727183196433._Name2}\n\nnow ${propObject.p_8727183196433._Title2} ${propObject.p_8727183196433._Name2}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_8727183196433._Title2} ${propObject.p_8727183196433._Name2}\n\nof`;
@@ -3627,7 +3620,7 @@ export default async function handler(req, res) {
           height: textHeight,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: timesRomanFontHeading,
+          font: timesRomanFontHeadingPrinted,
         });
         printeddeedPageTwo.drawText(SubHeading, {
           x: 180,
@@ -3638,7 +3631,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPageTwo.drawText(deedFormTextTwo, {
@@ -3650,7 +3643,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPageTwo.drawText(deedFormTextTwo, {
@@ -3662,7 +3655,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPageTwo.drawLine({
@@ -3681,7 +3674,7 @@ export default async function handler(req, res) {
           color: rgb(0.65, 0.65, 0.65),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanItalicFont,
+          font: timesRomanItalicFontPrinted,
         });
 
         printeddeedPageTwo.drawText(declarationOne, {
@@ -3693,7 +3686,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPageTwo.drawText(absolute, {
@@ -3704,8 +3697,7 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
         printeddeedPageTwo.drawText(formerNameBreak, {
           x: 453,
@@ -3716,7 +3708,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFontHeading,
+          font: timesRomanFontHeadingPrinted,
         });
         printeddeedPageTwo.drawText(titleBreak, {
           x: 30,
@@ -3727,7 +3719,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFontHeading,
+          font: timesRomanFontHeadingPrinted,
         });
         printeddeedPageTwo.drawText(absoluteTwo, {
           x: 58,
@@ -3749,7 +3741,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFontHeading,
+          font: timesRomanFontHeadingPrinted,
         });
         printeddeedPageTwo.drawText(inContent, {
           x: 520,
@@ -3771,7 +3763,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPageTwo.drawText(declarationTwo, {
@@ -3783,7 +3775,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPageTwo.drawText(declarationTwoSubscribe, {
@@ -3795,7 +3787,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
         printeddeedPageTwo.drawText(newTitleTwo, {
           x: 120,
@@ -3806,7 +3798,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPageTwo.drawText(declarationTwoSubscribeName, {
@@ -3818,7 +3810,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPageTwo.drawText(formerTitle, {
@@ -3830,7 +3822,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFontHeading,
+          font: timesRomanFontHeadingPrinted,
         });
 
         printeddeedPageTwo.drawText(so, {
@@ -3841,7 +3833,7 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPageTwo.drawText(relinqushed, {
@@ -3852,7 +3844,7 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
         printeddeedPageTwo.drawText(newTitleBreak, {
           x: 510,
@@ -3862,7 +3854,7 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: timesRomanFontHeading,
+          font: timesRomanFontHeadingPrinted,
         });
 
         printeddeedPageTwo.drawText(newTitleBreakTwo, {
@@ -3873,7 +3865,7 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: timesRomanFontHeading,
+          font: timesRomanFontHeadingPrinted,
         });
 
         printeddeedPageTwo.drawText(only, {
@@ -3884,7 +3876,7 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          font: timesRomanFontHeading,
+          font: timesRomanFontHeadingPrinted,
         });
 
         printeddeedPageTwo.drawText(declarationThree, {
@@ -3896,7 +3888,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPageTwo.drawText(adopt, {
@@ -3908,7 +3900,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPageTwo.drawText(newTitleTwo, {
@@ -3920,7 +3912,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFontHeading,
+          font: timesRomanFontHeadingPrinted,
         });
 
         printeddeedPageTwo.drawText(declarationFour, {
@@ -3932,7 +3924,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
         printeddeedPageTwo.drawText(newTitleTwo, {
           x: 413,
@@ -3943,7 +3935,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFontHeading,
+          font: timesRomanFontHeadingPrinted,
         });
         printeddeedPageTwo.drawText(declarationFourTwo, {
           x: 515,
@@ -3954,7 +3946,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPageTwo.drawText(signed, {
@@ -3966,7 +3958,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
         printeddeedPageTwo.drawLine({
           start: { x: underlineX3, y: 300 }, // Adjust the y-position for Form Field 3
@@ -3984,7 +3976,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPageTwo.drawLine({
@@ -4003,7 +3995,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPageTwo.drawText(signedAs, {
@@ -4015,7 +4007,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPageTwo.drawLine({
@@ -4033,7 +4025,7 @@ export default async function handler(req, res) {
           color: rgb(0.65, 0.65, 0.65),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanItalicFont,
+          font: timesRomanItalicFontPrinted,
         });
 
         printeddeedPageTwo.drawLine({
@@ -4052,7 +4044,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPageTwo.drawLine({
@@ -4071,7 +4063,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPageTwo.drawText(presence, {
@@ -4083,7 +4075,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPageTwo.drawText(witness, {
@@ -4095,7 +4087,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPageTwo.drawLine({
@@ -4114,7 +4106,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPageTwo.drawLine({
@@ -4133,7 +4125,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPageTwo.drawLine({
@@ -4164,7 +4156,7 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           // font: customFont,
-          font: timesRomanFont,
+          font: timesRomanFontPrinted,
         });
 
         printeddeedPageTwo.drawLine({
@@ -9412,11 +9404,9 @@ export default async function handler(req, res) {
 
       if (propObject.p_8727183065361.variant.includes("Printed Pack")) {
         emblemCertificatePrinted.drawImage(emblem_borders, {
-          // x
           y: 790,
           width: emblemCertificatePrinted.getWidth(),
           height: 70,
-          // height: emblemCertificatePrinted.getHeight(),
         });
 
         emblemCertificatePrinted.drawImage(certificateMidPrinted, {
@@ -9426,17 +9416,6 @@ export default async function handler(req, res) {
           height: ertificateMidpngDims.height,
         });
 
-        // emblemCertificatePrinted.drawText("abcdesfd", {
-        //   // x: 200,
-        //   x: x,
-        //   y: 670,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   size: 26,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   font: oldEngPrinted,
-        // });
         emblemCertificatePrinted.drawImage(img_printed, {
           x: 40,
           y: 710,
@@ -9739,11 +9718,9 @@ export default async function handler(req, res) {
         });
 
         emblemCertificatePrinted.drawImage(emblem_borders, {
-          // x
           y: 0,
           width: emblemCertificatePrinted.getWidth(),
           height: 60,
-          // height: emblemCertificatePrinted.getHeight(),
         });
       }
     } catch (error) {
@@ -9753,8 +9730,15 @@ export default async function handler(req, res) {
   };
 
   const onlyTartan = async (propObject) => {
+    console.log(propObject, "===============propObject==================");
     try {
-      const tartanCertificate = pdfDoc.addPage([595, 842]);
+      if (propObject.p_8727183032593.variant.includes("Printed Pack")) {
+        var tartanCertificatePrinted = pdfDocPrinted.addPage([595, 842]);
+        var tartanCertificate = pdfDoc.addPage([595, 842]);
+      } else {
+        var tartanCertificate = pdfDoc.addPage([595, 842]);
+      }
+      // const tartanCertificate = pdfDoc.addPage([595, 842]);
       // const tartanCerificatePrinted = pdfDoc.addPage([595, 842]);
 
       const tartan_certificate_heading = `To Whomsoever These Presents Do Concern`;
@@ -9853,6 +9837,12 @@ export default async function handler(req, res) {
 
       const tartan_bg = await pdfDoc.embedPng(tartanbg_Buffer);
 
+      const border = path.resolve("./public", "images", "borders.jpg");
+
+      const border_Buffer = fs.readFileSync(border);
+
+      const tartan_borders = await pdfDocPrinted.embedJpg(border_Buffer);
+
       const tartanlogoPath = path.resolve(
         "./public",
         "images",
@@ -9863,6 +9853,10 @@ export default async function handler(req, res) {
 
       const tartan_logo = await pdfDoc.embedJpg(tartan_logo_Buffer);
 
+      const tartan_logo_printed = await pdfDocPrinted.embedJpg(
+        tartan_logo_Buffer
+      );
+
       const tartansignPath = path.resolve(
         "./public",
         "images",
@@ -9870,20 +9864,18 @@ export default async function handler(req, res) {
       );
       const tartan_signature_Buffer = fs.readFileSync(tartansignPath);
 
-      // console.log(imgBuffer, "imgBuffer");
       const tartan_signature = await pdfDoc.embedPng(tartan_signature_Buffer);
+      const tartan_signature_printed = await pdfDocPrinted.embedPng(
+        tartan_signature_Buffer
+      );
 
       const filePath = path.resolve("./public", "images", "scotland_log.png");
 
       const imgBuffer = fs.readFileSync(filePath);
-      // console.log(imgBuffer, "imgBuffer");
       const img = await pdfDoc.embedPng(imgBuffer);
+      const img_printed = await pdfDocPrinted.embedPng(imgBuffer);
+
       const pngDims = img.scale(0.25);
-      const filePathThree = path.resolve(
-        "./public",
-        "images",
-        "certificate-stamp.png"
-      );
 
       const filePathFour = path.resolve(
         "./public",
@@ -9893,15 +9885,29 @@ export default async function handler(req, res) {
 
       const imgBufferFour = fs.readFileSync(filePathFour);
       const certificateMid = await pdfDoc.embedPng(imgBufferFour);
-      const ertificateMidpngDims = certificateMid.scale(0.3);
 
+      const certificateMidPrinted = await pdfDocPrinted.embedPng(imgBufferFour);
+
+      const ertificateMidpngDims = certificateMid.scale(0.3);
+      const filePathThree = path.resolve(
+        "./public",
+        "images",
+        "certificate-stamp.png"
+      );
       const imgBufferThree = fs.readFileSync(filePathThree);
       // console.log(imgBuffer, "imgBuffer");
       const stampImg = await pdfDoc.embedPng(imgBufferThree);
+      const stampImgPrinted = await pdfDocPrinted.embedPng(imgBufferThree);
+
       const stampPngDims = stampImg.scale(0.3);
 
-      const textWidth = tartanCertificate.getWidth() - 100; // Adjust the width as needed
-      const textHeight = tartanCertificate.getHeight() - 50;
+      if (propObject.p_8727183032593.variant.includes("Printed Pack")) {
+        var textWidth = tartanCertificatePrinted.getWidth() - 100; // Adjust the width as needed
+        var textHeight = tartanCertificatePrinted.getHeight() - 50;
+      } else {
+        var textWidth = tartanCertificate.getWidth() - 100; // Adjust the width as needed
+        var textHeight = tartanCertificate.getHeight() - 50;
+      }
 
       const dateText = "Date";
 
@@ -10359,6 +10365,429 @@ export default async function handler(req, res) {
         height: 50,
         width: 30,
       });
+
+      //========================================== Tartan Printed Work Started ================================
+
+      if (propObject.p_8727183032593.variant.includes("Printed Pack")) {
+        tartanCertificatePrinted.drawImage(tartan_borders, {
+          y: 790,
+          width: tartanCertificatePrinted.getWidth(),
+          height: 70,
+        });
+
+        tartanCertificatePrinted.drawImage(img_printed, {
+          x: 500,
+          y: 710,
+          width: pngDims.width,
+          height: pngDims.height,
+        });
+
+        tartanCertificatePrinted.drawImage(stampImgPrinted, {
+          x: 480,
+          y: 70,
+          width: stampPngDims.width,
+          height: stampPngDims.height,
+        });
+
+        tartanCertificatePrinted.drawText(tartan_certificate_heading, {
+          x: 150,
+          y: 750,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        tartanCertificatePrinted.drawText(tartanCertficateUserName, {
+          x: x,
+          y: 720,
+          width: textWidth,
+          height: textHeight,
+          size: 26,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+        tartanCertificatePrinted.drawText(tartanCertficateUserNameTwo, {
+          x: tartanTwox,
+          y: 690,
+          width: textWidth,
+          height: textHeight,
+          size: 26,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        tartanCertificatePrinted.drawText(declare, {
+          x: 250,
+          y: propObject.p_8727183032593._Title2 ? 665 : 690,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        tartanCertificatePrinted.drawText(Allegiance, {
+          x: 50,
+          y: propObject.p_8727183032593._Title2 ? 640 : 660,
+          size: 26,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.054, 0.027, 0.301),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        tartanCertificatePrinted.drawText(prey, {
+          x: 230,
+          y: propObject.p_8727183032593._Title2 ? 640 : 660,
+          size: 18,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        tartanCertificatePrinted.drawText(certified, {
+          x: 370,
+          y: propObject.p_8727183032593._Title2 ? 640 : 660,
+          size: 26,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.054, 0.027, 0.301),
+
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        tartanCertificatePrinted.drawImage(certificateMidPrinted, {
+          x: 230,
+          y: propObject.p_8727183032593._Title2 ? 600 : 630,
+          width: ertificateMidpngDims.width,
+          height: ertificateMidpngDims.height,
+        });
+        tartanCertificatePrinted.drawText(Greeting, {
+          x: 20,
+          y: 560,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        tartanCertificatePrinted.drawText(tartanCertificateGreetingText, {
+          x: 220,
+          y: 560,
+          width: textWidth,
+          height: textHeight,
+          size: 10,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        tartanCertificatePrinted.drawText(tartanCertificateGreetingTextTwo, {
+          x: 20,
+          y: 545,
+          width: textWidth,
+          height: textHeight,
+          size: 10,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        //shewen text
+
+        tartanCertificatePrinted.drawText(know, {
+          x: 20,
+          y: 520,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        tartanCertificatePrinted.drawText(tartanCertificateknowText, {
+          x: 143,
+          y: 520,
+          width: textWidth,
+          height: textHeight,
+          size: 10,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        tartanCertificatePrinted.drawText(tartanCertificateknowTextTwo, {
+          x: 20,
+          y: 505,
+          width: textWidth,
+          height: textHeight,
+          size: 10,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        //videlict
+
+        tartanCertificatePrinted.drawText(Therefore, {
+          x: 20,
+          y: 410,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        tartanCertificatePrinted.drawText(tartanCertificateThereforeText, {
+          x: 155,
+          y: 410,
+          width: textWidth,
+          height: textHeight,
+          size: 10,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        tartanCertificatePrinted.drawText(tartanCertificateThereforeTextTwo, {
+          x: 20,
+          y: 395,
+          width: textWidth,
+          height: textHeight,
+          size: 10,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        //In Testimony Whereof
+
+        tartanCertificatePrinted.drawText(scotlantTiles, {
+          x: 20,
+          y: 320,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        tartanCertificatePrinted.drawText(tartanCertificateScotlantTilesText, {
+          x: 208,
+          y: 320,
+          width: textWidth,
+          height: textHeight,
+          size: 10,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        tartanCertificatePrinted.drawText(
+          tartanCertificateScotlantTilesTextTwo,
+          {
+            x: 20,
+            y: 305,
+            width: textWidth,
+            height: textHeight,
+            size: 10,
+            color: rgb(0, 0, 0),
+            lineHeight: fontSize * 1.2,
+            font: tempusFontPrinted,
+          }
+        );
+
+        tartanCertificatePrinted.drawText(Tartan, {
+          x: 20,
+          y: 210,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        tartanCertificatePrinted.drawText(tartanCertificateText, {
+          x: 165,
+          y: 210,
+          width: textWidth,
+          height: textHeight,
+          size: 10,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        tartanCertificatePrinted.drawText(tartanCertificateTextTwo, {
+          x: 20,
+          y: 195,
+          width: textWidth,
+          height: textHeight,
+          size: 10,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        tartanCertificatePrinted.drawText("Royal Stewart Hunting", {
+          x: 360,
+          y: 570,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        tartanCertificatePrinted.drawImage(tartan_logo_printed, {
+          x: 330,
+          y: 330,
+          height: 230,
+          width: 230,
+        });
+
+        tartanCertificatePrinted.drawText(demostration, {
+          x: 310,
+          y: 300,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        tartanCertificatePrinted.drawText(demonstrationText, {
+          x: 445,
+          y: 300,
+          width: textWidth,
+          height: textHeight,
+          size: 10,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        tartanCertificatePrinted.drawText(demonstrationTextTwo, {
+          x: 310,
+          y: 285,
+          width: textWidth,
+          height: textHeight,
+          size: 10,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        tartanCertificatePrinted.drawText(tartanTestimony, {
+          x: 310,
+          y: 250,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        tartanCertificatePrinted.drawText(tartanTestimonyDescription, {
+          x: 460,
+          y: 250,
+          width: textWidth,
+          height: textHeight,
+          size: 10,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        tartanCertificatePrinted.drawText(tartanTestimonyDescriptionTwo, {
+          x: 310,
+          y: 235,
+          width: textWidth,
+          height: textHeight,
+          size: 10,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        //SIGNED
+        tartanCertificatePrinted.drawText(tartanSigned, {
+          x: 150,
+          y: 120,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        tartanCertificatePrinted.drawText(dateText, {
+          x: 170,
+          y: 80,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        tartanCertificatePrinted.drawText(TartandateContent, {
+          x: 210,
+          y: 80,
+          width: textWidth,
+          height: textHeight,
+          size: 10,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        tartanCertificatePrinted.drawText(copyright, {
+          x: 190,
+          y: 70,
+          width: textWidth,
+          height: textHeight,
+          size: 6,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFontPrinted,
+        });
+
+        tartanCertificatePrinted.drawImage(tartan_signature_printed, {
+          x: 210,
+          y: 100,
+          height: 50,
+          width: 30,
+        });
+
+        tartanCertificatePrinted.drawImage(tartan_borders, {
+          y: 0,
+          width: tartanCertificatePrinted.getWidth(),
+          height: 60,
+        });
+      }
     } catch (error) {
       console.error(error);
       res.status(500).send("An error occurred");
@@ -10374,21 +10803,16 @@ export default async function handler(req, res) {
     try {
       let pId = [];
       let pProperties = {};
-      let pLineItems = {};
       let i = 1;
 
       req.body.line_items.map((item, index) => {
-        // console.log(item, "=====item======");
         pId.push(item.product_id);
-        // console.log(pId, "PPPPPPPPPPIIIIIIIIIDDDDDDDDD");
-        // return;
+
         const word = item.variant_title.split(" ");
         type = word[2];
         typeTwo = word[3];
-        // console.log(type, "type ===========");
 
         for (const productId of pId) {
-          // console.log(productId, "productId");
           pProperties["p_" + productId] = {
             variant_title: item.variant_title,
             properties: item.properties,
@@ -10400,7 +10824,7 @@ export default async function handler(req, res) {
             let resultObjectTitlePack = {};
             let namesArrayTitlePacks = "";
 
-            if (pProperties[`p_8727182704913`].properties) {
+            if (pProperties[`p_8727183196433`].properties) {
               namesArrayTitlePacks = pProperties[
                 `p_8727183196433`
               ].properties.map((propItem, index) => propItem.name);
@@ -10482,7 +10906,6 @@ export default async function handler(req, res) {
                     variant: pProperties[`p_8727183065361`].variant_title,
                   },
                 };
-                // console.log(propertiesObj, "propertiesObj emblum");
                 onlyEmblem(propertiesObj);
               }
             }
@@ -10508,6 +10931,7 @@ export default async function handler(req, res) {
                     _Title1: resultObjectTatran._Title1,
                     _Name1: resultObjectTatran._name1,
                     _Date: resultObjectTatran._Date,
+                    variant: pProperties[`p_8727183032593`].variant_title,
                   },
                 };
                 onlyTartan(propertiesObj);
@@ -10519,6 +10943,7 @@ export default async function handler(req, res) {
                     _Title2: resultObjectTatran._Title2,
                     _Name2: resultObjectTatran._name2,
                     _Date: resultObjectTatran._Date,
+                    variant: pProperties[`p_8727183032593`].variant_title,
                   },
                 };
                 onlyTartan(propertiesObj);
@@ -10609,7 +11034,6 @@ export default async function handler(req, res) {
       console.log(pageCount, "pageCount");
       if (pageCount > 0) {
         const pdfPrintedBytes = await pdfDocPrinted.save();
-        // console.log(pdfPrintedBytes, "pdfBytespdfBytes");
 
         const pdfPrintedStream = new Readable();
 
@@ -10631,6 +11055,7 @@ export default async function handler(req, res) {
       // await order.save({
       //   update: true,
       // });
+      // await client.close();
 
       return res.status(200).send({ data: "success pdf" });
     } catch (error) {
