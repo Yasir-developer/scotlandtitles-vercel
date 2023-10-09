@@ -6767,16 +6767,6 @@ export default async function handler(req, res) {
           font: timesRomanFontHeading,
         });
 
-        // deedPageTwo.drawText(formerTitle, {
-        //   x:
-        //   y:
-        //   size: 12,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   font: timesRomanFontHeading,
-        // });
         deedPageTwo.drawText(newTitle, {
           x: newDeedTwoTotalTextWidth,
           y: 683,
@@ -8881,10 +8871,15 @@ export default async function handler(req, res) {
   };
 
   const onlyEmblem = async (propObject) => {
-    console.log("in emblum func");
+    console.log(propObject, "in emblum func");
 
     try {
-      const emblemCertificate = pdfDoc.addPage([595, 842]);
+      if (propObject.p_8727183065361.variant.includes("Printed Pack")) {
+        var emblemCertificatePrinted = pdfDocPrinted.addPage([595, 842]);
+        var emblemCertificate = pdfDoc.addPage([595, 842]);
+      } else {
+        var emblemCertificate = pdfDoc.addPage([595, 842]);
+      }
 
       const emblem_certificate_heading = `To All & Sundry whom these presents do concern\n
               Scotland Titles does declare that`;
@@ -8987,6 +8982,8 @@ export default async function handler(req, res) {
       const imgBufferThree = fs.readFileSync(filePathThree);
       // console.log(imgBuffer, "imgBuffer");
       const stampImg = await pdfDoc.embedPng(imgBufferThree);
+      const stampImgPrinted = await pdfDocPrinted.embedPng(imgBufferThree);
+
       const stampPngDims = stampImg.scale(0.3);
       const monthNames = [
         "JANUARY",
@@ -9033,13 +9030,14 @@ export default async function handler(req, res) {
 
       // console.log(imgBuffer, "imgBuffer");
       const emblem_bg = await pdfDoc.embedPng(emblembg_Buffer);
+      //borders image
 
-      const emblemmiddlegPath = path.resolve("./public", "images", "stick.png");
+      const border = path.resolve("./public", "images", "borders.jpg");
 
-      const emblem_middle_Buffer = fs.readFileSync(emblemmiddlegPath);
+      const border_Buffer = fs.readFileSync(border);
 
-      // console.log(imgBuffer, "imgBuffer");
-      const emblem_middle = await pdfDoc.embedPng(emblem_middle_Buffer);
+      const emblem_borders = await pdfDocPrinted.embedJpg(border_Buffer);
+
       const filePathFour = path.resolve(
         "./public",
         "images",
@@ -9048,6 +9046,9 @@ export default async function handler(req, res) {
 
       const imgBufferFour = fs.readFileSync(filePathFour);
       const certificateMid = await pdfDoc.embedPng(imgBufferFour);
+
+      const certificateMidPrinted = await pdfDocPrinted.embedPng(imgBufferFour);
+
       const ertificateMidpngDims = certificateMid.scale(0.3);
 
       const emblemlogoPath = path.resolve(
@@ -9061,11 +9062,16 @@ export default async function handler(req, res) {
       // console.log(imgBuffer, "imgBuffer");
       const emblem_logo = await pdfDoc.embedPng(emblem_logo_Buffer);
 
+      const emblem_logo_printed = await pdfDocPrinted.embedPng(
+        emblem_logo_Buffer
+      );
+
       const filePath = path.resolve("./public", "images", "scotland_log.png");
 
       const imgBuffer = fs.readFileSync(filePath);
-      // console.log(imgBuffer, "imgBuffer");
       const img = await pdfDoc.embedPng(imgBuffer);
+      const img_printed = await pdfDocPrinted.embedPng(imgBuffer);
+
       const pngDims = img.scale(0.25);
 
       const emblemsignPath = path.resolve(
@@ -9077,8 +9083,18 @@ export default async function handler(req, res) {
 
       // console.log(imgBuffer, "imgBuffer");
       const emblem_signature = await pdfDoc.embedPng(emblem_signature_Buffer);
-      const textWidth = emblemCertificate.getWidth() - 100; // Adjust the width as needed
-      const textHeight = emblemCertificate.getHeight() - 50;
+
+      const emblem_signature_printed = await pdfDocPrinted.embedPng(
+        emblem_signature_Buffer
+      );
+
+      if (propObject.p_8727183065361.variant.includes("Printed Pack")) {
+        var textWidth = emblemCertificatePrinted.getWidth() - 100; // Adjust the width as needed
+        var textHeight = emblemCertificatePrinted.getHeight() - 50;
+      } else {
+        var textWidth = emblemCertificate.getWidth() - 100; // Adjust the width as needed
+        var textHeight = emblemCertificate.getHeight() - 50;
+      }
 
       emblemCertificate.drawImage(emblem_bg, {
         width: emblemCertificate.getWidth(),
@@ -9278,16 +9294,6 @@ export default async function handler(req, res) {
         font: tempusFont,
       });
 
-      //middle line image ===========
-
-      //   emblemCertificate.drawImage(emblem_middle, {
-      //     x: 340,
-      //     y: 170,
-      //     height: 430,
-      //     // width: ertificateMidpngDims.width,
-      //     // height: ertificateMidpngDims.height,
-      //   });
-
       emblemCertificate.drawImage(emblem_logo, {
         x: 320,
         y: 400,
@@ -9402,19 +9408,344 @@ export default async function handler(req, res) {
         width: 30,
       });
 
-      // const pdfBytes = await pdfDoc.save();
+      //========================Printed Emblem Page Start===========================
 
-      // const pdfStream = new Readable();
+      if (propObject.p_8727183065361.variant.includes("Printed Pack")) {
+        emblemCertificatePrinted.drawImage(emblem_borders, {
+          // x
+          y: 790,
+          width: emblemCertificatePrinted.getWidth(),
+          height: 70,
+          // height: emblemCertificatePrinted.getHeight(),
+        });
 
-      // pdfStream.push(pdfBytes);
-      // pdfStream.push(null); // End of stream
+        emblemCertificatePrinted.drawImage(certificateMidPrinted, {
+          x: 250,
+          y: propObject.p_8727183065361._Title2 ? 610 : 630,
+          width: ertificateMidpngDims.width,
+          height: ertificateMidpngDims.height,
+        });
 
-      // const remotePath = `/pdfs/${order_number}.pdf`;
-      // await client.uploadFrom(pdfStream, remotePath);
-      // client.close();
+        // emblemCertificatePrinted.drawText("abcdesfd", {
+        //   // x: 200,
+        //   x: x,
+        //   y: 670,
+        //   width: textWidth,
+        //   height: textHeight,
+        //   size: 26,
+        //   color: rgb(0, 0, 0),
+        //   lineHeight: fontSize * 1.2,
+        //   font: oldEngPrinted,
+        // });
+        emblemCertificatePrinted.drawImage(img_printed, {
+          x: 40,
+          y: 710,
+          width: pngDims.width,
+          height: pngDims.height,
+        });
 
-      // const pdfUrl = `https://scotlandtitlesapp.com/pdfs/${order_number}.pdf`;
-      // console.log(pdfUrl, "pdfUrl");
+        emblemCertificatePrinted.drawImage(stampImgPrinted, {
+          x: 490,
+          y: 70,
+          width: stampPngDims.width,
+          height: stampPngDims.height,
+        });
+
+        emblemCertificatePrinted.drawText(emblem_certificate_heading, {
+          x: 150,
+          y: 730,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(emblemCertficateUserName, {
+          // x: 200,
+          x: x,
+          y: 670,
+          width: textWidth,
+          height: textHeight,
+          size: 26,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(emblememblemCertficateUserNameTwo, {
+          // x: 200,
+          x: xTwo,
+          y: 640,
+          width: textWidth,
+          height: textHeight,
+          size: 26,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(petition, {
+          x: 25,
+          y: 580,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(emblemCertificateText, {
+          x: 160,
+          y: 580,
+          width: textWidth,
+          height: textHeight,
+          size: 9,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(emblemCertificateTextTwo, {
+          x: 25,
+          y: 565,
+          width: textWidth,
+          height: textHeight,
+          size: 9,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        // //shewen text
+
+        emblemCertificatePrinted.drawText(Shewen, {
+          x: 25,
+          y: 490,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(emblemCertificateShewenText, {
+          x: 85,
+          y: 490,
+          width: textWidth,
+          height: textHeight,
+          size: 9,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(emblemCertificateShewenTextTwo, {
+          x: 25,
+          y: 475,
+          width: textWidth,
+          height: textHeight,
+          size: 9,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        // //videlict
+
+        emblemCertificatePrinted.drawText(videlicit, {
+          x: 25,
+          y: 290,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(emblemCertificateVidelicitText, {
+          x: 90,
+          y: 290,
+          width: textWidth,
+          height: textHeight,
+          size: 9,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(emblemCertificateVidelicitTextTwo, {
+          x: 25,
+          y: 275,
+          width: textWidth,
+          height: textHeight,
+          size: 9,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        // //In Testimony Whereof
+
+        emblemCertificatePrinted.drawText(testimony, {
+          x: 25,
+          y: 210,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(emblemCertificateTestimonyText, {
+          x: 180,
+          y: 210,
+          width: textWidth,
+          height: textHeight,
+          size: 9,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(emblemCertificateTestimonyTextTwo, {
+          x: 25,
+          y: 195,
+          width: textWidth,
+          height: textHeight,
+          size: 9,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        emblemCertificatePrinted.drawImage(emblem_logo_printed, {
+          x: 320,
+          y: 400,
+          height: 200,
+          width: 250,
+        });
+
+        emblemCertificatePrinted.drawText(further, {
+          x: 310,
+          y: 380,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(furtherDescription, {
+          x: 310,
+          y: 355,
+          width: textWidth,
+          height: textHeight,
+          size: 9,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(Scilicet, {
+          x: 310,
+          y: 275,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(scilicetSubDescription, {
+          x: 360,
+          y: 275,
+          width: textWidth,
+          height: textHeight,
+          size: 9,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(ScilicetDescription, {
+          x: 310,
+          y: 260,
+          width: textWidth,
+          height: textHeight,
+          size: 9,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        // //SIGNED
+        emblemCertificatePrinted.drawText(emblemSigned, {
+          x: 150,
+          y: 120,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(dateText, {
+          x: 170,
+          y: 80,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(dateContent, {
+          x: 210,
+          y: 80,
+          width: textWidth,
+          height: textHeight,
+          size: 9,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(copyright, {
+          x: 190,
+          y: 70,
+          width: textWidth,
+          height: textHeight,
+          size: 6,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFontPrinted,
+        });
+
+        emblemCertificatePrinted.drawImage(emblem_signature_printed, {
+          x: 210,
+          y: 100,
+          height: 50,
+          width: 30,
+        });
+
+        emblemCertificatePrinted.drawImage(emblem_borders, {
+          // x
+          y: 0,
+          width: emblemCertificatePrinted.getWidth(),
+          height: 60,
+          // height: emblemCertificatePrinted.getHeight(),
+        });
+      }
     } catch (error) {
       console.error(error);
       res.status(500).send("An error occurred");
@@ -10039,7 +10370,7 @@ export default async function handler(req, res) {
   let typeTwo;
 
   if (email && req.body.line_items.length > 0) {
-    console.log(req.body, "======================req body");
+    // console.log(req.body, "======================req body");
     try {
       let pId = [];
       let pProperties = {};
@@ -10047,9 +10378,9 @@ export default async function handler(req, res) {
       let i = 1;
 
       req.body.line_items.map((item, index) => {
-        console.log(item, "=====item======");
+        // console.log(item, "=====item======");
         pId.push(item.product_id);
-        console.log(pId, "PPPPPPPPPPIIIIIIIIIDDDDDDDDD");
+        // console.log(pId, "PPPPPPPPPPIIIIIIIIIDDDDDDDDD");
         // return;
         const word = item.variant_title.split(" ");
         type = word[2];
@@ -10136,10 +10467,10 @@ export default async function handler(req, res) {
                     _Title1: resultObjectEmblum._Title1,
                     _Name1: resultObjectEmblum._Name1,
                     _Date: resultObjectEmblum._Date,
+                    variant: pProperties[`p_8727183065361`].variant_title,
                   },
                 };
                 onlyEmblem(propertiesObj);
-                // }
               } else {
                 const propertiesObj = {
                   p_8727183065361: {
@@ -10148,6 +10479,7 @@ export default async function handler(req, res) {
                     _Title2: resultObjectEmblum._Title2,
                     _Name2: resultObjectEmblum._name2,
                     _Date: resultObjectEmblum._Date,
+                    variant: pProperties[`p_8727183065361`].variant_title,
                   },
                 };
                 // console.log(propertiesObj, "propertiesObj emblum");
@@ -10219,12 +10551,6 @@ export default async function handler(req, res) {
                     size: size,
                     reference: i++,
                   },
-
-                  // p_8727183032593: {
-                  //   _Title1: resultObjectTitlePack._Title1,
-                  //   _Name1: resultObjectTitlePack._Name1,
-                  //   _Date: resultObjectTitlePack._Date,
-                  // },
                 };
 
                 // console.log(propertiesObj, "propertiesObj propertiesObj");
@@ -10246,14 +10572,6 @@ export default async function handler(req, res) {
                     size: size,
                     reference: i++,
                   },
-
-                  // p_8727183032593: {
-                  //   _Title1: resultObjectTitlePack._Title1,
-                  //   _Name1: resultObjectTitlePack._Name1,
-                  //   _Title2: resultObjectTitlePack._Title2,
-                  //   _Name2: resultObjectTitlePack._Name2,
-                  //   _Date: resultObjectTitlePack._Date,
-                  // },
                 };
 
                 titlePackWithFreeTartan(propertiesObj);
@@ -10267,568 +10585,8 @@ export default async function handler(req, res) {
 
         return;
         // pLineItems["p_" + item.product_id] = item;
-
-        if (pId.includes(titlePackId)) {
-          const word = item.variant_title.split(" ");
-          size = word[0];
-          // type = word[2]
-          console.log(size, "sizesizesize");
-        }
       });
 
-      // if (
-      //   pId.includes(tartanId) &&
-      //   pId.includes(emblemId) &&
-      //   pId.includes(titlePackId)
-      // ) {
-      //   console.log("Emblem and tartan =============");
-
-      //   // // return;
-      //   let resultObjectTitlePack = {};
-      //   let namesArrayTitlePacks = "";
-
-      //   let resultObjectEmblum = {};
-      //   let namesArrayEmblum = "";
-
-      //   let resultObjectTatran = {};
-      //   let namesArrayTatran = "";
-
-      //   if (pProperties["p_8727183196433"].properties) {
-      //     namesArrayTitlePacks = pProperties["p_8727183196433"].properties.map(
-      //       (propItem, index) => propItem.name
-      //     );
-      //     for (const obj of pProperties["p_8727183196433"].properties) {
-      //       resultObjectTitlePack[obj.name] = obj.value;
-      //     }
-      //   }
-      //   if (pProperties["p_8727183065361"].properties) {
-      //     namesArrayEmblum = pProperties["p_8727183065361"].properties.map(
-      //       (propItem, index) => propItem.name
-      //     );
-      //     for (const obj of pProperties["p_8727183065361"].properties) {
-      //       resultObjectEmblum[obj.name] = obj.value;
-      //     }
-      //   }
-      //   if (pProperties["p_8727183032593"].properties) {
-      //     namesArrayTatran = pProperties["p_8727183032593"].properties.map(
-      //       (propItem, index) => propItem.name
-      //     );
-      //     for (const obj of pProperties["p_8727183032593"].properties) {
-      //       resultObjectTatran[obj.name] = obj.value;
-      //     }
-      //   }
-
-      //   if (
-      //     !namesArrayTitlePacks.includes("_Title2") &&
-      //     !namesArrayEmblum.includes("_Title2") &&
-      //     !namesArrayTatran.includes("_Title2")
-      //   ) {
-      //     const propertiesObj = {
-      //       p_8727183196433: {
-      //         _Title1: resultObjectTitlePack._Title1,
-      //         _Name1: resultObjectTitlePack._Name1,
-      //         _Date: resultObjectTitlePack._Date,
-      //         size: size,
-      //         type,
-      //       },
-      //       p_8727183065361: {
-      //         _Title1: resultObjectEmblum._Title1,
-      //         _Name1: resultObjectEmblum._Name1,
-      //         _Date: resultObjectEmblum._Date,
-      //       },
-      //       p_8727183032593: {
-      //         _Title1: resultObjectTatran._Title1,
-      //         _Name1: resultObjectTatran._name1,
-      //         _Date: resultObjectTatran._Date,
-      //       },
-      //     };
-      //     titlePack(propertiesObj);
-      //     onlyEmblem(propertiesObj);
-      //     onlyTartan(propertiesObj);
-      //     // titleAndEmblemAndTartan(propertiesObj);
-      //   } else if (
-      //     namesArrayTitlePacks.includes("_Title2") &&
-      //     !namesArrayEmblum.includes("_Title2") &&
-      //     !namesArrayTatran.includes("_Title2")
-      //   ) {
-      //     const propertiesObj = {
-      //       p_8727183196433: {
-      //         _Title1: resultObjectTitlePack._Title1,
-      //         _Name1: resultObjectTitlePack._Name1,
-      //         _Title2: resultObjectTitlePack._Title2,
-      //         _Name2: resultObjectTitlePack._Name2,
-      //         _Date: resultObjectTitlePack._Date,
-      //         size: size,
-      //       },
-      //       p_8727183065361: {
-      //         _Title1: resultObjectEmblum._Title1,
-      //         _Name1: resultObjectEmblum._Name1,
-      //         _Date: resultObjectEmblum._Date,
-      //       },
-      //       p_8727183032593: {
-      //         _Title1: resultObjectTatran._Title1,
-      //         _Name1: resultObjectTatran._name1,
-      //         _Date: resultObjectTatran._Date,
-      //       },
-      //     };
-      //     console.log(propertiesObj, "propertiesObj");
-      //     titlePack(propertiesObj);
-      //     onlyEmblem(propertiesObj);
-      //     onlyTartan(propertiesObj);
-      //   } else if (
-      //     namesArrayTitlePacks.includes("_Title2") &&
-      //     namesArrayEmblum.includes("_Title2") &&
-      //     !namesArrayTatran.includes("_Title2")
-      //   ) {
-      //     const propertiesObj = {
-      //       p_8727183196433: {
-      //         _Title1: resultObjectTitlePack._Title1,
-      //         _Name1: resultObjectTitlePack._Name1,
-      //         _Title2: resultObjectTitlePack._Title2,
-      //         _Name2: resultObjectTitlePack._Name2,
-      //         _Date: resultObjectTitlePack._Date,
-      //         size: size,
-      //       },
-      //       p_8727183065361: {
-      //         _Title1: resultObjectEmblum._Title1,
-      //         _Name1: resultObjectEmblum._Name1,
-      //         _Title2: resultObjectEmblum._Title2,
-      //         _Name2: resultObjectEmblum._name2,
-      //         _Date: resultObjectEmblum._Date,
-      //       },
-      //       p_8727183032593: {
-      //         _Title1: resultObjectTatran._Title1,
-      //         _Name1: resultObjectTatran._name1,
-      //         _Date: resultObjectTatran._Date,
-      //       },
-      //     };
-      //     titlePack(propertiesObj);
-      //     onlyEmblem(propertiesObj);
-      //     onlyTartan(propertiesObj);
-      //   } else {
-      //     const propertiesObj = {
-      //       p_8727183196433: {
-      //         _Title1: resultObjectTitlePack._Title1,
-      //         _Name1: resultObjectTitlePack._Name1,
-      //         _Title2: resultObjectTitlePack._Title2,
-      //         _Name2: resultObjectTitlePack._Name2,
-      //         _Date: resultObjectTitlePack._Date,
-      //         size: size,
-      //       },
-      //       p_8727183065361: {
-      //         _Title1: resultObjectEmblum._Title1,
-      //         _Name1: resultObjectEmblum._Name1,
-      //         _Title2: resultObjectEmblum._Title2,
-      //         _Name2: resultObjectEmblum._name2,
-      //         _Date: resultObjectEmblum._Date,
-      //       },
-      //       p_8727183032593: {
-      //         _Title1: resultObjectTatran._Title1,
-      //         _Name1: resultObjectTatran._name1,
-      //         _Title2: resultObjectTatran._Title2,
-      //         _Name2: resultObjectTatran._name2,
-      //         _Date: resultObjectTatran._Date,
-      //       },
-      //     };
-      //     titlePack(propertiesObj);
-      //     onlyEmblem(propertiesObj);
-      //     onlyTartan(propertiesObj);
-      //   }
-
-      //   // onlyEmblem(abx)
-      // }
-      // else if (pId.includes(titlePackId) && pId.includes(emblemId)) {
-      //   let resultObjectTitlePack = {};
-      //   let namesArrayTitlePacks = "";
-
-      //   let resultObjectEmblum = {};
-      //   let namesArrayEmblum = "";
-
-      //   if (pProperties["p_8727183196433"].properties) {
-      //     namesArrayTitlePacks = pProperties["p_8727183196433"].properties.map(
-      //       (propItem, index) => propItem.name
-      //     );
-      //     for (const obj of pProperties["p_8727183196433"].properties) {
-      //       resultObjectTitlePack[obj.name] = obj.value;
-      //       console.log(obj.value, "obj.value");
-      //     }
-      //   }
-      //   if (pProperties["p_8727183065361"].properties) {
-      //     namesArrayEmblum = pProperties["p_8727183065361"].properties.map(
-      //       (propItem, index) => propItem.name
-      //     );
-      //     for (const obj of pProperties["p_8727183065361"].properties) {
-      //       resultObjectEmblum[obj.name] = obj.value;
-      //     }
-      //   }
-
-      //   if (
-      //     !namesArrayTitlePacks.includes("_Title2") &&
-      //     !namesArrayEmblum.includes("_Title2") // resultObjectTitlePack._Title1 == "Lord" &&
-      //   ) {
-      //     const propertiesObj = {
-      //       p_8727183196433: {
-      //         _Title1: resultObjectTitlePack._Title1,
-      //         _Name1: resultObjectTitlePack._Name1,
-      //         _Date: resultObjectTitlePack._Date,
-      //         size: size,
-      //       },
-      //       p_8727183065361: {
-      //         _Title1: resultObjectEmblum._Title1,
-      //         _Name1: resultObjectEmblum._Name1,
-      //         _Date: resultObjectEmblum._Date,
-      //       },
-      //     };
-      //     if (
-      //       pProperties[`p_${titlePackId}`].variant_title.includes(
-      //         "Digital Download & Printed Pack"
-      //       ) &&
-      //       pProperties[`p_${emblemId}`].variant_title.includes(
-      //         "Digital Download & Printed Pack"
-      //       )
-      //     ) {
-      //       // titlePackPrinted(propertiesObj);
-      //       onlyEmblem(propertiesObj);
-
-      //       const pdfBytesPrinted = await pdfDocPrinted.save();
-      //       // console.log(pdfBytes, "pdfBytespdfBytes");
-
-      //       const pdfStreamPrinted = new Readable();
-
-      //       pdfStreamPrinted.push(pdfBytesPrinted);
-      //       pdfStreamPrinted.push(null); // End of stream
-
-      //       const remotePath = `/pdfs/${order_number}-printed.pdf`;
-      //       await client.uploadFrom(pdfStreamPrinted, remotePath);
-
-      //       // client.close();
-
-      //       const pdfUrl = `https://scotlandtitlesapp.com/pdfs/${order_number}-printed.pdf`;
-      //       console.log(pdfUrl, "pdfUrl pdfUrl");
-
-      //       client.close();
-
-      //       return res.end();
-      //     } else if (
-      //       pProperties[`p_${titlePackId}`].variant_title.includes(
-      //         "Digital Download & Printed Pack"
-      //       )
-      //     ) {
-      //       titlePack(propertiesObj);
-      //       // titlePackPrinted(propertiesObj);
-
-      //       const pdfBytesPrinted = await pdfDocPrinted.save();
-      //       // console.log(pdfBytes, "pdfBytespdfBytes");
-
-      //       const pdfStreamPrinted = new Readable();
-
-      //       pdfStreamPrinted.push(pdfBytesPrinted);
-      //       pdfStreamPrinted.push(null); // End of stream
-
-      //       const remotePath = `/pdfs/${order_number}-printed.pdf`;
-      //       await client.uploadFrom(pdfStreamPrinted, remotePath);
-
-      //       // client.close();
-
-      //       const pdfUrl = `https://scotlandtitlesapp.com/pdfs/${order_number}-printed.pdf`;
-      //       console.log(pdfUrl, "pdfUrl pdfUrl");
-
-      //       onlyEmblem(propertiesObj);
-
-      //       const pdfBytesPrintedtwo = await pdfDoc.save();
-      //       // console.log(pdfBytes, "pdfBytespdfBytes");
-
-      //       const pdfStreamPrintedtwo = new Readable();
-
-      //       pdfStreamPrintedtwo.push(pdfBytesPrintedtwo);
-      //       pdfStreamPrintedtwo.push(null); // End of stream
-
-      //       const remotePathTwo = `/pdfs/${order_number}.pdf`;
-      //       await client.uploadFrom(pdfStreamPrintedtwo, remotePathTwo);
-
-      //       // client.close();
-
-      //       const pdfUrlTwo = `https://scotlandtitlesapp.com/pdfs/${order_number}.pdf`;
-      //       console.log(pdfUrlTwo, "pdfUrlTwo");
-
-      //       client.close();
-
-      //       return res.end();
-      //     }
-      //   } else if (
-      //     namesArrayTitlePacks.includes("_Title2") &&
-      //     !namesArrayEmblum.includes("_Title2")
-      //   ) {
-      //     const propertiesObj = {
-      //       p_8727183196433: {
-      //         _Title1: resultObjectTitlePack._Title1,
-      //         _Name1: resultObjectTitlePack._Name1,
-      //         _Title2: resultObjectTitlePack._Title2,
-      //         _Name2: resultObjectTitlePack._Name2,
-
-      //         _Date: resultObjectTitlePack._Date,
-      //         size: size,
-      //       },
-      //       p_8727183065361: {
-      //         _Title1: resultObjectEmblum._Title1,
-      //         _Name1: resultObjectEmblum._Name1,
-
-      //         _Date: resultObjectEmblum._Date,
-      //       },
-      //     };
-      //     titlePack(propertiesObj);
-      //     onlyEmblem(propertiesObj);
-      //   } else if (
-      //     !namesArrayTitlePacks.includes("_Title2") &&
-      //     namesArrayEmblum.includes("_Title2")
-      //   ) {
-      //     const propertiesObj = {
-      //       p_8727183196433: {
-      //         _Title1: resultObjectTitlePack._Title1,
-      //         _Name1: resultObjectTitlePack._Name1,
-
-      //         _Date: resultObjectTitlePack._Date,
-      //         size: size,
-      //       },
-      //       p_8727183065361: {
-      //         _Title1: resultObjectEmblum._Title1,
-      //         _Name1: resultObjectEmblum._Name1,
-      //         _Title2: resultObjectEmblum._Title2,
-      //         _Name2: resultObjectEmblum._name2,
-      //         _Date: resultObjectEmblum._Date,
-      //       },
-      //     };
-      //     titlePack(propertiesObj);
-      //     onlyEmblem(propertiesObj);
-      //   } else {
-      //     const propertiesObj = {
-      //       p_8727183196433: {
-      //         _Title1: resultObjectTitlePack._Title1,
-      //         _Name1: resultObjectTitlePack._Name1,
-      //         _Title2: resultObjectTitlePack._Title2,
-      //         _Name2: resultObjectTitlePack._Name2,
-
-      //         _Date: resultObjectTitlePack._Date,
-      //         size: size,
-      //       },
-      //       p_8727183065361: {
-      //         _Title1: resultObjectEmblum._Title1,
-      //         _Name1: resultObjectEmblum._Name1,
-      //         _Title2: resultObjectEmblum._Title2,
-      //         _Name2: resultObjectEmblum._name2,
-      //         _Date: resultObjectEmblum._Date,
-      //       },
-      //     };
-      //     titlePack(propertiesObj);
-      //     onlyEmblem(propertiesObj);
-      //   }
-      // }
-      // else if (pId.includes(titlePackId) && pId.includes(tartanId)) {
-      //   let resultObjectTitlePack = {};
-      //   let namesArrayTitlePacks = "";
-
-      //   let resultObjectTatran = {};
-      //   let namesArrayTatran = "";
-
-      //   if (pProperties["p_8727183196433"].properties) {
-      //     namesArrayTitlePacks = pProperties["p_8727183196433"].properties.map(
-      //       (propItem, index) => propItem.name
-      //     );
-      //     for (const obj of pProperties["p_8727183196433"].properties) {
-      //       resultObjectTitlePack[obj.name] = obj.value;
-      //     }
-      //   }
-      //   if (pProperties["p_8727183032593"].properties) {
-      //     namesArrayTatran = pProperties["p_8727183032593"].properties.map(
-      //       (propItem, index) => propItem.name
-      //     );
-      //     for (const obj of pProperties["p_8727183032593"].properties) {
-      //       resultObjectTatran[obj.name] = obj.value;
-      //     }
-      //   }
-
-      //   if (
-      //     !namesArrayTitlePacks.includes("_Title2") &&
-      //     !namesArrayTatran.includes("_Title2") // resultObjectTitlePack._Title1 == "Lord" &&
-      //     // resultObjectEmblum._Title1 == "Lord" &&
-      //     // resultObjectTatran._Title1 == "Lord"
-      //   ) {
-      //     const propertiesObj = {
-      //       p_8727183196433: {
-      //         _Title1: resultObjectTitlePack._Title1,
-      //         _Name1: resultObjectTitlePack._Name1,
-      //         _Date: resultObjectTitlePack._Date,
-      //         size: size,
-      //       },
-      //       p_8727183032593: {
-      //         _Title1: resultObjectTatran._Title1,
-      //         _Name1: resultObjectTatran._name1,
-      //         _Date: resultObjectTatran._Date,
-      //       },
-      //     };
-      //     titlePack(propertiesObj);
-      //     onlyTartan(propertiesObj);
-      //   } else if (
-      //     namesArrayTatran.includes("_Title2") &&
-      //     !namesArrayTatran.includes("_Title2")
-      //   ) {
-      //     const propertiesObj = {
-      //       p_8727183196433: {
-      //         _Title1: resultObjectTitlePack._Title1,
-      //         _Name1: resultObjectTitlePack._Name1,
-      //         _Title2: resultObjectTitlePack._Title2,
-      //         _Name2: resultObjectTitlePack._Name2,
-      //         _Date: resultObjectTitlePack._Date,
-      //         size: size,
-      //       },
-      //       p_8727183032593: {
-      //         _Title1: resultObjectTatran._Title1,
-      //         _Name1: resultObjectTatran._name1,
-
-      //         _Date: resultObjectTatran._Date,
-      //       },
-      //     };
-      //     titlePack(propertiesObj);
-      //     onlyTartan(propertiesObj);
-      //     // titleAndTartan(propertiesObj);
-      //   } else if (
-      //     !namesArrayTitlePacks.includes("_Title2") &&
-      //     namesArrayTatran.includes("_Title2")
-      //   ) {
-      //     const propertiesObj = {
-      //       p_8727183196433: {
-      //         _Title1: resultObjectTitlePack._Title1,
-      //         _Name1: resultObjectTitlePack._Name1,
-
-      //         _Date: resultObjectTitlePack._Date,
-      //         size: size,
-      //       },
-      //       p_8727183032593: {
-      //         _Title1: resultObjectTatran._Title1,
-      //         _Name1: resultObjectTatran._name1,
-      //         _Title2: resultObjectTatran._Title2,
-      //         _Name2: resultObjectTatran._name2,
-      //         _Date: resultObjectTatran._Date,
-      //       },
-      //     };
-      //     titlePack(propertiesObj);
-      //     onlyTartan(propertiesObj);
-      //     // titleAndTartan(propertiesObj);
-      //   } else {
-      //     const propertiesObj = {
-      //       p_8727183196433: {
-      //         _Title1: resultObjectTitlePack._Title1,
-      //         _Name1: resultObjectTitlePack._Name1,
-      //         _Title2: resultObjectTitlePack._Title2,
-      //         _Name2: resultObjectTitlePack._Name2,
-      //         _Date: resultObjectTitlePack._Date,
-      //         size: size,
-      //       },
-      //       p_8727183032593: {
-      //         _Title1: resultObjectTatran._Title1,
-      //         _Name1: resultObjectTatran._name1,
-      //         _Title2: resultObjectTatran._Title2,
-      //         _Name2: resultObjectTatran._name2,
-      //         _Date: resultObjectTatran._Date,
-      //       },
-      //     };
-      //     titlePack(propertiesObj);
-      //     onlyTartan(propertiesObj);
-      //   }
-      // }
-      //  else if (pId.includes(emblemId)) {
-      //   let resultObjectEmblum = {};
-      //   let namesArrayEmblum = "";
-
-      //   if (pProperties["p_8727183065361"].properties) {
-      //     namesArrayEmblum = pProperties["p_8727183065361"].properties.map(
-      //       (propItem, index) => propItem.name
-      //     );
-      //     for (const obj of pProperties["p_8727183065361"].properties) {
-      //       resultObjectEmblum[obj.name] = obj.value;
-      //     }
-      //   }
-
-      //   if (!namesArrayEmblum.includes("_Title2")) {
-      //     console.log("in name array emblum");
-      //     const propertiesObj = {
-      //       p_8727183065361: {
-      //         _Title1: resultObjectEmblum._Title1,
-      //         _Name1: resultObjectEmblum._Name1,
-      //         _Date: resultObjectEmblum._Date,
-      //       },
-      //     };
-      //     onlyEmblem(propertiesObj);
-      //     const pdfBytes = await pdfDoc.save();
-      //     console.log(pdfBytes, "pdfBytespdfBytes");
-
-      //     const pdfStream = new Readable();
-
-      //     pdfStream.push(pdfBytes);
-      //     pdfStream.push(null); // End of stream
-
-      //     const remotePath = `/pdfs/${order_number}.pdf`;
-      //     await client.uploadFrom(pdfStream, remotePath);
-
-      //     // client.close();
-
-      //     const pdfUrl = `https://scotlandtitlesapp.com/pdfs/${order_number}.pdf`;
-      //     console.log(pdfUrl, "pdfUrl pdfUrl");
-      //     client.close();
-
-      //     return res.end();
-      //   } else {
-      //     const propertiesObj = {
-      //       p_8727183065361: {
-      //         _Title1: resultObjectEmblum._Title1,
-      //         _Name1: resultObjectEmblum._Name1,
-      //         _Title2: resultObjectEmblum._Title2,
-      //         _Name2: resultObjectEmblum._name2,
-      //         _Date: resultObjectEmblum._Date,
-      //       },
-      //     };
-      //     console.log(propertiesObj, "propertiesObj emblum");
-      //     onlyEmblem(propertiesObj);
-      //   }
-      // }
-      // else if (pId.includes(tartanId))
-      //  {
-      //   let resultObjectTatran = {};
-      //   let namesArrayTatran = "";
-
-      //   if (pProperties["p_8727183032593"].properties) {
-      //     namesArrayTatran = pProperties["p_8727183032593"].properties.map(
-      //       (propItem, index) => propItem.name
-      //     );
-      //     for (const obj of pProperties["p_8727183032593"].properties) {
-      //       resultObjectTatran[obj.name] = obj.value;
-      //     }
-      //   }
-
-      //   if (
-      //     !namesArrayTatran.includes("_Title2") // resultObjectTitlePack._Title1 == "Lord" &&
-      //   ) {
-      //     const propertiesObj = {
-      //       p_8727183032593: {
-      //         _Title1: resultObjectTatran._Title1,
-      //         _Name1: resultObjectTatran._name1,
-      //         _Date: resultObjectTatran._Date,
-      //       },
-      //     };
-      //     onlyTartan(propertiesObj);
-      //   } else {
-      //     const propertiesObj = {
-      //       p_8727183032593: {
-      //         _Title1: resultObjectTatran._Title1,
-      //         _Name1: resultObjectTatran._name1,
-      //         _Title2: resultObjectTatran._Title2,
-      //         _Name2: resultObjectTatran._name2,
-      //         _Date: resultObjectTatran._Date,
-      //       },
-      //     };
-      //     onlyTartan(propertiesObj);
-      //   }
-      // }
       const pdfBytes = await pdfDoc.save();
 
       const pdfStream = new Readable();
@@ -10838,33 +10596,35 @@ export default async function handler(req, res) {
 
       const remotePath = `/pdfs/${order_number}.pdf`;
       await client.uploadFrom(pdfStream, remotePath);
+      const pageCount = pdfDocPrinted.getPageCount();
 
-      client.close();
-
+      if (pageCount == 0) {
+        client.close();
+      }
       const pdfUrl = `https://scotlandtitlesapp.com/pdfs/${order_number}.pdf`;
 
       console.log(pdfUrl, "pdfUrl");
 
-      // const pageCount = pdfDocPrinted.getPageCount();
-      // // console.log(pageCount);
-      // // console.log(pdfUrl, "pdfUrl");
-      // if (pageCount > 0) {
-      //   const pdfPrintedBytes = await pdfDocPrinted.save();
-      //   // console.log(pdfPrintedBytes, "pdfBytespdfBytes");
+      //for printed page
+      console.log(pageCount, "pageCount");
+      if (pageCount > 0) {
+        const pdfPrintedBytes = await pdfDocPrinted.save();
+        // console.log(pdfPrintedBytes, "pdfBytespdfBytes");
 
-      //   const pdfPrintedStream = new Readable();
+        const pdfPrintedStream = new Readable();
 
-      //   pdfPrintedStream.push(pdfPrintedBytes);
-      //   pdfPrintedStream.push(null); // End of stream
+        pdfPrintedStream.push(pdfPrintedBytes);
+        pdfPrintedStream.push(null); // End of stream
 
-      //   const remotePrintedPath = `/pdfs/${order_number}-printed.pdf`;
-      //   await client.uploadFrom(pdfPrintedStream, remotePrintedPath);
+        const remotePrintedPath = `/pdfs/${order_number}-printed.pdf`;
+        await client.uploadFrom(pdfPrintedStream, remotePrintedPath);
 
-      //   client.close();
+        client.close();
 
-      //   const pdfPrintedUrl = `https://scotlandtitlesapp.com/pdfs/${order_number}-printed.pdf`;
-      //   console.log(pdfPrintedUrl, "pdfPrintedUrl");
-      // }
+        const pdfPrintedUrl = `https://scotlandtitlesapp.com/pdfs/${order_number}-printed.pdf`;
+        console.log(pdfPrintedUrl, "pdfPrintedUrl");
+      }
+      // pageCount = 0
       // const order = new shopify.rest.Order({session: session});
       // order.id = 450789469;
       // order.note = "Customer contacted us about a custom engraving on this iPod";
@@ -10873,14 +10633,6 @@ export default async function handler(req, res) {
       // });
 
       return res.status(200).send({ data: "success pdf" });
-
-      // // return res.send("done");
-      // res.end();
-      // return;
-      // if (pdfUrl) {
-      //   console.log("end pdfurl");
-
-      // }
     } catch (error) {
       console.log(error, "catch error final");
       return res.status(500).send({ message: "error" });
