@@ -147,8 +147,10 @@ export default async function handler(req, res) {
       const welcome_emblem_signature_printed = await pdfDocPrinted.embedPng(
         welcom_signature_Buffer
       );
-      const heading = `Land with reference number ${order_number} - ${
-        propObject.p_8727183196433.reference
+      const heading = `Land with reference number ${order_number} ${
+        propObject.p_8727183196433.reference != 0
+          ? `- ${propObject.p_8727183196433.reference}`
+          : ""
       } ${propObject.p_8727183196433._Title1} ${
         propObject.p_8727183196433._Name1
       } ${
@@ -578,11 +580,14 @@ export default async function handler(req, res) {
             titledayWithSuffix = `${day}TH`;
         }
       }
-      const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18′′N , 003°23′08′′W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is ${order_number} - ${
-        propObject.p_8727183196433.reference
-      }\n\nThe size of THE LAND is ${
-        propObject.p_8727183196433.size
-      } square foot\n\nDate of Entry of THE LAND is as the date of this CERTIFICATE\n\nThis Disposition is signed for and on behalf of Scotland Titles and witnessed on the\n${titledayWithSuffix} Day of ${monthName} ${year}`;
+      let text = propObject.p_8727183196433.variant;
+      const myArray = text.split(" ");
+      let word = myArray[0];
+      const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18′′N , 003°23′08′′W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is ${order_number} ${
+        propObject.p_8727183196433.reference != 0
+          ? `- ${propObject.p_8727183196433.reference}`
+          : ""
+      }\n\nThe size of THE LAND is ${word} square foot\n\nDate of Entry of THE LAND is as the date of this CERTIFICATE\n\nThis Disposition is signed for and on behalf of Scotland Titles and witnessed on the\n${titledayWithSuffix} Day of ${monthName} ${year}`;
       pagetwo.drawImage(imgBg, {
         width: pagetwo.getWidth(),
         height: pagetwo.getHeight(),
@@ -3584,7 +3589,11 @@ export default async function handler(req, res) {
   };
 
   const titlePackWithFreeTartan = async (propObject) => {
-    console.log(propObject, "titlePackWithFreeTartan propObject");
+    console.log(
+      propObject,
+
+      "jjjjjjjj titlePackWithFreeTartan propObject"
+    );
 
     try {
       if (propObject.p_8727182704913.variant.includes("Printed Pack")) {
@@ -3660,8 +3669,10 @@ export default async function handler(req, res) {
       const welcome_emblem_signature_printed = await pdfDocPrinted.embedPng(
         welcom_signature_Buffer
       );
-      const heading = `Land with reference number ${order_number} - ${
-        propObject.p_8727182704913.reference
+      const heading = `Land with reference number ${order_number} ${
+        propObject.p_8727182704913.reference != 0
+          ? `- ${propObject.p_8727182704913.reference}`
+          : ""
       } ${propObject.p_8727182704913._Title1} ${
         propObject.p_8727182704913._Name1
       } ${
@@ -4091,11 +4102,15 @@ export default async function handler(req, res) {
             titledayWithSuffix = `${day}TH`;
         }
       }
-      const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18′′N , 003°23′08′′W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is ${order_number} - ${
-        propObject.p_8727182704913.reference
-      }\n\nThe size of THE LAND is ${
-        propObject.p_8727182704913.size
-      } square foot\n\nDate of Entry of THE LAND is as the date of this CERTIFICATE\n\nThis Disposition is signed for and on behalf of Scotland Titles and witnessed on the\n${titledayWithSuffix} Day of ${monthName} ${year}`;
+      let text = propObject.p_8727182704913.variant;
+      const myArray = text.split(" ");
+      let word = myArray[0];
+
+      const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18′′N , 003°23′08′′W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is ${order_number}${
+        propObject.p_8727182704913.reference != 0
+          ? ` - ${propObject.p_8727182704913.reference}`
+          : ""
+      }\n\nThe size of THE LAND is ${word} square foot\n\nDate of Entry of THE LAND is as the date of this CERTIFICATE\n\nThis Disposition is signed for and on behalf of Scotland Titles and witnessed on the\n${titledayWithSuffix} Day of ${monthName} ${year}`;
       pagetwo.drawImage(imgBg, {
         width: pagetwo.getWidth(),
         height: pagetwo.getHeight(),
@@ -10653,7 +10668,7 @@ export default async function handler(req, res) {
     }
   };
 
-  let size;
+  var size;
   let type;
   let typeTwo;
 
@@ -10663,231 +10678,314 @@ export default async function handler(req, res) {
       let pId = [];
       let pProperties = {};
       let i = 1;
+      var k = 1;
+      var titleId = 1;
+      var emblemPackId = 1;
+      var tartanPackId = 1;
+      var freeTartanPackId = 1;
 
       req.body.line_items.map((item, index) => {
-        pId.push(item.product_id);
-        console.log(pId, "pId=========");
-        const word = item.variant_title.split(" ");
-        type = word[2];
-        typeTwo = word[3];
-        const specificId = titlePackId;
+        console.log(item, "itemitem");
+        if (item.product_id == titlePackId) {
+          pId.push(item.product_id);
+          // console.log(pId, "pId=========");
+          var word = item.variant_title.split(" ");
+          type = word[2];
+          typeTwo = word[3];
+          size = word[0];
 
-        const specificIdCount = pId.filter((id) => id === specificId).length;
-
-        for (const productId of pId) {
-          pProperties["p_" + productId] = {
+          pProperties["p_" + item.product_id + titleId] = {
             variant_title: item.variant_title,
             properties: item.properties,
-            // size:
+            quantity: item.quantity,
+          };
+          titleId++;
+        } else if (item.product_id == emblemId) {
+          pId.push(item.product_id);
+          // console.log(pId, "pId=========");
+          var word = item.variant_title.split(" ");
+          type = word[2];
+          typeTwo = word[3];
+          size = word[0];
+
+          const specificId = titlePackId;
+
+          const specificIdCount = pId.filter((id) => id === specificId).length;
+          pProperties["p_" + item.product_id + emblemPackId] = {
+            variant_title: item.variant_title,
+            properties: item.properties,
+            quantity: item.quantity,
+          };
+          emblemPackId++;
+        } else if (item.product_id == tartanId) {
+          pId.push(item.product_id);
+          // console.log(pId, "pId=========");
+          var word = item.variant_title.split(" ");
+          type = word[2];
+
+          pProperties["p_" + item.product_id + tartanPackId] = {
+            variant_title: item.variant_title,
+            properties: item.properties,
+            quantity: item.quantity,
+          };
+          tartanPackId++;
+        } else if (item.product_id == freeTartanId) {
+          console.log("free tartan id heree");
+          pId.push(item.product_id);
+          var word = item.variant_title.split(" ");
+          type = word[2];
+          typeTwo = word[3];
+          size = word[0];
+
+          pProperties["p_" + item.product_id + freeTartanPackId] = {
+            variant_title: item.variant_title,
+            properties: item.properties,
+            // quantity:item.quantity
           };
 
-          console.log(specificIdCount, "specificIdCount");
-          if (productId == titlePackId) {
-            // let j;
-            // for (let i = 0; i < quantity; i++) {
+          freeTartanPackId++;
+        }
+      });
+      const specificId = freeTartanId;
+      const specificIdTitlePack = titlePackId;
+      const specificIdCountTitle = pId.filter(
+        (id) => id === specificIdTitlePack
+      ).length;
 
-            let resultObjectTitlePack = {};
-            let namesArrayTitlePacks = "";
+      const specificIdCount = pId.filter((id) => id === specificId).length;
+      console.log(specificIdCount, "specificIdCount");
+      console.log(pProperties, "pProperties,");
 
-            if (pProperties[`p_8727183196433`].properties) {
-              namesArrayTitlePacks = pProperties[
-                `p_8727183196433`
-              ].properties.map((propItem, index) => propItem.name);
-              for (const obj of pProperties[`p_8727183196433`].properties) {
-                // console.log(obj, "objobj");
-                resultObjectTitlePack[obj.name] = obj.value;
-              }
-            }
-            size = word[0];
-            console.log(size, "alllll  size");
+      console.log(pId, "pId pId pId");
+      var titleIncrement = 1;
+      var embelemIncrement = 1;
+      var tartanIncrement = 1;
+      var freeTartanIncrement = 1;
 
-            if (!namesArrayTitlePacks.includes("_Title2")) {
-              const propertiesObj = {
-                p_8727183196433: {
-                  _Title1: resultObjectTitlePack._Title1,
-                  _Name1: resultObjectTitlePack._Name1,
-                  _Date: resultObjectTitlePack._Date,
-                  variant: pProperties[`p_8727183196433`].variant_title,
-                  size: size,
-                  reference: i++,
-                },
-              };
-              // if (specificIdCount > 1) {
-              //   propertiesObj.p_8727183196433.reference = i + 1;
-              // }
+      for (const productId of pId) {
+        if (productId == titlePackId) {
+          // let j;
 
-              // console.log(propertiesObj, "propertiesObj propertiesObj");
-              titlePack(propertiesObj);
-            } else {
-              // console.log("inside else");
+          let resultObjectTitlePack = {};
+          let namesArrayTitlePacks = "";
 
-              const propertiesObj = {
-                p_8727183196433: {
-                  _Title1: resultObjectTitlePack._Title1,
-                  _Name1: resultObjectTitlePack._Name1,
-                  _Title2: resultObjectTitlePack._Title2,
-                  _Name2: resultObjectTitlePack._Name2,
-                  variant: pProperties[`p_8727183196433`].variant_title,
-
-                  _Date: resultObjectTitlePack._Date,
-
-                  size: size,
-                  reference: i++,
-
-                  // reference: i++,
-                },
-              };
-              // if (specificIdCount > 1) {
-              //   propertiesObj.p_8727183196433.reference = i + 1;
-              // }
-              // }
-
-              titlePack(propertiesObj);
-            }
-          } else if (productId == emblemId) {
-            for (let i = 0; i < item.quantity; i++) {
-              let resultObjectEmblum = {};
-              let namesArrayEmblum = "";
-
-              if (pProperties["p_8727183065361"].properties) {
-                namesArrayEmblum = pProperties[
-                  "p_8727183065361"
-                ].properties.map((propItem, index) => propItem.name);
-                for (const obj of pProperties["p_8727183065361"].properties) {
-                  resultObjectEmblum[obj.name] = obj.value;
-                }
-              }
-
-              if (!namesArrayEmblum.includes("_Title2")) {
-                console.log("in name array emblum");
-                const propertiesObj = {
-                  p_8727183065361: {
-                    _Title1: resultObjectEmblum._Title1,
-                    _Name1: resultObjectEmblum._Name1,
-                    _Date: resultObjectEmblum._Date,
-                    variant: pProperties[`p_8727183065361`].variant_title,
-                  },
-                };
-                onlyEmblem(propertiesObj);
-              } else {
-                const propertiesObj = {
-                  p_8727183065361: {
-                    _Title1: resultObjectEmblum._Title1,
-                    _Name1: resultObjectEmblum._Name1,
-                    _Title2: resultObjectEmblum._Title2,
-                    _Name2: resultObjectEmblum._name2,
-                    _Date: resultObjectEmblum._Date,
-                    variant: pProperties[`p_8727183065361`].variant_title,
-                  },
-                };
-                onlyEmblem(propertiesObj);
-              }
-            }
-          } else if (productId == tartanId) {
-            for (let i = 0; i < item.quantity; i++) {
-              let resultObjectTatran = {};
-              let namesArrayTatran = "";
-
-              if (pProperties["p_8727183032593"].properties) {
-                namesArrayTatran = pProperties[
-                  "p_8727183032593"
-                ].properties.map((propItem, index) => propItem.name);
-                for (const obj of pProperties["p_8727183032593"].properties) {
-                  resultObjectTatran[obj.name] = obj.value;
-                }
-              }
-
-              if (
-                !namesArrayTatran.includes("_Title2") // resultObjectTitlePack._Title1 == "Lord" &&
-              ) {
-                const propertiesObj = {
-                  p_8727183032593: {
-                    _Title1: resultObjectTatran._Title1,
-                    _Name1: resultObjectTatran._name1,
-                    _Date: resultObjectTatran._Date,
-                    variant: pProperties[`p_8727183032593`].variant_title,
-                  },
-                };
-                onlyTartan(propertiesObj);
-              } else {
-                const propertiesObj = {
-                  p_8727183032593: {
-                    _Title1: resultObjectTatran._Title1,
-                    _Name1: resultObjectTatran._name1,
-                    _Title2: resultObjectTatran._Title2,
-                    _Name2: resultObjectTatran._name2,
-                    _Date: resultObjectTatran._Date,
-                    variant: pProperties[`p_8727183032593`].variant_title,
-                  },
-                };
-                onlyTartan(propertiesObj);
-              }
-            }
-          } else if (productId == freeTartanId) {
-            for (let j = 0; j < item.quantity; j++) {
-              let resultObjectTitleFreePack = {};
-              let namesArrayTitleFreePacks = "";
-
-              if (pProperties[`p_8727182704913`].properties) {
-                namesArrayTitleFreePacks = pProperties[
-                  `p_8727182704913`
-                ].properties.map((propItem, index) => propItem.name);
-                for (const obj of pProperties[`p_8727182704913`].properties) {
-                  // console.log(obj, "objobj");
-                  resultObjectTitleFreePack[obj.name] = obj.value;
-                }
-              }
-              size = word[0];
-              console.log(size, "alllll  size");
-
-              if (!namesArrayTitleFreePacks.includes("_Title2")) {
-                const propertiesObj = {
-                  p_8727182704913: {
-                    _Title1: resultObjectTitleFreePack._Title1,
-                    _Name1: resultObjectTitleFreePack._Name1,
-                    _Date: resultObjectTitleFreePack._Date,
-                    variant: pProperties[`p_8727182704913`].variant_title,
-                    size: size,
-                    reference: i++,
-                  },
-                };
-
-                // console.log(propertiesObj, "propertiesObj propertiesObj");
-                titlePackWithFreeTartan(propertiesObj);
-                // onlyEmblem(propertiesObj);
-              } else {
-                // console.log("inside else");
-
-                const propertiesObj = {
-                  p_8727182704913: {
-                    _Title1: resultObjectTitleFreePack._Title1,
-                    _Name1: resultObjectTitleFreePack._Name1,
-                    _Title2: resultObjectTitleFreePack._Title2,
-                    _Name2: resultObjectTitleFreePack._Name2,
-                    variant: pProperties[`p_8727182704913`].variant_title,
-
-                    _Date: resultObjectTitleFreePack._Date,
-
-                    size: size,
-                    reference: i++,
-                  },
-                };
-
-                titlePackWithFreeTartan(propertiesObj);
-                // onlyEmblem(propertiesObj);
-              }
+          if (pProperties[`p_8727183196433${titleIncrement}`].properties) {
+            namesArrayTitlePacks = pProperties[
+              `p_8727183196433${titleIncrement}`
+            ].properties.map((propItem, index) => propItem.name);
+            for (const obj of pProperties[`p_8727183196433${titleIncrement}`]
+              .properties) {
+              // console.log(obj, "objobj");
+              resultObjectTitlePack[obj.name] = obj.value;
             }
           }
+          // size = word[0];
+          console.log(size, "alllll  size");
+
+          if (!namesArrayTitlePacks.includes("_Title2")) {
+            const propertiesObj = {
+              p_8727183196433: {
+                _Title1: resultObjectTitlePack._Title1,
+                _Name1: resultObjectTitlePack._Name1,
+                _Date: resultObjectTitlePack._Date,
+                variant:
+                  pProperties[`p_8727183196433${titleIncrement}`].variant_title,
+                size: 0,
+                reference: specificIdCountTitle == 1 ? 0 : i++,
+              },
+            };
+
+            titlePack(propertiesObj);
+          } else {
+            // console.log("inside else");
+
+            const propertiesObj = {
+              p_8727183196433: {
+                _Title1: resultObjectTitlePack._Title1,
+                _Name1: resultObjectTitlePack._Name1,
+                _Title2: resultObjectTitlePack._Title2,
+                _Name2: resultObjectTitlePack._Name2,
+                variant:
+                  pProperties[`p_8727183196433${titleIncrement}`].variant_title,
+
+                _Date: resultObjectTitlePack._Date,
+
+                size: 0,
+                reference: specificIdCountTitle == 1 ? 0 : i++,
+
+                // reference: i++,
+              },
+            };
+
+            titlePack(propertiesObj);
+          }
+          // }
+        } else if (productId == emblemId) {
+          for (
+            let i = 0;
+            i < pProperties[`p_8727183065361${embelemIncrement}`].quantity;
+            i++
+          ) {
+            let resultObjectEmblum = {};
+            let namesArrayEmblum = "";
+
+            if (pProperties[`p_8727183065361${embelemIncrement}`].properties) {
+              namesArrayEmblum = pProperties[
+                `p_8727183065361${embelemIncrement}`
+              ].properties.map((propItem, index) => propItem.name);
+              for (const obj of pProperties[
+                `p_8727183065361${embelemIncrement}`
+              ].properties) {
+                resultObjectEmblum[obj.name] = obj.value;
+              }
+            }
+
+            if (!namesArrayEmblum.includes("_Title2")) {
+              console.log("in name array emblum");
+              const propertiesObj = {
+                p_8727183065361: {
+                  _Title1: resultObjectEmblum._Title1,
+                  _Name1: resultObjectEmblum._Name1,
+                  _Date: resultObjectEmblum._Date,
+                  variant:
+                    pProperties[`p_8727183065361${embelemIncrement}`]
+                      .variant_title,
+                },
+              };
+              onlyEmblem(propertiesObj);
+            } else {
+              const propertiesObj = {
+                p_8727183065361: {
+                  _Title1: resultObjectEmblum._Title1,
+                  _Name1: resultObjectEmblum._Name1,
+                  _Title2: resultObjectEmblum._Title2,
+                  _Name2: resultObjectEmblum._name2,
+                  _Date: resultObjectEmblum._Date,
+                  variant:
+                    pProperties[`p_8727183065361${embelemIncrement}`]
+                      .variant_title,
+                },
+              };
+              onlyEmblem(propertiesObj);
+            }
+          }
+        } else if (productId == tartanId) {
+          for (
+            let i = 0;
+            i < pProperties[`p_8727183032593${tartanIncrement}`].quantity;
+            i++
+          ) {
+            let resultObjectTatran = {};
+            let namesArrayTatran = "";
+
+            if (pProperties[`p_8727183032593${tartanIncrement}`].properties) {
+              namesArrayTatran = pProperties[
+                `p_8727183032593${tartanIncrement}`
+              ].properties.map((propItem, index) => propItem.name);
+              for (const obj of pProperties[`p_8727183032593${tartanIncrement}`]
+                .properties) {
+                resultObjectTatran[obj.name] = obj.value;
+              }
+            }
+
+            if (
+              !namesArrayTatran.includes("_Title2") // resultObjectTitlePack._Title1 == "Lord" &&
+            ) {
+              const propertiesObj = {
+                p_8727183032593: {
+                  _Title1: resultObjectTatran._Title1,
+                  _Name1: resultObjectTatran._name1,
+                  _Date: resultObjectTatran._Date,
+                  variant:
+                    pProperties[`p_8727183032593${tartanIncrement}`]
+                      .variant_title,
+                },
+              };
+              onlyTartan(propertiesObj);
+            } else {
+              const propertiesObj = {
+                p_8727183032593: {
+                  _Title1: resultObjectTatran._Title1,
+                  _Name1: resultObjectTatran._name1,
+                  _Title2: resultObjectTatran._Title2,
+                  _Name2: resultObjectTatran._name2,
+                  _Date: resultObjectTatran._Date,
+                  variant:
+                    pProperties[`p_8727183032593${tartanIncrement}`]
+                      .variant_title,
+                },
+              };
+              onlyTartan(propertiesObj);
+            }
+          }
+        } else if (productId == freeTartanId) {
+          // for (let j = 0; j < item.quantity; j++) {
+          let resultObjectTitleFreePack = {};
+          let namesArrayTitleFreePacks = "";
+
+          if (pProperties[`p_8727182704913${freeTartanIncrement}`].properties) {
+            namesArrayTitleFreePacks = pProperties[
+              `p_8727182704913${freeTartanIncrement}`
+            ].properties.map((propItem, index) => propItem.name);
+            for (const obj of pProperties[
+              `p_8727182704913${freeTartanIncrement}`
+            ].properties) {
+              // console.log(obj, "objobj");
+              resultObjectTitleFreePack[obj.name] = obj.value;
+            }
+          }
+          // return;
+          // size = word[0];
+          // console.log(size, "alllll  size");
+
+          if (!namesArrayTitleFreePacks.includes("_Title2")) {
+            const propertiesObj = {
+              p_8727182704913: {
+                _Title1: resultObjectTitleFreePack._Title1,
+                _Name1: resultObjectTitleFreePack._Name1,
+                _Date: resultObjectTitleFreePack._Date,
+                variant:
+                  pProperties[`p_8727182704913${freeTartanIncrement}`]
+                    .variant_title,
+                size: size,
+                reference: specificIdCount == 1 ? 0 : i++,
+              },
+            };
+
+            console.log(propertiesObj, "propertiesObj propertiesObj");
+            titlePackWithFreeTartan(propertiesObj);
+            // onlyEmblem(propertiesObj);
+          } else {
+            // console.log("inside else");
+
+            const propertiesObj = {
+              p_8727182704913: {
+                _Title1: resultObjectTitleFreePack._Title1,
+                _Name1: resultObjectTitleFreePack._Name1,
+                _Title2: resultObjectTitleFreePack._Title2,
+                _Name2: resultObjectTitleFreePack._Name2,
+                variant:
+                  pProperties[`p_8727182704913${freeTartanIncrement}`]
+                    .variant_title,
+
+                _Date: resultObjectTitleFreePack._Date,
+
+                size: size,
+                reference: specificIdCount == 1 ? 0 : i++,
+              },
+            };
+            console.log(
+              propertiesObj,
+              "propertiesObj propertiesObj double= ===="
+            );
+            // return;
+            titlePackWithFreeTartan(propertiesObj);
+            // onlyEmblem(propertiesObj);
+          }
+          // }
+          freeTartanIncrement++;
         }
-        // pId.pop()
-        console.log(pId, "sftrr pId");
-        pId = [];
-        // console.log(pProperties, "after for loop =======");
-
-        return;
-        // pLineItems["p_" + item.product_id] = item;
-      });
-
+      }
       const pdfBytes = await pdfDoc.save();
 
       const pdfStream = new Readable();
