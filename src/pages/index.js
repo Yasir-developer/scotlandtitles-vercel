@@ -177,7 +177,7 @@ export default function Home() {
               cursor: "pointer",
             }}
           >
-            Previous
+            Next
           </p>
         ) : (
           ""
@@ -187,7 +187,7 @@ export default function Home() {
             style={{ marginLeft: "10px", cursor: "pointer" }}
             onClick={() => nextBtnHandle()}
           >
-            Next
+            Previous
           </p>
         ) : (
           ""
