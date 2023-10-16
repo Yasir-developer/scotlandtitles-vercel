@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@pdf-lib/fontkit": "^1.1.1",
+    "@shopify/shopify-api": "^8.0.1",
     "autoprefixer": "10.4.15",
     "axios": "^1.5.0",
     "basic-ftp": "^5.0.3",
