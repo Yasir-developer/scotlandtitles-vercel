@@ -43,19 +43,8 @@ export default function Home() {
   };
 
   const handleSearch = (pagination) => {
-    // setSearchLoader(true);
-    // if (query) {
     setSearch(true);
-    // Update the URL with search query
-    //   const url = `${server}/api/listOrder?name=${query}`;
-    //   listOrders(url);
-    //   console.log("Searching for:", query);
-    // } else {
-    //   setSearch(false);
-    //   // Use the original URL without search query
-    //   const url = `${server}/api/listOrder${
-    //     pagination ? `?page_info=${pagination}` : ""
-    //   }`;
+
     listOrders();
     // setSearchLoader(false);
   };
@@ -160,10 +149,11 @@ export default function Home() {
               display: "flex",
               flexDirection: "row",
               justifyContent: "space-between",
-              padding: "10px",
-              margin: "10px",
+              padding: "8px",
+              // margin: "10px",
               alignItems: "center",
-              backgroundColor: "#D3D3D3",
+              // backgroundColor: "#D3D3D3",
+              borderBottomWidth: "1px",
               borderRadius: "2px",
               // height:
             }}
@@ -171,14 +161,14 @@ export default function Home() {
           >
             <p>Order {item.name}</p>
 
-            <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ display: "flex", flexDirection: "row" }}>
               <a
                 href={`https://scotlandtitlesapp.com/pdfs/${item.order_number}.pdf`}
                 download
                 target="_blank"
                 rel="noreferrer"
               >
-                <button>Download Digital Pdf file</button>
+                <button className="pdf-buttons">Digital Pdf</button>
               </a>
 
               {hasPrintedPack && (
@@ -188,7 +178,7 @@ export default function Home() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <button>Download Printed pdf file</button>
+                  <button className="pdf-printed-buttons">Printed Pdf</button>
                 </a>
               )}
             </div>
@@ -196,24 +186,38 @@ export default function Home() {
         );
       });
     } else {
-      return <div>No results found</div>;
+      return (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          No Result Found
+        </div>
+      );
     }
   };
   return (
     <main className={`flex min-h-screen flex-col justify-between p-24`}>
-      <div className="search-container">
-        <input
-          type="text"
-          value={query}
-          onChange={handleInputChange}
-          placeholder="Search Order No"
-          className="search-input"
-        />
+      {!loader ? (
+        <div className="search-container">
+          <input
+            type="text"
+            value={query}
+            onChange={handleInputChange}
+            placeholder="Search Order No"
+            className="search-input"
+          />
 
-        <button onClick={handleSearch} className="search-button">
-          Search
-        </button>
-      </div>
+          <button onClick={handleSearch} className="search-button">
+            Search
+          </button>
+        </div>
+      ) : (
+        ""
+      )}
 
       {!loader ? (
         check() // Assuming check() returns valid JSX
@@ -237,39 +241,39 @@ export default function Home() {
           />
         </div>
       )}
-
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "row",
-          width: "100%",
-        }}
-      >
-        {nextBtn && linkData ? (
-          <p
-            onClick={() => previousBtnHandle()}
-            style={{
-              cursor: "pointer",
-            }}
-          >
-            Next
-          </p>
-        ) : (
-          ""
-        )}
-        {prevBtn && linkData ? (
-          <p
-            style={{ marginLeft: "10px", cursor: "pointer" }}
-            onClick={() => nextBtnHandle()}
-          >
-            Previous
-          </p>
-        ) : (
-          ""
-        )}
-      </div>
+      {!loader ? (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "row",
+            width: "100%",
+            marginTop: "10px",
+          }}
+        >
+          {nextBtn && linkData ? (
+            <button onClick={() => previousBtnHandle()} className="next-btn">
+              Next
+            </button>
+          ) : (
+            ""
+          )}
+          {prevBtn && linkData ? (
+            <button
+              // style={{ marginLeft: "10px", cursor: "pointer" }}
+              className="next-btn"
+              onClick={() => nextBtnHandle()}
+            >
+              Previous
+            </button>
+          ) : (
+            ""
+          )}
+        </div>
+      ) : (
+        ""
+      )}
     </main>
   );
 }

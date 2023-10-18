@@ -15,21 +15,55 @@
   border-radius: 4px;
   width: 150px; /* Adjust the width as needed */
   margin-right: 10px;
+  outline: none;
 }
 
 
 .search-button {
   padding: 0px 16px;
-  font-size: 16px;
-  background-color: #007bff;
+  font-size: 14px;
+  background-color: #2A2A2A;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
+.pdf-buttons {
+  padding: 5px 16px;
+  margin-top: 5px;
+  font-size: 14px;
+  background-color: #2A2A2A;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pdf-printed-buttons {
+  padding: 5px 14px;
+  margin-top: 5px;
+  margin-left: 5px;
+  font-size: 14px;
+  background-color: #2A2A2A;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.next-btn{
+  padding: 5px 14px;
+  margin-top: 5px;
+  margin-left: 5px;
+  font-size: 14px;
+  background-color: #2A2A2A;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
 .search-button:hover {
-  background-color: #0056b3;
+  background-color: #D3D3D3;
 }
 
 
