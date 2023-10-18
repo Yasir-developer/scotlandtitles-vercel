@@ -150,6 +150,7 @@ export default function Home() {
               flexDirection: "row",
               justifyContent: "space-between",
               padding: "8px",
+              // margin: "0px",
               // margin: "10px",
               alignItems: "center",
               // backgroundColor: "#D3D3D3",
@@ -200,7 +201,7 @@ export default function Home() {
     }
   };
   return (
-    <main className={`flex min-h-screen flex-col justify-between p-24`}>
+    <main className={`flex min-h-screen flex-col p-24`}>
       {!loader ? (
         <div className="search-container">
           <input
@@ -211,7 +212,11 @@ export default function Home() {
             className="search-input"
           />
 
-          <button onClick={handleSearch} className="search-button">
+          <button
+            onClick={handleSearch}
+            className="search-button"
+            disabled={!query}
+          >
             Search
           </button>
         </div>
