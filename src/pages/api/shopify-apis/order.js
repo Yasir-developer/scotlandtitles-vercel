@@ -85,7 +85,7 @@ export default async function handler(req, res) {
   //=========================== end global variables ===========================
 
   const titlePack = async (propObject) => {
-    console.log(propObject, "title pack propObject");
+    // console.log(propObject, "title pack propObject");
 
     try {
       if (propObject.p_8727183196433.variant.includes("Printed Pack")) {
@@ -9604,7 +9604,7 @@ export default async function handler(req, res) {
   };
 
   const onlyTartan = async (propObject) => {
-    console.log(propObject, "===============propObject==================");
+    // console.log(propObject, "===============propObject==================");
     try {
       if (propObject.p_8727183032593.variant.includes("Printed Pack")) {
         var tartanCertificatePrinted = pdfDocPrinted.addPage([595, 842]);
@@ -10694,7 +10694,12 @@ export default async function handler(req, res) {
           typeTwo = word[3];
           size = word[0];
 
-          pProperties["p_" + item.product_id + titleId] = {
+          // console.log(item.product_id, "title pack typeof item.product_id");
+          // console.log(
+          //   item.product_id + tartanPackId,
+          //   "title plus pack xtypeof item.product_id"
+          // );
+          pProperties["p_" + `${item.product_id}_${titleId}`] = {
             variant_title: item.variant_title,
             properties: item.properties,
             quantity: item.quantity,
@@ -10708,27 +10713,31 @@ export default async function handler(req, res) {
           typeTwo = word[3];
           size = word[0];
 
-          const specificId = titlePackId;
-
-          const specificIdCount = pId.filter((id) => id === specificId).length;
-          pProperties["p_" + item.product_id + emblemPackId] = {
+          pProperties["p_" + `${item.product_id}_${emblemPackId}`] = {
             variant_title: item.variant_title,
             properties: item.properties,
             quantity: item.quantity,
           };
           emblemPackId++;
         } else if (item.product_id == tartanId) {
+          console.log(tartanPackId, "tartanPackId");
           pId.push(item.product_id);
           // console.log(pId, "pId=========");
           var word = item.variant_title.split(" ");
           type = word[2];
+          console.log(item.product_id, "typeof item.product_id");
+          console.log(
+            item.product_id + tartanPackId,
+            "plus typeof item.product_id"
+          );
 
-          pProperties["p_" + item.product_id + tartanPackId] = {
+          pProperties["p_" + `${item.product_id}_${tartanPackId}`] = {
             variant_title: item.variant_title,
             properties: item.properties,
             quantity: item.quantity,
           };
           tartanPackId++;
+          // console.log(first)
         } else if (item.product_id == freeTartanId) {
           console.log("free tartan id heree");
           pId.push(item.product_id);
@@ -10736,8 +10745,7 @@ export default async function handler(req, res) {
           type = word[2];
           typeTwo = word[3];
           size = word[0];
-
-          pProperties["p_" + item.product_id + freeTartanPackId] = {
+          pProperties["p_" + `${item.product_id}_${freeTartanPackId}`] = {
             variant_title: item.variant_title,
             properties: item.properties,
             // quantity:item.quantity
@@ -10746,6 +10754,9 @@ export default async function handler(req, res) {
           freeTartanPackId++;
         }
       });
+      let ko = Object.keys(pProperties);
+      console.log(ko, "sdfsdfsdfsadfsadfsdfsdfsdfsdf");
+      ko.map((a) => console.log(pProperties[a]));
       const specificId = freeTartanId;
       const specificIdTitlePack = titlePackId;
       const specificIdCountTitle = pId.filter(
@@ -10753,10 +10764,10 @@ export default async function handler(req, res) {
       ).length;
 
       const specificIdCount = pId.filter((id) => id === specificId).length;
-      console.log(specificIdCount, "specificIdCount");
-      console.log(pProperties, "pProperties,");
+      // console.log(specificIdCount, "specificIdCount");
+      // console.log(pProperties, "pProperties,");
 
-      console.log(pId, "pId pId pId");
+      // console.log(pId, "pId pId pId");
       var titleIncrement = 1;
       var embelemIncrement = 1;
       var tartanIncrement = 1;
@@ -10769,11 +10780,11 @@ export default async function handler(req, res) {
           let resultObjectTitlePack = {};
           let namesArrayTitlePacks = "";
 
-          if (pProperties[`p_8727183196433${titleIncrement}`].properties) {
+          if (pProperties[`p_8727183196433_${titleIncrement}`].properties) {
             namesArrayTitlePacks = pProperties[
-              `p_8727183196433${titleIncrement}`
+              `p_8727183196433_${titleIncrement}`
             ].properties.map((propItem, index) => propItem.name);
-            for (const obj of pProperties[`p_8727183196433${titleIncrement}`]
+            for (const obj of pProperties[`p_8727183196433_${titleIncrement}`]
               .properties) {
               // console.log(obj, "objobj");
               resultObjectTitlePack[obj.name] = obj.value;
@@ -10789,12 +10800,14 @@ export default async function handler(req, res) {
                 _Name1: resultObjectTitlePack._Name1,
                 _Date: resultObjectTitlePack._Date,
                 variant:
-                  pProperties[`p_8727183196433${titleIncrement}`].variant_title,
-                size: 0,
+                  pProperties[`p_8727183196433_${titleIncrement}`]
+                    .variant_title,
+                size: size,
                 reference: specificIdCountTitle == 1 ? 0 : i++,
               },
             };
-
+            console.log(propertiesObj);
+            console.log("propertiesObj");
             titlePack(propertiesObj);
           } else {
             // console.log("inside else");
@@ -10806,11 +10819,12 @@ export default async function handler(req, res) {
                 _Title2: resultObjectTitlePack._Title2,
                 _Name2: resultObjectTitlePack._Name2,
                 variant:
-                  pProperties[`p_8727183196433${titleIncrement}`].variant_title,
+                  pProperties[`p_8727183196433_${titleIncrement}`]
+                    .variant_title,
 
                 _Date: resultObjectTitlePack._Date,
 
-                size: 0,
+                size: size,
                 reference: specificIdCountTitle == 1 ? 0 : i++,
 
                 // reference: i++,
@@ -10819,22 +10833,23 @@ export default async function handler(req, res) {
 
             titlePack(propertiesObj);
           }
+          titleIncrement++;
           // }
         } else if (productId == emblemId) {
           for (
             let i = 0;
-            i < pProperties[`p_8727183065361${embelemIncrement}`].quantity;
+            i < pProperties[`p_8727183065361_${embelemIncrement}`].quantity;
             i++
           ) {
             let resultObjectEmblum = {};
             let namesArrayEmblum = "";
 
-            if (pProperties[`p_8727183065361${embelemIncrement}`].properties) {
+            if (pProperties[`p_8727183065361_${embelemIncrement}`].properties) {
               namesArrayEmblum = pProperties[
-                `p_8727183065361${embelemIncrement}`
+                `p_8727183065361_${embelemIncrement}`
               ].properties.map((propItem, index) => propItem.name);
               for (const obj of pProperties[
-                `p_8727183065361${embelemIncrement}`
+                `p_8727183065361_${embelemIncrement}`
               ].properties) {
                 resultObjectEmblum[obj.name] = obj.value;
               }
@@ -10848,7 +10863,7 @@ export default async function handler(req, res) {
                   _Name1: resultObjectEmblum._Name1,
                   _Date: resultObjectEmblum._Date,
                   variant:
-                    pProperties[`p_8727183065361${embelemIncrement}`]
+                    pProperties[`p_8727183065361_${embelemIncrement}`]
                       .variant_title,
                 },
               };
@@ -10862,28 +10877,30 @@ export default async function handler(req, res) {
                   _Name2: resultObjectEmblum._name2,
                   _Date: resultObjectEmblum._Date,
                   variant:
-                    pProperties[`p_8727183065361${embelemIncrement}`]
+                    pProperties[`p_8727183065361_${embelemIncrement}`]
                       .variant_title,
                 },
               };
               onlyEmblem(propertiesObj);
             }
           }
+          embelemIncrement++;
         } else if (productId == tartanId) {
           for (
             let i = 0;
-            i < pProperties[`p_8727183032593${tartanIncrement}`].quantity;
+            i < pProperties[`p_8727183032593_${tartanIncrement}`].quantity;
             i++
           ) {
             let resultObjectTatran = {};
             let namesArrayTatran = "";
 
-            if (pProperties[`p_8727183032593${tartanIncrement}`].properties) {
+            if (pProperties[`p_8727183032593_${tartanIncrement}`].properties) {
               namesArrayTatran = pProperties[
-                `p_8727183032593${tartanIncrement}`
+                `p_8727183032593_${tartanIncrement}`
               ].properties.map((propItem, index) => propItem.name);
-              for (const obj of pProperties[`p_8727183032593${tartanIncrement}`]
-                .properties) {
+              for (const obj of pProperties[
+                `p_8727183032593_${tartanIncrement}`
+              ].properties) {
                 resultObjectTatran[obj.name] = obj.value;
               }
             }
@@ -10897,7 +10914,7 @@ export default async function handler(req, res) {
                   _Name1: resultObjectTatran._name1,
                   _Date: resultObjectTatran._Date,
                   variant:
-                    pProperties[`p_8727183032593${tartanIncrement}`]
+                    pProperties[`p_8727183032593_${tartanIncrement}`]
                       .variant_title,
                 },
               };
@@ -10911,24 +10928,28 @@ export default async function handler(req, res) {
                   _Name2: resultObjectTatran._name2,
                   _Date: resultObjectTatran._Date,
                   variant:
-                    pProperties[`p_8727183032593${tartanIncrement}`]
+                    pProperties[`p_8727183032593_${tartanIncrement}`]
                       .variant_title,
                 },
               };
+              console.log(propertiesObj, "all properties");
               onlyTartan(propertiesObj);
             }
           }
+          tartanIncrement++;
         } else if (productId == freeTartanId) {
           // for (let j = 0; j < item.quantity; j++) {
           let resultObjectTitleFreePack = {};
           let namesArrayTitleFreePacks = "";
 
-          if (pProperties[`p_8727182704913${freeTartanIncrement}`].properties) {
+          if (
+            pProperties[`p_8727182704913_${freeTartanIncrement}`].properties
+          ) {
             namesArrayTitleFreePacks = pProperties[
-              `p_8727182704913${freeTartanIncrement}`
+              `p_8727182704913_${freeTartanIncrement}`
             ].properties.map((propItem, index) => propItem.name);
             for (const obj of pProperties[
-              `p_8727182704913${freeTartanIncrement}`
+              `p_8727182704913_${freeTartanIncrement}`
             ].properties) {
               // console.log(obj, "objobj");
               resultObjectTitleFreePack[obj.name] = obj.value;
@@ -10945,7 +10966,7 @@ export default async function handler(req, res) {
                 _Name1: resultObjectTitleFreePack._Name1,
                 _Date: resultObjectTitleFreePack._Date,
                 variant:
-                  pProperties[`p_8727182704913${freeTartanIncrement}`]
+                  pProperties[`p_8727182704913_${freeTartanIncrement}`]
                     .variant_title,
                 size: size,
                 reference: specificIdCount == 1 ? 0 : i++,
@@ -10965,7 +10986,7 @@ export default async function handler(req, res) {
                 _Title2: resultObjectTitleFreePack._Title2,
                 _Name2: resultObjectTitleFreePack._Name2,
                 variant:
-                  pProperties[`p_8727182704913${freeTartanIncrement}`]
+                  pProperties[`p_8727182704913_${freeTartanIncrement}`]
                     .variant_title,
 
                 _Date: resultObjectTitleFreePack._Date,

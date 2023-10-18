@@ -3,5 +3,6 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
-  "/api/listOrder": "pages/api/listOrder.js"
+  "/api/listOrder": "pages/api/listOrder.js",
+  "/api/shopify-apis/order": "pages/api/shopify-apis/order.js"
 }
