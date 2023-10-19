@@ -6,6 +6,7 @@
 .search-container {
   display: flex;
   margin-bottom: 20px;
+  justify-content:space-between;
 }
 
 .search-input {
@@ -20,7 +21,7 @@
 
 
 .search-button {
-  padding: 0px 16px;
+  padding: 5px 16px;
   font-size: 14px;
   background-color: #2A2A2A;
   color: #fff;

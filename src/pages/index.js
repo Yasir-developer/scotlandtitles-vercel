@@ -49,6 +49,76 @@ export default function Home() {
     // setSearchLoader(false);
   };
 
+  const onRefresh = async () => {
+    setLoader(true);
+    // console.log(pagination, "pagination");
+    console.log(pageInformation, "pageInformation pageInformation");
+
+    var url = `${server}/api/listOrder`;
+
+    console.log(url, "all url");
+
+    await axios
+      .get(url)
+      .then((res) => {
+        console.log(res.data.data.headers.link, "total response link");
+        console.log(res.data.data, "overall response");
+
+        // setLoader(false);
+
+        if (res.status == 200) {
+          if (res.data.data.data.length == 0) {
+            setCount("No Result Found");
+          }
+          setOrders(res.data.data.data);
+          setHeaderData(res.data.data.headers);
+          setLinkData(res.data.data.headers.link);
+          if (res.data.data.headers.link) {
+            const urls = res.data.data.headers.link.split(", ").map((link) => {
+              const [urlPart, relPart] = link.split("; ");
+              const url = urlPart.slice(1, -1); // Removing '<' and '>'
+              const rel = relPart.trim().split("=")[1].slice(1, -1); // Extracting 'next' from rel="next"
+              setBtn(rel);
+              // setNextBtn(rel);
+              const params = new URLSearchParams(new URL(url).search);
+              const pageInfo = params.get("page_info");
+
+              return { rel, pageInfo };
+            });
+            if (urls[0]?.rel == "previous" && urls[1]?.rel == "next") {
+              setNextBtn(urls[1]?.pageInfo);
+              setPageInformation(urls[0].pageInfo);
+              setPrevBtn(urls[0].pageInfo);
+            } else if (urls[0].rel == "next") {
+              setNextBtn(urls[0].pageInfo);
+              setPrevBtn("");
+            } else {
+              setPrevBtn(urls[0].pageInfo);
+
+              setPageInformation(urls[0].pageInfo);
+              setNextBtn("");
+            }
+            setQuery("");
+            console.log(urls, "-------------------");
+          }
+          setLoader(false);
+          setSearch(false);
+
+          // if (urls[1]?.pageInfo) {
+          //   setNextBtn(urls[1]?.pageInfo);
+          //   setPageInformation(urls[0].pageInfo);
+          //   setPrevBtn(urls[0].pageInfo);
+          // } else {
+          //   setNextBtn(urls[0].pageInfo);
+          //   // setPrevBtn(urls[0].pageInfo)
+          // }
+        }
+      })
+      .catch((error) => {
+        console.log(error.message, "error");
+      });
+  };
+
   const listOrders = async (pagination, url) => {
     console.log(search, "search");
     console.log(query, "que");
@@ -169,7 +239,7 @@ export default function Home() {
                 target="_blank"
                 rel="noreferrer"
               >
-                <button className="pdf-buttons">Digital Pdf</button>
+                <button className="pdf-buttons">Digital PDF</button>
               </a>
 
               {hasPrintedPack && (
@@ -179,7 +249,7 @@ export default function Home() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <button className="pdf-printed-buttons">Printed Pdf</button>
+                  <button className="pdf-printed-buttons">Printed PDF</button>
                 </a>
               )}
             </div>
@@ -204,21 +274,32 @@ export default function Home() {
     <main className={`flex min-h-screen flex-col p-24`}>
       {!loader ? (
         <div className="search-container">
-          <input
-            type="text"
-            value={query}
-            onChange={handleInputChange}
-            placeholder="Search Order No"
-            className="search-input"
-          />
+          <div style={{}}>
+            <input
+              type="text"
+              value={query}
+              onChange={handleInputChange}
+              placeholder="Search Order No"
+              className="search-input"
+            />
 
-          <button
-            onClick={handleSearch}
-            className="search-button"
-            disabled={!query}
-          >
-            Search
-          </button>
+            <button
+              onClick={query == "" ? onRefresh : handleSearch}
+              className="search-button"
+              // disabled={!query}
+            >
+              Search
+            </button>
+          </div>
+          <div>
+            <button
+              onClick={onRefresh}
+              className="search-button"
+              // disabled={!query}
+            >
+              Refresh
+            </button>
+          </div>
         </div>
       ) : (
         ""
