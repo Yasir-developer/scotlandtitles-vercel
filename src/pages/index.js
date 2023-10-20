@@ -294,7 +294,7 @@ export default function Home() {
           <div>
             <button
               onClick={onRefresh}
-              className="search-button"
+              className="refresh-button"
               // disabled={!query}
             >
               Refresh
@@ -338,13 +338,6 @@ export default function Home() {
             marginTop: "10px",
           }}
         >
-          {nextBtn && linkData ? (
-            <button onClick={() => previousBtnHandle()} className="next-btn">
-              Next
-            </button>
-          ) : (
-            ""
-          )}
           {prevBtn && linkData ? (
             <button
               // style={{ marginLeft: "10px", cursor: "pointer" }}
@@ -352,6 +345,13 @@ export default function Home() {
               onClick={() => nextBtnHandle()}
             >
               Previous
+            </button>
+          ) : (
+            ""
+          )}
+          {nextBtn && linkData ? (
+            <button onClick={() => previousBtnHandle()} className="next-btn">
+              Next
             </button>
           ) : (
             ""

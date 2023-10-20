@@ -30,6 +30,20 @@
   cursor: pointer;
 }
 
+.refresh-button {
+  background-color: #FAFAFA;
+  padding: 5px 16px;
+  font-size: 14px;
+  /* background-color: #2A2A2A; */
+  color: #000000;
+  /* border-color: #BABFC3; */
+  border-width: 0.5;
+  border: solid 1px #BABFC3;
+  border-radius: 4px;
+  cursor: pointer;
+
+}
+
 .pdf-buttons {
   padding: 5px 16px;
   margin-top: 5px;
@@ -82,12 +96,3 @@
   }
 }
 
-/* body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-} */
