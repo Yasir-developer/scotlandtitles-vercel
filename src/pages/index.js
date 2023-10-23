@@ -8,11 +8,6 @@ import { Audio, Puff, RotatingLines } from "react-loader-spinner";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  // const req = () => {
-  //   axios.post("/api/shopify-apis/order", orderObj).then((res) => {
-  //     console.log(res);
-  //   });
-  // };
   const [orders, setOrders] = useState([]);
   const [headerData, setHeaderData] = useState("");
   const [nextBtn, setNextBtn] = useState("");
@@ -29,15 +24,19 @@ export default function Home() {
 
   const [pageInformation, setPageInformation] = useState("");
   const [query, setQuery] = useState("");
+  const [checked, setChecked] = useState(false);
+  const [status, setStatus] = useState([]);
+  const [checkedOrders, setCheckedOrders] = useState([]);
 
   useEffect(() => {
     listOrders();
-    console.log(linkData);
+    downloadStatus();
+    console.log(status, "al status");
   }, []);
   useEffect(() => {
     console.log(pageInformation, "pageInformation");
   }, [pageInformation, nextBtn, prevBtn]);
-
+  // useEffect()
   const handleInputChange = (e) => {
     setQuery(e.target.value);
   };
@@ -47,6 +46,43 @@ export default function Home() {
 
     listOrders();
     // setSearchLoader(false);
+  };
+
+  const downloadStatus = () => {
+    // if (!checked) {
+    // If checkbox is checked, make a POST request
+    axios
+      .get(`${server}/api/getDownloadStatus`)
+      .then((response) => {
+        console.log(response.data, "response status ===========");
+
+        setStatus(response.data.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    // }
+  };
+
+  const handleCheckboxChange = (id) => {
+    console.log("first");
+    if (!checkedOrders.includes(id)) {
+      setCheckedOrders([...checkedOrders, id]);
+
+      setChecked(!checked);
+
+      if (!checked) {
+        // If checkbox is checked, make a POST request
+        axios
+          .post(`${server}/api/downloadFile`, { orderId: id, download: true })
+          .then((response) => {
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    }
   };
 
   const onRefresh = async () => {
@@ -208,6 +244,10 @@ export default function Home() {
   const check = () => {
     if (orders.length > 0) {
       return orders.map((item, index) => {
+        const isOrderDownloaded = status.some(
+          (sta) => sta.orderId === item.order_number
+        );
+
         // console.log(item, "itemmmmmmmmmmmmmm");
         const hasPrintedPack = item.line_items.some((data) =>
           data.variant_title.includes("Printed Pack")
@@ -220,18 +260,51 @@ export default function Home() {
               flexDirection: "row",
               justifyContent: "space-between",
               padding: "8px",
-              // margin: "0px",
-              // margin: "10px",
+
               alignItems: "center",
-              // backgroundColor: "#D3D3D3",
               borderBottomWidth: "1px",
               borderRadius: "2px",
-              // height:
             }}
             key={index}
+            // <label>
           >
-            <p>Order {item.name}</p>
+            <div style={{ display: "flex", flexDirection: "row" }}>
+              <input
+                type="checkbox"
+                // checked={status.some(
+                //   (downloadedOrder) => downloadedOrder.id === item.order_number
+                // )}
 
+                checked={
+                  isOrderDownloaded || checkedOrders.includes(item.order_number)
+                }
+                disabled={
+                  isOrderDownloaded || checkedOrders.includes(item.order_number)
+                }
+                onClick={() => handleCheckboxChange(item.order_number)}
+              />
+              {/* {status && status?.some((status) => status.id === item.order_number)
+              ? "Downloaded"
+              : ""} */}
+              {/* {isOrderDownloaded || checkedOrders.includes(item.order_number)
+              ? "Downloaded"
+              : ""} */}
+
+              {/* </label> */}
+
+              {/* <div>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={checked}
+                  onChange={() => handleCheckboxChange(item.order_number)}
+                />
+                Downloaded
+              </label>
+            </div> */}
+
+              <p style={{ marginLeft: "10px" }}>Order {item.name}</p>
+            </div>
             <div style={{ display: "flex", flexDirection: "row" }}>
               <a
                 href={`https://scotlandtitlesapp.com/pdfs/${item.order_number}.pdf`}

@@ -3,5 +3,7 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/api/listOrder": "pages/api/listOrder.js",
-  "/": "pages/index.js"
+  "/": "pages/index.js",
+  "/api/getDownloadStatus": "pages/api/getDownloadStatus.js",
+  "/api/downloadFile": "pages/api/downloadFile.js"
 }
