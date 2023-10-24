@@ -13564,7 +13564,7 @@ export default async function handler(req, res) {
 
       //Name Capital work
 
-      let emblemNameParts = propObject.p_8950348644625._Name1.split(" ");
+      let emblemNameParts = propObject.p_8727183065361._Name1.split(" ");
       console.log(emblemNameParts, "nameParts");
       let emblemModifiedName = emblemNameParts
         .map(
@@ -13575,7 +13575,7 @@ export default async function handler(req, res) {
 
       //two name
 
-      let emblemNamePartsTwo = propObject.p_8950348644625._Name2.split(" ");
+      let emblemNamePartsTwo = propObject.p_8727183065361._Name2.split(" ");
       console.log(emblemNamePartsTwo, "nameParts");
       let emblemModifiedNameTwo = emblemNamePartsTwo
         .map(
