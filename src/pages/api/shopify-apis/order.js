@@ -12760,7 +12760,7 @@ export default async function handler(req, res) {
 
       const emblememblemCertficateUserNameTwo = `${
         propObject.p_8950348644625._Title2
-          ? `${propObject.p_8950348644625._Title2} ${emblemModifiedName}`
+          ? `${propObject.p_8950348644625._Title2} ${emblemModifiedNameTwo}`
           : ""
       }`;
       const userNametextTwoWidth = oldEng.widthOfTextAtSize(
