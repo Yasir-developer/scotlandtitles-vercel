@@ -13562,9 +13562,31 @@ export default async function handler(req, res) {
       const emblem_certificate_heading = `To All & Sundry whom these presents do concern\n
               Scotland Titles does declare that`;
 
-      const emblemCertficateUserName = `${propObject.p_8727183065361._Title1} ${
-        propObject.p_8727183065361._Name1
-      } ${propObject.p_8727183065361._Title2 ? "&" : ""}`;
+      //Name Capital work
+
+      let emblemNameParts = propObject.p_8950348644625._Name1.split(" ");
+      console.log(emblemNameParts, "nameParts");
+      let emblemModifiedName = emblemNameParts
+        .map(
+          (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+        )
+        .join(" ");
+      console.log(emblemModifiedName, "modified name");
+
+      //two name
+
+      let emblemNamePartsTwo = propObject.p_8950348644625._Name2.split(" ");
+      console.log(emblemNamePartsTwo, "nameParts");
+      let emblemModifiedNameTwo = emblemNamePartsTwo
+        .map(
+          (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+        )
+        .join(" ");
+      console.log(emblemModifiedNameTwo, "modified name two");
+
+      const emblemCertficateUserName = `${
+        propObject.p_8727183065361._Title1
+      } ${emblemModifiedName} ${propObject.p_8727183065361._Title2 ? "&" : ""}`;
 
       const userNametextWidth = oldEng.widthOfTextAtSize(
         emblemCertficateUserName,
@@ -13578,7 +13600,7 @@ export default async function handler(req, res) {
 
       const emblememblemCertficateUserNameTwo = `${
         propObject.p_8727183065361._Title2
-          ? `${propObject.p_8727183065361._Title2} ${propObject.p_8727183065361._Name2}`
+          ? `${propObject.p_8727183065361._Title2} ${emblemModifiedNameTwo}`
           : ""
       }`;
       const userNametextTwoWidth = oldEng.widthOfTextAtSize(
