@@ -411,6 +411,17 @@ export default async function handler(req, res) {
         .join(" ");
       console.log(modifiedName, "modified name");
 
+      //two name
+
+      let namePartsTwo = propObject.p_8727183196433._Name2.split(" ");
+      console.log(nameParts, "nameParts");
+      let modifiedNameTwo = namePartsTwo
+        .map(
+          (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+        )
+        .join(" ");
+      console.log(modifiedNameTwo, "modified name two");
+
       const certficateUserName = `${propObject.p_8727183196433._Title1} ${modifiedName} of Blairadam`;
 
       const and = "and";
@@ -418,11 +429,9 @@ export default async function handler(req, res) {
         propObject.p_8727183196433._Title2
           ? propObject.p_8727183196433._Title2
           : ""
-      } ${
-        propObject.p_8727183196433._Title2
-          ? propObject.p_8727183196433._Name2
-          : ""
-      } ${propObject.p_8727183196433._Title2 ? `of Blairadam` : ""}`;
+      } ${propObject.p_8727183196433._Title2 ? modifiedNameTwo : ""} ${
+        propObject.p_8727183196433._Title2 ? `of Blairadam` : ""
+      }`;
 
       //   const emblemCertficateUserName = `${propObject.p_8727183065361._Title1} ${propObject.p_8727183065361._Name1}`;
       const certificateUserNametextWidth = oldEng.widthOfTextAtSize(
@@ -3823,18 +3832,40 @@ export default async function handler(req, res) {
       const certficateAddress =
         "between Scotland Titles, Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom and";
       //   const certficateUserName = `${propObject.p_8727182704913._Title1} ${propObject.p_8727182704913._Name1} of Blairadam`;
-      const certficateUserName = `${propObject.p_8727182704913._Title1} ${propObject.p_8727182704913._Name1} of Blairadam`;
+      // const certficateUserName = `${propObject.p_8727182704913._Title1} ${propObject.p_8727182704913._Name1} of Blairadam`;
 
-      const and = "and";
+      let nameParts = propObject.p_8727182704913._Name1.split(" ");
+      console.log(nameParts, "nameParts");
+      let modifiedName = nameParts
+        .map(
+          (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+        )
+        .join(" ");
+      console.log(modifiedName, "modified name");
+
+      //two name
+
+      let namePartsTwo = propObject.p_8727182704913._Name2.split(" ");
+      console.log(nameParts, "nameParts");
+      let modifiedNameTwo = namePartsTwo
+        .map(
+          (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+        )
+        .join(" ");
+      console.log(modifiedNameTwo, "modified name two");
+
+      const certficateUserName = `${propObject.p_8727182704913._Title1} ${modifiedName} of Blairadam`;
+
+      // const and = "and";
       const certficateUserNameTwo = `${
         propObject.p_8727182704913._Title2
           ? propObject.p_8727182704913._Title2
           : ""
-      } ${
-        propObject.p_8727182704913._Title2
-          ? propObject.p_8727182704913._Name2
-          : ""
-      } ${propObject.p_8727182704913._Title2 ? `of Blairadam` : ""}`;
+      } ${propObject.p_8727182704913._Title2 ? modifiedNameTwo : ""} ${
+        propObject.p_8727182704913._Title2 ? `of Blairadam` : ""
+      }`;
+
+      const and = "and";
 
       //   const emblemCertficateUserName = `${propObject.p_8727183065361._Title1} ${propObject.p_8727183065361._Name1}`;
       const certificateUserNametextWidth = oldEng.widthOfTextAtSize(
