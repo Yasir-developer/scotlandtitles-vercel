@@ -79,7 +79,7 @@ export default function Home() {
             console.log(response.data);
           })
           .catch((error) => {
-            console.error(error);
+            console.log(error.message);
           });
       }
     }
