@@ -93,7 +93,6 @@ export default async function handler(req, res) {
 
     try {
       if (propObject.p_8727183196433.variant.includes("Printed Pack")) {
-        var type = true;
         console.log("Printed Pack =============");
         if (propObject.p_8727183196433._Title2) {
           console.log("herrrrrrrrrrrrreeeeee");
@@ -114,7 +113,6 @@ export default async function handler(req, res) {
           var printeddeedPage = pdfDocPrinted.addPage([595, 842]);
         }
       } else {
-        type = false;
         if (propObject.p_8727183196433._Title2) {
           console.log("herrrrrrrrrrrrreeeeee");
           var page = pdfDoc.addPage([595, 842]);
@@ -402,8 +400,18 @@ export default async function handler(req, res) {
       const certificateHeading = "Certificate of Disposition and Proclamation";
       const certficateAddress =
         "between Scotland Titles, Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom and";
-      //   const certficateUserName = `${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1} of Blairadam`;
-      const certficateUserName = `${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1} of Blairadam`;
+      // const certficateUserName = `${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1} of Blairadam`;
+      // const certficateUserName = `${propObject.p_8727183196433._Title1} ${propObject.p_8727183196433._Name1} of Blairadam`;
+      let nameParts = propObject.p_8727183196433._Name1.split(" ");
+      console.log(nameParts, "nameParts");
+      let modifiedName = nameParts
+        .map(
+          (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+        )
+        .join(" ");
+      console.log(modifiedName, "modified name");
+
+      const certficateUserName = `${propObject.p_8727183196433._Title1} ${modifiedName} of Blairadam`;
 
       const and = "and";
       const certficateUserNameTwo = `${
