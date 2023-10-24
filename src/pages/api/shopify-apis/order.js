@@ -87,6 +87,8 @@ export default async function handler(req, res) {
   //=========================== end global variables ===========================
 
   const titlePack = async (propObject) => {
+    let titleConditions;
+
     // console.log(propObject, "title pack propObject");
 
     try {
@@ -160,7 +162,7 @@ export default async function handler(req, res) {
           ? `& ${propObject.p_8727183196433._Title2}\n${propObject.p_8727183196433._Name2}`
           : ""
       } of ${!propObject.p_8727183196433._Name2 ? `\n` : ""}Blairadam`;
-      const content = `Please find enclosed your Certificate of Disposition and Proclamation confirming you now own Land\nwithin a Scottish Estate . You may choose to adopt the traditional Scottish title of ${propObject.p_8727183196433._Title1} as a sign of\nrespect, or the English language equivalent.\n\nYour land is located within our Estate with street address of Kingseat Road (off Cantsdam Road),\nCantsdam, Kelty, Fife, Scotland KY12 0SW. Your plot of land is located beside Kingseat Road single\ntrack road that leads north from the B912 Cantsdam Road.\n\nYou can view the land online. The following coordinates will show you the centre of the Estate;\n\nGoogle Maps type in  coordinates 56.1215718, - 3.3856475\nOrdinance Survey 10 Figure Grid Reference NT 13956 92954\nX Easting 313956 , Y Northing 692954\n\nWe hope that you have the opportunity to visit your land, and to enjoy the Scottish countryside as a\n${propObject.p_8727183196433._Title1} of Scotland . You can keep up to date via our Facebook page at fb.me/ScotlandTitles\n\nI very much hope that owning a piece of Scotland is something that will give you a sense of pride, and\nwould like to take this opportunity to thank you for choosing Scotland Titles`; // const page = document.getPage(0);
+      const content = `Please find enclosed your Certificate of Disposition and Proclamation confirming you now own Land\nwithin a Scottish Estate . You may choose to adopt the traditional Scottish title of Laird as a sign of\nrespect, or the English language equivalent.\n\nYour land is located within our Estate with street address of Kingseat Road (off Cantsdam Road),\nCantsdam, Kelty, Fife, Scotland KY12 0SW. Your plot of land is located beside Kingseat Road single\ntrack road that leads north from the B912 Cantsdam Road.\n\nYou can view the land online. The following coordinates will show you the centre of the Estate;\n\nGoogle Maps type in  coordinates 56.1215718, - 3.3856475\nOrdinance Survey 10 Figure Grid Reference NT 13956 92954\nX Easting 313956 , Y Northing 692954\n\nWe hope that you have the opportunity to visit your land, and to enjoy the Scottish countryside as a\nLaird of Scotland . You can keep up to date via our Facebook page at fb.me/ScotlandTitles\n\nI very much hope that owning a piece of Scotland is something that will give you a sense of pride, and\nwould like to take this opportunity to thank you for choosing Scotland Titles`; // const page = document.getPage(0);
       const welcomeContent = `Welcome to Scotland!`; // const page = document.getPage(0);
       const welcomeSignContent = `Signed for\nand on behalf of\nScotland Titles`; // const page = document.getPage(0);
       const facebookContent = `Facebook:`; // const page = document.getPage(0);
@@ -435,8 +437,6 @@ export default async function handler(req, res) {
       const certificateTwoX =
         certificateTwoStartingPosition - certificateTwoHalfOfWord;
 
-      var titleConditions = "";
-
       if (
         !propObject.p_8727183196433._Title2 &&
         propObject.p_8727183196433._Title1
@@ -449,8 +449,8 @@ export default async function handler(req, res) {
           titleConditions = "LADY";
         }
       } else if (
-        propObject.p_8727183196433._Title2 &&
-        propObject.p_8727183196433._Title1
+        propObject.p_8727183196433._Title1 &&
+        propObject.p_8727183196433._Title2
       ) {
         if (
           propObject.p_8727183196433._Title1 == "Lord" &&
@@ -473,16 +473,36 @@ export default async function handler(req, res) {
         ) {
           titleConditions = "LORD AND LADY";
         } else if (
+          propObject.p_8727183196433._Title1 == "Lady" &&
+          propObject.p_8727183196433._Title2 == "Lord"
+        ) {
+          console.log("LADY AND LORD condition");
+          titleConditions = "LADY AND LORD";
+        } else if (
           propObject.p_8727183196433._Title1 == "Lord" &&
           propObject.p_8727183196433._Title2 == "Laird"
         ) {
           titleConditions = "LORD AND LAIRD";
         } else if (
+          propObject.p_8727183196433._Title1 == "Laird" &&
+          propObject.p_8727183196433._Title2 == "Lord"
+        ) {
+          titleConditions = "LAIRD AND LORD";
+        } else if (
           propObject.p_8727183196433._Title1 == "Lady" &&
           propObject.p_8727183196433._Title2 == "Laird"
         ) {
           titleConditions = "LADY AND LAIRD";
+        } else if (
+          propObject.p_8727183196433._Title1 == "Laird" &&
+          propObject.p_8727183196433._Title2 == "Lady"
+        ) {
+          titleConditions = "LAIRD AND LADY";
         }
+        console.log(
+          titleConditions,
+          "titleConditionstitleConditionstitleConditions"
+        );
       }
       const certificateAddressTwo = `(hereafter to be proclaimed as “THE ${titleConditions}”), care of Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom`;
 
@@ -490,50 +510,74 @@ export default async function handler(req, res) {
         propObject.p_8727183196433._Title2 ? "have" : "has"
       } petitioned unto Scotland Titles on this day their ${
         titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LAIRD AND LADY" ||
         titleConditions == "LORD AND LAIRD" ||
-        titleConditions == "LORD AND LADY"
+        titleConditions == "LAIRD AND LORD" ||
+        titleConditions == "LORD AND LADY" ||
+        titleConditions == "LADY AND LORD"
           ? "\nintention to"
           : "intention to\n"
       }purchase, and Scotland Titles has determined to accept the disposition ${
         titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LAIRD AND LADY" ||
         titleConditions == "LORD AND LAIRD" ||
-        titleConditions == "LORD AND LADY"
+        titleConditions == "LAIRD AND LORD" ||
+        titleConditions == "LORD AND LADY" ||
+        titleConditions == "LADY AND LORD"
           ? "\nof a plot of"
           : "of a plot of\n"
       }land within THE ESTATE, at Cantsdam, hereafter referred to as “THE ${
         titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LAIRD AND LADY" ||
         titleConditions == "LORD AND LAIRD" ||
-        titleConditions == "LORD AND LADY"
+        titleConditions == "LAIRD AND LORD" ||
+        titleConditions == "LORD AND LADY" ||
+        titleConditions == "LADY AND LORD"
           ? "\nLAND"
           : "LAND"
       }”.\n\nScotland Titles, in CONSIDERATION of all monies due to be paid to us by THE\n${titleConditions}, of which we have received of in full, we do hereby DISCHARGE ${
         titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LAIRD AND LADY" ||
         titleConditions == "LORD AND LAIRD" ||
-        titleConditions == "LORD AND LADY"
+        titleConditions == "LAIRD AND LORD" ||
+        titleConditions == "LORD AND LADY" ||
+        titleConditions == "LADY AND LORD"
           ? "\nunto them"
           : "unto them\n"
       }and DISPONE to and in perpetuity in favour of THE ${titleConditions} ${
         titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LAIRD AND LADY" ||
         titleConditions == "LORD AND LAIRD" ||
-        titleConditions == "LORD AND LADY"
+        titleConditions == "LAIRD AND LORD" ||
+        titleConditions == "LORD AND LADY" ||
+        titleConditions == "LADY AND LORD"
           ? "\nand to their future"
           : "and to their future\n"
       }assignees the whole of THE LAND but always with ${
         titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LAIRD AND LADY" ||
         titleConditions == "LORD AND LAIRD" ||
-        titleConditions == "LORD AND LADY"
+        titleConditions == "LAIRD AND LORD" ||
+        titleConditions == "LORD AND LADY" ||
+        titleConditions == "LADY AND LORD"
           ? "pedestrian\naccess only over THE "
           : "pedestrian access only over THE\n"
       }ESTATE; such rights of vehicular access are reserved ${
         titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LAIRD AND LADY" ||
         titleConditions == "LORD AND LAIRD" ||
-        titleConditions == "LORD AND LADY"
+        titleConditions == "LAIRD AND LORD" ||
+        titleConditions == "LORD AND LADY" ||
+        titleConditions == "LADY AND LORD"
           ? "\nto Scotland Titles and its"
           : "to Scotland Titles and its\n"
       }successors in title plus any and all others authorised by it; ${
         titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LAIRD AND LADY" ||
         titleConditions == "LORD AND LAIRD" ||
-        titleConditions == "LORD AND LADY"
+        titleConditions == "LAIRD AND LORD" ||
+        titleConditions == "LORD AND LADY" ||
+        titleConditions == "LADY AND LORD"
           ? `\nTHE ${titleConditions} ${
               propObject.p_8727183196433._Title2 ? "covenant" : "covenants"
             } not`
@@ -585,7 +629,7 @@ export default async function handler(req, res) {
       let text = propObject.p_8727183196433.variant;
       const myArray = text.split(" ");
       let word = myArray[0];
-      const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18′′N , 003°23′08′′W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is ${order_number} ${
+      const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18 N , 003°23 08 W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is ${order_number} ${
         propObject.p_8727183196433.reference != 0
           ? `- ${propObject.p_8727183196433.reference}`
           : ""
@@ -3444,6 +3488,7 @@ export default async function handler(req, res) {
 
       "jjjjjjjj titlePackWithFreeTartan propObject"
     );
+    let titleConditions;
 
     try {
       if (propObject.p_8727182704913.variant.includes("Printed Pack")) {
@@ -3530,7 +3575,7 @@ export default async function handler(req, res) {
           ? `& ${propObject.p_8727182704913._Title2}\n${propObject.p_8727182704913._Name2}`
           : ""
       } of ${!propObject.p_8727182704913._Name2 ? `\n` : ""}Blairadam`;
-      const content = `Please find enclosed your Certificate of Disposition and Proclamation confirming you now own Land\nwithin a Scottish Estate . You may choose to adopt the traditional Scottish title of ${propObject.p_8727182704913._Title1} as a sign of\nrespect, or the English language equivalent.\n\nYour land is located within our Estate with street address of Kingseat Road (off Cantsdam Road),\nCantsdam, Kelty, Fife, Scotland KY12 0SW. Your plot of land is located beside Kingseat Road single\ntrack road that leads north from the B912 Cantsdam Road.\n\nYou can view the land online. The following coordinates will show you the centre of the Estate;\n\nGoogle Maps type in  coordinates 56.1215718, - 3.3856475\nOrdinance Survey 10 Figure Grid Reference NT 13956 92954\nX Easting 313956 , Y Northing 692954\n\nWe hope that you have the opportunity to visit your land, and to enjoy the Scottish countryside as a\n${propObject.p_8727182704913._Title1} of Scotland . You can keep up to date via our Facebook page at fb.me/ScotlandTitles\n\nI very much hope that owning a piece of Scotland is something that will give you a sense of pride, and\nwould like to take this opportunity to thank you for choosing Scotland Titles`; // const page = document.getPage(0);
+      const content = `Please find enclosed your Certificate of Disposition and Proclamation confirming you now own Land\nwithin a Scottish Estate . You may choose to adopt the traditional Scottish title of Laird as a sign of\nrespect, or the English language equivalent.\n\nYour land is located within our Estate with street address of Kingseat Road (off Cantsdam Road),\nCantsdam, Kelty, Fife, Scotland KY12 0SW. Your plot of land is located beside Kingseat Road single\ntrack road that leads north from the B912 Cantsdam Road.\n\nYou can view the land online. The following coordinates will show you the centre of the Estate;\n\nGoogle Maps type in  coordinates 56.1215718, - 3.3856475\nOrdinance Survey 10 Figure Grid Reference NT 13956 92954\nX Easting 313956 , Y Northing 692954\n\nWe hope that you have the opportunity to visit your land, and to enjoy the Scottish countryside as a\nLaird of Scotland . You can keep up to date via our Facebook page at fb.me/ScotlandTitles\n\nI very much hope that owning a piece of Scotland is something that will give you a sense of pride, and\nwould like to take this opportunity to thank you for choosing Scotland Titles`; // const page = document.getPage(0);
       const welcomeContent = `Welcome to Scotland!`; // const page = document.getPage(0);
       const welcomeSignContent = `Signed for\nand on behalf of\nScotland Titles`; // const page = document.getPage(0);
       const facebookContent = `Facebook:`; // const page = document.getPage(0);
@@ -3804,7 +3849,7 @@ export default async function handler(req, res) {
       const certificateTwoX =
         certificateTwoStartingPosition - certificateTwoHalfOfWord;
 
-      var titleConditions = "";
+      // var titleConditions = "";
 
       if (
         !propObject.p_8727182704913._Title2 &&
@@ -3818,8 +3863,8 @@ export default async function handler(req, res) {
           titleConditions = "LADY";
         }
       } else if (
-        propObject.p_8727182704913._Title2 &&
-        propObject.p_8727182704913._Title1
+        propObject.p_8727182704913._Title1 &&
+        propObject.p_8727182704913._Title2
       ) {
         if (
           propObject.p_8727182704913._Title1 == "Lord" &&
@@ -3842,16 +3887,36 @@ export default async function handler(req, res) {
         ) {
           titleConditions = "LORD AND LADY";
         } else if (
+          propObject.p_8727182704913._Title1 == "Lady" &&
+          propObject.p_8727182704913._Title2 == "Lord"
+        ) {
+          console.log("LADY AND LORD condition");
+          titleConditions = "LADY AND LORD";
+        } else if (
           propObject.p_8727182704913._Title1 == "Lord" &&
           propObject.p_8727182704913._Title2 == "Laird"
         ) {
           titleConditions = "LORD AND LAIRD";
         } else if (
+          propObject.p_8727182704913._Title1 == "Laird" &&
+          propObject.p_8727182704913._Title2 == "Lord"
+        ) {
+          titleConditions = "LAIRD AND LORD";
+        } else if (
           propObject.p_8727182704913._Title1 == "Lady" &&
           propObject.p_8727182704913._Title2 == "Laird"
         ) {
           titleConditions = "LADY AND LAIRD";
+        } else if (
+          propObject.p_8727182704913._Title1 == "Laird" &&
+          propObject.p_8727182704913._Title2 == "Lady"
+        ) {
+          titleConditions = "LAIRD AND LADY";
         }
+        console.log(
+          titleConditions,
+          "titleConditionstitleConditionstitleConditions"
+        );
       }
       const certificateAddressTwo = `(hereafter to be proclaimed as “THE ${titleConditions}”), care of Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom`;
 
@@ -3859,50 +3924,74 @@ export default async function handler(req, res) {
         propObject.p_8727182704913._Title2 ? "have" : "has"
       } petitioned unto Scotland Titles on this day their ${
         titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LAIRD AND LADY" ||
         titleConditions == "LORD AND LAIRD" ||
-        titleConditions == "LORD AND LADY"
+        titleConditions == "LAIRD AND LORD" ||
+        titleConditions == "LORD AND LADY" ||
+        titleConditions == "LADY AND LORD"
           ? "\nintention to"
           : "intention to\n"
       }purchase, and Scotland Titles has determined to accept the disposition ${
         titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LAIRD AND LADY" ||
         titleConditions == "LORD AND LAIRD" ||
-        titleConditions == "LORD AND LADY"
+        titleConditions == "LAIRD AND LORD" ||
+        titleConditions == "LORD AND LADY" ||
+        titleConditions == "LADY AND LORD"
           ? "\nof a plot of"
           : "of a plot of\n"
       }land within THE ESTATE, at Cantsdam, hereafter referred to as “THE ${
         titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LAIRD AND LADY" ||
         titleConditions == "LORD AND LAIRD" ||
-        titleConditions == "LORD AND LADY"
+        titleConditions == "LAIRD AND LORD" ||
+        titleConditions == "LORD AND LADY" ||
+        titleConditions == "LADY AND LORD"
           ? "\nLAND"
           : "LAND"
       }”.\n\nScotland Titles, in CONSIDERATION of all monies due to be paid to us by THE\n${titleConditions}, of which we have received of in full, we do hereby DISCHARGE ${
         titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LAIRD AND LADY" ||
         titleConditions == "LORD AND LAIRD" ||
-        titleConditions == "LORD AND LADY"
+        titleConditions == "LAIRD AND LORD" ||
+        titleConditions == "LORD AND LADY" ||
+        titleConditions == "LADY AND LORD"
           ? "\nunto them"
           : "unto them\n"
       }and DISPONE to and in perpetuity in favour of THE ${titleConditions} ${
         titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LAIRD AND LADY" ||
         titleConditions == "LORD AND LAIRD" ||
-        titleConditions == "LORD AND LADY"
+        titleConditions == "LAIRD AND LORD" ||
+        titleConditions == "LORD AND LADY" ||
+        titleConditions == "LADY AND LORD"
           ? "\nand to their future"
           : "and to their future\n"
       }assignees the whole of THE LAND but always with ${
         titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LAIRD AND LADY" ||
         titleConditions == "LORD AND LAIRD" ||
-        titleConditions == "LORD AND LADY"
+        titleConditions == "LAIRD AND LORD" ||
+        titleConditions == "LORD AND LADY" ||
+        titleConditions == "LADY AND LORD"
           ? "pedestrian\naccess only over THE "
           : "pedestrian access only over THE\n"
       }ESTATE; such rights of vehicular access are reserved ${
         titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LAIRD AND LADY" ||
         titleConditions == "LORD AND LAIRD" ||
-        titleConditions == "LORD AND LADY"
+        titleConditions == "LAIRD AND LORD" ||
+        titleConditions == "LORD AND LADY" ||
+        titleConditions == "LADY AND LORD"
           ? "\nto Scotland Titles and its"
           : "to Scotland Titles and its\n"
       }successors in title plus any and all others authorised by it; ${
         titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LAIRD AND LADY" ||
         titleConditions == "LORD AND LAIRD" ||
-        titleConditions == "LORD AND LADY"
+        titleConditions == "LAIRD AND LORD" ||
+        titleConditions == "LORD AND LADY" ||
+        titleConditions == "LADY AND LORD"
           ? `\nTHE ${titleConditions} ${
               propObject.p_8727182704913._Title2 ? "covenant" : "covenants"
             } not`
@@ -3955,7 +4044,7 @@ export default async function handler(req, res) {
       const myArray = text.split(" ");
       let word = myArray[0];
 
-      const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18′′N , 003°23′08′′W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is ${order_number}${
+      const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18 N , 003°23 08 W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is ${order_number}${
         propObject.p_8727182704913.reference != 0
           ? ` - ${propObject.p_8727182704913.reference}`
           : ""
@@ -8520,7 +8609,7 @@ export default async function handler(req, res) {
 
       "jjjjjjjj titlePackWithFreeEmblem propObject"
     );
-
+    let titleConditions;
     // return;
 
     try {
@@ -8599,7 +8688,7 @@ export default async function handler(req, res) {
           ? `& ${propObject.p_8950348644625._Title2}\n${propObject.p_8950348644625._Name2}`
           : ""
       } of ${!propObject.p_8950348644625._Name2 ? `\n` : ""}Blairadam`;
-      const content = `Please find enclosed your Certificate of Disposition and Proclamation confirming you now own Land\nwithin a Scottish Estate . You may choose to adopt the traditional Scottish title of ${propObject.p_8950348644625._Title1} as a sign of\nrespect, or the English language equivalent.\n\nYour land is located within our Estate with street address of Kingseat Road (off Cantsdam Road),\nCantsdam, Kelty, Fife, Scotland KY12 0SW. Your plot of land is located beside Kingseat Road single\ntrack road that leads north from the B912 Cantsdam Road.\n\nYou can view the land online. The following coordinates will show you the centre of the Estate;\n\nGoogle Maps type in  coordinates 56.1215718, - 3.3856475\nOrdinance Survey 10 Figure Grid Reference NT 13956 92954\nX Easting 313956 , Y Northing 692954\n\nWe hope that you have the opportunity to visit your land, and to enjoy the Scottish countryside as a\n${propObject.p_8950348644625._Title1} of Scotland . You can keep up to date via our Facebook page at fb.me/ScotlandTitles\n\nI very much hope that owning a piece of Scotland is something that will give you a sense of pride, and\nwould like to take this opportunity to thank you for choosing Scotland Titles`; // const page = document.getPage(0);
+      const content = `Please find enclosed your Certificate of Disposition and Proclamation confirming you now own Land\nwithin a Scottish Estate . You may choose to adopt the traditional Scottish title of Laird as a sign of\nrespect, or the English language equivalent.\n\nYour land is located within our Estate with street address of Kingseat Road (off Cantsdam Road),\nCantsdam, Kelty, Fife, Scotland KY12 0SW. Your plot of land is located beside Kingseat Road single\ntrack road that leads north from the B912 Cantsdam Road.\n\nYou can view the land online. The following coordinates will show you the centre of the Estate;\n\nGoogle Maps type in  coordinates 56.1215718, - 3.3856475\nOrdinance Survey 10 Figure Grid Reference NT 13956 92954\nX Easting 313956 , Y Northing 692954\n\nWe hope that you have the opportunity to visit your land, and to enjoy the Scottish countryside as a\nLaird of Scotland . You can keep up to date via our Facebook page at fb.me/ScotlandTitles\n\nI very much hope that owning a piece of Scotland is something that will give you a sense of pride, and\nwould like to take this opportunity to thank you for choosing Scotland Titles`; // const page = document.getPage(0);
       const welcomeContent = `Welcome to Scotland!`; // const page = document.getPage(0);
       const welcomeSignContent = `Signed for\nand on behalf of\nScotland Titles`; // const page = document.getPage(0);
       const facebookContent = `Facebook:`; // const page = document.getPage(0);
@@ -8874,7 +8963,7 @@ export default async function handler(req, res) {
       const certificateTwoX =
         certificateTwoStartingPosition - certificateTwoHalfOfWord;
 
-      var titleConditions = "";
+      // var titleConditions = "";
 
       if (
         !propObject.p_8950348644625._Title2 &&
@@ -8888,8 +8977,8 @@ export default async function handler(req, res) {
           titleConditions = "LADY";
         }
       } else if (
-        propObject.p_8950348644625._Title2 &&
-        propObject.p_8950348644625._Title1
+        propObject.p_8950348644625._Title1 &&
+        propObject.p_8950348644625._Title2
       ) {
         if (
           propObject.p_8950348644625._Title1 == "Lord" &&
@@ -8912,16 +9001,36 @@ export default async function handler(req, res) {
         ) {
           titleConditions = "LORD AND LADY";
         } else if (
+          propObject.p_8950348644625._Title1 == "Lady" &&
+          propObject.p_8950348644625._Title2 == "Lord"
+        ) {
+          console.log("LADY AND LORD condition");
+          titleConditions = "LADY AND LORD";
+        } else if (
           propObject.p_8950348644625._Title1 == "Lord" &&
           propObject.p_8950348644625._Title2 == "Laird"
         ) {
           titleConditions = "LORD AND LAIRD";
         } else if (
+          propObject.p_8950348644625._Title1 == "Laird" &&
+          propObject.p_8950348644625._Title2 == "Lord"
+        ) {
+          titleConditions = "LAIRD AND LORD";
+        } else if (
           propObject.p_8950348644625._Title1 == "Lady" &&
           propObject.p_8950348644625._Title2 == "Laird"
         ) {
           titleConditions = "LADY AND LAIRD";
+        } else if (
+          propObject.p_8950348644625._Title1 == "Laird" &&
+          propObject.p_8950348644625._Title2 == "Lady"
+        ) {
+          titleConditions = "LAIRD AND LADY";
         }
+        console.log(
+          titleConditions,
+          "titleConditionstitleConditionstitleConditions"
+        );
       }
       const certificateAddressTwo = `(hereafter to be proclaimed as “THE ${titleConditions}”), care of Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom`;
 
@@ -8929,50 +9038,74 @@ export default async function handler(req, res) {
         propObject.p_8950348644625._Title2 ? "have" : "has"
       } petitioned unto Scotland Titles on this day their ${
         titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LAIRD AND LADY" ||
         titleConditions == "LORD AND LAIRD" ||
-        titleConditions == "LORD AND LADY"
+        titleConditions == "LAIRD AND LORD" ||
+        titleConditions == "LORD AND LADY" ||
+        titleConditions == "LADY AND LORD"
           ? "\nintention to"
           : "intention to\n"
       }purchase, and Scotland Titles has determined to accept the disposition ${
         titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LAIRD AND LADY" ||
         titleConditions == "LORD AND LAIRD" ||
-        titleConditions == "LORD AND LADY"
+        titleConditions == "LAIRD AND LORD" ||
+        titleConditions == "LORD AND LADY" ||
+        titleConditions == "LADY AND LORD"
           ? "\nof a plot of"
           : "of a plot of\n"
       }land within THE ESTATE, at Cantsdam, hereafter referred to as “THE ${
         titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LAIRD AND LADY" ||
         titleConditions == "LORD AND LAIRD" ||
-        titleConditions == "LORD AND LADY"
+        titleConditions == "LAIRD AND LORD" ||
+        titleConditions == "LORD AND LADY" ||
+        titleConditions == "LADY AND LORD"
           ? "\nLAND"
           : "LAND"
       }”.\n\nScotland Titles, in CONSIDERATION of all monies due to be paid to us by THE\n${titleConditions}, of which we have received of in full, we do hereby DISCHARGE ${
         titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LAIRD AND LADY" ||
         titleConditions == "LORD AND LAIRD" ||
-        titleConditions == "LORD AND LADY"
+        titleConditions == "LAIRD AND LORD" ||
+        titleConditions == "LORD AND LADY" ||
+        titleConditions == "LADY AND LORD"
           ? "\nunto them"
           : "unto them\n"
       }and DISPONE to and in perpetuity in favour of THE ${titleConditions} ${
         titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LAIRD AND LADY" ||
         titleConditions == "LORD AND LAIRD" ||
-        titleConditions == "LORD AND LADY"
+        titleConditions == "LAIRD AND LORD" ||
+        titleConditions == "LORD AND LADY" ||
+        titleConditions == "LADY AND LORD"
           ? "\nand to their future"
           : "and to their future\n"
       }assignees the whole of THE LAND but always with ${
         titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LAIRD AND LADY" ||
         titleConditions == "LORD AND LAIRD" ||
-        titleConditions == "LORD AND LADY"
+        titleConditions == "LAIRD AND LORD" ||
+        titleConditions == "LORD AND LADY" ||
+        titleConditions == "LADY AND LORD"
           ? "pedestrian\naccess only over THE "
           : "pedestrian access only over THE\n"
       }ESTATE; such rights of vehicular access are reserved ${
         titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LAIRD AND LADY" ||
         titleConditions == "LORD AND LAIRD" ||
-        titleConditions == "LORD AND LADY"
+        titleConditions == "LAIRD AND LORD" ||
+        titleConditions == "LORD AND LADY" ||
+        titleConditions == "LADY AND LORD"
           ? "\nto Scotland Titles and its"
           : "to Scotland Titles and its\n"
       }successors in title plus any and all others authorised by it; ${
         titleConditions == "LADY AND LAIRD" ||
+        titleConditions == "LAIRD AND LADY" ||
         titleConditions == "LORD AND LAIRD" ||
-        titleConditions == "LORD AND LADY"
+        titleConditions == "LAIRD AND LORD" ||
+        titleConditions == "LORD AND LADY" ||
+        titleConditions == "LADY AND LORD"
           ? `\nTHE ${titleConditions} ${
               propObject.p_8950348644625._Title2 ? "covenant" : "covenants"
             } not`
@@ -9025,7 +9158,7 @@ export default async function handler(req, res) {
       const myArray = text.split(" ");
       let word = myArray[0];
 
-      const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18′′N , 003°23′08′′W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is ${order_number}${
+      const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18 N , 003°23 08 W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is ${order_number}${
         propObject.p_8950348644625.reference != 0
           ? ` - ${propObject.p_8950348644625.reference}`
           : ""
