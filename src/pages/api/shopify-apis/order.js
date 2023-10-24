@@ -14448,9 +14448,32 @@ export default async function handler(req, res) {
       }
 
       const tartan_certificate_heading = `To Whomsoever These Presents Do Concern`;
-      const tartanCertficateUserName = `${propObject.p_8727183032593._Title1} ${
-        propObject.p_8727183032593._Name1
-      } ${propObject.p_8727183032593._Title2 ? "&" : ""}`;
+
+      //Name Capital work
+
+      let tartanNameParts = propObject.p_8727183032593._Name1.split(" ");
+      console.log(tartanNameParts, "nameParts");
+      let tartanModifiedName = tartanNameParts
+        .map(
+          (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+        )
+        .join(" ");
+      console.log(tartanModifiedName, "modified name");
+
+      //two name
+
+      let tartanNamePartsTwo = propObject.p_8727183032593._Name2.split(" ");
+      console.log(emblemNamePartsTwo, "nameParts");
+      let tartanModifiedNameTwo = tartanNamePartsTwo
+        .map(
+          (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+        )
+        .join(" ");
+      console.log(tartanModifiedNameTwo, "modified name two");
+
+      const tartanCertficateUserName = `${
+        propObject.p_8727183032593._Title1
+      } ${tartanModifiedName} ${propObject.p_8727183032593._Title2 ? "&" : ""}`;
       const userNametextWidth = oldEng.widthOfTextAtSize(
         tartanCertficateUserName,
         12
@@ -14463,7 +14486,7 @@ export default async function handler(req, res) {
 
       const tartanCertficateUserNameTwo = `${
         propObject.p_8727183032593._Title2
-          ? `${propObject.p_8727183032593._Title2} ${propObject.p_8727183032593._Name2}`
+          ? `${propObject.p_8727183032593._Title2} ${tartanModifiedNameTwo}`
           : ""
       }`;
 
