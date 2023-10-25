@@ -14480,7 +14480,7 @@ export default async function handler(req, res) {
       //two name
       if (propObject.p_8727183032593._Title2) {
         let tartanNamePartsTwo = propObject.p_8727183032593._Name2.split(" ");
-        let tartanModifiedNameTwo = tartanNamePartsTwo
+        var tartanModifiedNameTwo = tartanNamePartsTwo
           .map(
             (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
           )
