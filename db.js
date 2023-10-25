@@ -14,8 +14,6 @@ let cachedDb;
 // const client = new MongoClient(uri, options);
 
 export async function connectToDatabase() {
-  console.log(cachedDb, "cachedDb");
-
   if (!client) {
     client = new MongoClient(uri, options);
 

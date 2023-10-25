@@ -15939,7 +15939,7 @@ export default async function handler(req, res) {
                   pProperties[`p_8950348644625_${freeEmblemIncrement}`]
                     .variant_title,
                 size: size,
-                reference: specificIdCountFreeEmblem == 0 ? 0 : i++,
+                reference: specificIdCountFreeEmblem == 1 ? 0 : i++,
               },
             };
 
@@ -15959,7 +15959,7 @@ export default async function handler(req, res) {
                 _Date: resultObjectTitleFreeEmblemPack._Date,
 
                 size: size,
-                reference: specificIdCountFreeEmblem == 0 ? 0 : i++,
+                reference: specificIdCountFreeEmblem == 1 ? 0 : i++,
               },
             };
             console.log(

@@ -2,7 +2,7 @@ import "@shopify/shopify-api/adapters/node";
 import axios from "axios";
 
 export default async function listOrder(req, res) {
-  console.log(req, "reqqqqqq");
+  // console.log(req, "reqqqqqq");
 
   var result;
   const options = {
