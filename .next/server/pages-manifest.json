@@ -2,5 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/api/shopify-apis/order": "pages/api/shopify-apis/order.js"
+  "/api/listOrder": "pages/api/listOrder.js",
+  "/": "pages/index.js",
+  "/api/getDownloadStatus": "pages/api/getDownloadStatus.js"
 }

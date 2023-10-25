@@ -269,20 +269,6 @@ export default function Home() {
             // <label>
           >
             <div style={{ display: "flex", flexDirection: "row" }}>
-              <input
-                type="checkbox"
-                // checked={status.some(
-                //   (downloadedOrder) => downloadedOrder.id === item.order_number
-                // )}
-
-                checked={
-                  isOrderDownloaded || checkedOrders.includes(item.order_number)
-                }
-                disabled={
-                  isOrderDownloaded || checkedOrders.includes(item.order_number)
-                }
-                onClick={() => handleCheckboxChange(item.order_number)}
-              />
               {/* {status && status?.some((status) => status.id === item.order_number)
               ? "Downloaded"
               : ""} */}
@@ -304,6 +290,29 @@ export default function Home() {
             </div> */}
 
               <p style={{ marginLeft: "10px" }}>Order {item.name}</p>
+
+              <div
+                style={{
+                  width: "1px",
+                  height: "25px",
+                  backgroundColor: "#CCCCCC",
+                  marginLeft: "20px",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              ></div>
+
+              <input
+                type="checkbox"
+                checked={
+                  isOrderDownloaded || checkedOrders.includes(item.order_number)
+                }
+                disabled={
+                  isOrderDownloaded || checkedOrders.includes(item.order_number)
+                }
+                onClick={() => handleCheckboxChange(item.order_number)}
+                style={{ marginLeft: 20 }}
+              />
             </div>
             <div style={{ display: "flex", flexDirection: "row" }}>
               <a

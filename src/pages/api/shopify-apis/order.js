@@ -12735,7 +12735,7 @@ export default async function handler(req, res) {
       //========================================== Emblem Work Started ================================
 
       const emblem_certificate_heading = `To All & Sundry whom these presents do concern\n
-      Scotland Titles does declare that`;
+              Scotland Titles does declare that`;
 
       //Name Capital work
 
