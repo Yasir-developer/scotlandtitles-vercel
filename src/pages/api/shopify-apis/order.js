@@ -881,7 +881,7 @@ export default async function handler(req, res) {
       //two name
       if (propObject.p_8727183196433._Title2) {
         let deedNamePartsTwo = propObject.p_8727183196433._Name2.split(" ");
-        let deedModifiedNameTwo = deedNamePartsTwo
+        var deedModifiedNameTwo = deedNamePartsTwo
           .map(
             (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
           )
@@ -1528,7 +1528,7 @@ export default async function handler(req, res) {
         //two name
         if (propObject.p_8727183196433._Title2) {
           let deedNamePartsTwo = propObject.p_8727183196433._Name2.split(" ");
-          let deedModifiedNameTwo = deedNamePartsTwo
+          var deedModifiedNameTwo = deedNamePartsTwo
             .map(
               (part) =>
                 part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
@@ -8997,7 +8997,7 @@ export default async function handler(req, res) {
         let namePartsTwo = propObject.p_8950348644625._Name2.split(" ");
         console.log(nameParts, "nameParts");
         if (propObject.p_8950348644625._Title2) {
-          let modifiedNameTwo = namePartsTwo
+          var modifiedNameTwo = namePartsTwo
             .map(
               (part) =>
                 part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
@@ -15062,7 +15062,7 @@ export default async function handler(req, res) {
       //SIGNED
       tartanCertificate.drawText(tartanSigned, {
         x: 150,
-        y: 120,
+        y: 100,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -15106,7 +15106,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawImage(tartan_signature, {
         x: 210,
-        y: 100,
+        y: 85,
         height: 50,
         width: 30,
       });
