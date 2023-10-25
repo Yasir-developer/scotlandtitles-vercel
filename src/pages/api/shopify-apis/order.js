@@ -12752,7 +12752,7 @@ export default async function handler(req, res) {
       if (propObject.p_8950348644625._Title2) {
         let emblemNamePartsTwo = propObject.p_8950348644625._Name2.split(" ");
         console.log(emblemNamePartsTwo, "nameParts");
-        let emblemModifiedNameTwo = emblemNamePartsTwo
+        var emblemModifiedNameTwo = emblemNamePartsTwo
           .map(
             (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
           )
@@ -13593,7 +13593,7 @@ export default async function handler(req, res) {
       if (propObject.p_8727183065361._Title2) {
         let emblemNamePartsTwo = propObject.p_8727183065361._Name2.split(" ");
         console.log(emblemNamePartsTwo, "nameParts");
-        let emblemModifiedNameTwo = emblemNamePartsTwo
+        var emblemModifiedNameTwo = emblemNamePartsTwo
           .map(
             (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
           )
