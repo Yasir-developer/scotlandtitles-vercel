@@ -8575,7 +8575,7 @@ export default async function handler(req, res) {
         //SIGNED
         tartanCertificatePrinted.drawText(tartanSigned, {
           x: 150,
-          y: 120,
+          y: 100,
           size: 16,
           width: textWidth,
           height: textHeight,
@@ -8619,7 +8619,7 @@ export default async function handler(req, res) {
 
         tartanCertificatePrinted.drawImage(tartan_signature_printed, {
           x: 210,
-          y: 100,
+          y: 85,
           height: 50,
           width: 30,
         });
@@ -13182,7 +13182,7 @@ export default async function handler(req, res) {
       //SIGNED
       emblemCertificate.drawText(emblemSigned, {
         x: 150,
-        y: 120,
+        y: 100,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -13226,7 +13226,7 @@ export default async function handler(req, res) {
 
       emblemCertificate.drawImage(emblem_signature, {
         x: 210,
-        y: 100,
+        y: 85,
         height: 50,
         width: 30,
       });
@@ -13503,7 +13503,7 @@ export default async function handler(req, res) {
         // //SIGNED
         emblemCertificatePrinted.drawText(emblemSigned, {
           x: 150,
-          y: 120,
+          y: 100,
           size: 16,
           width: textWidth,
           height: textHeight,
@@ -13547,7 +13547,7 @@ export default async function handler(req, res) {
 
         emblemCertificatePrinted.drawImage(emblem_signature_printed, {
           x: 210,
-          y: 100,
+          y: 85,
           height: 50,
           width: 30,
         });
@@ -14076,7 +14076,7 @@ export default async function handler(req, res) {
       //SIGNED
       emblemCertificate.drawText(emblemSigned, {
         x: 150,
-        y: 120,
+        y: 100,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -14120,7 +14120,7 @@ export default async function handler(req, res) {
 
       emblemCertificate.drawImage(emblem_signature, {
         x: 210,
-        y: 100,
+        y: 85,
         height: 50,
         width: 30,
       });
@@ -14393,7 +14393,7 @@ export default async function handler(req, res) {
         // //SIGNED
         emblemCertificatePrinted.drawText(emblemSigned, {
           x: 150,
-          y: 120,
+          y: 100,
           size: 16,
           width: textWidth,
           height: textHeight,
@@ -14437,7 +14437,7 @@ export default async function handler(req, res) {
 
         emblemCertificatePrinted.drawImage(emblem_signature_printed, {
           x: 210,
-          y: 100,
+          y: 85,
           height: 50,
           width: 30,
         });
@@ -15478,7 +15478,7 @@ export default async function handler(req, res) {
         //SIGNED
         tartanCertificatePrinted.drawText(tartanSigned, {
           x: 150,
-          y: 120,
+          y: 100,
           size: 16,
           width: textWidth,
           height: textHeight,
@@ -15522,7 +15522,7 @@ export default async function handler(req, res) {
 
         tartanCertificatePrinted.drawImage(tartan_signature_printed, {
           x: 210,
-          y: 100,
+          y: 85,
           height: 50,
           width: 30,
         });
