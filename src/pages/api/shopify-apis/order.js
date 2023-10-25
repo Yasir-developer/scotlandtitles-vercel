@@ -6716,7 +6716,7 @@ export default async function handler(req, res) {
       //SIGNED
       tartanCertificate.drawText(tartanSigned, {
         x: 150,
-        y: 120,
+        y: 100,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -6760,7 +6760,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawImage(tartan_signature, {
         x: 210,
-        y: 100,
+        y: 85,
         height: 50,
         width: 30,
       });
@@ -8722,7 +8722,7 @@ export default async function handler(req, res) {
         let firstPageNamePartsTwo =
           propObject.p_8950348644625._Name2.split(" ");
         console.log(firstPageNamePartsTwo, "nameParts");
-        let firstPageModifiedNameTwo = firstPageNamePartsTwo
+        var firstPageModifiedNameTwo = firstPageNamePartsTwo
           .map(
             (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
           )
