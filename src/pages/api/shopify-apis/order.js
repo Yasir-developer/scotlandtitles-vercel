@@ -161,15 +161,17 @@ export default async function handler(req, res) {
       console.log(firstPageModifiedName, "modified name");
 
       //two name
-
-      let firstPageNamePartsTwo = propObject.p_8727183196433._Name2.split(" ");
-      console.log(firstPageNamePartsTwo, "nameParts");
-      let firstModifiedNameTwo = firstPageNamePartsTwo
-        .map(
-          (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
-        )
-        .join(" ");
-      console.log(firstModifiedNameTwo, "title modified name two");
+      if (propObject.p_8727183196433._Title2) {
+        let firstPageNamePartsTwo =
+          propObject.p_8727183196433._Name2.split(" ");
+        console.log(firstPageNamePartsTwo, "nameParts");
+        var firstModifiedNameTwo = firstPageNamePartsTwo
+          .map(
+            (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+          )
+          .join(" ");
+        console.log(firstModifiedNameTwo, "title modified name two");
+      }
 
       const heading = `Land with reference number ${order_number} ${
         propObject.p_8727183196433.reference != 0
@@ -432,15 +434,16 @@ export default async function handler(req, res) {
       console.log(modifiedName, "modified name");
 
       //two name
-
-      let namePartsTwo = propObject.p_8727183196433._Name2.split(" ");
-      console.log(nameParts, "nameParts");
-      let modifiedNameTwo = namePartsTwo
-        .map(
-          (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
-        )
-        .join(" ");
-      console.log(modifiedNameTwo, "modified name two");
+      if (propObject.p_8727183196433._Title2) {
+        let namePartsTwo = propObject.p_8727183196433._Name2.split(" ");
+        console.log(nameParts, "nameParts");
+        var modifiedNameTwo = namePartsTwo
+          .map(
+            (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+          )
+          .join(" ");
+        console.log(modifiedNameTwo, "modified name two");
+      }
 
       const certficateUserName = `${propObject.p_8727183196433._Title1} ${modifiedName} of Blairadam`;
 
@@ -876,14 +879,15 @@ export default async function handler(req, res) {
         .join(" ");
 
       //two name
-
-      let deedNamePartsTwo = propObject.p_8727183196433._Name2.split(" ");
-      let deedModifiedNameTwo = deedNamePartsTwo
-        .map(
-          (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
-        )
-        .join(" ");
-      console.log(deedModifiedNameTwo, "modified name two");
+      if (propObject.p_8727183196433._Title2) {
+        let deedNamePartsTwo = propObject.p_8727183196433._Name2.split(" ");
+        let deedModifiedNameTwo = deedNamePartsTwo
+          .map(
+            (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+          )
+          .join(" ");
+        console.log(deedModifiedNameTwo, "modified name two");
+      }
 
       const deedUserNameWidth = `of ${deedModifiedName}`;
       const formertextWidth = timesRomanFontHeading.widthOfTextAtSize(
@@ -1522,14 +1526,16 @@ export default async function handler(req, res) {
           .join(" ");
 
         //two name
-
-        let deedNamePartsTwo = propObject.p_8727183196433._Name2.split(" ");
-        let deedModifiedNameTwo = deedNamePartsTwo
-          .map(
-            (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
-          )
-          .join(" ");
-        console.log(deedModifiedNameTwo, "modified name two");
+        if (propObject.p_8727183196433._Title2) {
+          let deedNamePartsTwo = propObject.p_8727183196433._Name2.split(" ");
+          let deedModifiedNameTwo = deedNamePartsTwo
+            .map(
+              (part) =>
+                part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+            )
+            .join(" ");
+          console.log(deedModifiedNameTwo, "modified name two");
+        }
         const deedTwoUserNameWidth = `of ${deedModifiedNameTwo}`;
         const formerDeedTwotextWidth = timesRomanFontHeading.widthOfTextAtSize(
           deedTwoUserNameWidth,
@@ -3637,7 +3643,7 @@ export default async function handler(req, res) {
       //capital Name
       let firstPageNameParts = propObject.p_8727182704913._Name1.split(" ");
       console.log(firstPageNameParts, "nameParts");
-      let firstPageModifiedName = firstPageNameParts
+      var firstPageModifiedName = firstPageNameParts
         .map(
           (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
         )
@@ -3645,15 +3651,17 @@ export default async function handler(req, res) {
       console.log(firstPageModifiedName, "modified name");
 
       //two name
-
-      let firstPageNamePartsTwo = propObject.p_8727182704913._Name2.split(" ");
-      console.log(firstPageNamePartsTwo, "nameParts");
-      let firstModifiedNameTwo = firstPageNamePartsTwo
-        .map(
-          (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
-        )
-        .join(" ");
-      console.log(firstModifiedNameTwo, "modified name two");
+      if (propObject.p_8727182704913._Title2) {
+        let firstPageNamePartsTwo =
+          propObject.p_8727182704913._Name2.split(" ");
+        console.log(firstPageNamePartsTwo, "nameParts");
+        var firstModifiedNameTwo = firstPageNamePartsTwo
+          .map(
+            (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+          )
+          .join(" ");
+        console.log(firstModifiedNameTwo, "modified name two");
+      }
 
       const heading = `Land with reference number ${order_number} ${
         propObject.p_8727182704913.reference != 0
@@ -3916,15 +3924,16 @@ export default async function handler(req, res) {
       console.log(modifiedName, "modified name");
 
       //two name
-
-      let namePartsTwo = propObject.p_8727182704913._Name2.split(" ");
-      console.log(namePartsTwo, "nameParts");
-      let modifiedNameTwo = namePartsTwo
-        .map(
-          (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
-        )
-        .join(" ");
-      console.log(modifiedNameTwo, "modified name two");
+      if (propObject.p_8727182704913._Title2) {
+        let namePartsTwo = propObject.p_8727182704913._Name2.split(" ");
+        console.log(namePartsTwo, "nameParts");
+        var modifiedNameTwo = namePartsTwo
+          .map(
+            (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+          )
+          .join(" ");
+        console.log(modifiedNameTwo, "modified name two");
+      }
 
       const certficateUserName = `${propObject.p_8727182704913._Title1} ${modifiedName} of Blairadam`;
 
@@ -4357,21 +4366,21 @@ export default async function handler(req, res) {
       //Capital name
       let deedNameParts = propObject.p_8727182704913._Name1.split(" ");
       console.log(nameParts, "nameParts");
-      let deedModifiedName = deedNameParts
+      var deedModifiedName = deedNameParts
         .map(
           (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
         )
         .join(" ");
 
       //two name
-
-      let deedNamePartsTwo = propObject.p_8727182704913._Name2.split(" ");
-      let deedModifiedNameTwo = deedNamePartsTwo
-        .map(
-          (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
-        )
-        .join(" ");
-
+      if (propObject.p_8727182704913._Title2) {
+        let deedNamePartsTwo = propObject.p_8727182704913._Name2.split(" ");
+        var deedModifiedNameTwo = deedNamePartsTwo
+          .map(
+            (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+          )
+          .join(" ");
+      }
       const deedUserNameWidth = `of ${deedModifiedName}`;
       const formertextWidth = timesRomanFontHeading.widthOfTextAtSize(
         deedUserNameWidth,
@@ -6174,14 +6183,15 @@ export default async function handler(req, res) {
       console.log(tartanModifiedName, "modified name");
 
       //two name
-
-      let tartanNamePartsTwo = propObject.p_8727182704913._Name2.split(" ");
-      let tartanModifiedNameTwo = tartanNamePartsTwo
-        .map(
-          (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
-        )
-        .join(" ");
-      console.log(tartanModifiedNameTwo, "modified name two");
+      if (propObject.p_8727182704913._Title2) {
+        let tartanNamePartsTwo = propObject.p_8727182704913._Name2.split(" ");
+        var tartanModifiedNameTwo = tartanNamePartsTwo
+          .map(
+            (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+          )
+          .join(" ");
+        console.log(tartanModifiedNameTwo, "modified name two");
+      }
 
       const tartanCertficateUserName = `${
         propObject.p_8727182704913._Title1
@@ -6444,7 +6454,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawImage(certificateMid, {
         x: 230,
-        y: propObject.p_8727182704913._Title2 ? 600 : 630,
+        y: propObject.p_8727182704913._Title2 ? 600 : 610,
         width: ertificateMidpngDims.width,
         height: ertificateMidpngDims.height,
       });
@@ -8300,7 +8310,7 @@ export default async function handler(req, res) {
 
         tartanCertificatePrinted.drawImage(certificateMidPrinted, {
           x: 230,
-          y: propObject.p_8727182704913._Title2 ? 600 : 630,
+          y: propObject.p_8727182704913._Title2 ? 600 : 610,
           width: ertificateMidpngDims.width,
           height: ertificateMidpngDims.height,
         });
@@ -8629,11 +8639,6 @@ export default async function handler(req, res) {
   };
 
   const titlePackWithFreeEmblem = async (propObject) => {
-    console.log(
-      propObject,
-
-      "jjjjjjjj titlePackWithFreeEmblem propObject"
-    );
     let titleConditions;
     // return;
 
@@ -8713,15 +8718,17 @@ export default async function handler(req, res) {
       console.log(firstPageModifiedName, "modified name");
 
       //two name
-
-      let firstPageNamePartsTwo = propObject.p_8950348644625._Name2.split(" ");
-      console.log(firstPageNamePartsTwo, "nameParts");
-      let firstPageModifiedNameTwo = firstPageNamePartsTwo
-        .map(
-          (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
-        )
-        .join(" ");
-      console.log(firstPageModifiedNameTwo, "modified name two");
+      if (propObject.p_8950348644625._Title2) {
+        let firstPageNamePartsTwo =
+          propObject.p_8950348644625._Name2.split(" ");
+        console.log(firstPageNamePartsTwo, "nameParts");
+        let firstPageModifiedNameTwo = firstPageNamePartsTwo
+          .map(
+            (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+          )
+          .join(" ");
+        console.log(firstPageModifiedNameTwo, "modified name two");
+      }
 
       const heading = `Land with reference number ${order_number} ${
         propObject.p_8950348644625.reference != 0
@@ -8986,15 +8993,19 @@ export default async function handler(req, res) {
       console.log(modifiedName, "modified name");
 
       //two name
-
-      let namePartsTwo = propObject.p_8950348644625._Name2.split(" ");
-      console.log(nameParts, "nameParts");
-      let modifiedNameTwo = namePartsTwo
-        .map(
-          (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
-        )
-        .join(" ");
-      console.log(modifiedNameTwo, "modified name two");
+      if (propObject.p_8950348644625._Title2) {
+        let namePartsTwo = propObject.p_8950348644625._Name2.split(" ");
+        console.log(nameParts, "nameParts");
+        if (propObject.p_8950348644625._Title2) {
+          let modifiedNameTwo = namePartsTwo
+            .map(
+              (part) =>
+                part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+            )
+            .join(" ");
+          console.log(modifiedNameTwo, "modified name two");
+        }
+      }
 
       const certficateUserName = `${propObject.p_8950348644625._Title1} ${modifiedName} of Blairadam`;
 
@@ -9435,14 +9446,14 @@ export default async function handler(req, res) {
         .join(" ");
 
       //two name
-
-      let deedNamePartsTwo = propObject.p_8950348644625._Name2.split(" ");
-      let deedModifiedNameTwo = deedNamePartsTwo
-        .map(
-          (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
-        )
-        .join(" ");
-
+      if (propObject.p_8950348644625._Title2) {
+        let deedNamePartsTwo = propObject.p_8950348644625._Name2.split(" ");
+        var deedModifiedNameTwo = deedNamePartsTwo
+          .map(
+            (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+          )
+          .join(" ");
+      }
       const deedUserNameWidth = `of ${deedModifiedName}`;
       const formertextWidth = timesRomanFontHeading.widthOfTextAtSize(
         deedUserNameWidth,
@@ -12738,15 +12749,16 @@ export default async function handler(req, res) {
       console.log(emblemModifiedName, "modified name");
 
       //two name
-
-      let emblemNamePartsTwo = propObject.p_8950348644625._Name2.split(" ");
-      console.log(emblemNamePartsTwo, "nameParts");
-      let emblemModifiedNameTwo = emblemNamePartsTwo
-        .map(
-          (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
-        )
-        .join(" ");
-      console.log(emblemModifiedNameTwo, "modified name two");
+      if (propObject.p_8950348644625._Title2) {
+        let emblemNamePartsTwo = propObject.p_8950348644625._Name2.split(" ");
+        console.log(emblemNamePartsTwo, "nameParts");
+        let emblemModifiedNameTwo = emblemNamePartsTwo
+          .map(
+            (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+          )
+          .join(" ");
+        console.log(emblemModifiedNameTwo, "modified name two");
+      }
 
       const emblemCertficateUserName = `${
         propObject.p_8950348644625._Title1
@@ -13578,15 +13590,16 @@ export default async function handler(req, res) {
       console.log(emblemModifiedName, "modified name");
 
       //two name
-
-      let emblemNamePartsTwo = propObject.p_8727183065361._Name2.split(" ");
-      console.log(emblemNamePartsTwo, "nameParts");
-      let emblemModifiedNameTwo = emblemNamePartsTwo
-        .map(
-          (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
-        )
-        .join(" ");
-      console.log(emblemModifiedNameTwo, "modified name two");
+      if (propObject.p_8727183065361._Title2) {
+        let emblemNamePartsTwo = propObject.p_8727183065361._Name2.split(" ");
+        console.log(emblemNamePartsTwo, "nameParts");
+        let emblemModifiedNameTwo = emblemNamePartsTwo
+          .map(
+            (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+          )
+          .join(" ");
+        console.log(emblemModifiedNameTwo, "modified name two");
+      }
 
       const emblemCertficateUserName = `${
         propObject.p_8727183065361._Title1
@@ -14465,14 +14478,15 @@ export default async function handler(req, res) {
       console.log(tartanModifiedName, "modified name");
 
       //two name
-
-      let tartanNamePartsTwo = propObject.p_8727183032593._Name2.split(" ");
-      let tartanModifiedNameTwo = tartanNamePartsTwo
-        .map(
-          (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
-        )
-        .join(" ");
-      console.log(tartanModifiedNameTwo, "modified name two");
+      if (propObject.p_8727183032593._Title2) {
+        let tartanNamePartsTwo = propObject.p_8727183032593._Name2.split(" ");
+        let tartanModifiedNameTwo = tartanNamePartsTwo
+          .map(
+            (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+          )
+          .join(" ");
+        console.log(tartanModifiedNameTwo, "modified name two");
+      }
 
       const tartanCertficateUserName = `${
         propObject.p_8727183032593._Title1
@@ -14786,7 +14800,7 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawImage(certificateMid, {
         x: 230,
-        y: propObject.p_8727183032593._Title2 ? 600 : 630,
+        y: propObject.p_8727183032593._Title2 ? 600 : 610,
         width: ertificateMidpngDims.width,
         height: ertificateMidpngDims.height,
       });
@@ -15199,7 +15213,7 @@ export default async function handler(req, res) {
 
         tartanCertificatePrinted.drawImage(certificateMidPrinted, {
           x: 230,
-          y: propObject.p_8727183032593._Title2 ? 600 : 630,
+          y: propObject.p_8727183032593._Title2 ? 600 : 610,
           width: ertificateMidpngDims.width,
           height: ertificateMidpngDims.height,
         });
