@@ -149,15 +149,35 @@ export default async function handler(req, res) {
       const welcome_emblem_signature_printed = await pdfDocPrinted.embedPng(
         welcom_signature_Buffer
       );
+
+      //capital Name
+      let firstPageNameParts = propObject.p_8727183196433._Name1.split(" ");
+      console.log(firstPageNameParts, "nameParts");
+      let firstPageModifiedName = firstPageNameParts
+        .map(
+          (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+        )
+        .join(" ");
+      console.log(firstPageModifiedName, "modified name");
+
+      //two name
+
+      let firstPageNamePartsTwo = propObject.p_8727183196433._Name2.split(" ");
+      console.log(firstPageNamePartsTwo, "nameParts");
+      let firstModifiedNameTwo = firstPageNamePartsTwo
+        .map(
+          (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+        )
+        .join(" ");
+      console.log(firstModifiedNameTwo, "title modified name two");
+
       const heading = `Land with reference number ${order_number} ${
         propObject.p_8727183196433.reference != 0
           ? `- ${propObject.p_8727183196433.reference}`
           : ""
-      } ${propObject.p_8727183196433._Title1} ${
-        propObject.p_8727183196433._Name1
-      } ${
+      } ${propObject.p_8727183196433._Title1} ${firstPageModifiedName} ${
         propObject.p_8727183196433._Title2
-          ? `& ${propObject.p_8727183196433._Title2}\n${propObject.p_8727183196433._Name2}`
+          ? `& ${propObject.p_8727183196433._Title2}\n${firstModifiedNameTwo}`
           : ""
       } of ${!propObject.p_8727183196433._Name2 ? `\n` : ""}Blairadam`;
       const content = `Please find enclosed your Certificate of Disposition and Proclamation confirming you now own Land\nwithin a Scottish Estate . You may choose to adopt the traditional Scottish title of Laird as a sign of\nrespect, or the English language equivalent.\n\nYour land is located within our Estate with street address of Kingseat Road (off Cantsdam Road),\nCantsdam, Kelty, Fife, Scotland KY12 0SW. Your plot of land is located beside Kingseat Road single\ntrack road that leads north from the B912 Cantsdam Road.\n\nYou can view the land online. The following coordinates will show you the centre of the Estate;\n\nGoogle Maps type in  coordinates 56.1215718, - 3.3856475\nOrdinance Survey 10 Figure Grid Reference NT 13956 92954\nX Easting 313956 , Y Northing 692954\n\nWe hope that you have the opportunity to visit your land, and to enjoy the Scottish countryside as a\nLaird of Scotland . You can keep up to date via our Facebook page at fb.me/ScotlandTitles\n\nI very much hope that owning a piece of Scotland is something that will give you a sense of pride, and\nwould like to take this opportunity to thank you for choosing Scotland Titles`; // const page = document.getPage(0);
