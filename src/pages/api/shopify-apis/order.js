@@ -3557,11 +3557,6 @@ export default async function handler(req, res) {
   };
 
   const titlePackWithFreeTartan = async (propObject) => {
-    console.log(
-      propObject,
-
-      "jjjjjjjj titlePackWithFreeTartan propObject"
-    );
     let titleConditions;
 
     try {
@@ -4360,7 +4355,7 @@ export default async function handler(req, res) {
       });
 
       //Capital name
-      let deedNameParts = propObject.p_8727183196433._Name1.split(" ");
+      let deedNameParts = propObject.p_8727182704913._Name1.split(" ");
       console.log(nameParts, "nameParts");
       let deedModifiedName = deedNameParts
         .map(
@@ -4370,7 +4365,7 @@ export default async function handler(req, res) {
 
       //two name
 
-      let deedNamePartsTwo = propObject.p_8727183196433._Name2.split(" ");
+      let deedNamePartsTwo = propObject.p_8727182704913._Name2.split(" ");
       let deedModifiedNameTwo = deedNamePartsTwo
         .map(
           (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
@@ -5035,16 +5030,6 @@ export default async function handler(req, res) {
           font: timesRomanFontHeading,
         });
 
-        // deedPageTwo.drawText(formerTitle, {
-        //   x:
-        //   y:
-        //   size: 12,
-        //   width: textWidth,
-        //   height: textHeight,
-        //   color: rgb(0, 0, 0),
-        //   lineHeight: fontSize * 1.2,
-        //   font: timesRomanFontHeading,
-        // });
         deedPageTwo.drawText(newTitle, {
           x: newDeedTwoTotalTextWidth,
           y: 683,
@@ -5079,7 +5064,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5091,7 +5075,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5103,7 +5086,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5122,7 +5104,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0.65, 0.65, 0.65),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanItalicFont,
         });
 
@@ -5134,7 +5115,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5146,7 +5126,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
         deedPageTwo.drawText(formerNameBreak, {
@@ -5157,7 +5136,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontHeading,
         });
         deedPageTwo.drawText(titleBreak, {
@@ -5168,7 +5146,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontHeading,
         });
         deedPageTwo.drawText(absoluteTwo, {
@@ -5179,7 +5156,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
         deedPageTwo.drawText(newTitleTwo, {
@@ -5190,7 +5166,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontHeading,
         });
         deedPageTwo.drawText(inContent, {
@@ -5201,7 +5176,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
         deedPageTwo.drawText(absoluteThree, {
@@ -5212,7 +5186,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5224,7 +5197,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5236,7 +5208,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
         deedPageTwo.drawText(newTitleTwo, {
@@ -5247,7 +5218,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5259,7 +5229,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5271,7 +5240,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontHeading,
         });
 
@@ -5337,7 +5305,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5349,7 +5316,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5361,7 +5327,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontHeading,
         });
 
@@ -5373,7 +5338,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
         deedPageTwo.drawText(newTitleTwo, {
@@ -5384,7 +5348,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontHeading,
         });
         deedPageTwo.drawText(declarationFourTwo, {
@@ -5395,7 +5358,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5407,7 +5369,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
         deedPageTwo.drawLine({
@@ -5425,7 +5386,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5444,7 +5404,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5456,7 +5415,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5474,7 +5432,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0.65, 0.65, 0.65),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanItalicFont,
         });
 
@@ -5493,7 +5450,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5512,7 +5468,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5524,7 +5479,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5536,7 +5490,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5555,7 +5508,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5574,7 +5526,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5605,7 +5556,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5703,7 +5653,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5715,7 +5664,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5727,7 +5675,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5746,7 +5693,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0.65, 0.65, 0.65),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanItalicFont,
         });
 
@@ -5758,7 +5704,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5770,7 +5715,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
         deedPageTwo.drawText(formerNameBreak, {
@@ -5781,7 +5725,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontHeading,
         });
         deedPageTwo.drawText(titleBreak, {
@@ -5792,7 +5735,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontHeading,
         });
         deedPageTwo.drawText(absoluteTwo, {
@@ -5803,7 +5745,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
         deedPageTwo.drawText(newTitleTwo, {
@@ -5814,7 +5755,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontHeading,
         });
         deedPageTwo.drawText(inContent, {
@@ -5825,7 +5765,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
         deedPageTwo.drawText(absoluteThree, {
@@ -5836,7 +5775,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5848,7 +5786,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5860,7 +5797,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
         deedPageTwo.drawText(newTitleTwo, {
@@ -5871,7 +5807,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5883,7 +5818,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5895,7 +5829,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontHeading,
         });
 
@@ -5961,7 +5894,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5973,7 +5905,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -5985,7 +5916,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontHeading,
         });
 
@@ -5997,7 +5927,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
         deedPageTwo.drawText(newTitleTwo, {
@@ -6008,7 +5937,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontHeading,
         });
         deedPageTwo.drawText(declarationFourTwo, {
@@ -6019,7 +5947,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -6031,7 +5958,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
         deedPageTwo.drawLine({
@@ -6049,7 +5975,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -6068,7 +5993,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -6080,7 +6004,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -6098,7 +6021,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0.65, 0.65, 0.65),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanItalicFont,
         });
 
@@ -6117,7 +6039,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -6136,7 +6057,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -6148,7 +6068,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -6160,7 +6079,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -6179,7 +6097,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -6198,7 +6115,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -6229,7 +6145,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFont,
         });
 
@@ -6867,7 +6782,6 @@ export default async function handler(req, res) {
           size: headingFontSize,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontHeadingPrinted,
         });
 
@@ -7031,7 +6945,6 @@ export default async function handler(req, res) {
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
           font: tempusFontPrinted,
-          // font: customFont,
           // font: tempusFont,
         });
 
@@ -7199,7 +7112,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontPrinted,
         });
 
@@ -7211,7 +7123,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontPrinted,
         });
 
@@ -7223,7 +7134,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontPrinted,
         });
 
@@ -7242,7 +7152,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0.65, 0.65, 0.65),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanItalicFontPrinted,
         });
 
@@ -7254,7 +7163,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontPrinted,
         });
 
@@ -7266,7 +7174,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontPrinted,
         });
         printeddeedPage.drawText(formerNameBreak, {
@@ -7277,7 +7184,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontHeadingPrinted,
         });
         printeddeedPage.drawText(titleBreak, {
@@ -7288,7 +7194,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontHeadingPrinted,
         });
         printeddeedPage.drawText(absoluteTwo, {
@@ -7299,7 +7204,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontPrinted,
         });
         printeddeedPage.drawText(newTitleTwo, {
@@ -7310,7 +7214,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontHeadingPrinted,
         });
         printeddeedPage.drawText(inContent, {
@@ -7321,7 +7224,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontPrinted,
         });
         printeddeedPage.drawText(absoluteThree, {
@@ -7332,7 +7234,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontPrinted,
         });
 
@@ -7344,7 +7245,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontPrinted,
         });
 
@@ -7356,7 +7256,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontPrinted,
         });
         printeddeedPage.drawText(newTitleTwo, {
@@ -7367,7 +7266,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontPrinted,
         });
 
@@ -7379,7 +7277,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontPrinted,
         });
 
@@ -7391,7 +7288,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontHeadingPrinted,
         });
 
@@ -7457,7 +7353,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontPrinted,
         });
 
@@ -7469,7 +7364,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontPrinted,
         });
 
@@ -7481,7 +7375,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontHeadingPrinted,
         });
 
@@ -7493,7 +7386,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontPrinted,
         });
         printeddeedPage.drawText(newTitleTwo, {
@@ -7504,7 +7396,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontHeadingPrinted,
         });
         printeddeedPage.drawText(declarationFourTwo, {
@@ -7543,7 +7434,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontPrinted,
         });
 
@@ -7562,7 +7452,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontPrinted,
         });
 
@@ -7574,7 +7463,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontPrinted,
         });
 
@@ -7592,7 +7480,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0.65, 0.65, 0.65),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanItalicFontPrinted,
         });
 
@@ -7611,7 +7498,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontPrinted,
         });
 
@@ -7630,7 +7516,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontPrinted,
         });
 
@@ -7642,7 +7527,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontPrinted,
         });
 
@@ -7654,7 +7538,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontPrinted,
         });
 
@@ -7673,7 +7556,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontPrinted,
         });
 
@@ -7692,7 +7574,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontPrinted,
         });
 
@@ -7723,7 +7604,6 @@ export default async function handler(req, res) {
           size: 12,
           color: rgb(0, 0, 0),
           lineHeight: fontSize * 1.2,
-          // font: customFont,
           font: timesRomanFontPrinted,
         });
 
@@ -7748,13 +7628,13 @@ export default async function handler(req, res) {
             });
           });
 
-          const deedTwoUserNameWidth = `of ${propObject.p_8727182704913._Name2}`;
+          const deedTwoUserNameWidth = `of ${deedModifiedNameTwo}`;
           const formerDeedTwotextWidth =
             timesRomanFontHeading.widthOfTextAtSize(deedTwoUserNameWidth, 12);
           // console.log(formertextWidth, "formertextWidth");
           const totalWidthDeedTwo = formerDeedTwotextWidth + 35;
 
-          const deedTwoNewNameWidth = `now ${propObject.p_8727182704913._Title2} ${propObject.p_8727182704913._Name2}`;
+          const deedTwoNewNameWidth = `now ${propObject.p_8727182704913._Title2} ${deedModifiedNameTwo}`;
           const newDeedTwotextWidth = timesRomanFontHeading.widthOfTextAtSize(
             deedTwoNewNameWidth,
             12
@@ -7784,16 +7664,6 @@ export default async function handler(req, res) {
             font: timesRomanFontHeadingPrinted,
           });
 
-          // printeddeedPageTwo.drawText(formerTitle, {
-          //   x:
-          //   y:
-          //   size: 12,
-          //   width: textWidth,
-          //   height: textHeight,
-          //   color: rgb(0, 0, 0),
-          //   lineHeight: fontSize * 1.2,
-          //   font: timesRomanFontHeading,
-          // });
           printeddeedPageTwo.drawText(newTitle, {
             x: newDeedTwoTotalTextWidth,
             y: 683,
@@ -7805,10 +7675,10 @@ export default async function handler(req, res) {
             font: timesRomanFontHeadingPrinted,
           });
 
-          const deedFormTextTwo = `of ${propObject.p_8727182704913._Name2}\n\nnow ${propObject.p_8727182704913._Title2} ${propObject.p_8727182704913._Name2}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_8727182704913._Title2} ${propObject.p_8727182704913._Name2}\n\nof`;
+          const deedFormTextTwo = `of ${deedModifiedNameTwo}\n\nnow ${propObject.p_8727182704913._Title2} ${deedModifiedNameTwo}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_8727182704913._Title2} ${deedModifiedNameTwo}\n\nof`;
 
-          const lordNameTwo = `${propObject.p_8727182704913._Title2} ${propObject.p_8727182704913._Name2}\n\nFormerly known as`;
-          const formerNameTwo = `${propObject.p_8727182704913._Name2}`;
+          const lordNameTwo = `${propObject.p_8727182704913._Title2} ${deedModifiedNameTwo}\n\nFormerly known as`;
+          const formerNameTwo = `${deedModifiedNameTwo}`;
 
           printeddeedPageTwo.drawText(MainHeading, {
             x: 200,
@@ -9555,7 +9425,25 @@ export default async function handler(req, res) {
         });
       });
 
-      const deedUserNameWidth = `of ${propObject.p_8950348644625._Name1}`;
+      //Capital name
+      let deedNameParts = propObject.p_8950348644625._Name1.split(" ");
+      console.log(nameParts, "nameParts");
+      let deedModifiedName = deedNameParts
+        .map(
+          (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+        )
+        .join(" ");
+
+      //two name
+
+      let deedNamePartsTwo = propObject.p_8950348644625._Name2.split(" ");
+      let deedModifiedNameTwo = deedNamePartsTwo
+        .map(
+          (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+        )
+        .join(" ");
+
+      const deedUserNameWidth = `of ${deedModifiedName}`;
       const formertextWidth = timesRomanFontHeading.widthOfTextAtSize(
         deedUserNameWidth,
         12
@@ -9563,7 +9451,7 @@ export default async function handler(req, res) {
       console.log(formertextWidth, "formertextWidth");
       const totalWidth = formertextWidth + 35;
 
-      const deedNewNameWidth = `now ${propObject.p_8950348644625._Title1} ${propObject.p_8950348644625._Name1}`;
+      const deedNewNameWidth = `now ${propObject.p_8950348644625._Title1} ${deedModifiedName}`;
       const newtextWidth = timesRomanFontHeading.widthOfTextAtSize(
         deedNewNameWidth,
         12
@@ -9604,7 +9492,7 @@ export default async function handler(req, res) {
         font: timesRomanFontHeading,
       });
 
-      const deedFormText = `of ${propObject.p_8950348644625._Name1}\n\nnow ${propObject.p_8950348644625._Title1} ${propObject.p_8950348644625._Name1}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_8950348644625._Title1} ${propObject.p_8950348644625._Name1}\n\nof`;
+      const deedFormText = `of ${deedModifiedName}\n\nnow ${propObject.p_8950348644625._Title1} ${deedModifiedName}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_8950348644625._Title1} ${deedModifiedName}\n\nof`;
       const declarationOne = `HEREBY DECLARE AS FOLLOWS;`;
       const absolute =
         "1.   I ABSOLUTELY and entirely renounce, relinquish and abandon the use of my said";
@@ -9634,8 +9522,8 @@ export default async function handler(req, res) {
       const yearIn = "IN THE YEAR";
       const signedAs = "SIGNED AS A DEED AND DELIVERED\n\nby the above named";
       const signPlaceHolder = "Signature";
-      const lordName = `${propObject.p_8950348644625._Title1} ${propObject.p_8950348644625._Name1}\n\nFormerly known as`;
-      const formerName = `${propObject.p_8950348644625._Name1}`;
+      const lordName = `${propObject.p_8950348644625._Title1} ${deedModifiedName}\n\nFormerly known as`;
+      const formerName = `${deedModifiedName}`;
 
       const presence = "In the presence of:";
       const witness = "Witness's signature";
@@ -10210,7 +10098,7 @@ export default async function handler(req, res) {
           });
         });
 
-        const deedTwoUserNameWidth = `of ${propObject.p_8950348644625._Name2}`;
+        const deedTwoUserNameWidth = `of ${deedModifiedNameTwo}`;
         const formerDeedTwotextWidth = timesRomanFontHeading.widthOfTextAtSize(
           deedTwoUserNameWidth,
           12
@@ -10218,7 +10106,7 @@ export default async function handler(req, res) {
         // console.log(formertextWidth, "formertextWidth");
         const totalWidthDeedTwo = formerDeedTwotextWidth + 35;
 
-        const deedTwoNewNameWidth = `now ${propObject.p_8950348644625._Title2} ${propObject.p_8950348644625._Name2}`;
+        const deedTwoNewNameWidth = `now ${propObject.p_8950348644625._Title2} ${deedModifiedNameTwo}`;
         const newDeedTwotextWidth = timesRomanFontHeading.widthOfTextAtSize(
           deedTwoNewNameWidth,
           12
@@ -10259,10 +10147,10 @@ export default async function handler(req, res) {
           font: timesRomanFontHeading,
         });
 
-        const deedFormTextTwo = `of ${propObject.p_8950348644625._Name2}\n\nnow ${propObject.p_8950348644625._Title2} ${propObject.p_8950348644625._Name2}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_8950348644625._Title2} ${propObject.p_8950348644625._Name2}\n\nof`;
+        const deedFormTextTwo = `of ${deedModifiedNameTwo}\n\nnow ${propObject.p_8950348644625._Title2} ${deedModifiedNameTwo}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_8950348644625._Title2} ${deedModifiedNameTwo}\n\nof`;
 
-        const lordNameTwo = `${propObject.p_8950348644625._Title2} ${propObject.p_8950348644625._Name2}\n\nFormerly known as`;
-        const formerNameTwo = `${propObject.p_8950348644625._Name2}`;
+        const lordNameTwo = `${propObject.p_8950348644625._Title2} ${deedModifiedNameTwo}\n\nFormerly known as`;
+        const formerNameTwo = `${deedModifiedNameTwo}`;
 
         deedPageTwo.drawText(MainHeading, {
           x: 200,
@@ -10810,14 +10698,14 @@ export default async function handler(req, res) {
           });
         });
 
-        const deedTwoUserNameWidth = `of ${propObject.p_8950348644625._Name2}`;
+        const deedTwoUserNameWidth = `of ${deedModifiedNameTwo}`;
         const formerDeedTwotextWidth = timesRomanFontHeading.widthOfTextAtSize(
           deedTwoUserNameWidth,
           12
         );
         const totalWidthDeedTwo = formerDeedTwotextWidth + 35;
 
-        const deedTwoNewNameWidth = `now ${propObject.p_8950348644625._Title2} ${propObject.p_8950348644625._Name2}`;
+        const deedTwoNewNameWidth = `now ${propObject.p_8950348644625._Title2} ${deedModifiedNameTwo}`;
         const newDeedTwotextWidth = timesRomanFontHeading.widthOfTextAtSize(
           deedTwoNewNameWidth,
           12
@@ -10858,10 +10746,10 @@ export default async function handler(req, res) {
           font: timesRomanFontHeading,
         });
 
-        const deedFormTextTwo = `of ${propObject.p_8950348644625._Name2}\n\nnow ${propObject.p_8950348644625._Title2} ${propObject.p_8950348644625._Name2}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_8950348644625._Title2} ${propObject.p_8950348644625._Name2}\n\nof`;
+        const deedFormTextTwo = `of ${deedModifiedNameTwo}\n\nnow ${propObject.p_8950348644625._Title2} ${deedModifiedNameTwo}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_8950348644625._Title2} ${deedModifiedNameTwo}\n\nof`;
 
-        const lordNameTwo = `${propObject.p_8950348644625._Title2} ${propObject.p_8950348644625._Name2}\n\nFormerly known as`;
-        const formerNameTwo = `${propObject.p_8950348644625._Name2}`;
+        const lordNameTwo = `${propObject.p_8950348644625._Title2} ${deedModifiedNameTwo}\n\nFormerly known as`;
+        const formerNameTwo = `${deedModifiedNameTwo}`;
 
         deedPageTwo.drawText(MainHeading, {
           x: 200,
@@ -12257,13 +12145,13 @@ export default async function handler(req, res) {
             });
           });
 
-          const deedTwoUserNameWidth = `of ${propObject.p_8950348644625._Name2}`;
+          const deedTwoUserNameWidth = `of ${deedModifiedNameTwo}`;
           const formerDeedTwotextWidth =
             timesRomanFontHeading.widthOfTextAtSize(deedTwoUserNameWidth, 12);
           // console.log(formertextWidth, "formertextWidth");
           const totalWidthDeedTwo = formerDeedTwotextWidth + 35;
 
-          const deedTwoNewNameWidth = `now ${propObject.p_8950348644625._Title2} ${propObject.p_8950348644625._Name2}`;
+          const deedTwoNewNameWidth = `now ${propObject.p_8950348644625._Title2} ${deedModifiedNameTwo}`;
           const newDeedTwotextWidth = timesRomanFontHeading.widthOfTextAtSize(
             deedTwoNewNameWidth,
             12
@@ -12304,10 +12192,10 @@ export default async function handler(req, res) {
             font: timesRomanFontHeadingPrinted,
           });
 
-          const deedFormTextTwo = `of ${propObject.p_8950348644625._Name2}\n\nnow ${propObject.p_8950348644625._Title2} ${propObject.p_8950348644625._Name2}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_8950348644625._Title2} ${propObject.p_8950348644625._Name2}\n\nof`;
+          const deedFormTextTwo = `of ${deedModifiedNameTwo}\n\nnow ${propObject.p_8950348644625._Title2} ${deedModifiedNameTwo}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_8950348644625._Title2} ${deedModifiedNameTwo}\n\nof`;
 
-          const lordNameTwo = `${propObject.p_8950348644625._Title2} ${propObject.p_8950348644625._Name2}\n\nFormerly known as`;
-          const formerNameTwo = `${propObject.p_8950348644625._Name2}`;
+          const lordNameTwo = `${propObject.p_8950348644625._Title2} ${deedModifiedNameTwo}\n\nFormerly known as`;
+          const formerNameTwo = `${deedModifiedNameTwo}`;
 
           printeddeedPageTwo.drawText(MainHeading, {
             x: 200,
