@@ -313,6 +313,12 @@ export default function Home() {
                 onClick={() => handleCheckboxChange(item.order_number)}
                 style={{ marginLeft: 20 }}
               />
+              {isOrderDownloaded ||
+              checkedOrders.includes(item.order_number) ? (
+                <p style={{ marginLeft: "20px" }}>Printed</p>
+              ) : (
+                ""
+              )}
             </div>
             <div style={{ display: "flex", flexDirection: "row" }}>
               <a
