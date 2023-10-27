@@ -14,7 +14,7 @@ export default async function handler(req, res) {
         "Missing shop parameter. Please add SHOP_NAME=your-shop-name.myshopify.com to your env file."
       );
   }
-  const installUrl = `https://${shop}/admin/oauth/authorize?client_id=${client_id}&scope=read_products,write_products,read_themes,write_themes,read_orders,write_orders,read_checkouts,write_checkouts,read_content,write_content,read_customers,write_customers&redirect_uri=https://${process.env.APP_URL}/api/auth/callback`;
+  const installUrl = `https://${shop}/admin/oauth/authorize?client_id=${client_id}&scope=read_products,write_products,read_orders,write_orders,read_content,write_content&redirect_uri=https://${process.env.APP_URL}/api/auth/callback`;
   //   console.log(installUrl);
   //   res.status(200).json({ message: installUrl });
   res.redirect(installUrl);
