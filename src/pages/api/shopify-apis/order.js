@@ -15976,6 +15976,9 @@ export default async function handler(req, res) {
       return res.status(500).send({ message: "error" });
     }
   } else {
+    console.log(email);
+    console.log("error found ------------");
+    console.log(req.body.line_items.length);
     console.log("error found ------------");
     return res.status(500).send({ message: "error" });
   }
