@@ -3558,7 +3558,7 @@ export default async function handler(req, res) {
       }
     } catch (error) {
       console.error(error);
-      res.status(500).send("An error occurred");
+      res.status(200).send("An error occurred");
     }
   };
 
@@ -8634,7 +8634,7 @@ export default async function handler(req, res) {
       }
     } catch (error) {
       console.error(error);
-      res.status(500).send("An error occurred");
+      res.status(200).send("An error occurred");
     }
   };
 
@@ -13560,7 +13560,7 @@ export default async function handler(req, res) {
       }
     } catch (error) {
       console.error(error);
-      res.status(500).send("An error occurred");
+      res.status(200).send("An error occurred");
     }
   };
 
@@ -14450,7 +14450,7 @@ export default async function handler(req, res) {
       }
     } catch (error) {
       console.error(error);
-      res.status(500).send("An error occurred");
+      res.status(200).send("An error occurred");
     }
   };
 
@@ -15535,7 +15535,7 @@ export default async function handler(req, res) {
       }
     } catch (error) {
       console.error(error);
-      res.status(500).send("An error occurred");
+      res.status(200).send("An error occurred");
     }
   };
 
@@ -15974,14 +15974,14 @@ export default async function handler(req, res) {
       return res.status(200).send({ data: "success pdf" });
     } catch (error) {
       console.log(error, "catch error final");
-      return res.status(500).send({ message: "error" });
+      return res.status(200).send({ message: "error" });
     }
   } else {
     console.log(email);
     console.log("error found ------------");
     console.log(req.body.line_items.length);
     console.log("error found ------------");
-    return res.status(500).send({ message: "error" });
+    return res.status(200).send({ message: "error" });
   }
   return;
 }

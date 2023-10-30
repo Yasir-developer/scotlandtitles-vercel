@@ -29,7 +29,7 @@ export default async function listOrder(req, res) {
         headers: {
           "Access-Control-Allow-Origin": "*",
           // "X-Shopify-Access-Token": accessToken.accessToken,
-          "X-Shopify-Access-Token": "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",
+          "X-Shopify-Access-Token": accessToken.accessToken,
         },
       })
       .then((response) => {
