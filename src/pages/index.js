@@ -31,7 +31,7 @@ export default function Home() {
   useEffect(() => {
     listOrders();
     downloadStatus();
-    console.log(status, "al status");
+    // console.log(status, "al status");
   }, []);
   useEffect(() => {
     console.log(pageInformation, "pageInformation");
@@ -48,23 +48,23 @@ export default function Home() {
     // setSearchLoader(false);
   };
 
-  const downloadStatus = () => {
+  const downloadStatus = async () => {
     // if (!checked) {
     // If checkbox is checked, make a POST request
-    axios
+    await axios
       .get(`${server}/api/getDownloadStatus`)
       .then((response) => {
-        console.log(response.data, "response status ===========");
+        // console.log(response.data, "response status ===========");
 
         setStatus(response.data.data);
       })
       .catch((error) => {
-        console.error(error);
+        console.log(error.message, "get Download status");
       });
     // }
   };
 
-  const handleCheckboxChange = (id) => {
+  const handleCheckboxChange = async (id) => {
     console.log("first");
     if (!checkedOrders.includes(id)) {
       setCheckedOrders([...checkedOrders, id]);
@@ -73,7 +73,7 @@ export default function Home() {
 
       if (!checked) {
         // If checkbox is checked, make a POST request
-        axios
+        await axios
           .post(`${server}/api/downloadFile`, { orderId: id, download: true })
           .then((response) => {
             console.log(response.data);
@@ -156,11 +156,8 @@ export default function Home() {
   };
 
   const listOrders = async (pagination, url) => {
-    console.log(search, "search");
-    console.log(query, "que");
     setLoader(true);
-    console.log(pagination, "pagination");
-    console.log(pageInformation, "pageInformation pageInformation");
+    // console.log(pageInformation, "pageInformation pageInformation");
     if (!search && query == "") {
       var url = `${server}/api/listOrder${
         pagination ? `?page_info=${pagination}` : ""
@@ -173,8 +170,8 @@ export default function Home() {
     await axios
       .get(url)
       .then((res) => {
-        console.log(res.data.data.headers.link, "total response link");
-        console.log(res.data.data, "overall response");
+        // console.log(res.data.data.headers.link, "total response link");
+        // console.log(res.data.data, "overall response");
 
         // setLoader(false);
 
@@ -249,8 +246,9 @@ export default function Home() {
         );
 
         // console.log(item, "itemmmmmmmmmmmmmm");
-        const hasPrintedPack = item.line_items.some((data) =>
-          data.variant_title.includes("Printed Pack")
+        const hasPrintedPack = item.line_items.some(
+          (data) =>
+            data.variant_title && data.variant_title.includes("Printed Pack")
         );
 
         return (

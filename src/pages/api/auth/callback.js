@@ -48,6 +48,7 @@ export default async function handler(req, res) {
         await db.collection("config").insertOne({
           accessToken: at,
         });
+        console.log(at, "token access");
         const accessTokenFromDB = await db
           .collection("config")
           .findOne({ accessToken: at });
