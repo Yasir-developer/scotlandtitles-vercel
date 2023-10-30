@@ -9,7 +9,7 @@ import { pid } from "process";
 
 export default async function handler(req, res) {
   const titlePackId = 6846298849466;
-  const emblemId = 6882555658426;
+  const emblemId = 6846299078842;
   const tartanId = 6846299111610;
   const freeTartanId = 7420325265594;
   const freeEmblemId = 7434986651834;
@@ -456,7 +456,7 @@ export default async function handler(req, res) {
         propObject.p_6846298849466._Title2 ? `of Blairadam` : ""
       }`;
 
-      //   const emblemCertficateUserName = `${propObject.p_6882555658426._Title1} ${propObject.p_6882555658426._Name1}`;
+      //   const emblemCertficateUserName = `${propObject.p_6846299078842._Title1} ${propObject.p_6846299078842._Name1}`;
       const certificateUserNametextWidth = oldEng.widthOfTextAtSize(
         certficateUserName,
         12
@@ -3948,7 +3948,7 @@ export default async function handler(req, res) {
 
       const and = "and";
 
-      //   const emblemCertficateUserName = `${propObject.p_6882555658426._Title1} ${propObject.p_6882555658426._Name1}`;
+      //   const emblemCertficateUserName = `${propObject.p_6846299078842._Title1} ${propObject.p_6846299078842._Name1}`;
       const certificateUserNametextWidth = oldEng.widthOfTextAtSize(
         certficateUserName,
         12
@@ -9020,7 +9020,7 @@ export default async function handler(req, res) {
 
       const and = "and";
 
-      //   const emblemCertficateUserName = `${propObject.p_6882555658426._Title1} ${propObject.p_6882555658426._Name1}`;
+      //   const emblemCertficateUserName = `${propObject.p_6846299078842._Title1} ${propObject.p_6846299078842._Name1}`;
       const certificateUserNametextWidth = oldEng.widthOfTextAtSize(
         certficateUserName,
         12
@@ -13568,7 +13568,7 @@ export default async function handler(req, res) {
     console.log(propObject, "in emblum func");
 
     try {
-      if (propObject.p_6882555658426.variant.includes("Printed Pack")) {
+      if (propObject.p_6846299078842.variant.includes("Printed Pack")) {
         var emblemCertificatePrinted = pdfDocPrinted.addPage([595, 842]);
         var emblemCertificate = pdfDoc.addPage([595, 842]);
       } else {
@@ -13580,7 +13580,7 @@ export default async function handler(req, res) {
 
       //Name Capital work
 
-      let emblemNameParts = propObject.p_6882555658426._Name1.split(" ");
+      let emblemNameParts = propObject.p_6846299078842._Name1.split(" ");
       console.log(emblemNameParts, "nameParts");
       let emblemModifiedName = emblemNameParts
         .map(
@@ -13590,8 +13590,8 @@ export default async function handler(req, res) {
       console.log(emblemModifiedName, "modified name");
 
       //two name
-      if (propObject.p_6882555658426._Title2) {
-        let emblemNamePartsTwo = propObject.p_6882555658426._Name2.split(" ");
+      if (propObject.p_6846299078842._Title2) {
+        let emblemNamePartsTwo = propObject.p_6846299078842._Name2.split(" ");
         console.log(emblemNamePartsTwo, "nameParts");
         var emblemModifiedNameTwo = emblemNamePartsTwo
           .map(
@@ -13602,8 +13602,8 @@ export default async function handler(req, res) {
       }
 
       const emblemCertficateUserName = `${
-        propObject.p_6882555658426._Title1
-      } ${emblemModifiedName} ${propObject.p_6882555658426._Title2 ? "&" : ""}`;
+        propObject.p_6846299078842._Title1
+      } ${emblemModifiedName} ${propObject.p_6846299078842._Title2 ? "&" : ""}`;
 
       const userNametextWidth = oldEng.widthOfTextAtSize(
         emblemCertficateUserName,
@@ -13616,8 +13616,8 @@ export default async function handler(req, res) {
       const x = startingPosition - halfOfWord;
 
       const emblememblemCertficateUserNameTwo = `${
-        propObject.p_6882555658426._Title2
-          ? `${propObject.p_6882555658426._Title2} ${emblemModifiedNameTwo}`
+        propObject.p_6846299078842._Title2
+          ? `${propObject.p_6846299078842._Title2} ${emblemModifiedNameTwo}`
           : ""
       }`;
       const userNametextTwoWidth = oldEng.widthOfTextAtSize(
@@ -13638,25 +13638,25 @@ export default async function handler(req, res) {
       const Shewen = "Shewen:";
 
       const emblemCertificateShewenText = `THAT THE SAID ${
-        propObject.p_6882555658426._Title2
+        propObject.p_6846299078842._Title2
           ? "PETITIONERS HAVE"
           : "PETITIONER HAS"
       }`;
       const emblemCertificateShewenTextTwo = `OWNERSHIP OF LANDS IN SCOTLAND AND THE\n${
-        propObject.p_6882555658426._Title2 ? "PETITIONERS" : "PETITIONER"
+        propObject.p_6846299078842._Title2 ? "PETITIONERS" : "PETITIONER"
       } HAVING PREYED THAT THERE MIGHT BE\nGRANTED UNTO THEM TO USE SUCH ENSIGNS\nARMORIAL AS MAY BE THE LAWFUL PROPERTY OF\nSCOTLAND TITLES AND MIGHT BE SUITABLE AND\nACCORDING TO THE LAWS OF ARMS, KNOW YE\nTHEREFORE THAT WE HAVE ASSIGNED, AND DO BY\nTHESE PRESENTS DECLARE, RATIFY AND CONFIRM UNTO\nTHE ${
-        propObject.p_6882555658426._Title2 ? "PETITIONERS" : "PETITIONER"
+        propObject.p_6846299078842._Title2 ? "PETITIONERS" : "PETITIONER"
       } THE FOLLOWING ENSIGNS ARMORIAL,\nAS DEPICTED HEREOF, AND MATRICULATED OF EVEN\nDATE WITH THESE PRESENTS AS A MARK OF THE\nINTELLECTUAL PROPERTY OF SCOTLAND TITLES, TO BE\nPRESENTED BY THE ${
-        propObject.p_6882555658426._Title2 ? "PETITIONERS" : "PETITIONER"
+        propObject.p_6846299078842._Title2 ? "PETITIONERS" : "PETITIONER"
       } AS THEY DEEM,\n\n`;
 
       const videlicit = "Videlicit:";
 
       const emblemCertificateVidelicitText = `BY DEMONSTRATION OF WHICH ENSIGNS`;
       const emblemCertificateVidelicitTextTwo = `ARMORIAL THE SAID ${
-        propObject.p_6882555658426._Title2 ? "PETITIONERS ARE" : "PETITIONER IS"
+        propObject.p_6846299078842._Title2 ? "PETITIONERS ARE" : "PETITIONER IS"
       }, AMONGST ALL\nNOBLES AND IN ALL PLACES OF HONOUR, TO BE\nTAKEN, NUMBERED, ACCOUNTED AND RECEIVED ${
-        propObject.p_6882555658426._Title2
+        propObject.p_6846299078842._Title2
           ? "AS\nLAIRDS OF SCOTLAND,"
           : "A\nLAIRD OF SCOTLAND,"
       }\n\n`;
@@ -13673,11 +13673,11 @@ export default async function handler(req, res) {
       const Scilicet = "Scilicet";
       const scilicetSubDescription = "BY VIRTUE OF OWNERSHIP OF THE LAND IN ";
       const ScilicetDescription = `SCOTLAND AND IN PARTICULAR THE LAND DESCRIBED\nABOVE WITHIN THE KINGDOM OF FIFE BY CANTSDAM\nAS FURTHER DESCRIBEDIN THE CERTIFICATE OF\nDISPOSITION AND PROCLAMATION, THE ${
-        propObject.p_6882555658426._Title2 ? "PETITIONERS" : "PETITIONER"
+        propObject.p_6846299078842._Title2 ? "PETITIONERS" : "PETITIONER"
       }\nMAY HENCEFORTH AND IN PERPETUITY BE KNOWN BY\nTHE STYLE OF ${
-        propObject.p_6882555658426._Title2 ? "LAIRDS" : "A LAIRD"
+        propObject.p_6846299078842._Title2 ? "LAIRDS" : "A LAIRD"
       } AND IN PARTICULAR ${
-        propObject.p_6882555658426._Title2 ? "LAIRDS" : "LAIRD"
+        propObject.p_6846299078842._Title2 ? "LAIRDS" : "LAIRD"
       } OF\nBLAIRADAM.`;
       //Signed content
 
@@ -13685,7 +13685,7 @@ export default async function handler(req, res) {
 
       const dateText = "Date";
 
-      const emblemdate = propObject.p_6882555658426._Date;
+      const emblemdate = propObject.p_6846299078842._Date;
       const emblemdateObj = new Date(emblemdate);
       const emblemyear = emblemdateObj.getFullYear();
       const emblemmonth = String(emblemdateObj.getMonth() + 1).padStart(2, "0"); // Adding 1 because months are 0-indexed
@@ -13805,7 +13805,7 @@ export default async function handler(req, res) {
         emblem_signature_Buffer
       );
 
-      if (propObject.p_6882555658426.variant.includes("Printed Pack")) {
+      if (propObject.p_6846299078842.variant.includes("Printed Pack")) {
         var textWidth = emblemCertificatePrinted.getWidth() - 100; // Adjust the width as needed
         var textHeight = emblemCertificatePrinted.getHeight() - 50;
       } else {
@@ -13820,7 +13820,7 @@ export default async function handler(req, res) {
 
       emblemCertificate.drawImage(certificateMid, {
         x: 250,
-        y: propObject.p_6882555658426._Title2 ? 610 : 630,
+        y: propObject.p_6846299078842._Title2 ? 610 : 630,
         width: ertificateMidpngDims.width,
         height: ertificateMidpngDims.height,
       });
@@ -14127,7 +14127,7 @@ export default async function handler(req, res) {
 
       //========================Printed Emblem Page Start===========================
 
-      if (propObject.p_6882555658426.variant.includes("Printed Pack")) {
+      if (propObject.p_6846299078842.variant.includes("Printed Pack")) {
         emblemCertificatePrinted.drawImage(emblem_borders, {
           y: 790,
           width: emblemCertificatePrinted.getWidth(),
@@ -14136,7 +14136,7 @@ export default async function handler(req, res) {
 
         emblemCertificatePrinted.drawImage(certificateMidPrinted, {
           x: 250,
-          y: propObject.p_6882555658426._Title2 ? 610 : 630,
+          y: propObject.p_6846299078842._Title2 ? 610 : 630,
           width: ertificateMidpngDims.width,
           height: ertificateMidpngDims.height,
         });
@@ -15708,18 +15708,18 @@ export default async function handler(req, res) {
         } else if (productId == emblemId) {
           for (
             let i = 0;
-            i < pProperties[`p_6882555658426_${embelemIncrement}`].quantity;
+            i < pProperties[`p_6846299078842_${embelemIncrement}`].quantity;
             i++
           ) {
             let resultObjectEmblum = {};
             let namesArrayEmblum = "";
 
-            if (pProperties[`p_6882555658426_${embelemIncrement}`].properties) {
+            if (pProperties[`p_6846299078842_${embelemIncrement}`].properties) {
               namesArrayEmblum = pProperties[
-                `p_6882555658426_${embelemIncrement}`
+                `p_6846299078842_${embelemIncrement}`
               ].properties.map((propItem, index) => propItem.name);
               for (const obj of pProperties[
-                `p_6882555658426_${embelemIncrement}`
+                `p_6846299078842_${embelemIncrement}`
               ].properties) {
                 resultObjectEmblum[obj.name] = obj.value;
               }
@@ -15728,26 +15728,26 @@ export default async function handler(req, res) {
             if (!namesArrayEmblum.includes("_Title2")) {
               console.log("in name array emblum");
               const propertiesObj = {
-                p_6882555658426: {
+                p_6846299078842: {
                   _Title1: resultObjectEmblum._Title1,
                   _Name1: resultObjectEmblum._Name1,
                   _Date: resultObjectEmblum._Date,
                   variant:
-                    pProperties[`p_6882555658426_${embelemIncrement}`]
+                    pProperties[`p_6846299078842_${embelemIncrement}`]
                       .variant_title,
                 },
               };
               onlyEmblem(propertiesObj);
             } else {
               const propertiesObj = {
-                p_6882555658426: {
+                p_6846299078842: {
                   _Title1: resultObjectEmblum._Title1,
                   _Name1: resultObjectEmblum._Name1,
                   _Title2: resultObjectEmblum._Title2,
                   _Name2: resultObjectEmblum._name2,
                   _Date: resultObjectEmblum._Date,
                   variant:
-                    pProperties[`p_6882555658426_${embelemIncrement}`]
+                    pProperties[`p_6846299078842_${embelemIncrement}`]
                       .variant_title,
                 },
               };
