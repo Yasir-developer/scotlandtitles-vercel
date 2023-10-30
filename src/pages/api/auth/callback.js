@@ -44,17 +44,22 @@ export default async function handler(req, res) {
     generateAccessToken(apiKey, apiSecret, code, shop)
       .then(async (at) => {
         console.log(at, "at");
-        await db.collection("config").deleteMany({});
-        await db.collection("config").insertOne({
-          accessToken: at,
-        });
-        console.log(at, "token access");
-        const accessTokenFromDB = await db.collection("orders").findOne({});
-        console.log(accessTokenFromDB, "accessTokenFromDB");
-        console.log(at, "token access one");
+        if (at) {
+          await db.collection("config").deleteMany({});
+          await db.collection("config").insertOne({
+            accessToken: at,
+          });
+          console.log(at, "token access");
+          const accessTokenFromDB = await db.collection("orders").findOne({});
+          console.log(accessTokenFromDB, "accessTokenFromDB");
+          console.log(at, "token access one");
 
-        res.send(at);
-        console.log(at, "token access two");
+          res.send(accessTokenFromDB);
+        } else {
+          console.log(at, "token access two");
+
+          res.send("No Access to Token");
+        }
       })
       .catch((e) => {
         console.log(e);
