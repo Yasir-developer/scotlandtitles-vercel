@@ -30,7 +30,7 @@ export default function Home() {
 
   // const db = connectToDatabase();
 
-  console.log(db, "db");
+  // console.log(db, "db");
 
   useEffect(() => {
     listOrders();
