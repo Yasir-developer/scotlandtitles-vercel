@@ -51,7 +51,10 @@ export default async function handler(req, res) {
         console.log(at, "token access");
         const accessTokenFromDB = await db.collection("orders").findOne({});
         console.log(accessTokenFromDB, "accessTokenFromDB");
+        console.log(at, "token access one");
+
         res.send(at);
+        console.log(at, "token access two");
       })
       .catch((e) => {
         console.log(e);
