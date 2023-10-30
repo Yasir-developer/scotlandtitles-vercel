@@ -7,6 +7,7 @@ export default async function listOrder(req, res) {
     const db = await connectToDatabase();
     const collection = db.collection("config");
     const accessToken = await collection.findOne({});
+    console.log(accessToken, "collection db");
 
     var result;
     const options = {

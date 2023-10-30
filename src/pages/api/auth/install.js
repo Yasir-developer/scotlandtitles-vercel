@@ -1,12 +1,11 @@
 import connectToDatabase from "../../../../db";
 
 export default async function handler(req, res) {
-  const db = await connectToDatabase();
+  //   const db = await connectToDatabase();
 
   const shop = process.env.SHOP_NAME;
   console.log(shop);
   const client_id = process.env.CLIENT_ID;
-
   if (!shop) {
     return res
       .status(400)

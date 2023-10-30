@@ -14,7 +14,7 @@ export default async function handler(req, res) {
     try {
       const response = await axios.post(accessTokenUrl, query);
       const accessToken = response.data.access_token;
-      console.log(accessToken);
+      console.log(accessToken, "accessTokenUrl generateAccessToken");
       return accessToken;
     } catch (error) {
       console.error(error);
@@ -49,11 +49,9 @@ export default async function handler(req, res) {
           accessToken: at,
         });
         console.log(at, "token access");
-        const accessTokenFromDB = await db
-          .collection("config")
-          .findOne({ accessToken: at });
+        const accessTokenFromDB = await db.collection("orders").findOne({});
         console.log(accessTokenFromDB, "accessTokenFromDB");
-        res.send(accessTokenFromDB);
+        // res.send(accessTokenFromDB);
       })
       .catch((e) => {
         console.log(e);

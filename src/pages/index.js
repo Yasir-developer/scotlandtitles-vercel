@@ -28,6 +28,10 @@ export default function Home() {
   const [status, setStatus] = useState([]);
   const [checkedOrders, setCheckedOrders] = useState([]);
 
+  const db = connectToDatabase();
+
+  console.log(db, "db");
+
   useEffect(() => {
     listOrders();
     downloadStatus();
