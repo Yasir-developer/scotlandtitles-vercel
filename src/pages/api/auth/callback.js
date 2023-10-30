@@ -51,6 +51,7 @@ export default async function handler(req, res) {
         const accessTokenFromDB = await db
           .collection("config")
           .findOne({ accessToken: at });
+        console.log(accessTokenFromDB, "accessTokenFromDB");
         res.send(accessTokenFromDB);
       })
       .catch((e) => {
