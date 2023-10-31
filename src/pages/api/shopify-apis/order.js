@@ -179,7 +179,7 @@ export default async function handler(req, res) {
           : ""
       } ${propObject.p_6846298849466._Title1} ${firstPageModifiedName} ${
         propObject.p_6846298849466._Title2
-          ? `& ${propObject.p_6846298849466._Title2}\n${firstModifiedNameTwo}`
+          ? `\n& ${propObject.p_6846298849466._Title2} ${firstModifiedNameTwo}`
           : ""
       } of ${
         !propObject.p_6846298849466._Name2 &&
@@ -3674,7 +3674,7 @@ export default async function handler(req, res) {
           : ""
       } ${propObject.p_7420325265594._Title1} ${firstPageModifiedName} ${
         propObject.p_7420325265594._Title2
-          ? `& ${propObject.p_7420325265594._Title2}\n${firstModifiedNameTwo}`
+          ? `\n& ${propObject.p_7420325265594._Title2} ${firstModifiedNameTwo}`
           : ""
       } of ${
         !propObject.p_7420325265594._Name2 &&
@@ -8749,7 +8749,7 @@ export default async function handler(req, res) {
         firstPageModifiedName
       } ${
         propObject.p_7434986651834._Title2
-          ? `& ${propObject.p_7434986651834._Title2}\n${firstPageModifiedNameTwo}`
+          ? `\n& ${propObject.p_7434986651834._Title2} ${firstPageModifiedNameTwo}`
           : ""
       } of ${
         !propObject.p_7434986651834._Name2 &&
