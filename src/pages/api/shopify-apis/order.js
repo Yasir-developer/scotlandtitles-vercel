@@ -16313,13 +16313,28 @@ export default async function handler(req, res) {
           ) {
             let resultObjectEmblum = {};
             let namesArrayEmblum = "";
-
-            if (pProperties[`p_6846299078842_${embelemIncrement}`].properties) {
+            if (
+              pProperties[`p_6846299078842_${embelemIncrement}`].properties
+                .length > 0
+            ) {
+              if (
+                pProperties[`p_6846299078842_${embelemIncrement}`].properties
+              ) {
+                namesArrayEmblum = pProperties[
+                  `p_6846299078842_${embelemIncrement}`
+                ].properties.map((propItem, index) => propItem.name);
+                for (const obj of pProperties[
+                  `p_6846299078842_${embelemIncrement}`
+                ].properties) {
+                  resultObjectEmblum[obj.name] = obj.value;
+                }
+              }
+            } else {
               namesArrayEmblum = pProperties[
-                `p_6846299078842_${embelemIncrement}`
+                `p_6846298849466_${embelemIncrement}`
               ].properties.map((propItem, index) => propItem.name);
               for (const obj of pProperties[
-                `p_6846299078842_${embelemIncrement}`
+                `p_6846298849466_${embelemIncrement}`
               ].properties) {
                 resultObjectEmblum[obj.name] = obj.value;
               }
