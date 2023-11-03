@@ -16152,7 +16152,7 @@ export default async function handler(req, res) {
       var discountedEmblemPackId = 1;
 
       req.body.line_items.map((item, index) => {
-        console.log(item, "itemitem");
+        // console.log(item, "itemitem");
         if (item.product_id == titlePackId) {
           pId.push(item.product_id);
           var word = item.variant_title.split(" ");
@@ -16168,6 +16168,10 @@ export default async function handler(req, res) {
           };
           titleId++;
         } else if (item.product_id == emblemId) {
+          console.log(
+            titlePackProperties,
+            "==========titlePackProperties========="
+          );
           pId.push(item.product_id);
           var word = item.variant_title.split(" ");
           type = word[2];
@@ -16313,6 +16317,10 @@ export default async function handler(req, res) {
           ) {
             let resultObjectEmblum = {};
             let namesArrayEmblum = "";
+            console.log(
+              pProperties[`p_6846299078842_${embelemIncrement}`].properties,
+              "pProperties[`p_6846299078842_${embelemIncrement}`].properties"
+            );
             if (
               pProperties[`p_6846299078842_${embelemIncrement}`].properties
                 .length > 0
