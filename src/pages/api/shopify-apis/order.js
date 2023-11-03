@@ -16173,7 +16173,7 @@ export default async function handler(req, res) {
           //   "==========titlePackProperties========="
           // );
           console.log(
-            pProperties[`p_6846298849466_${titleIncrement}`].properties,
+            pProperties[`p_6846298849466_${emblemPackId}`],
             "==========titlePackProperties========="
           );
           pId.push(item.product_id);
@@ -16187,7 +16187,7 @@ export default async function handler(req, res) {
             properties:
               item.properties.length > 0
                 ? item.properties
-                : titlePackProperties,
+                : pProperties[`p_6846298849466_${titleId}`],
             quantity: item.quantity,
           };
           emblemPackId++;
