@@ -3680,7 +3680,7 @@ export default async function handler(req, res) {
           : ""
       } of ${
         !propObject.p_7420325265594._Name2 &&
-        !propObject.p_6846298849466._Title2
+        !propObject.p_7420325265594._Title2
           ? `\n`
           : ""
       }Blairadam`;
@@ -8755,7 +8755,7 @@ export default async function handler(req, res) {
           : ""
       } of ${
         !propObject.p_7434986651834._Name2 &&
-        !propObject.p_6846298849466._Title2
+        !propObject.p_7434986651834._Title2
           ? `\n`
           : ""
       }Blairadam`;
