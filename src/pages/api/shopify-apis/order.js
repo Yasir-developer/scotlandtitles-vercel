@@ -16187,7 +16187,7 @@ export default async function handler(req, res) {
             properties:
               item.properties.length > 0
                 ? item.properties
-                : pProperties[`p_6846298849466_${titleId}`],
+                : pProperties[`p_6846298849466_${emblemPackId}`],
             quantity: item.quantity,
           };
           emblemPackId++;
