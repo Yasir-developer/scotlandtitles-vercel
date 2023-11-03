@@ -16371,7 +16371,9 @@ export default async function handler(req, res) {
                   _Title1: resultObjectEmblum._Title1,
                   _Name1: resultObjectEmblum._Name1,
                   _Title2: resultObjectEmblum._Title2,
-                  _Name2: resultObjectEmblum._name2,
+                  _Name2: resultObjectEmblum._name2
+                    ? resultObjectEmblum._name2
+                    : resultObjectEmblum._Name2,
                   _Date: resultObjectEmblum._Date,
                   variant:
                     pProperties[`p_6846299078842_${embelemIncrement}`]
