@@ -16168,8 +16168,12 @@ export default async function handler(req, res) {
           };
           titleId++;
         } else if (item.product_id == emblemId) {
+          // console.log(
+          //   titlePackProperties,
+          //   "==========titlePackProperties========="
+          // );
           console.log(
-            titlePackProperties,
+            pProperties[`p_6846298849466_${titleIncrement}`].properties,
             "==========titlePackProperties========="
           );
           pId.push(item.product_id);
