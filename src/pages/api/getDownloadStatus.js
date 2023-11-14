@@ -2,16 +2,12 @@
 import connectToDatabase from "../../../db";
 
 export default async function handler(req, res) {
-  //   await dbConnect();
   await connectToDatabase();
 
-  //   const collection = db.collection("orders");
-  //   console.log(collection, "collection");
   if (req.method === "GET") {
     try {
       const db = await connectToDatabase();
 
-      //   const database = req.db;
       const collection = db.collection("orders");
       const orders = await collection.find({}).toArray();
       res.status(200).json({ success: true, data: orders });
