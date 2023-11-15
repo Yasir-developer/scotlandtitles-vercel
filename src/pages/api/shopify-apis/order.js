@@ -16151,7 +16151,24 @@ export default async function handler(req, res) {
       var freeEmblemPackId = 1;
       var discountedEmblemPackId = 1;
 
-      req.body.line_items.map((item, index) => {
+      const desiredOrder = [
+        6846298849466, 6846299078842, 6846299111610, 7420325265594,
+        7434986651834,
+      ];
+      const sortedLineItems = req.body.line_items.sort((a, b) => {
+        return (
+          desiredOrder.indexOf(a.product_id) -
+          desiredOrder.indexOf(b.product_id)
+        );
+      });
+      console.log(sortedLineItems, "sortedLineItems");
+
+      const mappedLineItems = sortedLineItems.map((item) => {
+        // Your mapping logic here
+        console.log(item, "-----items-----");
+      });
+
+      sortedLineItems.map((item, index) => {
         // console.log(item, "itemitem");
         if (item.product_id == titlePackId) {
           pId.push(item.product_id);
