@@ -14720,6 +14720,318 @@ export default async function handler(req, res) {
         var textHeight = emblemCertificate.getHeight() - 50;
       }
 
+      emblemCertificate.drawImage(emblem_bg, {
+        width: emblemCertificate.getWidth(),
+        height: emblemCertificate.getHeight(),
+      });
+
+      emblemCertificate.drawImage(certificateMid, {
+        x: 250,
+        y: propObject.p_6882555658426._Title2 ? 610 : 630,
+        width: ertificateMidpngDims.width,
+        height: ertificateMidpngDims.height,
+      });
+      emblemCertificate.drawImage(img, {
+        x: 40,
+        y: 710,
+        width: pngDims.width,
+        height: pngDims.height,
+      });
+
+      emblemCertificate.drawImage(stampImg, {
+        x: 490,
+        y: 70,
+        width: stampPngDims.width,
+        height: stampPngDims.height,
+      });
+
+      emblemCertificate.drawText(emblem_certificate_heading, {
+        x: 150,
+        y: 730,
+        size: 16,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0.219, 0.337, 0.137),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+
+      emblemCertificate.drawText(emblemCertficateUserName, {
+        // x: 200,
+        x: x,
+        y: 670,
+        width: textWidth,
+        height: textHeight,
+        size: 26,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+
+      emblemCertificate.drawText(emblememblemCertficateUserNameTwo, {
+        // x: 200,
+        x: xTwo,
+        y: 640,
+        width: textWidth,
+        height: textHeight,
+        size: 26,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+
+      emblemCertificate.drawText(petition, {
+        x: 25,
+        y: 580,
+        size: 16,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0.219, 0.337, 0.137),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+
+      emblemCertificate.drawText(emblemCertificateText, {
+        x: 160,
+        y: 580,
+        width: textWidth,
+        height: textHeight,
+        size: 9,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      emblemCertificate.drawText(emblemCertificateTextTwo, {
+        x: 25,
+        y: 565,
+        width: textWidth,
+        height: textHeight,
+        size: 9,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      //shewen text
+
+      emblemCertificate.drawText(Shewen, {
+        x: 25,
+        y: 490,
+        size: 16,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0.219, 0.337, 0.137),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+
+      emblemCertificate.drawText(emblemCertificateShewenText, {
+        x: 85,
+        y: 490,
+        width: textWidth,
+        height: textHeight,
+        size: 9,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      emblemCertificate.drawText(emblemCertificateShewenTextTwo, {
+        x: 25,
+        y: 475,
+        width: textWidth,
+        height: textHeight,
+        size: 9,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      //videlict
+
+      emblemCertificate.drawText(videlicit, {
+        x: 25,
+        y: 290,
+        size: 16,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0.219, 0.337, 0.137),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+
+      emblemCertificate.drawText(emblemCertificateVidelicitText, {
+        x: 90,
+        y: 290,
+        width: textWidth,
+        height: textHeight,
+        size: 9,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      emblemCertificate.drawText(emblemCertificateVidelicitTextTwo, {
+        x: 25,
+        y: 275,
+        width: textWidth,
+        height: textHeight,
+        size: 9,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      //In Testimony Whereof
+
+      emblemCertificate.drawText(testimony, {
+        x: 25,
+        y: 210,
+        size: 16,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0.219, 0.337, 0.137),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+
+      emblemCertificate.drawText(emblemCertificateTestimonyText, {
+        x: 180,
+        y: 210,
+        width: textWidth,
+        height: textHeight,
+        size: 9,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      emblemCertificate.drawText(emblemCertificateTestimonyTextTwo, {
+        x: 25,
+        y: 195,
+        width: textWidth,
+        height: textHeight,
+        size: 9,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      emblemCertificate.drawImage(emblem_logo, {
+        x: 320,
+        y: 400,
+        height: 200,
+        width: 250,
+      });
+
+      emblemCertificate.drawText(further, {
+        x: 310,
+        y: 380,
+        size: 16,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0.219, 0.337, 0.137),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+
+      emblemCertificate.drawText(furtherDescription, {
+        x: 310,
+        y: 355,
+        width: textWidth,
+        height: textHeight,
+        size: 9,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      emblemCertificate.drawText(Scilicet, {
+        x: 310,
+        y: 275,
+        size: 16,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0.219, 0.337, 0.137),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+
+      emblemCertificate.drawText(scilicetSubDescription, {
+        x: 360,
+        y: 275,
+        width: textWidth,
+        height: textHeight,
+        size: 9,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      emblemCertificate.drawText(ScilicetDescription, {
+        x: 310,
+        y: 260,
+        width: textWidth,
+        height: textHeight,
+        size: 9,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      //SIGNED
+      emblemCertificate.drawText(emblemSigned, {
+        x: 150,
+        y: 100,
+        size: 16,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0.219, 0.337, 0.137),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+
+      emblemCertificate.drawText(dateText, {
+        x: 170,
+        y: 80,
+        size: 16,
+        width: textWidth,
+        height: textHeight,
+        color: rgb(0.219, 0.337, 0.137),
+        lineHeight: fontSize * 1.2,
+        font: oldEng,
+      });
+
+      emblemCertificate.drawText(dateContent, {
+        x: 210,
+        y: 80,
+        width: textWidth,
+        height: textHeight,
+        size: 9,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: tempusFont,
+      });
+
+      emblemCertificate.drawText(copyright, {
+        x: 190,
+        y: 70,
+        width: textWidth,
+        height: textHeight,
+        size: 6,
+        color: rgb(0, 0, 0),
+        lineHeight: fontSize * 1.2,
+        font: timesRomanFont,
+      });
+
+      emblemCertificate.drawImage(emblem_signature, {
+        x: 210,
+        y: 85,
+        height: 50,
+        width: 30,
+      });
+
       //========================Printed Emblem Page Start===========================
 
       if (propObject.p_6882555658426.variant.includes("Printed Pack")) {
@@ -16153,7 +16465,7 @@ export default async function handler(req, res) {
 
       const desiredOrder = [
         6846298849466, 6846299078842, 6846299111610, 7420325265594,
-        7434986651834,6882555658426
+        7434986651834, 6882555658426,
       ];
       const sortedLineItems = req.body.line_items.sort((a, b) => {
         return (
@@ -16245,16 +16557,17 @@ export default async function handler(req, res) {
           };
 
           freeEmblemPackId++;
-        }else if (item.product_id == discountedEmblemId) {
+        } else if (item.product_id == discountedEmblemId) {
           pId.push(item.product_id);
           var word = item.variant_title.split(" ");
           type = word[2];
           typeTwo = word[3];
           size = word[0];
-          pProperties["p_" + `${item.product_id}_${discountedEmblemPackedId}`] = {
-            variant_title: item.variant_title,
-            properties: item.properties,
-          };
+          pProperties["p_" + `${item.product_id}_${discountedEmblemPackedId}`] =
+            {
+              variant_title: item.variant_title,
+              properties: item.properties,
+            };
 
           discountedEmblemPackedId++;
         }
@@ -16590,7 +16903,7 @@ export default async function handler(req, res) {
           }
           // }
           freeEmblemIncrement++;
-        }else if (productId == discountedEmblemId) {
+        } else if (productId == discountedEmblemId) {
           // for (let j = 0; j < item.quantity; j++) {
           let resultObjectdiscountEmblemPack = {};
           let namesArraydiscountEmblemPacks = "";
@@ -16642,7 +16955,7 @@ export default async function handler(req, res) {
                 // reference: specificIdCountFreeEmblem == 1 ? 0 : i++,
               },
             };
-        
+
             console.log(
               propertiesObj,
               "propertiesObj propertiesObj double= ===="
