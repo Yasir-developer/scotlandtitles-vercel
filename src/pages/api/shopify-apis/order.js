@@ -16245,7 +16245,7 @@ export default async function handler(req, res) {
           };
 
           freeEmblemPackId++;
-        }else if (item.product_id == d) {
+        }else if (item.product_id == discountedEmblemId) {
           pId.push(item.product_id);
           var word = item.variant_title.split(" ");
           type = word[2];
