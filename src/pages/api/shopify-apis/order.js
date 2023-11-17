@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   const freeTartanId = 7420325265594;
   const freeEmblemId = 7434986651834;
 
-  // const discountedEmblemId = 8727182868753;
+  const discountedEmblemId = 6882555658426;
 
   const client = new ftp.Client();
 
@@ -14471,583 +14471,583 @@ export default async function handler(req, res) {
     }
   };
 
-  //Future discounted Code
-
-  // const discountedonlyPrintedEmblem = async (propObject) => {
-  //   try {
-  //     if (propObject.p_8727182868753.variant.includes("Printed Pack")) {
-  //       var emblemCertificatePrinted = pdfDocPrinted.addPage([595, 842]);
-  //       var emblemCertificate = pdfDoc.addPage([595, 842]);
-  //     } else {
-  //       var emblemCertificate = pdfDoc.addPage([595, 842]);
-  //     }
-
-  //     const emblem_certificate_heading = `To All & Sundry whom these presents do concern\n
-  //             Scotland Titles does declare that`;
-
-  //     //Name Capital work
-
-  //     let emblemNameParts = propObject.p_8727182868753._Name1.split(" ");
-  //     console.log(emblemNameParts, "nameParts");
-  //     let emblemModifiedName = emblemNameParts
-  //       .map(
-  //         (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
-  //       )
-  //       .join(" ");
-  //     console.log(emblemModifiedName, "modified name");
-
-  //     //two name
-  //     if (propObject.p_8727182868753._Title2) {
-  //       let emblemNamePartsTwo = propObject.p_8727182868753._Name2.split(" ");
-  //       console.log(emblemNamePartsTwo, "nameParts");
-  //       var emblemModifiedNameTwo = emblemNamePartsTwo
-  //         .map(
-  //           (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
-  //         )
-  //         .join(" ");
-  //       console.log(emblemModifiedNameTwo, "modified name two");
-  //     }
-
-  //     const emblemCertficateUserName = `${
-  //       propObject.p_8727182868753._Title1
-  //     } ${emblemModifiedName} ${propObject.p_8727182868753._Title2 ? "&" : ""}`;
-
-  //     const userNametextWidth = oldEng.widthOfTextAtSize(
-  //       emblemCertficateUserName,
-  //       12
-  //     );
-
-  //     const halfOfWord = userNametextWidth / 2;
-  //     const startingPosition =
-  //       (emblemCertificate.getWidth() - userNametextWidth) / 2;
-  //     const x = startingPosition - halfOfWord;
-
-  //     const emblememblemCertficateUserNameTwo = `${
-  //       propObject.p_8727182868753._Title2
-  //         ? `${propObject.p_8727182868753._Title2} ${emblemModifiedNameTwo}`
-  //         : ""
-  //     }`;
-  //     const userNametextTwoWidth = oldEng.widthOfTextAtSize(
-  //       emblememblemCertficateUserNameTwo,
-  //       12
-  //     );
-
-  //     const halfOfWordTwo = userNametextTwoWidth / 2;
-  //     const startingPositionTwo =
-  //       (emblemCertificate.getWidth() - userNametextTwoWidth) / 2;
-  //     const xTwo = startingPositionTwo - halfOfWordTwo;
-
-  //     const petition = "Having By Petition";
-
-  //     const emblemCertificateText = `UNTO US THIS DAY IN THIS`;
-  //     const emblemCertificateTextTwo = `YEAR OF THE REIGN OF OUR SOVEREIGN CHARLES THE\nTHIRD, BY THE GRACE OF GOD, OF THE UNITED\nKINGDOM OF GREAT BRITAIN AND NORTHERN\nIRELAND, KING, HEAD OF THE COMMONWEALTH,\nDEFENDER OF THE FAITH\n\n`;
-
-  //     const Shewen = "Shewen:";
-
-  //     const emblemCertificateShewenText = `THAT THE SAID ${
-  //       propObject.p_8727182868753._Title2
-  //         ? "PETITIONERS HAVE"
-  //         : "PETITIONER HAS"
-  //     }`;
-  //     const emblemCertificateShewenTextTwo = `OWNERSHIP OF LANDS IN SCOTLAND AND THE\n${
-  //       propObject.p_8727182868753._Title2 ? "PETITIONERS" : "PETITIONER"
-  //     } HAVING PREYED THAT THERE MIGHT BE\nGRANTED UNTO THEM TO USE SUCH ENSIGNS\nARMORIAL AS MAY BE THE LAWFUL PROPERTY OF\nSCOTLAND TITLES AND MIGHT BE SUITABLE AND\nACCORDING TO THE LAWS OF ARMS, KNOW YE\nTHEREFORE THAT WE HAVE ASSIGNED, AND DO BY\nTHESE PRESENTS DECLARE, RATIFY AND CONFIRM UNTO\nTHE ${
-  //       propObject.p_8727182868753._Title2 ? "PETITIONERS" : "PETITIONER"
-  //     } THE FOLLOWING ENSIGNS ARMORIAL,\nAS DEPICTED HEREOF, AND MATRICULATED OF EVEN\nDATE WITH THESE PRESENTS AS A MARK OF THE\nINTELLECTUAL PROPERTY OF SCOTLAND TITLES, TO BE\nPRESENTED BY THE ${
-  //       propObject.p_8727182868753._Title2 ? "PETITIONERS" : "PETITIONER"
-  //     } AS THEY DEEM,\n\n`;
-
-  //     const videlicit = "Videlicit:";
-
-  //     const emblemCertificateVidelicitText = `BY DEMONSTRATION OF WHICH ENSIGNS`;
-  //     const emblemCertificateVidelicitTextTwo = `ARMORIAL THE SAID ${
-  //       propObject.p_8727182868753._Title2 ? "PETITIONERS ARE" : "PETITIONER IS"
-  //     }, AMONGST ALL\nNOBLES AND IN ALL PLACES OF HONOUR, TO BE\nTAKEN, NUMBERED, ACCOUNTED AND RECEIVED ${
-  //       propObject.p_8727182868753._Title2
-  //         ? "AS\nLAIRDS OF SCOTLAND,"
-  //         : "A\nLAIRD OF SCOTLAND,"
-  //     }\n\n`;
-
-  //     const testimony = "In Testimony Whereof:";
-
-  //     const emblemCertificateTestimonyText = `WE HAVE SUBSCRIBED`;
-  //     const emblemCertificateTestimonyTextTwo = `THESE PRESENTS AND THE SEAL OF OUR OFFICE IS\nAFFIXED HERETO AT SCOTLAND TITLES THIS DAY.\n\n`;
-
-  //     const further = "furthermore know ye therefore that";
-  //     const furtherDescription =
-  //       "SCOTLAND TITLES HAS SET OUT PART OF THE ESTATE BY\nBLAIRADAM FOREST KNOWN AS CANTSDAM, FIFE,\nSCOTLAND, HEREINAFTER REFERRED TO AS ‘THE\nESTATE’, AS A SCHEME OF SOUVENIR PLOTS AND";
-
-  //     const Scilicet = "Scilicet";
-  //     const scilicetSubDescription = "BY VIRTUE OF OWNERSHIP OF THE LAND IN ";
-  //     const ScilicetDescription = `SCOTLAND AND IN PARTICULAR THE LAND DESCRIBED\nABOVE WITHIN THE KINGDOM OF FIFE BY CANTSDAM\nAS FURTHER DESCRIBEDIN THE CERTIFICATE OF\nDISPOSITION AND PROCLAMATION, THE ${
-  //       propObject.p_8727182868753._Title2 ? "PETITIONERS" : "PETITIONER"
-  //     }\nMAY HENCEFORTH AND IN PERPETUITY BE KNOWN BY\nTHE STYLE OF ${
-  //       propObject.p_8727182868753._Title2 ? "LAIRDS" : "A LAIRD"
-  //     } AND IN PARTICULAR ${
-  //       propObject.p_8727182868753._Title2 ? "LAIRDS" : "LAIRD"
-  //     } OF\nBLAIRADAM.`;
-  //     //Signed content
-
-  //     const emblemSigned = "Signed";
-
-  //     const dateText = "Date";
-
-  //     const emblemdate = propObject.p_8727182868753._Date;
-  //     const emblemdateObj = new Date(emblemdate);
-  //     const emblemyear = emblemdateObj.getFullYear();
-  //     const emblemmonth = String(emblemdateObj.getMonth() + 1).padStart(2, "0"); // Adding 1 because months are 0-indexed
-  //     const emblemday = String(emblemdateObj.getDate()).padStart(2, "0");
-  //     const filePathThree = path.resolve(
-  //       "./public",
-  //       "images",
-  //       "certificate-stamp.png"
-  //     );
-
-  //     const imgBufferThree = fs.readFileSync(filePathThree);
-  //     // console.log(imgBuffer, "imgBuffer");
-  //     const stampImg = await pdfDoc.embedPng(imgBufferThree);
-  //     const stampImgPrinted = await pdfDocPrinted.embedPng(imgBufferThree);
-
-  //     const stampPngDims = stampImg.scale(0.3);
-  //     const monthNames = [
-  //       "JANUARY",
-  //       "FEBRUARY",
-  //       "MARCH",
-  //       "APRIL",
-  //       "MAY",
-  //       "JUNE",
-  //       "JULY",
-  //       "AUGUST",
-  //       "SEPTEMBER",
-  //       "OCTOBER",
-  //       "NOVEMBER",
-  //       "DECEMBER",
-  //     ];
-
-  //     const emblemmonthName = monthNames[emblemdateObj.getMonth()];
-  //     let dayWithSuffix;
-
-  //     if (emblemday >= 11 && emblemday <= 13) {
-  //       dayWithSuffix = `${emblemday}TH`;
-  //     } else {
-  //       switch (emblemday % 10) {
-  //         case 1:
-  //           dayWithSuffix = `${emblemday}ST`;
-  //           break;
-  //         case 2:
-  //           dayWithSuffix = `${emblemday}ND`;
-  //           break;
-  //         case 3:
-  //           dayWithSuffix = `${emblemday}RD`;
-  //           break;
-  //         default:
-  //           dayWithSuffix = `${emblemday}TH`;
-  //       }
-  //     }
-  //     const dateContent = `THIS ${dayWithSuffix} DAY OF ${emblemmonthName} IN THE YEAR ${emblemyear}`;
-  //     const copyright =
-  //       "All content, layout, artwork and illustrations copyright Scotland Titles 2021 and subject to licence";
-
-  //     const emblemBgPath = path.resolve("./public", "images", "emblem_bg.png");
-
-  //     const emblembg_Buffer = fs.readFileSync(emblemBgPath);
-
-  //     // console.log(imgBuffer, "imgBuffer");
-  //     const emblem_bg = await pdfDoc.embedPng(emblembg_Buffer);
-  //     //borders image
-
-  //     const border = path.resolve("./public", "images", "borders.jpg");
-
-  //     const border_Buffer = fs.readFileSync(border);
-
-  //     const emblem_borders = await pdfDocPrinted.embedJpg(border_Buffer);
-
-  //     const filePathFour = path.resolve(
-  //       "./public",
-  //       "images",
-  //       "certificate-mid.png"
-  //     );
-
-  //     const imgBufferFour = fs.readFileSync(filePathFour);
-  //     const certificateMid = await pdfDoc.embedPng(imgBufferFour);
-
-  //     const certificateMidPrinted = await pdfDocPrinted.embedPng(imgBufferFour);
-
-  //     const ertificateMidpngDims = certificateMid.scale(0.3);
-
-  //     const emblemlogoPath = path.resolve(
-  //       "./public",
-  //       "images",
-  //       "emblem_logo.png"
-  //     );
-
-  //     const emblem_logo_Buffer = fs.readFileSync(emblemlogoPath);
-
-  //     // console.log(imgBuffer, "imgBuffer");
-  //     const emblem_logo = await pdfDoc.embedPng(emblem_logo_Buffer);
-
-  //     const emblem_logo_printed = await pdfDocPrinted.embedPng(
-  //       emblem_logo_Buffer
-  //     );
-
-  //     const filePath = path.resolve("./public", "images", "scotland_log.png");
-
-  //     const imgBuffer = fs.readFileSync(filePath);
-  //     const img = await pdfDoc.embedPng(imgBuffer);
-  //     const img_printed = await pdfDocPrinted.embedPng(imgBuffer);
-
-  //     const pngDims = img.scale(0.25);
-
-  //     const emblemsignPath = path.resolve(
-  //       "./public",
-  //       "images",
-  //       "g_signature.png"
-  //     );
-  //     const emblem_signature_Buffer = fs.readFileSync(emblemsignPath);
-
-  //     // console.log(imgBuffer, "imgBuffer");
-  //     const emblem_signature = await pdfDoc.embedPng(emblem_signature_Buffer);
-
-  //     const emblem_signature_printed = await pdfDocPrinted.embedPng(
-  //       emblem_signature_Buffer
-  //     );
-
-  //     if (propObject.p_8727182868753.variant.includes("Printed Pack")) {
-  //       var textWidth = emblemCertificatePrinted.getWidth() - 100; // Adjust the width as needed
-  //       var textHeight = emblemCertificatePrinted.getHeight() - 50;
-  //     } else {
-  //       var textWidth = emblemCertificate.getWidth() - 100; // Adjust the width as needed
-  //       var textHeight = emblemCertificate.getHeight() - 50;
-  //     }
-
-  //     //========================Printed Emblem Page Start===========================
-
-  //     if (propObject.p_8727182868753.variant.includes("Printed Pack")) {
-  //       emblemCertificatePrinted.drawImage(emblem_borders, {
-  //         y: 790,
-  //         width: emblemCertificatePrinted.getWidth(),
-  //         height: 70,
-  //       });
-
-  //       emblemCertificatePrinted.drawImage(certificateMidPrinted, {
-  //         x: 250,
-  //         y: propObject.p_8727182868753._Title2 ? 610 : 630,
-  //         width: ertificateMidpngDims.width,
-  //         height: ertificateMidpngDims.height,
-  //       });
-
-  //       emblemCertificatePrinted.drawImage(img_printed, {
-  //         x: 40,
-  //         y: 710,
-  //         width: pngDims.width,
-  //         height: pngDims.height,
-  //       });
-
-  //       emblemCertificatePrinted.drawImage(stampImgPrinted, {
-  //         x: 490,
-  //         y: 70,
-  //         width: stampPngDims.width,
-  //         height: stampPngDims.height,
-  //       });
-
-  //       emblemCertificatePrinted.drawText(emblem_certificate_heading, {
-  //         x: 150,
-  //         y: 730,
-  //         size: 16,
-  //         width: textWidth,
-  //         height: textHeight,
-  //         color: rgb(0.219, 0.337, 0.137),
-  //         lineHeight: fontSize * 1.2,
-  //         font: oldEngPrinted,
-  //       });
-
-  //       emblemCertificatePrinted.drawText(emblemCertficateUserName, {
-  //         // x: 200,
-  //         x: x,
-  //         y: 670,
-  //         width: textWidth,
-  //         height: textHeight,
-  //         size: 26,
-  //         color: rgb(0, 0, 0),
-  //         lineHeight: fontSize * 1.2,
-  //         font: oldEngPrinted,
-  //       });
-
-  //       emblemCertificatePrinted.drawText(emblememblemCertficateUserNameTwo, {
-  //         // x: 200,
-  //         x: xTwo,
-  //         y: 640,
-  //         width: textWidth,
-  //         height: textHeight,
-  //         size: 26,
-  //         color: rgb(0, 0, 0),
-  //         lineHeight: fontSize * 1.2,
-  //         font: oldEngPrinted,
-  //       });
-
-  //       emblemCertificatePrinted.drawText(petition, {
-  //         x: 25,
-  //         y: 580,
-  //         size: 16,
-  //         width: textWidth,
-  //         height: textHeight,
-  //         color: rgb(0.219, 0.337, 0.137),
-  //         lineHeight: fontSize * 1.2,
-  //         font: oldEngPrinted,
-  //       });
-
-  //       emblemCertificatePrinted.drawText(emblemCertificateText, {
-  //         x: 160,
-  //         y: 580,
-  //         width: textWidth,
-  //         height: textHeight,
-  //         size: 9,
-  //         color: rgb(0, 0, 0),
-  //         lineHeight: fontSize * 1.2,
-  //         font: tempusFontPrinted,
-  //       });
-
-  //       emblemCertificatePrinted.drawText(emblemCertificateTextTwo, {
-  //         x: 25,
-  //         y: 565,
-  //         width: textWidth,
-  //         height: textHeight,
-  //         size: 9,
-  //         color: rgb(0, 0, 0),
-  //         lineHeight: fontSize * 1.2,
-  //         font: tempusFontPrinted,
-  //       });
-
-  //       // //shewen text
-
-  //       emblemCertificatePrinted.drawText(Shewen, {
-  //         x: 25,
-  //         y: 490,
-  //         size: 16,
-  //         width: textWidth,
-  //         height: textHeight,
-  //         color: rgb(0.219, 0.337, 0.137),
-  //         lineHeight: fontSize * 1.2,
-  //         font: oldEngPrinted,
-  //       });
-
-  //       emblemCertificatePrinted.drawText(emblemCertificateShewenText, {
-  //         x: 85,
-  //         y: 490,
-  //         width: textWidth,
-  //         height: textHeight,
-  //         size: 9,
-  //         color: rgb(0, 0, 0),
-  //         lineHeight: fontSize * 1.2,
-  //         font: tempusFontPrinted,
-  //       });
-
-  //       emblemCertificatePrinted.drawText(emblemCertificateShewenTextTwo, {
-  //         x: 25,
-  //         y: 475,
-  //         width: textWidth,
-  //         height: textHeight,
-  //         size: 9,
-  //         color: rgb(0, 0, 0),
-  //         lineHeight: fontSize * 1.2,
-  //         font: tempusFontPrinted,
-  //       });
-
-  //       // //videlict
-
-  //       emblemCertificatePrinted.drawText(videlicit, {
-  //         x: 25,
-  //         y: 290,
-  //         size: 16,
-  //         width: textWidth,
-  //         height: textHeight,
-  //         color: rgb(0.219, 0.337, 0.137),
-  //         lineHeight: fontSize * 1.2,
-  //         font: oldEngPrinted,
-  //       });
-
-  //       emblemCertificatePrinted.drawText(emblemCertificateVidelicitText, {
-  //         x: 90,
-  //         y: 290,
-  //         width: textWidth,
-  //         height: textHeight,
-  //         size: 9,
-  //         color: rgb(0, 0, 0),
-  //         lineHeight: fontSize * 1.2,
-  //         font: tempusFontPrinted,
-  //       });
-
-  //       emblemCertificatePrinted.drawText(emblemCertificateVidelicitTextTwo, {
-  //         x: 25,
-  //         y: 275,
-  //         width: textWidth,
-  //         height: textHeight,
-  //         size: 9,
-  //         color: rgb(0, 0, 0),
-  //         lineHeight: fontSize * 1.2,
-  //         font: tempusFontPrinted,
-  //       });
-
-  //       // //In Testimony Whereof
-
-  //       emblemCertificatePrinted.drawText(testimony, {
-  //         x: 25,
-  //         y: 210,
-  //         size: 16,
-  //         width: textWidth,
-  //         height: textHeight,
-  //         color: rgb(0.219, 0.337, 0.137),
-  //         lineHeight: fontSize * 1.2,
-  //         font: oldEngPrinted,
-  //       });
-
-  //       emblemCertificatePrinted.drawText(emblemCertificateTestimonyText, {
-  //         x: 180,
-  //         y: 210,
-  //         width: textWidth,
-  //         height: textHeight,
-  //         size: 9,
-  //         color: rgb(0, 0, 0),
-  //         lineHeight: fontSize * 1.2,
-  //         font: tempusFontPrinted,
-  //       });
-
-  //       emblemCertificatePrinted.drawText(emblemCertificateTestimonyTextTwo, {
-  //         x: 25,
-  //         y: 195,
-  //         width: textWidth,
-  //         height: textHeight,
-  //         size: 9,
-  //         color: rgb(0, 0, 0),
-  //         lineHeight: fontSize * 1.2,
-  //         font: tempusFontPrinted,
-  //       });
-
-  //       emblemCertificatePrinted.drawImage(emblem_logo_printed, {
-  //         x: 320,
-  //         y: 400,
-  //         height: 200,
-  //         width: 250,
-  //       });
-
-  //       emblemCertificatePrinted.drawText(further, {
-  //         x: 310,
-  //         y: 380,
-  //         size: 16,
-  //         width: textWidth,
-  //         height: textHeight,
-  //         color: rgb(0.219, 0.337, 0.137),
-  //         lineHeight: fontSize * 1.2,
-  //         font: oldEngPrinted,
-  //       });
-
-  //       emblemCertificatePrinted.drawText(furtherDescription, {
-  //         x: 310,
-  //         y: 355,
-  //         width: textWidth,
-  //         height: textHeight,
-  //         size: 9,
-  //         color: rgb(0, 0, 0),
-  //         lineHeight: fontSize * 1.2,
-  //         font: tempusFontPrinted,
-  //       });
-
-  //       emblemCertificatePrinted.drawText(Scilicet, {
-  //         x: 310,
-  //         y: 275,
-  //         size: 16,
-  //         width: textWidth,
-  //         height: textHeight,
-  //         color: rgb(0.219, 0.337, 0.137),
-  //         lineHeight: fontSize * 1.2,
-  //         font: oldEngPrinted,
-  //       });
-
-  //       emblemCertificatePrinted.drawText(scilicetSubDescription, {
-  //         x: 360,
-  //         y: 275,
-  //         width: textWidth,
-  //         height: textHeight,
-  //         size: 9,
-  //         color: rgb(0, 0, 0),
-  //         lineHeight: fontSize * 1.2,
-  //         font: tempusFontPrinted,
-  //       });
-
-  //       emblemCertificatePrinted.drawText(ScilicetDescription, {
-  //         x: 310,
-  //         y: 260,
-  //         width: textWidth,
-  //         height: textHeight,
-  //         size: 9,
-  //         color: rgb(0, 0, 0),
-  //         lineHeight: fontSize * 1.2,
-  //         font: tempusFontPrinted,
-  //       });
-
-  //       // //SIGNED
-  //       emblemCertificatePrinted.drawText(emblemSigned, {
-  //         x: 150,
-  //         y: 100,
-  //         size: 16,
-  //         width: textWidth,
-  //         height: textHeight,
-  //         color: rgb(0.219, 0.337, 0.137),
-  //         lineHeight: fontSize * 1.2,
-  //         font: oldEngPrinted,
-  //       });
-
-  //       emblemCertificatePrinted.drawText(dateText, {
-  //         x: 170,
-  //         y: 80,
-  //         size: 16,
-  //         width: textWidth,
-  //         height: textHeight,
-  //         color: rgb(0.219, 0.337, 0.137),
-  //         lineHeight: fontSize * 1.2,
-  //         font: oldEngPrinted,
-  //       });
-
-  //       emblemCertificatePrinted.drawText(dateContent, {
-  //         x: 210,
-  //         y: 80,
-  //         width: textWidth,
-  //         height: textHeight,
-  //         size: 9,
-  //         color: rgb(0, 0, 0),
-  //         lineHeight: fontSize * 1.2,
-  //         font: tempusFontPrinted,
-  //       });
-
-  //       emblemCertificatePrinted.drawText(copyright, {
-  //         x: 190,
-  //         y: 70,
-  //         width: textWidth,
-  //         height: textHeight,
-  //         size: 6,
-  //         color: rgb(0, 0, 0),
-  //         lineHeight: fontSize * 1.2,
-  //         font: timesRomanFontPrinted,
-  //       });
-
-  //       emblemCertificatePrinted.drawImage(emblem_signature_printed, {
-  //         x: 210,
-  //         y: 85,
-  //         height: 50,
-  //         width: 30,
-  //       });
-
-  //       emblemCertificatePrinted.drawImage(emblem_borders, {
-  //         y: 0,
-  //         width: emblemCertificatePrinted.getWidth(),
-  //         height: 60,
-  //       });
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //     res.status(200).send("An error occurred");
-  //   }
-  // };
+  // Future discounted Code
+
+  const discountedonlyPrintedEmblem = async (propObject) => {
+    try {
+      if (propObject.p_6882555658426.variant.includes("Printed Pack")) {
+        var emblemCertificatePrinted = pdfDocPrinted.addPage([595, 842]);
+        var emblemCertificate = pdfDoc.addPage([595, 842]);
+      } else {
+        var emblemCertificate = pdfDoc.addPage([595, 842]);
+      }
+
+      const emblem_certificate_heading = `To All & Sundry whom these presents do concern\n
+              Scotland Titles does declare that`;
+
+      //Name Capital work
+
+      let emblemNameParts = propObject.p_6882555658426._Name1.split(" ");
+      console.log(emblemNameParts, "nameParts");
+      let emblemModifiedName = emblemNameParts
+        .map(
+          (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+        )
+        .join(" ");
+      console.log(emblemModifiedName, "modified name");
+
+      //two name
+      if (propObject.p_6882555658426._Title2) {
+        let emblemNamePartsTwo = propObject.p_6882555658426._Name2.split(" ");
+        console.log(emblemNamePartsTwo, "nameParts");
+        var emblemModifiedNameTwo = emblemNamePartsTwo
+          .map(
+            (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+          )
+          .join(" ");
+        console.log(emblemModifiedNameTwo, "modified name two");
+      }
+
+      const emblemCertficateUserName = `${
+        propObject.p_6882555658426._Title1
+      } ${emblemModifiedName} ${propObject.p_6882555658426._Title2 ? "&" : ""}`;
+
+      const userNametextWidth = oldEng.widthOfTextAtSize(
+        emblemCertficateUserName,
+        12
+      );
+
+      const halfOfWord = userNametextWidth / 2;
+      const startingPosition =
+        (emblemCertificate.getWidth() - userNametextWidth) / 2;
+      const x = startingPosition - halfOfWord;
+
+      const emblememblemCertficateUserNameTwo = `${
+        propObject.p_6882555658426._Title2
+          ? `${propObject.p_6882555658426._Title2} ${emblemModifiedNameTwo}`
+          : ""
+      }`;
+      const userNametextTwoWidth = oldEng.widthOfTextAtSize(
+        emblememblemCertficateUserNameTwo,
+        12
+      );
+
+      const halfOfWordTwo = userNametextTwoWidth / 2;
+      const startingPositionTwo =
+        (emblemCertificate.getWidth() - userNametextTwoWidth) / 2;
+      const xTwo = startingPositionTwo - halfOfWordTwo;
+
+      const petition = "Having By Petition";
+
+      const emblemCertificateText = `UNTO US THIS DAY IN THIS`;
+      const emblemCertificateTextTwo = `YEAR OF THE REIGN OF OUR SOVEREIGN CHARLES THE\nTHIRD, BY THE GRACE OF GOD, OF THE UNITED\nKINGDOM OF GREAT BRITAIN AND NORTHERN\nIRELAND, KING, HEAD OF THE COMMONWEALTH,\nDEFENDER OF THE FAITH\n\n`;
+
+      const Shewen = "Shewen:";
+
+      const emblemCertificateShewenText = `THAT THE SAID ${
+        propObject.p_6882555658426._Title2
+          ? "PETITIONERS HAVE"
+          : "PETITIONER HAS"
+      }`;
+      const emblemCertificateShewenTextTwo = `OWNERSHIP OF LANDS IN SCOTLAND AND THE\n${
+        propObject.p_6882555658426._Title2 ? "PETITIONERS" : "PETITIONER"
+      } HAVING PREYED THAT THERE MIGHT BE\nGRANTED UNTO THEM TO USE SUCH ENSIGNS\nARMORIAL AS MAY BE THE LAWFUL PROPERTY OF\nSCOTLAND TITLES AND MIGHT BE SUITABLE AND\nACCORDING TO THE LAWS OF ARMS, KNOW YE\nTHEREFORE THAT WE HAVE ASSIGNED, AND DO BY\nTHESE PRESENTS DECLARE, RATIFY AND CONFIRM UNTO\nTHE ${
+        propObject.p_6882555658426._Title2 ? "PETITIONERS" : "PETITIONER"
+      } THE FOLLOWING ENSIGNS ARMORIAL,\nAS DEPICTED HEREOF, AND MATRICULATED OF EVEN\nDATE WITH THESE PRESENTS AS A MARK OF THE\nINTELLECTUAL PROPERTY OF SCOTLAND TITLES, TO BE\nPRESENTED BY THE ${
+        propObject.p_6882555658426._Title2 ? "PETITIONERS" : "PETITIONER"
+      } AS THEY DEEM,\n\n`;
+
+      const videlicit = "Videlicit:";
+
+      const emblemCertificateVidelicitText = `BY DEMONSTRATION OF WHICH ENSIGNS`;
+      const emblemCertificateVidelicitTextTwo = `ARMORIAL THE SAID ${
+        propObject.p_6882555658426._Title2 ? "PETITIONERS ARE" : "PETITIONER IS"
+      }, AMONGST ALL\nNOBLES AND IN ALL PLACES OF HONOUR, TO BE\nTAKEN, NUMBERED, ACCOUNTED AND RECEIVED ${
+        propObject.p_6882555658426._Title2
+          ? "AS\nLAIRDS OF SCOTLAND,"
+          : "A\nLAIRD OF SCOTLAND,"
+      }\n\n`;
+
+      const testimony = "In Testimony Whereof:";
+
+      const emblemCertificateTestimonyText = `WE HAVE SUBSCRIBED`;
+      const emblemCertificateTestimonyTextTwo = `THESE PRESENTS AND THE SEAL OF OUR OFFICE IS\nAFFIXED HERETO AT SCOTLAND TITLES THIS DAY.\n\n`;
+
+      const further = "furthermore know ye therefore that";
+      const furtherDescription =
+        "SCOTLAND TITLES HAS SET OUT PART OF THE ESTATE BY\nBLAIRADAM FOREST KNOWN AS CANTSDAM, FIFE,\nSCOTLAND, HEREINAFTER REFERRED TO AS ‘THE\nESTATE’, AS A SCHEME OF SOUVENIR PLOTS AND";
+
+      const Scilicet = "Scilicet";
+      const scilicetSubDescription = "BY VIRTUE OF OWNERSHIP OF THE LAND IN ";
+      const ScilicetDescription = `SCOTLAND AND IN PARTICULAR THE LAND DESCRIBED\nABOVE WITHIN THE KINGDOM OF FIFE BY CANTSDAM\nAS FURTHER DESCRIBEDIN THE CERTIFICATE OF\nDISPOSITION AND PROCLAMATION, THE ${
+        propObject.p_6882555658426._Title2 ? "PETITIONERS" : "PETITIONER"
+      }\nMAY HENCEFORTH AND IN PERPETUITY BE KNOWN BY\nTHE STYLE OF ${
+        propObject.p_6882555658426._Title2 ? "LAIRDS" : "A LAIRD"
+      } AND IN PARTICULAR ${
+        propObject.p_6882555658426._Title2 ? "LAIRDS" : "LAIRD"
+      } OF\nBLAIRADAM.`;
+      //Signed content
+
+      const emblemSigned = "Signed";
+
+      const dateText = "Date";
+
+      const emblemdate = propObject.p_6882555658426._Date;
+      const emblemdateObj = new Date(emblemdate);
+      const emblemyear = emblemdateObj.getFullYear();
+      const emblemmonth = String(emblemdateObj.getMonth() + 1).padStart(2, "0"); // Adding 1 because months are 0-indexed
+      const emblemday = String(emblemdateObj.getDate()).padStart(2, "0");
+      const filePathThree = path.resolve(
+        "./public",
+        "images",
+        "certificate-stamp.png"
+      );
+
+      const imgBufferThree = fs.readFileSync(filePathThree);
+      // console.log(imgBuffer, "imgBuffer");
+      const stampImg = await pdfDoc.embedPng(imgBufferThree);
+      const stampImgPrinted = await pdfDocPrinted.embedPng(imgBufferThree);
+
+      const stampPngDims = stampImg.scale(0.3);
+      const monthNames = [
+        "JANUARY",
+        "FEBRUARY",
+        "MARCH",
+        "APRIL",
+        "MAY",
+        "JUNE",
+        "JULY",
+        "AUGUST",
+        "SEPTEMBER",
+        "OCTOBER",
+        "NOVEMBER",
+        "DECEMBER",
+      ];
+
+      const emblemmonthName = monthNames[emblemdateObj.getMonth()];
+      let dayWithSuffix;
+
+      if (emblemday >= 11 && emblemday <= 13) {
+        dayWithSuffix = `${emblemday}TH`;
+      } else {
+        switch (emblemday % 10) {
+          case 1:
+            dayWithSuffix = `${emblemday}ST`;
+            break;
+          case 2:
+            dayWithSuffix = `${emblemday}ND`;
+            break;
+          case 3:
+            dayWithSuffix = `${emblemday}RD`;
+            break;
+          default:
+            dayWithSuffix = `${emblemday}TH`;
+        }
+      }
+      const dateContent = `THIS ${dayWithSuffix} DAY OF ${emblemmonthName} IN THE YEAR ${emblemyear}`;
+      const copyright =
+        "All content, layout, artwork and illustrations copyright Scotland Titles 2021 and subject to licence";
+
+      const emblemBgPath = path.resolve("./public", "images", "emblem_bg.png");
+
+      const emblembg_Buffer = fs.readFileSync(emblemBgPath);
+
+      // console.log(imgBuffer, "imgBuffer");
+      const emblem_bg = await pdfDoc.embedPng(emblembg_Buffer);
+      //borders image
+
+      const border = path.resolve("./public", "images", "borders.jpg");
+
+      const border_Buffer = fs.readFileSync(border);
+
+      const emblem_borders = await pdfDocPrinted.embedJpg(border_Buffer);
+
+      const filePathFour = path.resolve(
+        "./public",
+        "images",
+        "certificate-mid.png"
+      );
+
+      const imgBufferFour = fs.readFileSync(filePathFour);
+      const certificateMid = await pdfDoc.embedPng(imgBufferFour);
+
+      const certificateMidPrinted = await pdfDocPrinted.embedPng(imgBufferFour);
+
+      const ertificateMidpngDims = certificateMid.scale(0.3);
+
+      const emblemlogoPath = path.resolve(
+        "./public",
+        "images",
+        "emblem_logo.png"
+      );
+
+      const emblem_logo_Buffer = fs.readFileSync(emblemlogoPath);
+
+      // console.log(imgBuffer, "imgBuffer");
+      const emblem_logo = await pdfDoc.embedPng(emblem_logo_Buffer);
+
+      const emblem_logo_printed = await pdfDocPrinted.embedPng(
+        emblem_logo_Buffer
+      );
+
+      const filePath = path.resolve("./public", "images", "scotland_log.png");
+
+      const imgBuffer = fs.readFileSync(filePath);
+      const img = await pdfDoc.embedPng(imgBuffer);
+      const img_printed = await pdfDocPrinted.embedPng(imgBuffer);
+
+      const pngDims = img.scale(0.25);
+
+      const emblemsignPath = path.resolve(
+        "./public",
+        "images",
+        "g_signature.png"
+      );
+      const emblem_signature_Buffer = fs.readFileSync(emblemsignPath);
+
+      // console.log(imgBuffer, "imgBuffer");
+      const emblem_signature = await pdfDoc.embedPng(emblem_signature_Buffer);
+
+      const emblem_signature_printed = await pdfDocPrinted.embedPng(
+        emblem_signature_Buffer
+      );
+
+      if (propObject.p_6882555658426.variant.includes("Printed Pack")) {
+        var textWidth = emblemCertificatePrinted.getWidth() - 100; // Adjust the width as needed
+        var textHeight = emblemCertificatePrinted.getHeight() - 50;
+      } else {
+        var textWidth = emblemCertificate.getWidth() - 100; // Adjust the width as needed
+        var textHeight = emblemCertificate.getHeight() - 50;
+      }
+
+      //========================Printed Emblem Page Start===========================
+
+      if (propObject.p_6882555658426.variant.includes("Printed Pack")) {
+        emblemCertificatePrinted.drawImage(emblem_borders, {
+          y: 790,
+          width: emblemCertificatePrinted.getWidth(),
+          height: 70,
+        });
+
+        emblemCertificatePrinted.drawImage(certificateMidPrinted, {
+          x: 250,
+          y: propObject.p_6882555658426._Title2 ? 610 : 630,
+          width: ertificateMidpngDims.width,
+          height: ertificateMidpngDims.height,
+        });
+
+        emblemCertificatePrinted.drawImage(img_printed, {
+          x: 40,
+          y: 710,
+          width: pngDims.width,
+          height: pngDims.height,
+        });
+
+        emblemCertificatePrinted.drawImage(stampImgPrinted, {
+          x: 490,
+          y: 70,
+          width: stampPngDims.width,
+          height: stampPngDims.height,
+        });
+
+        emblemCertificatePrinted.drawText(emblem_certificate_heading, {
+          x: 150,
+          y: 730,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(emblemCertficateUserName, {
+          // x: 200,
+          x: x,
+          y: 670,
+          width: textWidth,
+          height: textHeight,
+          size: 26,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(emblememblemCertficateUserNameTwo, {
+          // x: 200,
+          x: xTwo,
+          y: 640,
+          width: textWidth,
+          height: textHeight,
+          size: 26,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(petition, {
+          x: 25,
+          y: 580,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(emblemCertificateText, {
+          x: 160,
+          y: 580,
+          width: textWidth,
+          height: textHeight,
+          size: 9,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(emblemCertificateTextTwo, {
+          x: 25,
+          y: 565,
+          width: textWidth,
+          height: textHeight,
+          size: 9,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        // //shewen text
+
+        emblemCertificatePrinted.drawText(Shewen, {
+          x: 25,
+          y: 490,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(emblemCertificateShewenText, {
+          x: 85,
+          y: 490,
+          width: textWidth,
+          height: textHeight,
+          size: 9,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(emblemCertificateShewenTextTwo, {
+          x: 25,
+          y: 475,
+          width: textWidth,
+          height: textHeight,
+          size: 9,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        // //videlict
+
+        emblemCertificatePrinted.drawText(videlicit, {
+          x: 25,
+          y: 290,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(emblemCertificateVidelicitText, {
+          x: 90,
+          y: 290,
+          width: textWidth,
+          height: textHeight,
+          size: 9,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(emblemCertificateVidelicitTextTwo, {
+          x: 25,
+          y: 275,
+          width: textWidth,
+          height: textHeight,
+          size: 9,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        // //In Testimony Whereof
+
+        emblemCertificatePrinted.drawText(testimony, {
+          x: 25,
+          y: 210,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(emblemCertificateTestimonyText, {
+          x: 180,
+          y: 210,
+          width: textWidth,
+          height: textHeight,
+          size: 9,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(emblemCertificateTestimonyTextTwo, {
+          x: 25,
+          y: 195,
+          width: textWidth,
+          height: textHeight,
+          size: 9,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        emblemCertificatePrinted.drawImage(emblem_logo_printed, {
+          x: 320,
+          y: 400,
+          height: 200,
+          width: 250,
+        });
+
+        emblemCertificatePrinted.drawText(further, {
+          x: 310,
+          y: 380,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(furtherDescription, {
+          x: 310,
+          y: 355,
+          width: textWidth,
+          height: textHeight,
+          size: 9,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(Scilicet, {
+          x: 310,
+          y: 275,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(scilicetSubDescription, {
+          x: 360,
+          y: 275,
+          width: textWidth,
+          height: textHeight,
+          size: 9,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(ScilicetDescription, {
+          x: 310,
+          y: 260,
+          width: textWidth,
+          height: textHeight,
+          size: 9,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        // //SIGNED
+        emblemCertificatePrinted.drawText(emblemSigned, {
+          x: 150,
+          y: 100,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(dateText, {
+          x: 170,
+          y: 80,
+          size: 16,
+          width: textWidth,
+          height: textHeight,
+          color: rgb(0.219, 0.337, 0.137),
+          lineHeight: fontSize * 1.2,
+          font: oldEngPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(dateContent, {
+          x: 210,
+          y: 80,
+          width: textWidth,
+          height: textHeight,
+          size: 9,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: tempusFontPrinted,
+        });
+
+        emblemCertificatePrinted.drawText(copyright, {
+          x: 190,
+          y: 70,
+          width: textWidth,
+          height: textHeight,
+          size: 6,
+          color: rgb(0, 0, 0),
+          lineHeight: fontSize * 1.2,
+          font: timesRomanFontPrinted,
+        });
+
+        emblemCertificatePrinted.drawImage(emblem_signature_printed, {
+          x: 210,
+          y: 85,
+          height: 50,
+          width: 30,
+        });
+
+        emblemCertificatePrinted.drawImage(emblem_borders, {
+          y: 0,
+          width: emblemCertificatePrinted.getWidth(),
+          height: 60,
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(200).send("An error occurred");
+    }
+  };
 
   const onlyTartan = async (propObject) => {
     // console.log(propObject, "===============propObject==================");
@@ -16149,11 +16149,11 @@ export default async function handler(req, res) {
       var tartanPackId = 1;
       var freeTartanPackId = 1;
       var freeEmblemPackId = 1;
-      var discountedEmblemPackId = 1;
+      var discountedEmblemPackedId = 1;
 
       const desiredOrder = [
         6846298849466, 6846299078842, 6846299111610, 7420325265594,
-        7434986651834,
+        7434986651834,6882555658426
       ];
       const sortedLineItems = req.body.line_items.sort((a, b) => {
         return (
@@ -16245,6 +16245,18 @@ export default async function handler(req, res) {
           };
 
           freeEmblemPackId++;
+        }else if (item.product_id == d) {
+          pId.push(item.product_id);
+          var word = item.variant_title.split(" ");
+          type = word[2];
+          typeTwo = word[3];
+          size = word[0];
+          pProperties["p_" + `${item.product_id}_${discountedEmblemPackedId}`] = {
+            variant_title: item.variant_title,
+            properties: item.properties,
+          };
+
+          discountedEmblemPackedId++;
         }
       });
       let ko = Object.keys(pProperties);
@@ -16267,6 +16279,7 @@ export default async function handler(req, res) {
       var tartanIncrement = 1;
       var freeTartanIncrement = 1;
       var freeEmblemIncrement = 1;
+      var discountEmblemIncrement = 1;
 
       for (const productId of pId) {
         if (productId == titlePackId) {
@@ -16577,6 +16590,67 @@ export default async function handler(req, res) {
           }
           // }
           freeEmblemIncrement++;
+        }else if (productId == discountedEmblemId) {
+          // for (let j = 0; j < item.quantity; j++) {
+          let resultObjectdiscountEmblemPack = {};
+          let namesArraydiscountEmblemPacks = "";
+
+          if (
+            pProperties[`p_6882555658426_${discountEmblemIncrement}`].properties
+          ) {
+            namesArraydiscountEmblemPacks = pProperties[
+              `p_6882555658426_${discountEmblemIncrement}`
+            ].properties.map((propItem, index) => propItem.name);
+            for (const obj of pProperties[
+              `p_6882555658426_${discountEmblemIncrement}`
+            ].properties) {
+              // console.log(obj, "objobj");
+              resultObjectdiscountEmblemPack[obj.name] = obj.value;
+            }
+          }
+
+          if (!namesArraydiscountEmblemPacks.includes("_Title2")) {
+            const propertiesObj = {
+              p_6882555658426: {
+                _Title1: resultObjectdiscountEmblemPack._Title1,
+                _Name1: resultObjectdiscountEmblemPack._Name1,
+                _Date: resultObjectdiscountEmblemPack._Date,
+                variant:
+                  pProperties[`p_6882555658426_${discountEmblemIncrement}`]
+                    .variant_title,
+                size: size,
+                // reference: specificIdCountFreeEmblem == 1 ? 0 : i++,
+              },
+            };
+
+            console.log(propertiesObj, "propertiesObj propertiesObj");
+            discountedonlyPrintedEmblem(propertiesObj);
+          } else {
+            const propertiesObj = {
+              p_6882555658426_: {
+                _Title1: resultObjectdiscountEmblemPack._Title1,
+                _Name1: resultObjectdiscountEmblemPack._Name1,
+                _Title2: resultObjectdiscountEmblemPack._Title2,
+                _Name2: resultObjectdiscountEmblemPack._Name2,
+                variant:
+                  pProperties[`p_6882555658426__${discountEmblemIncrement}`]
+                    .variant_title,
+
+                _Date: resultObjectdiscountEmblemPack._Date,
+
+                size: size,
+                // reference: specificIdCountFreeEmblem == 1 ? 0 : i++,
+              },
+            };
+        
+            console.log(
+              propertiesObj,
+              "propertiesObj propertiesObj double= ===="
+            );
+            discountedonlyPrintedEmblem(propertiesObj);
+          }
+          // }
+          discountEmblemIncrement++;
         }
       }
       const pdfBytes = await pdfDoc.save();
