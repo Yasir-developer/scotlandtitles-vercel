@@ -257,7 +257,7 @@ export default async function orderEmail(req, res) {
       <tr>
         <td class="v-text-align" style="padding-right: 0px;padding-left: 0px;" align="center">
           
-          <img align="center" border="0" src="${server}/images/docs.jpeg" alt="image" title="image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 600px;" width="600" class="v-src-width v-src-max-width"/>
+          <img align="center" border="0" src="${server}/images/booklet.jpg" alt="image" title="image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 600px;" width="600" class="v-src-width v-src-max-width"/>
           
         </td>
       </tr>
@@ -548,7 +548,7 @@ export default async function orderEmail(req, res) {
     await sendMail({
       to: email,
       from: "info@scotlandtitles.com",
-      subject: `Scotland Order Email`,
+      subject: `Scotland Titles - Download Your Digital Pack`,
       html: emailTemplate,
     });
 
