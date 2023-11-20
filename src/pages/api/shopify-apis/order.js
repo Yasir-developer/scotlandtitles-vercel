@@ -16914,10 +16914,6 @@ export default async function handler(req, res) {
               },
             };
 
-            console.log(
-              propertiesObj,
-              "propertiesObj propertiesObj double= ===="
-            );
             discountedonlyPrintedEmblem(propertiesObj);
           }
           // }
