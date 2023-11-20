@@ -721,7 +721,8 @@ export default async function handler(req, res) {
       }
       let text = propObject.p_6846298849466.variant;
       const myArray = text.split(" ");
-      let word = myArray[0];
+      let word = parseInt(myArray[0] * 2);
+
       const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18 N , 003°23 08 W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is ${order_number} ${
         propObject.p_6846298849466.reference != 0
           ? `- ${propObject.p_6846298849466.reference}`
@@ -4197,7 +4198,7 @@ export default async function handler(req, res) {
       }
       let text = propObject.p_7420325265594.variant;
       const myArray = text.split(" ");
-      let word = myArray[0];
+      let word = parseInt(myArray[0] * 2);
 
       const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18 N , 003°23 08 W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is ${order_number}${
         propObject.p_7420325265594.reference != 0
@@ -9254,7 +9255,7 @@ export default async function handler(req, res) {
       }
       let text = propObject.p_7434986651834.variant;
       const myArray = text.split(" ");
-      let word = myArray[0];
+      let word = parseInt(myArray[0] * 2);
 
       const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18 N , 003°23 08 W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is ${order_number}${
         propObject.p_7434986651834.reference != 0
