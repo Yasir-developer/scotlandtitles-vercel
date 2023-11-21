@@ -16899,13 +16899,13 @@ export default async function handler(req, res) {
             discountedonlyPrintedEmblem(propertiesObj);
           } else {
             const propertiesObj = {
-              p_6882555658426_: {
+              p_6882555658426: {
                 _Title1: resultObjectdiscountEmblemPack._Title1,
                 _Name1: resultObjectdiscountEmblemPack._Name1,
                 _Title2: resultObjectdiscountEmblemPack._Title2,
                 _Name2: resultObjectdiscountEmblemPack._Name2,
                 variant:
-                  pProperties[`p_6882555658426__${discountEmblemIncrement}`]
+                  pProperties[`p_6882555658426_${discountEmblemIncrement}`]
                     .variant_title,
 
                 _Date: resultObjectdiscountEmblemPack._Date,
