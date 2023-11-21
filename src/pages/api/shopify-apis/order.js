@@ -80,7 +80,7 @@ export default async function handler(req, res) {
     // });
   }
 
-  // const discountedEmblemId = 8727182868753;
+  // const discountedEmblemId = 6882555658426;
 
   const client = new ftp.Client();
 
@@ -157,7 +157,10 @@ export default async function handler(req, res) {
     try {
       if (propObject.p_6846298849466.variant.includes("Printed Pack")) {
         // console.log("Printed Pack =============");
-        if (propObject.p_6846298849466._Title2) {
+        if (
+          propObject.p_6846298849466._Title2 &&
+          propObject.p_6846298849466._Name2 != ""
+        ) {
           var page = pdfDoc.addPage([595, 842]);
           var pagetwo = pdfDoc.addPage([842, 595]);
           var deedPage = pdfDoc.addPage([595, 842]);
@@ -175,7 +178,10 @@ export default async function handler(req, res) {
           var printeddeedPage = pdfDocPrinted.addPage([595, 842]);
         }
       } else {
-        if (propObject.p_6846298849466._Title2) {
+        if (
+          propObject.p_6846298849466._Title2 &&
+          propObject.p_6846298849466._Name2 != ""
+        ) {
           var page = pdfDoc.addPage([595, 842]);
           var pagetwo = pdfDoc.addPage([842, 595]);
           var deedPage = pdfDoc.addPage([595, 842]);
@@ -220,7 +226,10 @@ export default async function handler(req, res) {
         .join(" ");
 
       //two name
-      if (propObject.p_6846298849466._Title2) {
+      if (
+        propObject.p_6846298849466._Title2 &&
+        propObject.p_6846298849466._Name2 != ""
+      ) {
         let firstPageNamePartsTwo =
           propObject.p_6846298849466._Name2.split(" ");
         var firstModifiedNameTwo = firstPageNamePartsTwo
@@ -235,7 +244,8 @@ export default async function handler(req, res) {
           ? `- ${propObject.p_6846298849466.reference}`
           : ""
       } ${propObject.p_6846298849466._Title1} ${firstPageModifiedName} ${
-        propObject.p_6846298849466._Title2
+        propObject.p_6846298849466._Title2 &&
+        propObject.p_6846298849466._Name2 != ""
           ? `\n& ${propObject.p_6846298849466._Title2} ${firstModifiedNameTwo}`
           : ""
       } of ${
@@ -494,7 +504,10 @@ export default async function handler(req, res) {
         .join(" ");
 
       //two name
-      if (propObject.p_6846298849466._Title2) {
+      if (
+        propObject.p_6846298849466._Title2 &&
+        propObject.p_6846298849466._Name2 != ""
+      ) {
         let namePartsTwo = propObject.p_6846298849466._Name2.split(" ");
         var modifiedNameTwo = namePartsTwo
           .map(
@@ -507,11 +520,20 @@ export default async function handler(req, res) {
 
       const and = "and";
       const certficateUserNameTwo = `${
-        propObject.p_6846298849466._Title2
+        propObject.p_6846298849466._Title2 &&
+        propObject.p_6846298849466._Name2 != ""
           ? propObject.p_6846298849466._Title2
           : ""
-      } ${propObject.p_6846298849466._Title2 ? modifiedNameTwo : ""} ${
-        propObject.p_6846298849466._Title2 ? `of Blairadam` : ""
+      } ${
+        propObject.p_6846298849466._Title2 &&
+        propObject.p_6846298849466._Name2 != ""
+          ? modifiedNameTwo
+          : ""
+      } ${
+        propObject.p_6846298849466._Title2 &&
+        propObject.p_6846298849466._Name2 != ""
+          ? `of Blairadam`
+          : ""
       }`;
 
       //   const emblemCertficateUserName = `${propObject.p_6846299078842._Title1} ${propObject.p_6846299078842._Name1}`;
@@ -536,9 +558,11 @@ export default async function handler(req, res) {
         certificateTwoStartingPosition - certificateTwoHalfOfWord;
 
       if (
-        !propObject.p_6846298849466._Title2 &&
-        propObject.p_6846298849466._Title1
+        // !propObject.p_6846298849466._Title2 &&
+        propObject.p_6846298849466._Title1 &&
+        propObject.p_6846298849466._Name2 == ""
       ) {
+        console.log("Single Here");
         if (propObject.p_6846298849466._Title1 == "Lord") {
           titleConditions = "LORD";
         } else if (propObject.p_6846298849466._Title1 == "Laird") {
@@ -548,8 +572,11 @@ export default async function handler(req, res) {
         }
       } else if (
         propObject.p_6846298849466._Title1 &&
-        propObject.p_6846298849466._Title2
+        propObject.p_6846298849466._Title2 &&
+        propObject.p_6846298849466._Name2 != ""
       ) {
+        console.log("Double Here");
+
         if (
           propObject.p_6846298849466._Title1 == "Lord" &&
           propObject.p_6846298849466._Title2 == "Lord"
@@ -600,7 +627,10 @@ export default async function handler(req, res) {
       const certificateAddressTwo = `(hereafter to be proclaimed as “THE ${titleConditions}”), care of Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom`;
 
       const certificateText = `The Scotland Titles Estate in Fife, Scotland, hereinafter referred to as “THE ESTATE”,\nhas been partitioned into dedicated souvenir plots of land.\n\nTHE ${titleConditions} ${
-        propObject.p_6846298849466._Title2 ? "have" : "has"
+        propObject.p_6846298849466._Title2 &&
+        propObject.p_6846298849466._Name2 != ""
+          ? "have"
+          : "has"
       } petitioned unto Scotland Titles on this day their ${
         titleConditions == "LADY AND LAIRD" ||
         titleConditions == "LAIRD AND LADY" ||
@@ -672,10 +702,16 @@ export default async function handler(req, res) {
         titleConditions == "LORD AND LADY" ||
         titleConditions == "LADY AND LORD"
           ? `\nTHE ${titleConditions} ${
-              propObject.p_6846298849466._Title2 ? "covenant" : "covenants"
+              propObject.p_6846298849466._Title2 &&
+              propObject.p_6846298849466._Name2 == ""
+                ? "covenant"
+                : "covenants"
             } not`
           : `THE ${titleConditions} ${
-              propObject.p_6846298849466._Title2 ? "covenant" : "covenants"
+              propObject.p_6846298849466._Title2 &&
+              propObject.p_6846298849466._Name2 == ""
+                ? "covenant"
+                : "covenants"
             } not\n`
       } to dispose of THE LAND in part only.\n\nScotland Titles is a trading name of Blairdam Corporation PA. Terms and Conditions,\nand this CERTIFICATE shall be governed by the Law of Scotland.`;
       const datee = propObject.p_6846298849466._Date;
@@ -722,6 +758,7 @@ export default async function handler(req, res) {
       let text = propObject.p_6846298849466.variant;
       const myArray = text.split(" ");
       let word = parseInt(myArray[0] * 2);
+      // console.log(typeof word, "typeof word-------------------------");
 
       const certificateTextTwo = `THE ESTATE location is KINGSEAT ROAD (OFF CANTSDAM ROAD),\nCANTSDAM, KELTY, FIFE, SCOTLAND KY12 0SW\n\nTHE ESTATE is recorded in the General Register of Sasines RS30-32\n\nCoordinates to the centre of THE ESTATE are;\nLatitude, Longitude in degrees 56°07${"`"}18 N , 003°23 08 W\nX Easting 313956 , Y Northing 692954\n\nThe Plot Number of THE LAND within THE ESTATE is ${order_number} ${
         propObject.p_6846298849466.reference != 0
@@ -735,7 +772,11 @@ export default async function handler(req, res) {
 
       pagetwo.drawImage(yellow_middle, {
         x: 380,
-        y: propObject.p_6846298849466._Title2 ? 385 : 405,
+        y:
+          propObject.p_6846298849466._Title2 &&
+          propObject.p_6846298849466._Name2 != ""
+            ? 385
+            : 405,
         width: ertificateMidpngDims.width,
         height: ertificateMidpngDims.height,
       });
@@ -824,6 +865,7 @@ export default async function handler(req, res) {
       });
       {
         propObject.p_6846298849466._Title2 &&
+          propObject.p_6846298849466._Name2 != "" &&
           pagetwo.drawText(and, {
             x: 400,
             y: 460,
@@ -848,7 +890,11 @@ export default async function handler(req, res) {
       }
       pagetwo.drawText(certificateAddressTwo, {
         x: 195,
-        y: propObject.p_6846298849466._Title2 ? 415 : 450,
+        y:
+          propObject.p_6846298849466._Title2 &&
+          propObject.p_6846298849466._Name2 != ""
+            ? 415
+            : 450,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -932,7 +978,10 @@ export default async function handler(req, res) {
         .join(" ");
 
       //two name
-      if (propObject.p_6846298849466._Title2) {
+      if (
+        propObject.p_6846298849466._Title2 &&
+        propObject.p_6846298849466._Name2 != ""
+      ) {
         let deedNamePartsTwo = propObject.p_6846298849466._Name2.split(" ");
         var deedModifiedNameTwo = deedNamePartsTwo
           .map(
@@ -1553,7 +1602,10 @@ export default async function handler(req, res) {
       });
 
       //master deed page two
-      if (propObject.p_6846298849466._Title2) {
+      if (
+        propObject.p_6846298849466._Title2 &&
+        propObject.p_6846298849466._Name2 != ""
+      ) {
         positions.forEach((position) => {
           deedPageTwo.drawText(`${formerTitle}.`, {
             x: position.x,
@@ -1576,7 +1628,10 @@ export default async function handler(req, res) {
           .join(" ");
 
         //two name
-        if (propObject.p_6846298849466._Title2) {
+        if (
+          propObject.p_6846298849466._Title2 &&
+          propObject.p_6846298849466._Name2 != ""
+        ) {
           let deedNamePartsTwo = propObject.p_6846298849466._Name2.split(" ");
           var deedModifiedNameTwo = deedNamePartsTwo
             .map(
@@ -2310,7 +2365,11 @@ export default async function handler(req, res) {
         });
         printedpagetwo.drawImage(yellow_middle_printed, {
           x: 380,
-          y: propObject.p_6846298849466._Title2 ? 385 : 405,
+          y:
+            propObject.p_6846298849466._Title2 &&
+            propObject.p_6846298849466._Name2 != ""
+              ? 385
+              : 405,
           width: ertificateMidpngDims.width,
           height: ertificateMidpngDims.height,
         });
@@ -2398,6 +2457,7 @@ export default async function handler(req, res) {
         });
         {
           propObject.p_6846298849466._Title2 &&
+            propObject.p_6846298849466._Name2 != "" &&
             printedpagetwo.drawText(and, {
               x: 400,
               y: 460,
@@ -2422,7 +2482,11 @@ export default async function handler(req, res) {
         }
         printedpagetwo.drawText(certificateAddressTwo, {
           x: 195,
-          y: propObject.p_6846298849466._Title2 ? 415 : 450,
+          y:
+            propObject.p_6846298849466._Title2 &&
+            propObject.p_6846298849466._Name2 != ""
+              ? 415
+              : 450,
           width: textWidth,
           height: textHeight,
           size: 10,
@@ -3013,7 +3077,10 @@ export default async function handler(req, res) {
           thickness: underlineHeight,
         });
 
-        if (propObject.p_6846298849466._Title2) {
+        if (
+          propObject.p_6846298849466._Title2 &&
+          propObject.p_6846298849466._Name2 != ""
+        ) {
           positions.forEach((position) => {
             printeddeedPageTwo.drawText(`${formerTitle}.`, {
               x: position.x,
@@ -3615,7 +3682,10 @@ export default async function handler(req, res) {
     try {
       if (propObject.p_7420325265594.variant.includes("Printed Pack")) {
         var type = true;
-        if (propObject.p_7420325265594._Title2) {
+        if (
+          propObject.p_7420325265594._Title2 &&
+          propObject.p_7420325265594._Name2 != ""
+        ) {
           var page = pdfDoc.addPage([595, 842]);
           var pagetwo = pdfDoc.addPage([842, 595]);
           var deedPage = pdfDoc.addPage([595, 842]);
@@ -3642,7 +3712,10 @@ export default async function handler(req, res) {
         }
       } else {
         type = false;
-        if (propObject.p_7420325265594._Title2) {
+        if (
+          propObject.p_7420325265594._Title2 &&
+          propObject.p_7420325265594._Name2 != ""
+        ) {
           var page = pdfDoc.addPage([595, 842]);
           var pagetwo = pdfDoc.addPage([842, 595]);
           var deedPage = pdfDoc.addPage([595, 842]);
@@ -3693,7 +3766,10 @@ export default async function handler(req, res) {
         .join(" ");
 
       //two name
-      if (propObject.p_7420325265594._Title2) {
+      if (
+        propObject.p_7420325265594._Title2 &&
+        propObject.p_7420325265594._Name2 != ""
+      ) {
         let firstPageNamePartsTwo =
           propObject.p_7420325265594._Name2.split(" ");
         var firstModifiedNameTwo = firstPageNamePartsTwo
@@ -3708,7 +3784,8 @@ export default async function handler(req, res) {
           ? `- ${propObject.p_7420325265594.reference}`
           : ""
       } ${propObject.p_7420325265594._Title1} ${firstPageModifiedName} ${
-        propObject.p_7420325265594._Title2
+        propObject.p_7420325265594._Title2 &&
+        propObject.p_7420325265594._Name2 != ""
           ? `\n& ${propObject.p_7420325265594._Title2} ${firstModifiedNameTwo}`
           : ""
       } of ${
@@ -3967,7 +4044,10 @@ export default async function handler(req, res) {
         .join(" ");
 
       //two name
-      if (propObject.p_7420325265594._Title2) {
+      if (
+        propObject.p_7420325265594._Title2 &&
+        propObject.p_7420325265594._Name2 != ""
+      ) {
         let namePartsTwo = propObject.p_7420325265594._Name2.split(" ");
         var modifiedNameTwo = namePartsTwo
           .map(
@@ -3980,11 +4060,20 @@ export default async function handler(req, res) {
 
       // const and = "and";
       const certficateUserNameTwo = `${
-        propObject.p_7420325265594._Title2
+        propObject.p_7420325265594._Title2 &&
+        propObject.p_7420325265594._Name2 != ""
           ? propObject.p_7420325265594._Title2
           : ""
-      } ${propObject.p_7420325265594._Title2 ? modifiedNameTwo : ""} ${
-        propObject.p_7420325265594._Title2 ? `of Blairadam` : ""
+      } ${
+        propObject.p_7420325265594._Title2 &&
+        propObject.p_7420325265594._Name2 != ""
+          ? modifiedNameTwo
+          : ""
+      } ${
+        propObject.p_7420325265594._Title2 &&
+        propObject.p_7420325265594._Name2 != ""
+          ? `of Blairadam`
+          : ""
       }`;
 
       const and = "and";
@@ -4013,9 +4102,10 @@ export default async function handler(req, res) {
       // var titleConditions = "";
 
       if (
-        !propObject.p_7420325265594._Title2 &&
-        propObject.p_7420325265594._Title1
+        propObject.p_7420325265594._Title1 &&
+        propObject.p_7420325265594._Name2 == ""
       ) {
+        console.log("single here");
         if (propObject.p_7420325265594._Title1 == "Lord") {
           titleConditions = "LORD";
         } else if (propObject.p_7420325265594._Title1 == "Laird") {
@@ -4025,8 +4115,11 @@ export default async function handler(req, res) {
         }
       } else if (
         propObject.p_7420325265594._Title1 &&
-        propObject.p_7420325265594._Title2
+        propObject.p_7420325265594._Title2 &&
+        propObject.p_7420325265594._Name2 != ""
       ) {
+        console.log("Double here");
+
         if (
           propObject.p_7420325265594._Title1 == "Lord" &&
           propObject.p_7420325265594._Title2 == "Lord"
@@ -4077,7 +4170,10 @@ export default async function handler(req, res) {
       const certificateAddressTwo = `(hereafter to be proclaimed as “THE ${titleConditions}”), care of Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom`;
 
       const certificateText = `The Scotland Titles Estate in Fife, Scotland, hereinafter referred to as “THE ESTATE”,\nhas been partitioned into dedicated souvenir plots of land.\n\nTHE ${titleConditions} ${
-        propObject.p_7420325265594._Title2 ? "have" : "has"
+        propObject.p_7420325265594._Title2 &&
+        propObject.p_7420325265594._Name2 != ""
+          ? "have"
+          : "has"
       } petitioned unto Scotland Titles on this day their ${
         titleConditions == "LADY AND LAIRD" ||
         titleConditions == "LAIRD AND LADY" ||
@@ -4149,10 +4245,16 @@ export default async function handler(req, res) {
         titleConditions == "LORD AND LADY" ||
         titleConditions == "LADY AND LORD"
           ? `\nTHE ${titleConditions} ${
-              propObject.p_7420325265594._Title2 ? "covenant" : "covenants"
+              propObject.p_7420325265594._Title2 &&
+              propObject.p_7420325265594._Name2 == ""
+                ? "covenant"
+                : "covenants"
             } not`
           : `THE ${titleConditions} ${
-              propObject.p_7420325265594._Title2 ? "covenant" : "covenants"
+              propObject.p_7420325265594._Title2 &&
+              propObject.p_7420325265594._Name2 == ""
+                ? "covenant"
+                : "covenants"
             } not\n`
       } to dispose of THE LAND in part only.\n\nScotland Titles is a trading name of Blairdam Corporation PA. Terms and Conditions,\nand this CERTIFICATE shall be governed by the Law of Scotland.`;
       const datee = propObject.p_7420325265594._Date;
@@ -4212,7 +4314,11 @@ export default async function handler(req, res) {
 
       pagetwo.drawImage(yellow_middle, {
         x: 380,
-        y: propObject.p_7420325265594._Title2 ? 385 : 405,
+        y:
+          propObject.p_7420325265594._Title2 &&
+          propObject.p_7420325265594._Name2 != ""
+            ? 385
+            : 405,
         width: ertificateMidpngDims.width,
         height: ertificateMidpngDims.height,
       });
@@ -4300,6 +4406,7 @@ export default async function handler(req, res) {
       });
       {
         propObject.p_7420325265594._Title2 &&
+          propObject.p_7420325265594._Name2 != "" &&
           pagetwo.drawText(and, {
             x: 400,
             y: 460,
@@ -4324,7 +4431,11 @@ export default async function handler(req, res) {
       }
       pagetwo.drawText(certificateAddressTwo, {
         x: 195,
-        y: propObject.p_7420325265594._Title2 ? 415 : 450,
+        y:
+          propObject.p_7420325265594._Title2 &&
+          propObject.p_7420325265594._Name2 != ""
+            ? 415
+            : 450,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -4408,7 +4519,10 @@ export default async function handler(req, res) {
         .join(" ");
 
       //two name
-      if (propObject.p_7420325265594._Title2) {
+      if (
+        propObject.p_7420325265594._Title2 &&
+        propObject.p_7420325265594._Name2 != ""
+      ) {
         let deedNamePartsTwo = propObject.p_7420325265594._Name2.split(" ");
         var deedModifiedNameTwo = deedNamePartsTwo
           .map(
@@ -5021,7 +5135,10 @@ export default async function handler(req, res) {
       });
 
       //master deed page two
-      if (propObject.p_7420325265594._Title2) {
+      if (
+        propObject.p_7420325265594._Title2 &&
+        propObject.p_7420325265594._Name2 != ""
+      ) {
         positions.forEach((position) => {
           deedPageTwo.drawText(`${formerTitle}.`, {
             x: position.x,
@@ -5610,7 +5727,10 @@ export default async function handler(req, res) {
         });
       }
 
-      if (propObject.p_7420325265594._Title2) {
+      if (
+        propObject.p_7420325265594._Title2 &&
+        propObject.p_7420325265594._Name2 != ""
+      ) {
         positions.forEach((position) => {
           deedPageTwo.drawText(`${formerTitle}.`, {
             x: position.x,
@@ -6215,7 +6335,10 @@ export default async function handler(req, res) {
         .join(" ");
 
       //two name
-      if (propObject.p_7420325265594._Title2) {
+      if (
+        propObject.p_7420325265594._Title2 &&
+        propObject.p_7420325265594._Name2 != ""
+      ) {
         let tartanNamePartsTwo = propObject.p_7420325265594._Name2.split(" ");
         var tartanModifiedNameTwo = tartanNamePartsTwo
           .map(
@@ -6226,7 +6349,12 @@ export default async function handler(req, res) {
 
       const tartanCertficateUserName = `${
         propObject.p_7420325265594._Title1
-      } ${tartanModifiedName} ${propObject.p_7420325265594._Title2 ? "&" : ""}`;
+      } ${tartanModifiedName} ${
+        propObject.p_7420325265594._Title2 &&
+        propObject.p_7420325265594._Name2 != ""
+          ? "&"
+          : ""
+      }`;
       const userNametextWidth = oldEng.widthOfTextAtSize(
         tartanCertficateUserName,
         12
@@ -6238,7 +6366,8 @@ export default async function handler(req, res) {
       const x = startingPosition - halfOfWord;
 
       const tartanCertficateUserNameTwo = `${
-        propObject.p_7420325265594._Title2
+        propObject.p_7420325265594._Title2 &&
+        propObject.p_7420325265594._Name2 != ""
           ? `${propObject.p_7420325265594._Title2} ${tartanModifiedNameTwo}`
           : ""
       }`;
@@ -6253,7 +6382,10 @@ export default async function handler(req, res) {
         (tartanCertificate.getWidth() - tartanuserNameTwotextWidth) / 2;
       const tartanTwox = tartanStartingPositionTwo - tartanHalfOfWordTwo;
       const declare = `${
-        propObject.p_7420325265594._Title2 ? "Do" : "Does"
+        propObject.p_7420325265594._Title2 &&
+        propObject.p_7420325265594._Name2 == ""
+          ? "Do"
+          : "Does"
       } Declare`;
       const Allegiance = "Clan Allegiance";
       const prey = "and Prey to Wear";
@@ -6268,15 +6400,24 @@ export default async function handler(req, res) {
 
       const tartanCertificateknowText = `that the said by virtue of ownership`;
       const tartanCertificateknowTextTwo = `of Land in Scotland and in particular the Land within the\nKingdom of Fife by Cantsdam as described in the Disposition\nand Certificate of Sale, the ${
-        propObject.p_7420325265594._Title2 ? "Petitioner are" : "Petitioner is"
+        propObject.p_7420325265594._Title2 &&
+        propObject.p_7420325265594._Name2 != ""
+          ? "Petitioner are"
+          : "Petitioner is"
       } henceforth and in\nperpetuity amongst all nobles and in all places of honour, to\nbe taken, numbered, accounted and received as a ${
-        propObject.p_7420325265594._Title2 ? "Lairds" : "Laird"
+        propObject.p_7420325265594._Title2 &&
+        propObject.p_7420325265594._Name2 != ""
+          ? "Lairds"
+          : "Laird"
       } of\nScotland,\n\n`;
 
       const Therefore = "Know Ye Therefore";
 
       const tartanCertificateThereforeText = `that the ${
-        propObject.p_7420325265594._Title2 ? "Petitioners" : "Petitioner"
+        propObject.p_7420325265594._Title2 &&
+        propObject.p_7420325265594._Name2 != ""
+          ? "Petitioners"
+          : "Petitioner"
       } having preyed`;
       const tartanCertificateThereforeTextTwo = `that there might be granted unto them to use such Scottish\nTartan as set in law during the dress act of 1746 as repealed in\n1782 and thereinafter adopted, acknowledged and recognised\nas the symbolic National Dress of Scotland,\n\n`;
 
@@ -6284,9 +6425,15 @@ export default async function handler(req, res) {
 
       const tartanCertificateScotlantTilesText = `has assigned, and do`;
       const tartanCertificateScotlantTilesTextTwo = `by these presents assign, ratify and confirm unto the ${
-        propObject.p_7420325265594._Title2 ? "Petitioners" : "Petitioner"
+        propObject.p_7420325265594._Title2 &&
+        propObject.p_7420325265594._Name2 != ""
+          ? "Petitioners"
+          : "Petitioner"
       }\nthe following ensemble robes in such tartan as is depicted\nupon the margin sinister hereof, and award unto the\n${
-        propObject.p_7420325265594._Title2 ? "Petitioners" : "Petitioner"
+        propObject.p_7420325265594._Title2 &&
+        propObject.p_7420325265594._Name2 != ""
+          ? "Petitioners"
+          : "Petitioner"
       } the rights to use, wear, display and earasay such\nregistered Scottish Tartan in exchange for their sworn\nallegiance to the Clan of Scotland,\n\n`;
 
       const Tartan = "Videlicet such Tartan";
@@ -6297,9 +6444,15 @@ export default async function handler(req, res) {
 
       const demonstrationText = " which ensemble robes the said";
       const demonstrationTextTwo = `${
-        propObject.p_7420325265594._Title2 ? "Petitioner are" : "Petitioner is"
+        propObject.p_7420325265594._Title2 &&
+        propObject.p_7420325265594._Name2 != ""
+          ? "Petitioner are"
+          : "Petitioner is"
       }, amongst all nobles and in all places of honour, to\nbe received as a ${
-        propObject.p_7420325265594._Title2 ? "Lairds" : "Laird"
+        propObject.p_7420325265594._Title2 &&
+        propObject.p_7420325265594._Name2 != ""
+          ? "Lairds"
+          : "Laird"
       } of Scotland,`; //Signed content
 
       const tartanFurther = "Furthermore by ownership";
@@ -6440,7 +6593,11 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(declare, {
         x: 250,
-        y: propObject.p_7420325265594._Title2 ? 665 : 690,
+        y:
+          propObject.p_7420325265594._Title2 &&
+          propObject.p_7420325265594._Name2 != ""
+            ? 665
+            : 690,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -6451,7 +6608,11 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(Allegiance, {
         x: 50,
-        y: propObject.p_7420325265594._Title2 ? 640 : 660,
+        y:
+          propObject.p_7420325265594._Title2 &&
+          propObject.p_7420325265594._Name2 != ""
+            ? 640
+            : 660,
         size: 26,
         width: textWidth,
         height: textHeight,
@@ -6462,7 +6623,11 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(prey, {
         x: 230,
-        y: propObject.p_7420325265594._Title2 ? 640 : 660,
+        y:
+          propObject.p_7420325265594._Title2 &&
+          propObject.p_7420325265594._Name2 != ""
+            ? 640
+            : 660,
         size: 18,
         width: textWidth,
         height: textHeight,
@@ -6473,7 +6638,11 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(certified, {
         x: 370,
-        y: propObject.p_7420325265594._Title2 ? 640 : 660,
+        y:
+          propObject.p_7420325265594._Title2 &&
+          propObject.p_7420325265594._Name2 != ""
+            ? 640
+            : 660,
         size: 26,
         width: textWidth,
         height: textHeight,
@@ -6485,7 +6654,11 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawImage(certificateMid, {
         x: 230,
-        y: propObject.p_7420325265594._Title2 ? 600 : 610,
+        y:
+          propObject.p_7420325265594._Title2 &&
+          propObject.p_7420325265594._Name2 != ""
+            ? 600
+            : 610,
         width: ertificateMidpngDims.width,
         height: ertificateMidpngDims.height,
       });
@@ -6950,7 +7123,11 @@ export default async function handler(req, res) {
         });
         printedpagetwo.drawImage(yellow_middle_printed, {
           x: 380,
-          y: propObject.p_7420325265594._Title2 ? 385 : 405,
+          y:
+            propObject.p_7420325265594._Title2 &&
+            propObject.p_7420325265594._Name2 != ""
+              ? 385
+              : 405,
           width: ertificateMidpngDims.width,
           height: ertificateMidpngDims.height,
         });
@@ -7038,6 +7215,7 @@ export default async function handler(req, res) {
         });
         {
           propObject.p_7420325265594._Title2 &&
+            propObject.p_7420325265594._Name2 != "" &&
             printedpagetwo.drawText(and, {
               x: 400,
               y: 460,
@@ -7062,7 +7240,11 @@ export default async function handler(req, res) {
         }
         printedpagetwo.drawText(certificateAddressTwo, {
           x: 195,
-          y: propObject.p_7420325265594._Title2 ? 415 : 450,
+          y:
+            propObject.p_7420325265594._Title2 &&
+            propObject.p_7420325265594._Name2 != ""
+              ? 415
+              : 450,
           width: textWidth,
           height: textHeight,
           size: 10,
@@ -7653,7 +7835,10 @@ export default async function handler(req, res) {
           thickness: underlineHeight,
         });
 
-        if (propObject.p_7420325265594._Title2) {
+        if (
+          propObject.p_7420325265594._Title2 &&
+          propObject.p_7420325265594._Name2 != ""
+        ) {
           positions.forEach((position) => {
             printeddeedPageTwo.drawText(`${formerTitle}.`, {
               x: position.x,
@@ -8294,7 +8479,11 @@ export default async function handler(req, res) {
 
         tartanCertificatePrinted.drawText(declare, {
           x: 250,
-          y: propObject.p_7420325265594._Title2 ? 665 : 690,
+          y:
+            propObject.p_7420325265594._Title2 &&
+            propObject.p_7420325265594._Name2 != ""
+              ? 665
+              : 690,
           size: 16,
           width: textWidth,
           height: textHeight,
@@ -8305,7 +8494,11 @@ export default async function handler(req, res) {
 
         tartanCertificatePrinted.drawText(Allegiance, {
           x: 50,
-          y: propObject.p_7420325265594._Title2 ? 640 : 660,
+          y:
+            propObject.p_7420325265594._Title2 &&
+            propObject.p_7420325265594._Name2 != ""
+              ? 640
+              : 660,
           size: 26,
           width: textWidth,
           height: textHeight,
@@ -8316,7 +8509,11 @@ export default async function handler(req, res) {
 
         tartanCertificatePrinted.drawText(prey, {
           x: 230,
-          y: propObject.p_7420325265594._Title2 ? 640 : 660,
+          y:
+            propObject.p_7420325265594._Title2 &&
+            propObject.p_7420325265594._Name2 != ""
+              ? 640
+              : 660,
           size: 18,
           width: textWidth,
           height: textHeight,
@@ -8327,7 +8524,11 @@ export default async function handler(req, res) {
 
         tartanCertificatePrinted.drawText(certified, {
           x: 370,
-          y: propObject.p_7420325265594._Title2 ? 640 : 660,
+          y:
+            propObject.p_7420325265594._Title2 &&
+            propObject.p_7420325265594._Name2 != ""
+              ? 640
+              : 660,
           size: 26,
           width: textWidth,
           height: textHeight,
@@ -8339,7 +8540,11 @@ export default async function handler(req, res) {
 
         tartanCertificatePrinted.drawImage(certificateMidPrinted, {
           x: 230,
-          y: propObject.p_7420325265594._Title2 ? 600 : 610,
+          y:
+            propObject.p_7420325265594._Title2 &&
+            propObject.p_7420325265594._Name2 != ""
+              ? 600
+              : 610,
           width: ertificateMidpngDims.width,
           height: ertificateMidpngDims.height,
         });
@@ -8673,7 +8878,10 @@ export default async function handler(req, res) {
 
     try {
       if (propObject.p_7434986651834.variant.includes("Printed Pack")) {
-        if (propObject.p_7434986651834._Title2) {
+        if (
+          propObject.p_7434986651834._Title2 &&
+          propObject.p_7434986651834._Name2 != ""
+        ) {
           var page = pdfDoc.addPage([595, 842]);
           var pagetwo = pdfDoc.addPage([842, 595]);
           var deedPage = pdfDoc.addPage([595, 842]);
@@ -8698,7 +8906,10 @@ export default async function handler(req, res) {
         }
       } else {
         // type = false;
-        if (propObject.p_7434986651834._Title2) {
+        if (
+          propObject.p_7434986651834._Title2 &&
+          propObject.p_7434986651834._Name2 != ""
+        ) {
           console.log("herrrrrrrrrrrrreeeeee");
           var page = pdfDoc.addPage([595, 842]);
           var pagetwo = pdfDoc.addPage([842, 595]);
@@ -8745,7 +8956,10 @@ export default async function handler(req, res) {
         .join(" ");
 
       //two name
-      if (propObject.p_7434986651834._Title2) {
+      if (
+        propObject.p_7434986651834._Title2 &&
+        propObject.p_7434986651834._Name2 != ""
+      ) {
         let firstPageNamePartsTwo =
           propObject.p_7434986651834._Name2.split(" ");
         var firstPageModifiedNameTwo = firstPageNamePartsTwo
@@ -8763,7 +8977,8 @@ export default async function handler(req, res) {
         // propObject.p_7434986651834._Name1
         firstPageModifiedName
       } ${
-        propObject.p_7434986651834._Title2
+        propObject.p_7434986651834._Title2 &&
+        propObject.p_7434986651834._Name2 != ""
           ? `\n& ${propObject.p_7434986651834._Title2} ${firstPageModifiedNameTwo}`
           : ""
       } of ${
@@ -9021,7 +9236,10 @@ export default async function handler(req, res) {
         .join(" ");
 
       //two name
-      if (propObject.p_7434986651834._Title2) {
+      if (
+        propObject.p_7434986651834._Title2 &&
+        propObject.p_7434986651834._Name2 != ""
+      ) {
         let namePartsTwo = propObject.p_7434986651834._Name2.split(" ");
         if (propObject.p_7434986651834._Title2) {
           var modifiedNameTwo = namePartsTwo
@@ -9037,11 +9255,20 @@ export default async function handler(req, res) {
 
       // const and = "and";
       const certficateUserNameTwo = `${
-        propObject.p_7434986651834._Title2
+        propObject.p_7434986651834._Title2 &&
+        propObject.p_7434986651834._Name2 != ""
           ? propObject.p_7434986651834._Title2
           : ""
-      } ${propObject.p_7434986651834._Title2 ? modifiedNameTwo : ""} ${
-        propObject.p_7434986651834._Title2 ? `of Blairadam` : ""
+      } ${
+        propObject.p_7434986651834._Title2 &&
+        propObject.p_7434986651834._Name2 != ""
+          ? modifiedNameTwo
+          : ""
+      } ${
+        propObject.p_7434986651834._Title2 &&
+        propObject.p_7434986651834._Name2 != ""
+          ? `of Blairadam`
+          : ""
       }`;
 
       const and = "and";
@@ -9070,8 +9297,8 @@ export default async function handler(req, res) {
       // var titleConditions = "";
 
       if (
-        !propObject.p_7434986651834._Title2 &&
-        propObject.p_7434986651834._Title1
+        propObject.p_7434986651834._Title1 &&
+        propObject.p_7434986651834._Name2 == ""
       ) {
         if (propObject.p_7434986651834._Title1 == "Lord") {
           titleConditions = "LORD";
@@ -9082,7 +9309,8 @@ export default async function handler(req, res) {
         }
       } else if (
         propObject.p_7434986651834._Title1 &&
-        propObject.p_7434986651834._Title2
+        propObject.p_7434986651834._Title2 &&
+        propObject.p_7434986651834._Name2 != ""
       ) {
         if (
           propObject.p_7434986651834._Title1 == "Lord" &&
@@ -9134,7 +9362,10 @@ export default async function handler(req, res) {
       const certificateAddressTwo = `(hereafter to be proclaimed as “THE ${titleConditions}”), care of Unit 61892, PO Box 26965, Glasgow G1 9BW United Kingdom`;
 
       const certificateText = `The Scotland Titles Estate in Fife, Scotland, hereinafter referred to as “THE ESTATE”,\nhas been partitioned into dedicated souvenir plots of land.\n\nTHE ${titleConditions} ${
-        propObject.p_7434986651834._Title2 ? "have" : "has"
+        propObject.p_7434986651834._Title2 &&
+        propObject.p_7434986651834._Name2 != ""
+          ? "have"
+          : "has"
       } petitioned unto Scotland Titles on this day their ${
         titleConditions == "LADY AND LAIRD" ||
         titleConditions == "LAIRD AND LADY" ||
@@ -9206,10 +9437,16 @@ export default async function handler(req, res) {
         titleConditions == "LORD AND LADY" ||
         titleConditions == "LADY AND LORD"
           ? `\nTHE ${titleConditions} ${
-              propObject.p_7434986651834._Title2 ? "covenant" : "covenants"
+              propObject.p_7434986651834._Title2 &&
+              propObject.p_7434986651834._Name2 == ""
+                ? "covenant"
+                : "covenants"
             } not`
           : `THE ${titleConditions} ${
-              propObject.p_7434986651834._Title2 ? "covenant" : "covenants"
+              propObject.p_7434986651834._Title2 &&
+              propObject.p_7434986651834._Name2 == ""
+                ? "covenant"
+                : "covenants"
             } not\n`
       } to dispose of THE LAND in part only.\n\nScotland Titles is a trading name of Blairdam Corporation PA. Terms and Conditions,\nand this CERTIFICATE shall be governed by the Law of Scotland.`;
       const datee = propObject.p_7434986651834._Date;
@@ -9269,7 +9506,11 @@ export default async function handler(req, res) {
 
       pagetwo.drawImage(yellow_middle, {
         x: 380,
-        y: propObject.p_7434986651834._Title2 ? 385 : 405,
+        y:
+          propObject.p_7434986651834._Title2 &&
+          propObject.p_7434986651834._Name2 != ""
+            ? 385
+            : 405,
         width: ertificateMidpngDims.width,
         height: ertificateMidpngDims.height,
       });
@@ -9358,6 +9599,7 @@ export default async function handler(req, res) {
       });
       {
         propObject.p_7434986651834._Title2 &&
+          propObject.p_7434986651834._Name2 != "" &&
           pagetwo.drawText(and, {
             x: 400,
             y: 460,
@@ -9382,7 +9624,11 @@ export default async function handler(req, res) {
       }
       pagetwo.drawText(certificateAddressTwo, {
         x: 195,
-        y: propObject.p_7434986651834._Title2 ? 415 : 450,
+        y:
+          propObject.p_7434986651834._Title2 &&
+          propObject.p_7434986651834._Name2 != ""
+            ? 415
+            : 450,
         width: textWidth,
         height: textHeight,
         size: 10,
@@ -9466,7 +9712,10 @@ export default async function handler(req, res) {
         .join(" ");
 
       //two name
-      if (propObject.p_7434986651834._Title2) {
+      if (
+        propObject.p_7434986651834._Title2 &&
+        propObject.p_7434986651834._Name2 != ""
+      ) {
         let deedNamePartsTwo = propObject.p_7434986651834._Name2.split(" ");
         var deedModifiedNameTwo = deedNamePartsTwo
           .map(
@@ -10114,7 +10363,10 @@ export default async function handler(req, res) {
       });
 
       //master deed page two
-      if (propObject.p_7434986651834._Title2) {
+      if (
+        propObject.p_7434986651834._Title2 &&
+        propObject.p_7434986651834._Name2 != ""
+      ) {
         positions.forEach((position) => {
           deedPageTwo.drawText(`${formerTitle}.`, {
             x: position.x,
@@ -10714,7 +10966,10 @@ export default async function handler(req, res) {
         });
       }
 
-      if (propObject.p_7434986651834._Title2) {
+      if (
+        propObject.p_7434986651834._Title2 &&
+        propObject.p_7434986651834._Name2 != ""
+      ) {
         positions.forEach((position) => {
           deedPageTwo.drawText(`${formerTitle}.`, {
             x: position.x,
@@ -11456,7 +11711,11 @@ export default async function handler(req, res) {
         });
         printedpagetwo.drawImage(yellow_middle_printed, {
           x: 380,
-          y: propObject.p_7434986651834._Title2 ? 385 : 405,
+          y:
+            propObject.p_7434986651834._Title2 &&
+            propObject.p_7434986651834._Name2 != ""
+              ? 385
+              : 405,
           width: ertificateMidpngDims.width,
           height: ertificateMidpngDims.height,
         });
@@ -11544,6 +11803,7 @@ export default async function handler(req, res) {
         });
         {
           propObject.p_7434986651834._Title2 &&
+            propObject.p_7434986651834._Name2 != "" &&
             printedpagetwo.drawText(and, {
               x: 400,
               y: 460,
@@ -11568,7 +11828,11 @@ export default async function handler(req, res) {
         }
         printedpagetwo.drawText(certificateAddressTwo, {
           x: 195,
-          y: propObject.p_7434986651834._Title2 ? 415 : 450,
+          y:
+            propObject.p_7434986651834._Title2 &&
+            propObject.p_7434986651834._Name2 != ""
+              ? 415
+              : 450,
           width: textWidth,
           height: textHeight,
           size: 10,
@@ -12159,7 +12423,10 @@ export default async function handler(req, res) {
           thickness: underlineHeight,
         });
 
-        if (propObject.p_7434986651834._Title2) {
+        if (
+          propObject.p_7434986651834._Title2 &&
+          propObject.p_7434986651834._Name2 != ""
+        ) {
           positions.forEach((position) => {
             printeddeedPageTwo.drawText(`${formerTitle}.`, {
               x: position.x,
@@ -12764,7 +13031,10 @@ export default async function handler(req, res) {
         .join(" ");
 
       //two name
-      if (propObject.p_7434986651834._Title2) {
+      if (
+        propObject.p_7434986651834._Title2 &&
+        propObject.p_7434986651834._Name2 != ""
+      ) {
         let emblemNamePartsTwo = propObject.p_7434986651834._Name2.split(" ");
         var emblemModifiedNameTwo = emblemNamePartsTwo
           .map(
@@ -12775,7 +13045,12 @@ export default async function handler(req, res) {
 
       const emblemCertficateUserName = `${
         propObject.p_7434986651834._Title1
-      } ${emblemModifiedName} ${propObject.p_7434986651834._Title2 ? "&" : ""}`;
+      } ${emblemModifiedName} ${
+        propObject.p_7434986651834._Title2 &&
+        propObject.p_7434986651834._Name2 != ""
+          ? "&"
+          : ""
+      }`;
 
       const userNametextWidth = oldEng.widthOfTextAtSize(
         emblemCertficateUserName,
@@ -12788,7 +13063,8 @@ export default async function handler(req, res) {
       const x = startingPosition - halfOfWord;
 
       const emblememblemCertficateUserNameTwo = `${
-        propObject.p_7434986651834._Title2
+        propObject.p_7434986651834._Title2 &&
+        propObject.p_7434986651834._Name2 != ""
           ? `${propObject.p_7434986651834._Title2} ${emblemModifiedNameTwo}`
           : ""
       }`;
@@ -12810,23 +13086,36 @@ export default async function handler(req, res) {
       const Shewen = "Shewen:";
 
       const emblemCertificateShewenText = `THAT THE SAID ${
-        propObject.p_7434986651834._Title2
+        propObject.p_7434986651834._Title2 &&
+        propObject.p_7434986651834._Name2 != ""
           ? "PETITIONERS HAVE"
           : "PETITIONER HAS"
       }`;
       const emblemCertificateShewenTextTwo = `OWNERSHIP OF LANDS IN SCOTLAND AND THE\n${
-        propObject.p_7434986651834._Title2 ? "PETITIONERS" : "PETITIONER"
+        propObject.p_7434986651834._Title2 &&
+        propObject.p_7434986651834._Name2 != ""
+          ? "PETITIONERS"
+          : "PETITIONER"
       } HAVING PREYED THAT THERE MIGHT BE\nGRANTED UNTO THEM TO USE SUCH ENSIGNS\nARMORIAL AS MAY BE THE LAWFUL PROPERTY OF\nSCOTLAND TITLES AND MIGHT BE SUITABLE AND\nACCORDING TO THE LAWS OF ARMS, KNOW YE\nTHEREFORE THAT WE HAVE ASSIGNED, AND DO BY\nTHESE PRESENTS DECLARE, RATIFY AND CONFIRM UNTO\nTHE ${
-        propObject.p_7434986651834._Title2 ? "PETITIONERS" : "PETITIONER"
+        propObject.p_7434986651834._Title2 &&
+        propObject.p_7434986651834._Name2 != ""
+          ? "PETITIONERS"
+          : "PETITIONER"
       } THE FOLLOWING ENSIGNS ARMORIAL,\nAS DEPICTED HEREOF, AND MATRICULATED OF EVEN\nDATE WITH THESE PRESENTS AS A MARK OF THE\nINTELLECTUAL PROPERTY OF SCOTLAND TITLES, TO BE\nPRESENTED BY THE ${
-        propObject.p_7434986651834._Title2 ? "PETITIONERS" : "PETITIONER"
+        propObject.p_7434986651834._Title2 &&
+        propObject.p_7434986651834._Name2 != ""
+          ? "PETITIONERS"
+          : "PETITIONER"
       } AS THEY DEEM,\n\n`;
 
       const videlicit = "Videlicit:";
 
       const emblemCertificateVidelicitText = `BY DEMONSTRATION OF WHICH ENSIGNS`;
       const emblemCertificateVidelicitTextTwo = `ARMORIAL THE SAID ${
-        propObject.p_7434986651834._Title2 ? "PETITIONERS ARE" : "PETITIONER IS"
+        propObject.p_7434986651834._Title2 &&
+        propObject.p_7434986651834._Name2 != ""
+          ? "PETITIONERS ARE"
+          : "PETITIONER IS"
       }, AMONGST ALL\nNOBLES AND IN ALL PLACES OF HONOUR, TO BE\nTAKEN, NUMBERED, ACCOUNTED AND RECEIVED ${
         propObject.p_7434986651834._Title2
           ? "AS\nLAIRDS OF SCOTLAND,"
@@ -12845,11 +13134,20 @@ export default async function handler(req, res) {
       const Scilicet = "Scilicet";
       const scilicetSubDescription = "BY VIRTUE OF OWNERSHIP OF THE LAND IN ";
       const ScilicetDescription = `SCOTLAND AND IN PARTICULAR THE LAND DESCRIBED\nABOVE WITHIN THE KINGDOM OF FIFE BY CANTSDAM\nAS FURTHER DESCRIBEDIN THE CERTIFICATE OF\nDISPOSITION AND PROCLAMATION, THE ${
-        propObject.p_7434986651834._Title2 ? "PETITIONERS" : "PETITIONER"
+        propObject.p_7434986651834._Title2 &&
+        propObject.p_7434986651834._Name2 != ""
+          ? "PETITIONERS"
+          : "PETITIONER"
       }\nMAY HENCEFORTH AND IN PERPETUITY BE KNOWN BY\nTHE STYLE OF ${
-        propObject.p_7434986651834._Title2 ? "LAIRDS" : "A LAIRD"
+        propObject.p_7434986651834._Title2 &&
+        propObject.p_7434986651834._Name2 != ""
+          ? "LAIRDS"
+          : "A LAIRD"
       } AND IN PARTICULAR ${
-        propObject.p_7434986651834._Title2 ? "LAIRDS" : "LAIRD"
+        propObject.p_7434986651834._Title2 &&
+        propObject.p_7434986651834._Name2 != ""
+          ? "LAIRDS"
+          : "LAIRD"
       } OF\nBLAIRADAM.`;
       //Signed content
 
@@ -12939,7 +13237,11 @@ export default async function handler(req, res) {
 
       emblemCertificate.drawImage(certificateMid, {
         x: 250,
-        y: propObject.p_7434986651834._Title2 ? 610 : 630,
+        y:
+          propObject.p_7434986651834._Title2 &&
+          propObject.p_7434986651834._Name2 != ""
+            ? 610
+            : 630,
         width: ertificateMidpngDims.width,
         height: ertificateMidpngDims.height,
       });
@@ -13259,7 +13561,11 @@ export default async function handler(req, res) {
 
         emblemCertificatePrinted.drawImage(certificateMidPrinted, {
           x: 250,
-          y: propObject.p_7434986651834._Title2 ? 610 : 630,
+          y:
+            propObject.p_7434986651834._Title2 &&
+            propObject.p_7434986651834._Name2 != ""
+              ? 610
+              : 630,
           width: ertificateMidpngDims.width,
           height: ertificateMidpngDims.height,
         });
@@ -13578,6 +13884,7 @@ export default async function handler(req, res) {
   };
 
   const onlyEmblem = async (propObject) => {
+    console.log(propObject, "emblem work");
     try {
       if (propObject.p_6846299078842.variant.includes("Printed Pack")) {
         var emblemCertificatePrinted = pdfDocPrinted.addPage([595, 842]);
@@ -13599,7 +13906,10 @@ export default async function handler(req, res) {
         .join(" ");
 
       //two name
-      if (propObject.p_6846299078842._Title2) {
+      if (
+        propObject.p_6846299078842._Title2 &&
+        propObject.p_6846299078842._Name2
+      ) {
         let emblemNamePartsTwo = propObject.p_6846299078842._Name2.split(" ");
         var emblemModifiedNameTwo = emblemNamePartsTwo
           .map(
@@ -13610,7 +13920,11 @@ export default async function handler(req, res) {
 
       const emblemCertficateUserName = `${
         propObject.p_6846299078842._Title1
-      } ${emblemModifiedName} ${propObject.p_6846299078842._Title2 ? "&" : ""}`;
+      } ${emblemModifiedName} ${
+        propObject.p_6846299078842._Title2 && propObject.p_6846299078842._Name2
+          ? "&"
+          : ""
+      }`;
 
       const userNametextWidth = oldEng.widthOfTextAtSize(
         emblemCertficateUserName,
@@ -13623,7 +13937,7 @@ export default async function handler(req, res) {
       const x = startingPosition - halfOfWord;
 
       const emblememblemCertficateUserNameTwo = `${
-        propObject.p_6846299078842._Title2
+        propObject.p_6846299078842._Title2 && propObject.p_6846299078842._Name2
           ? `${propObject.p_6846299078842._Title2} ${emblemModifiedNameTwo}`
           : ""
       }`;
@@ -13645,25 +13959,33 @@ export default async function handler(req, res) {
       const Shewen = "Shewen:";
 
       const emblemCertificateShewenText = `THAT THE SAID ${
-        propObject.p_6846299078842._Title2
+        propObject.p_6846299078842._Title2 && propObject.p_6846299078842._Name2
           ? "PETITIONERS HAVE"
           : "PETITIONER HAS"
       }`;
       const emblemCertificateShewenTextTwo = `OWNERSHIP OF LANDS IN SCOTLAND AND THE\n${
-        propObject.p_6846299078842._Title2 ? "PETITIONERS" : "PETITIONER"
+        propObject.p_6846299078842._Title2 && propObject.p_6846299078842._Name2
+          ? "PETITIONERS"
+          : "PETITIONER"
       } HAVING PREYED THAT THERE MIGHT BE\nGRANTED UNTO THEM TO USE SUCH ENSIGNS\nARMORIAL AS MAY BE THE LAWFUL PROPERTY OF\nSCOTLAND TITLES AND MIGHT BE SUITABLE AND\nACCORDING TO THE LAWS OF ARMS, KNOW YE\nTHEREFORE THAT WE HAVE ASSIGNED, AND DO BY\nTHESE PRESENTS DECLARE, RATIFY AND CONFIRM UNTO\nTHE ${
-        propObject.p_6846299078842._Title2 ? "PETITIONERS" : "PETITIONER"
+        propObject.p_6846299078842._Title2 && propObject.p_6846299078842._Name2
+          ? "PETITIONERS"
+          : "PETITIONER"
       } THE FOLLOWING ENSIGNS ARMORIAL,\nAS DEPICTED HEREOF, AND MATRICULATED OF EVEN\nDATE WITH THESE PRESENTS AS A MARK OF THE\nINTELLECTUAL PROPERTY OF SCOTLAND TITLES, TO BE\nPRESENTED BY THE ${
-        propObject.p_6846299078842._Title2 ? "PETITIONERS" : "PETITIONER"
+        propObject.p_6846299078842._Title2 && propObject.p_6846299078842._Name2
+          ? "PETITIONERS"
+          : "PETITIONER"
       } AS THEY DEEM,\n\n`;
 
       const videlicit = "Videlicit:";
 
       const emblemCertificateVidelicitText = `BY DEMONSTRATION OF WHICH ENSIGNS`;
       const emblemCertificateVidelicitTextTwo = `ARMORIAL THE SAID ${
-        propObject.p_6846299078842._Title2 ? "PETITIONERS ARE" : "PETITIONER IS"
+        propObject.p_6846299078842._Title2 && propObject.p_6846299078842._Name2
+          ? "PETITIONERS ARE"
+          : "PETITIONER IS"
       }, AMONGST ALL\nNOBLES AND IN ALL PLACES OF HONOUR, TO BE\nTAKEN, NUMBERED, ACCOUNTED AND RECEIVED ${
-        propObject.p_6846299078842._Title2
+        propObject.p_6846299078842._Title2 && propObject.p_6846299078842._Name2
           ? "AS\nLAIRDS OF SCOTLAND,"
           : "A\nLAIRD OF SCOTLAND,"
       }\n\n`;
@@ -13680,11 +14002,17 @@ export default async function handler(req, res) {
       const Scilicet = "Scilicet";
       const scilicetSubDescription = "BY VIRTUE OF OWNERSHIP OF THE LAND IN ";
       const ScilicetDescription = `SCOTLAND AND IN PARTICULAR THE LAND DESCRIBED\nABOVE WITHIN THE KINGDOM OF FIFE BY CANTSDAM\nAS FURTHER DESCRIBEDIN THE CERTIFICATE OF\nDISPOSITION AND PROCLAMATION, THE ${
-        propObject.p_6846299078842._Title2 ? "PETITIONERS" : "PETITIONER"
+        propObject.p_6846299078842._Title2 && propObject.p_6846299078842._Name2
+          ? "PETITIONERS"
+          : "PETITIONER"
       }\nMAY HENCEFORTH AND IN PERPETUITY BE KNOWN BY\nTHE STYLE OF ${
-        propObject.p_6846299078842._Title2 ? "LAIRDS" : "A LAIRD"
+        propObject.p_6846299078842._Title2 && propObject.p_6846299078842._Name2
+          ? "LAIRDS"
+          : "A LAIRD"
       } AND IN PARTICULAR ${
-        propObject.p_6846299078842._Title2 ? "LAIRDS" : "LAIRD"
+        propObject.p_6846299078842._Title2 && propObject.p_6846299078842._Name2
+          ? "LAIRDS"
+          : "LAIRD"
       } OF\nBLAIRADAM.`;
       //Signed content
 
@@ -13827,7 +14155,11 @@ export default async function handler(req, res) {
 
       emblemCertificate.drawImage(certificateMid, {
         x: 250,
-        y: propObject.p_6846299078842._Title2 ? 610 : 630,
+        y:
+          propObject.p_6846299078842._Title2 &&
+          propObject.p_6846299078842._Name2
+            ? 610
+            : 630,
         width: ertificateMidpngDims.width,
         height: ertificateMidpngDims.height,
       });
@@ -14143,7 +14475,11 @@ export default async function handler(req, res) {
 
         emblemCertificatePrinted.drawImage(certificateMidPrinted, {
           x: 250,
-          y: propObject.p_6846299078842._Title2 ? 610 : 630,
+          y:
+            propObject.p_6846299078842._Title2 &&
+            propObject.p_6846299078842._Name2
+              ? 610
+              : 630,
           width: ertificateMidpngDims.width,
           height: ertificateMidpngDims.height,
         });
@@ -14462,6 +14798,7 @@ export default async function handler(req, res) {
   };
 
   const discountedonlyPrintedEmblem = async (propObject) => {
+    console.log(propObject, "emblem work");
     try {
       if (propObject.p_6882555658426.variant.includes("Printed Pack")) {
         var emblemCertificatePrinted = pdfDocPrinted.addPage([595, 842]);
@@ -14476,29 +14813,32 @@ export default async function handler(req, res) {
       //Name Capital work
 
       let emblemNameParts = propObject.p_6882555658426._Name1.split(" ");
-      console.log(emblemNameParts, "nameParts");
       let emblemModifiedName = emblemNameParts
         .map(
           (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
         )
         .join(" ");
-      console.log(emblemModifiedName, "modified name");
 
       //two name
-      if (propObject.p_6882555658426._Title2) {
+      if (
+        propObject.p_6882555658426._Title2 &&
+        propObject.p_6882555658426._Name2
+      ) {
         let emblemNamePartsTwo = propObject.p_6882555658426._Name2.split(" ");
-        console.log(emblemNamePartsTwo, "nameParts");
         var emblemModifiedNameTwo = emblemNamePartsTwo
           .map(
             (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
           )
           .join(" ");
-        console.log(emblemModifiedNameTwo, "modified name two");
       }
 
       const emblemCertficateUserName = `${
         propObject.p_6882555658426._Title1
-      } ${emblemModifiedName} ${propObject.p_6882555658426._Title2 ? "&" : ""}`;
+      } ${emblemModifiedName} ${
+        propObject.p_6882555658426._Title2 && propObject.p_6882555658426._Name2
+          ? "&"
+          : ""
+      }`;
 
       const userNametextWidth = oldEng.widthOfTextAtSize(
         emblemCertficateUserName,
@@ -14511,7 +14851,7 @@ export default async function handler(req, res) {
       const x = startingPosition - halfOfWord;
 
       const emblememblemCertficateUserNameTwo = `${
-        propObject.p_6882555658426._Title2
+        propObject.p_6882555658426._Title2 && propObject.p_6882555658426._Name2
           ? `${propObject.p_6882555658426._Title2} ${emblemModifiedNameTwo}`
           : ""
       }`;
@@ -14533,25 +14873,33 @@ export default async function handler(req, res) {
       const Shewen = "Shewen:";
 
       const emblemCertificateShewenText = `THAT THE SAID ${
-        propObject.p_6882555658426._Title2
+        propObject.p_6882555658426._Title2 && propObject.p_6882555658426._Name2
           ? "PETITIONERS HAVE"
           : "PETITIONER HAS"
       }`;
       const emblemCertificateShewenTextTwo = `OWNERSHIP OF LANDS IN SCOTLAND AND THE\n${
-        propObject.p_6882555658426._Title2 ? "PETITIONERS" : "PETITIONER"
+        propObject.p_6882555658426._Title2 && propObject.p_6882555658426._Name2
+          ? "PETITIONERS"
+          : "PETITIONER"
       } HAVING PREYED THAT THERE MIGHT BE\nGRANTED UNTO THEM TO USE SUCH ENSIGNS\nARMORIAL AS MAY BE THE LAWFUL PROPERTY OF\nSCOTLAND TITLES AND MIGHT BE SUITABLE AND\nACCORDING TO THE LAWS OF ARMS, KNOW YE\nTHEREFORE THAT WE HAVE ASSIGNED, AND DO BY\nTHESE PRESENTS DECLARE, RATIFY AND CONFIRM UNTO\nTHE ${
-        propObject.p_6882555658426._Title2 ? "PETITIONERS" : "PETITIONER"
+        propObject.p_6882555658426._Title2 && propObject.p_6882555658426._Name2
+          ? "PETITIONERS"
+          : "PETITIONER"
       } THE FOLLOWING ENSIGNS ARMORIAL,\nAS DEPICTED HEREOF, AND MATRICULATED OF EVEN\nDATE WITH THESE PRESENTS AS A MARK OF THE\nINTELLECTUAL PROPERTY OF SCOTLAND TITLES, TO BE\nPRESENTED BY THE ${
-        propObject.p_6882555658426._Title2 ? "PETITIONERS" : "PETITIONER"
+        propObject.p_6882555658426._Title2 && propObject.p_6882555658426._Name2
+          ? "PETITIONERS"
+          : "PETITIONER"
       } AS THEY DEEM,\n\n`;
 
       const videlicit = "Videlicit:";
 
       const emblemCertificateVidelicitText = `BY DEMONSTRATION OF WHICH ENSIGNS`;
       const emblemCertificateVidelicitTextTwo = `ARMORIAL THE SAID ${
-        propObject.p_6882555658426._Title2 ? "PETITIONERS ARE" : "PETITIONER IS"
+        propObject.p_6882555658426._Title2 && propObject.p_6882555658426._Name2
+          ? "PETITIONERS ARE"
+          : "PETITIONER IS"
       }, AMONGST ALL\nNOBLES AND IN ALL PLACES OF HONOUR, TO BE\nTAKEN, NUMBERED, ACCOUNTED AND RECEIVED ${
-        propObject.p_6882555658426._Title2
+        propObject.p_6882555658426._Title2 && propObject.p_6882555658426._Name2
           ? "AS\nLAIRDS OF SCOTLAND,"
           : "A\nLAIRD OF SCOTLAND,"
       }\n\n`;
@@ -14568,11 +14916,17 @@ export default async function handler(req, res) {
       const Scilicet = "Scilicet";
       const scilicetSubDescription = "BY VIRTUE OF OWNERSHIP OF THE LAND IN ";
       const ScilicetDescription = `SCOTLAND AND IN PARTICULAR THE LAND DESCRIBED\nABOVE WITHIN THE KINGDOM OF FIFE BY CANTSDAM\nAS FURTHER DESCRIBEDIN THE CERTIFICATE OF\nDISPOSITION AND PROCLAMATION, THE ${
-        propObject.p_6882555658426._Title2 ? "PETITIONERS" : "PETITIONER"
+        propObject.p_6882555658426._Title2 && propObject.p_6882555658426._Name2
+          ? "PETITIONERS"
+          : "PETITIONER"
       }\nMAY HENCEFORTH AND IN PERPETUITY BE KNOWN BY\nTHE STYLE OF ${
-        propObject.p_6882555658426._Title2 ? "LAIRDS" : "A LAIRD"
+        propObject.p_6882555658426._Title2 && propObject.p_6882555658426._Name2
+          ? "LAIRDS"
+          : "A LAIRD"
       } AND IN PARTICULAR ${
-        propObject.p_6882555658426._Title2 ? "LAIRDS" : "LAIRD"
+        propObject.p_6882555658426._Title2 && propObject.p_6882555658426._Name2
+          ? "LAIRDS"
+          : "LAIRD"
       } OF\nBLAIRADAM.`;
       //Signed content
 
@@ -14715,7 +15069,11 @@ export default async function handler(req, res) {
 
       emblemCertificate.drawImage(certificateMid, {
         x: 250,
-        y: propObject.p_6882555658426._Title2 ? 610 : 630,
+        y:
+          propObject.p_6882555658426._Title2 &&
+          propObject.p_6882555658426._Name2
+            ? 610
+            : 630,
         width: ertificateMidpngDims.width,
         height: ertificateMidpngDims.height,
       });
@@ -15031,7 +15389,11 @@ export default async function handler(req, res) {
 
         emblemCertificatePrinted.drawImage(certificateMidPrinted, {
           x: 250,
-          y: propObject.p_6882555658426._Title2 ? 610 : 630,
+          y:
+            propObject.p_6882555658426._Title2 &&
+            propObject.p_6882555658426._Name2
+              ? 610
+              : 630,
           width: ertificateMidpngDims.width,
           height: ertificateMidpngDims.height,
         });
@@ -15350,7 +15712,7 @@ export default async function handler(req, res) {
   };
 
   const onlyTartan = async (propObject) => {
-    // console.log(propObject, "===============propObject==================");
+    console.log(propObject, "===============propObject==================");
     try {
       if (propObject.p_6846299111610.variant.includes("Printed Pack")) {
         var tartanCertificatePrinted = pdfDocPrinted.addPage([595, 842]);
@@ -15369,9 +15731,13 @@ export default async function handler(req, res) {
           (part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
         )
         .join(" ");
-
+      //propObject.p_6846299111610._Name2 != ""
+      //
       //two name
-      if (propObject.p_6846299111610._Title2) {
+      if (
+        propObject.p_6846299111610._Title2 &&
+        propObject.p_6846299111610._Name2 != ""
+      ) {
         let tartanNamePartsTwo = propObject.p_6846299111610._Name2.split(" ");
         var tartanModifiedNameTwo = tartanNamePartsTwo
           .map(
@@ -15382,7 +15748,12 @@ export default async function handler(req, res) {
 
       const tartanCertficateUserName = `${
         propObject.p_6846299111610._Title1
-      } ${tartanModifiedName} ${propObject.p_6846299111610._Title2 ? "&" : ""}`;
+      } ${tartanModifiedName} ${
+        propObject.p_6846299111610._Title2 &&
+        propObject.p_6846299111610._Name2 != ""
+          ? "&"
+          : ""
+      }`;
       const userNametextWidth = oldEng.widthOfTextAtSize(
         tartanCertficateUserName,
         12
@@ -15394,7 +15765,8 @@ export default async function handler(req, res) {
       const x = startingPosition - halfOfWord;
 
       const tartanCertficateUserNameTwo = `${
-        propObject.p_6846299111610._Title2
+        propObject.p_6846299111610._Title2 &&
+        propObject.p_6846299111610._Name2 != ""
           ? `${propObject.p_6846299111610._Title2} ${tartanModifiedNameTwo}`
           : ""
       }`;
@@ -15409,7 +15781,10 @@ export default async function handler(req, res) {
         (tartanCertificate.getWidth() - tartanuserNameTwotextWidth) / 2;
       const tartanTwox = tartanStartingPositionTwo - tartanHalfOfWordTwo;
       const declare = `${
-        propObject.p_6846299111610._Title2 ? "Do" : "Does"
+        propObject.p_6846299111610._Title2 &&
+        propObject.p_6846299111610._Name2 == ""
+          ? "Do"
+          : "Does"
       } Declare`;
       const Allegiance = "Clan Allegiance";
       const prey = "and Prey to Wear";
@@ -15424,15 +15799,24 @@ export default async function handler(req, res) {
 
       const tartanCertificateknowText = `that the said by virtue of ownership`;
       const tartanCertificateknowTextTwo = `of Land in Scotland and in particular the Land within the\nKingdom of Fife by Cantsdam as described in the Disposition\nand Certificate of Sale, the ${
-        propObject.p_6846299111610._Title2 ? "Petitioner are" : "Petitioner is"
+        propObject.p_6846299111610._Title2 &&
+        propObject.p_6846299111610._Name2 != ""
+          ? "Petitioner are"
+          : "Petitioner is"
       } henceforth and in\nperpetuity amongst all nobles and in all places of honour, to\nbe taken, numbered, accounted and received as a ${
-        propObject.p_6846299111610._Title2 ? "Lairds" : "Laird"
+        propObject.p_6846299111610._Title2 &&
+        propObject.p_6846299111610._Name2 != ""
+          ? "Lairds"
+          : "Laird"
       } of\nScotland,\n\n`;
 
       const Therefore = "Know Ye Therefore";
 
       const tartanCertificateThereforeText = `that the ${
-        propObject.p_6846299111610._Title2 ? "Petitioners" : "Petitioner"
+        propObject.p_6846299111610._Title2 &&
+        propObject.p_6846299111610._Name2 != ""
+          ? "Petitioners"
+          : "Petitioner"
       } having preyed`;
       const tartanCertificateThereforeTextTwo = `that there might be granted unto them to use such Scottish\nTartan as set in law during the dress act of 1746 as repealed in\n1782 and thereinafter adopted, acknowledged and recognised\nas the symbolic National Dress of Scotland,\n\n`;
 
@@ -15440,9 +15824,15 @@ export default async function handler(req, res) {
 
       const tartanCertificateScotlantTilesText = `has assigned, and do`;
       const tartanCertificateScotlantTilesTextTwo = `by these presents assign, ratify and confirm unto the ${
-        propObject.p_6846299111610._Title2 ? "Petitioners" : "Petitioner"
+        propObject.p_6846299111610._Title2 &&
+        propObject.p_6846299111610._Name2 != ""
+          ? "Petitioners"
+          : "Petitioner"
       }\nthe following ensemble robes in such tartan as is depicted\nupon the margin sinister hereof, and award unto the\n${
-        propObject.p_6846299111610._Title2 ? "Petitioners" : "Petitioner"
+        propObject.p_6846299111610._Title2 &&
+        propObject.p_6846299111610._Name2 != ""
+          ? "Petitioners"
+          : "Petitioner"
       } the rights to use, wear, display and earasay such\nregistered Scottish Tartan in exchange for their sworn\nallegiance to the Clan of Scotland,\n\n`;
 
       const Tartan = "Videlicet such Tartan";
@@ -15453,9 +15843,15 @@ export default async function handler(req, res) {
 
       const demonstrationText = " which ensemble robes the said";
       const demonstrationTextTwo = `${
-        propObject.p_6846299111610._Title2 ? "Petitioner are" : "Petitioner is"
+        propObject.p_6846299111610._Title2 &&
+        propObject.p_6846299111610._Name2 != ""
+          ? "Petitioner are"
+          : "Petitioner is"
       }, amongst all nobles and in all places of honour, to\nbe received as a ${
-        propObject.p_6846299111610._Title2 ? "Lairds" : "Laird"
+        propObject.p_6846299111610._Title2 &&
+        propObject.p_6846299111610._Name2 != ""
+          ? "Lairds"
+          : "Laird"
       } of Scotland,`; //Signed content
 
       const tartanFurther = "Furthermore by ownership";
@@ -15647,7 +16043,11 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(declare, {
         x: 250,
-        y: propObject.p_6846299111610._Title2 ? 665 : 690,
+        y:
+          propObject.p_6846299111610._Title2 &&
+          propObject.p_6846299111610._Name2 != ""
+            ? 665
+            : 690,
         size: 16,
         width: textWidth,
         height: textHeight,
@@ -15658,7 +16058,11 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(Allegiance, {
         x: 50,
-        y: propObject.p_6846299111610._Title2 ? 640 : 660,
+        y:
+          propObject.p_6846299111610._Title2 &&
+          propObject.p_6846299111610._Name2 != ""
+            ? 640
+            : 660,
         size: 26,
         width: textWidth,
         height: textHeight,
@@ -15669,7 +16073,11 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(prey, {
         x: 230,
-        y: propObject.p_6846299111610._Title2 ? 640 : 660,
+        y:
+          propObject.p_6846299111610._Title2 &&
+          propObject.p_6846299111610._Name2 != ""
+            ? 640
+            : 660,
         size: 18,
         width: textWidth,
         height: textHeight,
@@ -15680,7 +16088,11 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawText(certified, {
         x: 370,
-        y: propObject.p_6846299111610._Title2 ? 640 : 660,
+        y:
+          propObject.p_6846299111610._Title2 &&
+          propObject.p_6846299111610._Name2 != ""
+            ? 640
+            : 660,
         size: 26,
         width: textWidth,
         height: textHeight,
@@ -15692,7 +16104,11 @@ export default async function handler(req, res) {
 
       tartanCertificate.drawImage(certificateMid, {
         x: 230,
-        y: propObject.p_6846299111610._Title2 ? 600 : 610,
+        y:
+          propObject.p_6846299111610._Title2 &&
+          propObject.p_6846299111610._Name2 != ""
+            ? 600
+            : 610,
         width: ertificateMidpngDims.width,
         height: ertificateMidpngDims.height,
       });
@@ -16060,7 +16476,11 @@ export default async function handler(req, res) {
 
         tartanCertificatePrinted.drawText(declare, {
           x: 250,
-          y: propObject.p_6846299111610._Title2 ? 665 : 690,
+          y:
+            propObject.p_6846299111610._Title2 &&
+            propObject.p_6846299111610._Name2 != ""
+              ? 665
+              : 690,
           size: 16,
           width: textWidth,
           height: textHeight,
@@ -16071,7 +16491,11 @@ export default async function handler(req, res) {
 
         tartanCertificatePrinted.drawText(Allegiance, {
           x: 50,
-          y: propObject.p_6846299111610._Title2 ? 640 : 660,
+          y:
+            propObject.p_6846299111610._Title2 &&
+            propObject.p_6846299111610._Name2 != ""
+              ? 640
+              : 660,
           size: 26,
           width: textWidth,
           height: textHeight,
@@ -16082,7 +16506,11 @@ export default async function handler(req, res) {
 
         tartanCertificatePrinted.drawText(prey, {
           x: 230,
-          y: propObject.p_6846299111610._Title2 ? 640 : 660,
+          y:
+            propObject.p_6846299111610._Title2 &&
+            propObject.p_6846299111610._Name2 != ""
+              ? 640
+              : 660,
           size: 18,
           width: textWidth,
           height: textHeight,
@@ -16093,7 +16521,11 @@ export default async function handler(req, res) {
 
         tartanCertificatePrinted.drawText(certified, {
           x: 370,
-          y: propObject.p_6846299111610._Title2 ? 640 : 660,
+          y:
+            propObject.p_6846299111610._Title2 &&
+            propObject.p_6846299111610._Name2 != ""
+              ? 640
+              : 660,
           size: 26,
           width: textWidth,
           height: textHeight,
@@ -16105,7 +16537,11 @@ export default async function handler(req, res) {
 
         tartanCertificatePrinted.drawImage(certificateMidPrinted, {
           x: 230,
-          y: propObject.p_6846299111610._Title2 ? 600 : 610,
+          y:
+            propObject.p_6846299111610._Title2 &&
+            propObject.p_6846299111610._Name2 != ""
+              ? 600
+              : 610,
           width: ertificateMidpngDims.width,
           height: ertificateMidpngDims.height,
         });
