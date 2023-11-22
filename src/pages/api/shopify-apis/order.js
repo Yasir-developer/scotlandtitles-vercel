@@ -9005,7 +9005,7 @@ export default async function handler(req, res) {
       } ${propObject.p_7434986651834._Title1} ${firstPageModifiedName} ${
         propObject.p_7434986651834._Title2 &&
         propObject.p_7434986651834._Name2 != ""
-          ? `\n& ${propObject.p_7434986651834._Title2} ${firstModifiedNameTwo} of `
+          ? `\n& ${propObject.p_7434986651834._Title2} ${firstPageModifiedNameTwo} of `
           : "\nof "
       }${
         propObject.p_7434986651834._Name2 == "" &&
