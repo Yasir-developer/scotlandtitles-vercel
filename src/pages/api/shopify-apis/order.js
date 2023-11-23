@@ -16931,8 +16931,8 @@ export default async function handler(req, res) {
       var freeEmblemPackId = 1;
       var discountedEmblemPackedId = 1;
       const desiredOrder = [
-        6846298849466, 6846299078842, 6846299111610, 7420325265594,
-        7434986651834, 6882555658426,
+        7434986651834, 6846298849466, 7420325265594, 6846299111610,
+        6882555658426, 6846299078842,
       ];
       const sortedLineItems = req.body.line_items.sort((a, b) => {
         return (
@@ -16944,7 +16944,7 @@ export default async function handler(req, res) {
 
       const mappedLineItems = sortedLineItems.map((item) => {
         // Your mapping logic here
-        console.log(item, "-----items-----");
+        // console.log(item, "-----items-----");
       });
       sortedLineItems.map((item, index) => {
         // console.log(item, "itemitem");
@@ -16974,9 +16974,19 @@ export default async function handler(req, res) {
             properties:
               item.properties.length > 0
                 ? item.properties
-                : pProperties[`p_6846298849466_${emblemPackId}`],
+                : pProperties[`p_6846298849466_${emblemPackId}`]
+                ? pProperties[`p_6846298849466_${emblemPackId}`]
+                : pProperties[`p_7434986651834_${emblemPackId}`]
+                ? pProperties[`p_7434986651834_${emblemPackId}`]
+                : pProperties[`p_7420325265594_${emblemPackId}`]
+                ? pProperties[`p_7420325265594_${emblemPackId}`]
+                : null,
             quantity: item.quantity,
           };
+          console.log(
+            pProperties["p_" + `${item.product_id}_${emblemPackId}`].properties,
+            "abcd"
+          );
           emblemPackId++;
         } else if (item.product_id == tartanId) {
           pId.push(item.product_id);
@@ -17029,7 +17039,10 @@ export default async function handler(req, res) {
         }
       });
       let ko = Object.keys(pProperties);
-      ko.map((a) => console.log(pProperties[a]));
+      ko.map((a) => {});
+      // console.log(pProperties[a]
+      // )
+
       const specificId = freeTartanId;
       const specificIdTitlePack = titlePackId;
       const specificIdfreeEmblemPack = freeEmblemId;
@@ -17067,8 +17080,6 @@ export default async function handler(req, res) {
               resultObjectTitlePack[obj.name] = obj.value;
             }
           }
-          // size = word[0];
-          // console.log(size, "alllll  size");
 
           if (!namesArrayTitlePacks.includes("_Title2")) {
             const propertiesObj = {
@@ -17112,6 +17123,7 @@ export default async function handler(req, res) {
           titleIncrement++;
           // }
         } else if (productId == emblemId) {
+          console.log("emblem hereeeeee");
           for (
             let i = 0;
             i < pProperties[`p_6846299078842_${embelemIncrement}`].quantity;
@@ -17121,29 +17133,68 @@ export default async function handler(req, res) {
             let namesArrayEmblum = "";
 
             if (
-              pProperties[`p_6846299078842_${embelemIncrement}`].properties
-                .length > 0
+              pProperties[`p_6846299078842_${embelemIncrement}`]?.properties
+                ?.length > 0
             ) {
               if (
-                pProperties[`p_6846299078842_${embelemIncrement}`].properties
+                pProperties[`p_6846299078842_${embelemIncrement}`]?.properties
               ) {
                 namesArrayEmblum = pProperties[
                   `p_6846299078842_${embelemIncrement}`
-                ].properties.map((propItem, index) => propItem.name);
+                ]?.properties.map((propItem, index) => propItem.name);
                 for (const obj of pProperties[
                   `p_6846299078842_${embelemIncrement}`
-                ].properties) {
+                ]?.properties) {
                   resultObjectEmblum[obj.name] = obj.value;
                 }
               }
-            } else {
-              namesArrayEmblum = pProperties[
-                `p_6846298849466_${embelemIncrement}`
-              ].properties.map((propItem, index) => propItem.name);
-              for (const obj of pProperties[
-                `p_6846298849466_${embelemIncrement}`
-              ].properties) {
-                resultObjectEmblum[obj.name] = obj.value;
+            } else if (
+              pProperties[`p_7434986651834_${embelemIncrement}`]?.properties
+                ?.length > 0
+            ) {
+              if (
+                pProperties[`p_7434986651834_${embelemIncrement}`]?.properties
+              ) {
+                namesArrayEmblum = pProperties[
+                  `p_7434986651834_${embelemIncrement}`
+                ]?.properties.map((propItem, index) => propItem.name);
+                for (const obj of pProperties[
+                  `p_7434986651834_${embelemIncrement}`
+                ]?.properties) {
+                  resultObjectEmblum[obj.name] = obj.value;
+                }
+              }
+            } else if (
+              pProperties[`p_6846298849466_${embelemIncrement}`]?.properties
+                .length > 0
+            ) {
+              if (
+                pProperties[`p_6846298849466_${embelemIncrement}`]?.properties
+              ) {
+                namesArrayEmblum = pProperties[
+                  `p_6846298849466_${embelemIncrement}`
+                ]?.properties.map((propItem, index) => propItem.name);
+                for (const obj of pProperties[
+                  `p_6846298849466_${embelemIncrement}`
+                ]?.properties) {
+                  resultObjectEmblum[obj.name] = obj.value;
+                }
+              }
+            } else if (
+              pProperties[`p_7420325265594_${embelemIncrement}`]?.properties
+                ?.length > 0
+            ) {
+              if (
+                pProperties[`p_7420325265594_${embelemIncrement}`]?.properties
+              ) {
+                namesArrayEmblum = pProperties[
+                  `p_7420325265594_${embelemIncrement}`
+                ]?.properties.map((propItem, index) => propItem.name);
+                for (const obj of pProperties[
+                  `p_7420325265594_${embelemIncrement}`
+                ]?.properties) {
+                  resultObjectEmblum[obj.name] = obj.value;
+                }
               }
             }
 
@@ -17425,7 +17476,10 @@ export default async function handler(req, res) {
 
       // emailPdfs();
       //for printed page
+      console.log(pageCount, "pageCount in printed");
+
       if (pageCount > 0) {
+        console.log("inside page count");
         const pdfPrintedBytes = await pdfDocPrinted.save();
 
         const pdfPrintedStream = new Readable();
@@ -17434,6 +17488,7 @@ export default async function handler(req, res) {
         pdfPrintedStream.push(null); // End of stream
 
         const remotePrintedPath = `/pdfs/${order_number}-printed.pdf`;
+        console.log(remotePrintedPath, "remotePrintedPath s");
         await client.uploadFrom(pdfPrintedStream, remotePrintedPath);
 
         client.close();
