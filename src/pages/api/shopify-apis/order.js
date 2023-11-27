@@ -662,14 +662,14 @@ export default async function handler(req, res) {
         titleConditions == "LADY AND LORD"
           ? "\nintention to"
           : "intention to\n"
-      }purchase, and Scotland Titles has determined to accept the disposition ${
+      } purchase, and Scotland Titles has determined to accept the disposition ${
         titleConditions == "LADY AND LAIRD" ||
         titleConditions == "LAIRD AND LADY" ||
         titleConditions == "LORD AND LAIRD" ||
         titleConditions == "LAIRD AND LORD" ||
         titleConditions == "LORD AND LADY" ||
         titleConditions == "LADY AND LORD"
-          ? "\nof a plot of"
+          ? "\nof a plot of "
           : "of a plot of\n"
       }land within THE ESTATE, at Cantsdam, hereafter referred to as “THE ${
         titleConditions == "LADY AND LAIRD" ||
@@ -678,8 +678,8 @@ export default async function handler(req, res) {
         titleConditions == "LAIRD AND LORD" ||
         titleConditions == "LORD AND LADY" ||
         titleConditions == "LADY AND LORD"
-          ? "\nLAND"
-          : "LAND"
+          ? "\nLAND "
+          : " LAND"
       }”.\n\nScotland Titles, in CONSIDERATION of all monies due to be paid to us by THE\n${titleConditions}, of which we have received of in full, we do hereby DISCHARGE ${
         titleConditions == "LADY AND LAIRD" ||
         titleConditions == "LAIRD AND LADY" ||
@@ -687,16 +687,16 @@ export default async function handler(req, res) {
         titleConditions == "LAIRD AND LORD" ||
         titleConditions == "LORD AND LADY" ||
         titleConditions == "LADY AND LORD"
-          ? "\nunto them"
+          ? "\nunto them "
           : "unto them\n"
-      }and DISPONE to and in perpetuity in favour of THE ${titleConditions} ${
+      } and DISPONE to and in perpetuity in favour of THE ${titleConditions} ${
         titleConditions == "LADY AND LAIRD" ||
         titleConditions == "LAIRD AND LADY" ||
         titleConditions == "LORD AND LAIRD" ||
         titleConditions == "LAIRD AND LORD" ||
         titleConditions == "LORD AND LADY" ||
         titleConditions == "LADY AND LORD"
-          ? "\nand to their future"
+          ? "\nand to their future "
           : "and to their future\n"
       }assignees the whole of THE LAND but always with ${
         titleConditions == "LADY AND LAIRD" ||
@@ -714,7 +714,7 @@ export default async function handler(req, res) {
         titleConditions == "LAIRD AND LORD" ||
         titleConditions == "LORD AND LADY" ||
         titleConditions == "LADY AND LORD"
-          ? "\nto Scotland Titles and its"
+          ? "\nto Scotland Titles and its "
           : "to Scotland Titles and its\n"
       }successors in title plus any and all others authorised by it; ${
         titleConditions == "LADY AND LAIRD" ||
@@ -4209,7 +4209,7 @@ export default async function handler(req, res) {
         titleConditions == "LAIRD AND LORD" ||
         titleConditions == "LORD AND LADY" ||
         titleConditions == "LADY AND LORD"
-          ? "\nintention to"
+          ? "\nintention to "
           : "intention to\n"
       }purchase, and Scotland Titles has determined to accept the disposition ${
         titleConditions == "LADY AND LAIRD" ||
@@ -4218,7 +4218,7 @@ export default async function handler(req, res) {
         titleConditions == "LAIRD AND LORD" ||
         titleConditions == "LORD AND LADY" ||
         titleConditions == "LADY AND LORD"
-          ? "\nof a plot of"
+          ? "\nof a plot of "
           : "of a plot of\n"
       }land within THE ESTATE, at Cantsdam, hereafter referred to as “THE ${
         titleConditions == "LADY AND LAIRD" ||
@@ -4227,7 +4227,7 @@ export default async function handler(req, res) {
         titleConditions == "LAIRD AND LORD" ||
         titleConditions == "LORD AND LADY" ||
         titleConditions == "LADY AND LORD"
-          ? "\nLAND"
+          ? "\nLAND "
           : "LAND"
       }”.\n\nScotland Titles, in CONSIDERATION of all monies due to be paid to us by THE\n${titleConditions}, of which we have received of in full, we do hereby DISCHARGE ${
         titleConditions == "LADY AND LAIRD" ||
@@ -4236,7 +4236,7 @@ export default async function handler(req, res) {
         titleConditions == "LAIRD AND LORD" ||
         titleConditions == "LORD AND LADY" ||
         titleConditions == "LADY AND LORD"
-          ? "\nunto them"
+          ? "\nunto them "
           : "unto them\n"
       }and DISPONE to and in perpetuity in favour of THE ${titleConditions} ${
         titleConditions == "LADY AND LAIRD" ||
@@ -4245,7 +4245,7 @@ export default async function handler(req, res) {
         titleConditions == "LAIRD AND LORD" ||
         titleConditions == "LORD AND LADY" ||
         titleConditions == "LADY AND LORD"
-          ? "\nand to their future"
+          ? "\nand to their future "
           : "and to their future\n"
       }assignees the whole of THE LAND but always with ${
         titleConditions == "LADY AND LAIRD" ||
@@ -4263,7 +4263,7 @@ export default async function handler(req, res) {
         titleConditions == "LAIRD AND LORD" ||
         titleConditions == "LORD AND LADY" ||
         titleConditions == "LADY AND LORD"
-          ? "\nto Scotland Titles and its"
+          ? "\nto Scotland Titles and its "
           : "to Scotland Titles and its\n"
       }successors in title plus any and all others authorised by it; ${
         titleConditions == "LADY AND LAIRD" ||
@@ -9407,7 +9407,7 @@ export default async function handler(req, res) {
         titleConditions == "LAIRD AND LORD" ||
         titleConditions == "LORD AND LADY" ||
         titleConditions == "LADY AND LORD"
-          ? "\nintention to"
+          ? "\nintention to "
           : "intention to\n"
       }purchase, and Scotland Titles has determined to accept the disposition ${
         titleConditions == "LADY AND LAIRD" ||
@@ -9416,7 +9416,7 @@ export default async function handler(req, res) {
         titleConditions == "LAIRD AND LORD" ||
         titleConditions == "LORD AND LADY" ||
         titleConditions == "LADY AND LORD"
-          ? "\nof a plot of"
+          ? "\nof a plot of "
           : "of a plot of\n"
       }land within THE ESTATE, at Cantsdam, hereafter referred to as “THE ${
         titleConditions == "LADY AND LAIRD" ||
@@ -9425,7 +9425,7 @@ export default async function handler(req, res) {
         titleConditions == "LAIRD AND LORD" ||
         titleConditions == "LORD AND LADY" ||
         titleConditions == "LADY AND LORD"
-          ? "\nLAND"
+          ? "\nLAND "
           : "LAND"
       }”.\n\nScotland Titles, in CONSIDERATION of all monies due to be paid to us by THE\n${titleConditions}, of which we have received of in full, we do hereby DISCHARGE ${
         titleConditions == "LADY AND LAIRD" ||
@@ -9434,7 +9434,7 @@ export default async function handler(req, res) {
         titleConditions == "LAIRD AND LORD" ||
         titleConditions == "LORD AND LADY" ||
         titleConditions == "LADY AND LORD"
-          ? "\nunto them"
+          ? "\nunto them "
           : "unto them\n"
       }and DISPONE to and in perpetuity in favour of THE ${titleConditions} ${
         titleConditions == "LADY AND LAIRD" ||
@@ -9443,7 +9443,7 @@ export default async function handler(req, res) {
         titleConditions == "LAIRD AND LORD" ||
         titleConditions == "LORD AND LADY" ||
         titleConditions == "LADY AND LORD"
-          ? "\nand to their future"
+          ? "\nand to their future "
           : "and to their future\n"
       }assignees the whole of THE LAND but always with ${
         titleConditions == "LADY AND LAIRD" ||
@@ -9461,7 +9461,7 @@ export default async function handler(req, res) {
         titleConditions == "LAIRD AND LORD" ||
         titleConditions == "LORD AND LADY" ||
         titleConditions == "LADY AND LORD"
-          ? "\nto Scotland Titles and its"
+          ? "\nto Scotland Titles and its "
           : "to Scotland Titles and its\n"
       }successors in title plus any and all others authorised by it; ${
         titleConditions == "LADY AND LAIRD" ||
