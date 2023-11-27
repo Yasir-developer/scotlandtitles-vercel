@@ -152,11 +152,6 @@ export default function Home() {
     await axios
       .get(url)
       .then((res) => {
-        // console.log(res.data.data.headers.link, "total response link");
-        // console.log(res.data.data, "overall response");
-
-        // setLoader(false);
-
         if (res.status == 200) {
           if (res.data.data.data.length == 0) {
             setCount("No Result Found");
@@ -196,15 +191,6 @@ export default function Home() {
           }
           setLoader(false);
           setSearch(false);
-
-          // if (urls[1]?.pageInfo) {
-          //   setNextBtn(urls[1]?.pageInfo);
-          //   setPageInformation(urls[0].pageInfo);
-          //   setPrevBtn(urls[0].pageInfo);
-          // } else {
-          //   setNextBtn(urls[0].pageInfo);
-          //   // setPrevBtn(urls[0].pageInfo)
-          // }
         }
       })
       .catch((error) => {
@@ -227,11 +213,6 @@ export default function Home() {
     await axios
       .get(url)
       .then((res) => {
-        // console.log(res.data.data.headers.link, "total response link");
-        // console.log(res.data.data, "overall response");
-
-        // setLoader(false);
-
         if (res.status == 200) {
           console.log(res, "res");
           if (res?.data?.data?.data?.length == 0) {
@@ -272,15 +253,6 @@ export default function Home() {
           }
           setLoader(false);
           setSearch(false);
-
-          // if (urls[1]?.pageInfo) {
-          //   setNextBtn(urls[1]?.pageInfo);
-          //   setPageInformation(urls[0].pageInfo);
-          //   setPrevBtn(urls[0].pageInfo);
-          // } else {
-          //   setNextBtn(urls[0].pageInfo);
-          //   // setPrevBtn(urls[0].pageInfo)
-          // }
         }
       })
       .catch((error) => {
@@ -337,32 +309,17 @@ export default function Home() {
               borderRadius: "2px",
             }}
             key={index}
-            // <label>
           >
             <div
               style={{
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "space-between",
-                // backgroundColor: "red",
-                // width: "350px",
               }}
             >
               <p style={{ marginLeft: "10px", marginRight: "50px" }}>
                 Order {item.name}
               </p>
-
-              {/* <div
-                style={{
-                  width: "1px",
-                  height: "25px",
-                  backgroundColor: "#CCCCCC",
-                  marginLeft: "5px",
-                  // paddingLeft: "15px",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              ></div> */}
 
               <Select
                 className="multi-select"
