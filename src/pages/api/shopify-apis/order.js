@@ -68,7 +68,7 @@ export default async function handler(req, res) {
       orderId: req.body.id,
       status: true,
     });
-    await emailPdfs();
+    // await emailPdfs();
     // .then((response) => {
     console.log("response");
 
