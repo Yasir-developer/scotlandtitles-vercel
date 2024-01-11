@@ -82,8 +82,6 @@ export default async function handler(req, res) {
     // });
   }
 
-  // const discountedEmblemId = 6882555658426;
-
   const client = new ftp.Client();
 
   await client.access({
