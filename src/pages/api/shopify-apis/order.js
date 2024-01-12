@@ -9,8 +9,6 @@ import axios from "axios";
 import connectToDatabase from "../../../../db";
 import capitalizeWords from "../../../../utils/common/capitalizeWords";
 
-// import orderEmail from "../user/email/orderEmail";
-
 export default async function handler(req, res) {
   // console.log(req.method, "req");
   const { id, email, created_at, order_number } = req.body;
