@@ -242,10 +242,12 @@ export default async function handler(req, res) {
         propObject.p_6846298849466.reference != 0
           ? `- ${propObject.p_6846298849466.reference}`
           : ""
-      } ${propObject.p_6846298849466._Title1} ${specialCapitalizedOne} ${
+      } ${propObject.p_6846298849466._Title1} ${
+        propObject.p_6846298849466._Name1
+      } ${
         propObject.p_6846298849466._Title2 &&
         propObject.p_6846298849466._Name2 != ""
-          ? `\n& ${propObject.p_6846298849466._Title2} ${specialCapitalizedTwo} of `
+          ? `\n& ${propObject.p_6846298849466._Title2} ${propObject.p_6846298849466._Name2} of `
           : "\nof "
       }${
         propObject.p_6846298849466._Name2 == "" &&
@@ -534,7 +536,7 @@ export default async function handler(req, res) {
         var pageTwoCapitalizedTwo = capitalizeWords(modifiedNameTwo);
       }
 
-      const certficateUserName = `${propObject.p_6846298849466._Title1} ${pageTwoCapitalizedOne} of Blairadam`;
+      const certficateUserName = `${propObject.p_6846298849466._Title1} ${propObject.p_6846298849466._Name1} of Blairadam`;
 
       const and = "and";
       const certficateUserNameTwo = `${
@@ -545,7 +547,7 @@ export default async function handler(req, res) {
       } ${
         propObject.p_6846298849466._Title2 &&
         propObject.p_6846298849466._Name2 != ""
-          ? pageTwoCapitalizedTwo
+          ? propObject.p_6846298849466._Name2
           : ""
       } ${
         propObject.p_6846298849466._Title2 &&
@@ -1009,14 +1011,14 @@ export default async function handler(req, res) {
           .join(" ");
       }
 
-      const deedUserNameWidth = `of ${deedCapitalizedOne}`;
+      const deedUserNameWidth = `of ${propObject.p_6846298849466._Name1}`;
       const formertextWidth = timesRomanFontHeading.widthOfTextAtSize(
         deedUserNameWidth,
         12
       );
       const totalWidth = formertextWidth + 35;
 
-      const deedNewNameWidth = `now ${propObject.p_6846298849466._Title1} ${deedCapitalizedOne}`;
+      const deedNewNameWidth = `now ${propObject.p_6846298849466._Title1} ${propObject.p_6846298849466._Name1}`;
       const newtextWidth = timesRomanFontHeading.widthOfTextAtSize(
         deedNewNameWidth,
         12
@@ -1057,7 +1059,7 @@ export default async function handler(req, res) {
         font: timesRomanFontHeading,
       });
 
-      const deedFormText = `of ${deedCapitalizedOne}\n\nnow ${propObject.p_6846298849466._Title1} ${deedCapitalizedOne}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_6846298849466._Title1} ${deedCapitalizedOne}\n\nof`;
+      const deedFormText = `of ${propObject.p_6846298849466._Name1}\n\nnow ${propObject.p_6846298849466._Title1} ${propObject.p_6846298849466._Name1}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_6846298849466._Title1} ${propObject.p_6846298849466._Name1}\n\nof`;
       const declarationOne = `HEREBY DECLARE AS FOLLOWS;`;
       const absolute =
         "1.   I ABSOLUTELY and entirely renounce, relinquish and abandon the use of my said";
@@ -1087,8 +1089,8 @@ export default async function handler(req, res) {
       const yearIn = "IN THE YEAR";
       const signedAs = "SIGNED AS A DEED AND DELIVERED\n\nby the above named";
       const signPlaceHolder = "Signature";
-      const lordName = `${propObject.p_6846298849466._Title1} ${deedCapitalizedOne}\n\nFormerly known as`;
-      const formerName = `${deedCapitalizedOne}`;
+      const lordName = `${propObject.p_6846298849466._Title1} ${propObject.p_6846298849466._Name1}\n\nFormerly known as`;
+      const formerName = `${propObject.p_6846298849466._Name1}`;
 
       const presence = "In the presence of:";
       const witness = "Witness's signature";
@@ -1661,7 +1663,7 @@ export default async function handler(req, res) {
           var deedCapitalizedTwo = capitalizeWords(deedModifiedNameTwo);
         }
 
-        const deedTwoUserNameWidth = `of ${deedCapitalizedTwo}`;
+        const deedTwoUserNameWidth = `of ${propObject.p_6846298849466._Name2}`;
         const formerDeedTwotextWidth = timesRomanFontHeading.widthOfTextAtSize(
           deedTwoUserNameWidth,
           12
@@ -1669,7 +1671,7 @@ export default async function handler(req, res) {
         // console.log(formertextWidth, "formertextWidth");
         const totalWidthDeedTwo = formerDeedTwotextWidth + 35;
 
-        const deedTwoNewNameWidth = `now ${propObject.p_6846298849466._Title2} ${deedCapitalizedTwo}`;
+        const deedTwoNewNameWidth = `now ${propObject.p_6846298849466._Title2} ${propObject.p_6846298849466._Name2}`;
         const newDeedTwotextWidth = timesRomanFontHeading.widthOfTextAtSize(
           deedTwoNewNameWidth,
           12
@@ -1710,10 +1712,10 @@ export default async function handler(req, res) {
           font: timesRomanFontHeading,
         });
 
-        const deedFormTextTwo = `of ${deedCapitalizedTwo}\n\nnow ${propObject.p_6846298849466._Title2} ${deedCapitalizedTwo}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_6846298849466._Title2} ${deedCapitalizedTwo}\n\nof`;
+        const deedFormTextTwo = `of ${propObject.p_6846298849466._Name2}\n\nnow ${propObject.p_6846298849466._Title2} ${propObject.p_6846298849466._Name2}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_6846298849466._Title2} ${propObject.p_6846298849466._Name2}\n\nof`;
 
-        const lordNameTwo = `${propObject.p_6846298849466._Title2} ${deedCapitalizedTwo}\n\nFormerly known as`;
-        const formerNameTwo = `${deedCapitalizedTwo}`;
+        const lordNameTwo = `${propObject.p_6846298849466._Title2} ${propObject.p_6846298849466._Name2}\n\nFormerly known as`;
+        const formerNameTwo = `${propObject.p_6846298849466._Name2}`;
 
         deedPageTwo.drawText(MainHeading, {
           x: 200,
@@ -3115,13 +3117,13 @@ export default async function handler(req, res) {
             });
           });
 
-          const deedTwoUserNameWidth = `of ${deedCapitalizedTwo}`;
+          const deedTwoUserNameWidth = `of ${propObject.p_6846298849466._Name2}`;
           const formerDeedTwotextWidth =
             timesRomanFontHeading.widthOfTextAtSize(deedTwoUserNameWidth, 12);
           // console.log(formertextWidth, "formertextWidth");
           const totalWidthDeedTwo = formerDeedTwotextWidth + 35;
 
-          const deedTwoNewNameWidth = `now ${propObject.p_6846298849466._Title2} ${deedCapitalizedTwo}`;
+          const deedTwoNewNameWidth = `now ${propObject.p_6846298849466._Title2} ${propObject.p_6846298849466._Name2}`;
           const newDeedTwotextWidth = timesRomanFontHeading.widthOfTextAtSize(
             deedTwoNewNameWidth,
             12
@@ -3161,10 +3163,10 @@ export default async function handler(req, res) {
             lineHeight: fontSize * 1.2,
             font: timesRomanFontHeadingPrinted,
           });
-          const deedFormTextTwo = `of ${deedCapitalizedTwo}\n\nnow ${propObject.p_6846298849466._Title2} ${deedCapitalizedTwo}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_6846298849466._Title2} ${deedCapitalizedTwo}\n\nof`;
+          const deedFormTextTwo = `of ${propObject.p_6846298849466._Name2}\n\nnow ${propObject.p_6846298849466._Title2} ${propObject.p_6846298849466._Name2}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_6846298849466._Title2} ${propObject.p_6846298849466._Name2}\n\nof`;
 
-          const lordNameTwo = `${propObject.p_6846298849466._Title2} ${deedCapitalizedTwo}\n\nFormerly known as`;
-          const formerNameTwo = `${deedCapitalizedTwo}`;
+          const lordNameTwo = `${propObject.p_6846298849466._Title2} ${propObject.p_6846298849466._Name2}\n\nFormerly known as`;
+          const formerNameTwo = `${propObject.p_6846298849466._Name2}`;
 
           printeddeedPageTwo.drawText(MainHeading, {
             x: 200,
@@ -3805,10 +3807,12 @@ export default async function handler(req, res) {
         propObject.p_7420325265594.reference != 0
           ? `- ${propObject.p_7420325265594.reference}`
           : ""
-      } ${propObject.p_7420325265594._Title1} ${specialCapitalizedOne} ${
+      } ${propObject.p_7420325265594._Title1} ${
+        propObject.p_7420325265594._Name1
+      } ${
         propObject.p_7420325265594._Title2 &&
         propObject.p_7420325265594._Name2 != ""
-          ? `\n& ${propObject.p_7420325265594._Title2} ${specialCapitalizedTwo} of `
+          ? `\n& ${propObject.p_7420325265594._Title2} ${propObject.p_7420325265594._Name2} of `
           : "\nof "
       }${
         propObject.p_7420325265594._Name2 == "" &&
@@ -4080,7 +4084,7 @@ export default async function handler(req, res) {
         var pageTwoCapitalizedTwo = capitalizeWords(modifiedNameTwo);
       }
 
-      const certficateUserName = `${propObject.p_7420325265594._Title1} ${pageTwoCapitalizedOne} of Blairadam`;
+      const certficateUserName = `${propObject.p_7420325265594._Title1} ${propObject.p_7420325265594._Name1} of Blairadam`;
 
       // const and = "and";
       const certficateUserNameTwo = `${
@@ -4091,7 +4095,7 @@ export default async function handler(req, res) {
       } ${
         propObject.p_7420325265594._Title2 &&
         propObject.p_7420325265594._Name2 != ""
-          ? pageTwoCapitalizedTwo
+          ? propObject.p_7420325265594._Name2
           : ""
       } ${
         propObject.p_7420325265594._Title2 &&
@@ -4556,14 +4560,14 @@ export default async function handler(req, res) {
           .join(" ");
         var deedCapitalizeTwo = capitalizeWords(deedModifiedNameTwo);
       }
-      const deedUserNameWidth = `of ${deedCapitalizedOne}`;
+      const deedUserNameWidth = `of ${propObject.p_7420325265594._Name1}`;
       const formertextWidth = timesRomanFontHeading.widthOfTextAtSize(
         deedUserNameWidth,
         12
       );
       const totalWidth = formertextWidth + 35;
 
-      const deedNewNameWidth = `now ${propObject.p_7420325265594._Title1} ${deedCapitalizedOne}`;
+      const deedNewNameWidth = `now ${propObject.p_7420325265594._Title1} ${propObject.p_7420325265594._Name1}`;
       const newtextWidth = timesRomanFontHeading.widthOfTextAtSize(
         deedNewNameWidth,
         12
@@ -4604,7 +4608,7 @@ export default async function handler(req, res) {
         font: timesRomanFontHeading,
       });
 
-      const deedFormText = `of ${deedCapitalizedOne}\n\nnow ${propObject.p_7420325265594._Title1} ${deedCapitalizedOne}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_7420325265594._Title1} ${deedCapitalizedOne}\n\nof`;
+      const deedFormText = `of ${propObject.p_7420325265594._Name1}\n\nnow ${propObject.p_7420325265594._Title1} ${propObject.p_7420325265594._Name1}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_7420325265594._Title1} ${propObject.p_7420325265594._Name1}\n\nof`;
       const declarationOne = `HEREBY DECLARE AS FOLLOWS;`;
       const absolute =
         "1.   I ABSOLUTELY and entirely renounce, relinquish and abandon the use of my said";
@@ -4634,8 +4638,8 @@ export default async function handler(req, res) {
       const yearIn = "IN THE YEAR";
       const signedAs = "SIGNED AS A DEED AND DELIVERED\n\nby the above named";
       const signPlaceHolder = "Signature";
-      const lordName = `${propObject.p_7420325265594._Title1} ${deedCapitalizedOne}\n\nFormerly known as`;
-      const formerName = `${deedCapitalizedOne}`;
+      const lordName = `${propObject.p_7420325265594._Title1} ${propObject.p_7420325265594._Name1}\n\nFormerly known as`;
+      const formerName = `${propObject.p_7420325265594._Name1}`;
 
       const presence = "In the presence of:";
       const witness = "Witness's signature";
@@ -5178,7 +5182,7 @@ export default async function handler(req, res) {
           });
         });
 
-        const deedTwoUserNameWidth = `of ${deedCapitalizeTwo}`;
+        const deedTwoUserNameWidth = `of ${propObject.p_7420325265594._Name2}`;
         const formerDeedTwotextWidth = timesRomanFontHeading.widthOfTextAtSize(
           deedTwoUserNameWidth,
           12
@@ -5186,7 +5190,7 @@ export default async function handler(req, res) {
         // console.log(formertextWidth, "formertextWidth");
         const totalWidthDeedTwo = formerDeedTwotextWidth + 35;
 
-        const deedTwoNewNameWidth = `now ${propObject.p_7420325265594._Title2} ${deedCapitalizeTwo}`;
+        const deedTwoNewNameWidth = `now ${propObject.p_7420325265594._Title2} ${propObject.p_7420325265594._Name2}`;
         const newDeedTwotextWidth = timesRomanFontHeading.widthOfTextAtSize(
           deedTwoNewNameWidth,
           12
@@ -5227,10 +5231,10 @@ export default async function handler(req, res) {
           font: timesRomanFontHeading,
         });
 
-        const deedFormTextTwo = `of ${deedCapitalizeTwo}\n\nnow ${propObject.p_7420325265594._Title2} ${deedCapitalizeTwo}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_7420325265594._Title2} ${deedCapitalizeTwo}\n\nof`;
+        const deedFormTextTwo = `of ${propObject.p_7420325265594._Name2}\n\nnow ${propObject.p_7420325265594._Title2} ${propObject.p_7420325265594._Name2}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_7420325265594._Title2} ${propObject.p_7420325265594._Name2}\n\nof`;
 
-        const lordNameTwo = `${propObject.p_7420325265594._Title2} ${deedCapitalizeTwo}\n\nFormerly known as`;
-        const formerNameTwo = `${deedCapitalizeTwo}`;
+        const lordNameTwo = `${propObject.p_7420325265594._Title2} ${propObject.p_7420325265594._Name2}\n\nFormerly known as`;
+        const formerNameTwo = `${propObject.p_7420325265594._Name2}`;
 
         deedPageTwo.drawText(MainHeading, {
           x: 200,
@@ -5770,7 +5774,7 @@ export default async function handler(req, res) {
           });
         });
 
-        const deedTwoUserNameWidth = `of ${deedCapitalizeTwo}`;
+        const deedTwoUserNameWidth = `of ${propObject.p_7420325265594._Name2}`;
         const formerDeedTwotextWidth = timesRomanFontHeading.widthOfTextAtSize(
           deedTwoUserNameWidth,
           12
@@ -5778,7 +5782,7 @@ export default async function handler(req, res) {
         // console.log(formertextWidth, "formertextWidth");
         const totalWidthDeedTwo = formerDeedTwotextWidth + 35;
 
-        const deedTwoNewNameWidth = `now ${propObject.p_7420325265594._Title2} ${deedCapitalizeTwo}`;
+        const deedTwoNewNameWidth = `now ${propObject.p_7420325265594._Title2} ${propObject.p_7420325265594._Name2}`;
         const newDeedTwotextWidth = timesRomanFontHeading.widthOfTextAtSize(
           deedTwoNewNameWidth,
           12
@@ -5819,10 +5823,10 @@ export default async function handler(req, res) {
           font: timesRomanFontHeading,
         });
 
-        const deedFormTextTwo = `of ${deedCapitalizeTwo}\n\nnow ${propObject.p_7420325265594._Title2} ${deedCapitalizeTwo}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_7420325265594._Title2} ${deedCapitalizeTwo}\n\nof`;
+        const deedFormTextTwo = `of ${propObject.p_7420325265594._Name2}\n\nnow ${propObject.p_7420325265594._Title2} ${propObject.p_7420325265594._Name2}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_7420325265594._Title2} ${propObject.p_7420325265594._Name2}\n\nof`;
 
-        const lordNameTwo = `${propObject.p_7420325265594._Title2} ${deedCapitalizeTwo}\n\nFormerly known as`;
-        const formerNameTwo = `${deedCapitalizeTwo}`;
+        const lordNameTwo = `${propObject.p_7420325265594._Title2} ${propObject.p_7420325265594._Name2}\n\nFormerly known as`;
+        const formerNameTwo = `${propObject.p_7420325265594._Name2}`;
 
         deedPageTwo.drawText(MainHeading, {
           x: 200,
@@ -6375,9 +6379,9 @@ export default async function handler(req, res) {
       }
       var tartanCapitalizedTwo = capitalizeWords(tartanModifiedNameTwo);
 
-      const tartanCertficateUserName = `${
-        propObject.p_7420325265594._Title1
-      } ${tartanCapitalizedOne} ${
+      const tartanCertficateUserName = `${propObject.p_7420325265594._Title1} ${
+        propObject.p_7420325265594._Name1
+      } ${
         propObject.p_7420325265594._Title2 &&
         propObject.p_7420325265594._Name2 != ""
           ? "&"
@@ -6396,7 +6400,7 @@ export default async function handler(req, res) {
       const tartanCertficateUserNameTwo = `${
         propObject.p_7420325265594._Title2 &&
         propObject.p_7420325265594._Name2 != ""
-          ? `${propObject.p_7420325265594._Title2} ${tartanCapitalizedTwo}`
+          ? `${propObject.p_7420325265594._Title2} ${propObject.p_7420325265594._Name2}`
           : ""
       }`;
 
@@ -7880,13 +7884,13 @@ export default async function handler(req, res) {
             });
           });
 
-          const deedTwoUserNameWidth = `of ${deedCapitalizeTwo}`;
+          const deedTwoUserNameWidth = `of ${propObject.p_7420325265594._Name2}`;
           const formerDeedTwotextWidth =
             timesRomanFontHeading.widthOfTextAtSize(deedTwoUserNameWidth, 12);
           // console.log(formertextWidth, "formertextWidth");
           const totalWidthDeedTwo = formerDeedTwotextWidth + 35;
 
-          const deedTwoNewNameWidth = `now ${propObject.p_7420325265594._Title2} ${deedCapitalizeTwo}`;
+          const deedTwoNewNameWidth = `now ${propObject.p_7420325265594._Title2} ${propObject.p_7420325265594._Name2}`;
           const newDeedTwotextWidth = timesRomanFontHeading.widthOfTextAtSize(
             deedTwoNewNameWidth,
             12
@@ -7927,10 +7931,10 @@ export default async function handler(req, res) {
             font: timesRomanFontHeadingPrinted,
           });
 
-          const deedFormTextTwo = `of ${deedCapitalizeTwo}\n\nnow ${propObject.p_7420325265594._Title2} ${deedCapitalizeTwo}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_7420325265594._Title2} ${deedCapitalizeTwo}\n\nof`;
+          const deedFormTextTwo = `of ${propObject.p_7420325265594._Name2}\n\nnow ${propObject.p_7420325265594._Title2} ${propObject.p_7420325265594._Name2}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_7420325265594._Title2} ${propObject.p_7420325265594._Name2}\n\nof`;
 
-          const lordNameTwo = `${propObject.p_7420325265594._Title2} ${deedCapitalizeTwo}\n\nFormerly known as`;
-          const formerNameTwo = `${deedCapitalizeTwo}`;
+          const lordNameTwo = `${propObject.p_7420325265594._Title2} ${propObject.p_7420325265594._Name2}\n\nFormerly known as`;
+          const formerNameTwo = `${propObject.p_7420325265594._Name2}`;
 
           printeddeedPageTwo.drawText(MainHeading, {
             x: 200,
@@ -9003,10 +9007,12 @@ export default async function handler(req, res) {
         propObject.p_7434986651834.reference != 0
           ? `- ${propObject.p_7434986651834.reference}`
           : ""
-      } ${propObject.p_7434986651834._Title1} ${specialCapitalizedOne} ${
+      } ${propObject.p_7434986651834._Title1} ${
+        propObject.p_7434986651834._Name1
+      } ${
         propObject.p_7434986651834._Title2 &&
         propObject.p_7434986651834._Name2 != ""
-          ? `\n& ${propObject.p_7434986651834._Title2} ${specialCapitalizedTwo} of `
+          ? `\n& ${propObject.p_7434986651834._Title2} ${propObject.p_7434986651834._Name2} of `
           : "\nof "
       }${
         propObject.p_7434986651834._Name2 == "" &&
@@ -9281,7 +9287,7 @@ export default async function handler(req, res) {
         var pageTwoCapitalizedTwo = capitalizeWords(modifiedNameTwo);
       }
 
-      const certficateUserName = `${propObject.p_7434986651834._Title1} ${pageTwoCapitalizedOne} of Blairadam`;
+      const certficateUserName = `${propObject.p_7434986651834._Title1} ${propObject.p_7434986651834._Name1} of Blairadam`;
 
       // const and = "and";
       const certficateUserNameTwo = `${
@@ -9292,7 +9298,7 @@ export default async function handler(req, res) {
       } ${
         propObject.p_7434986651834._Title2 &&
         propObject.p_7434986651834._Name2 != ""
-          ? pageTwoCapitalizedTwo
+          ? propObject.p_7434986651834._Name2
           : ""
       } ${
         propObject.p_7434986651834._Title2 &&
@@ -9756,14 +9762,14 @@ export default async function handler(req, res) {
 
         var deedCapitalizeTwo = capitalizeWords(deedModifiedNameTwo);
       }
-      const deedUserNameWidth = `of ${deedCapitalizedOne}`;
+      const deedUserNameWidth = `of ${propObject.p_7434986651834._Name1}`;
       const formertextWidth = timesRomanFontHeading.widthOfTextAtSize(
         deedUserNameWidth,
         12
       );
       const totalWidth = formertextWidth + 35;
 
-      const deedNewNameWidth = `now ${propObject.p_7434986651834._Title1} ${deedCapitalizedOne}`;
+      const deedNewNameWidth = `now ${propObject.p_7434986651834._Title1} ${propObject.p_7434986651834._Name1}`;
       const newtextWidth = timesRomanFontHeading.widthOfTextAtSize(
         deedNewNameWidth,
         12
@@ -9804,7 +9810,7 @@ export default async function handler(req, res) {
         font: timesRomanFontHeading,
       });
 
-      const deedFormText = `of ${deedCapitalizedOne}\n\nnow ${propObject.p_7434986651834._Title1} ${deedCapitalizedOne}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_7434986651834._Title1} ${deedCapitalizedOne}\n\nof`;
+      const deedFormText = `of ${propObject.p_7434986651834._Name1}\n\nnow ${propObject.p_7434986651834._Title1} ${propObject.p_7434986651834._Name1}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_7434986651834._Title1} ${propObject.p_7434986651834._Name1}\n\nof`;
       const declarationOne = `HEREBY DECLARE AS FOLLOWS;`;
       const absolute =
         "1.   I ABSOLUTELY and entirely renounce, relinquish and abandon the use of my said";
@@ -9834,8 +9840,8 @@ export default async function handler(req, res) {
       const yearIn = "IN THE YEAR";
       const signedAs = "SIGNED AS A DEED AND DELIVERED\n\nby the above named";
       const signPlaceHolder = "Signature";
-      const lordName = `${propObject.p_7434986651834._Title1} ${deedCapitalizedOne}\n\nFormerly known as`;
-      const formerName = `${deedCapitalizedOne}`;
+      const lordName = `${propObject.p_7434986651834._Title1} ${propObject.p_7434986651834._Name1}\n\nFormerly known as`;
+      const formerName = `${propObject.p_7434986651834._Name1}`;
 
       const presence = "In the presence of:";
       const witness = "Witness's signature";
@@ -10413,7 +10419,7 @@ export default async function handler(req, res) {
           });
         });
 
-        const deedTwoUserNameWidth = `of ${deedCapitalizeTwo}`;
+        const deedTwoUserNameWidth = `of ${propObject.p_7434986651834._Name2}`;
         const formerDeedTwotextWidth = timesRomanFontHeading.widthOfTextAtSize(
           deedTwoUserNameWidth,
           12
@@ -10421,7 +10427,7 @@ export default async function handler(req, res) {
         // console.log(formertextWidth, "formertextWidth");
         const totalWidthDeedTwo = formerDeedTwotextWidth + 35;
 
-        const deedTwoNewNameWidth = `now ${propObject.p_7434986651834._Title2} ${deedCapitalizeTwo}`;
+        const deedTwoNewNameWidth = `now ${propObject.p_7434986651834._Title2} ${propObject.p_7434986651834._Name2}`;
         const newDeedTwotextWidth = timesRomanFontHeading.widthOfTextAtSize(
           deedTwoNewNameWidth,
           12
@@ -10462,10 +10468,10 @@ export default async function handler(req, res) {
           font: timesRomanFontHeading,
         });
 
-        const deedFormTextTwo = `of ${deedCapitalizeTwo}\n\nnow ${propObject.p_7434986651834._Title2} ${deedCapitalizeTwo}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_7434986651834._Title2} ${deedCapitalizeTwo}\n\nof`;
+        const deedFormTextTwo = `of ${propObject.p_7434986651834._Name2}\n\nnow ${propObject.p_7434986651834._Title2} ${propObject.p_7434986651834._Name2}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_7434986651834._Title2} ${propObject.p_7434986651834._Name2}\n\nof`;
 
-        const lordNameTwo = `${propObject.p_7434986651834._Title2} ${deedCapitalizeTwo}\n\nFormerly known as`;
-        const formerNameTwo = `${deedCapitalizeTwo}`;
+        const lordNameTwo = `${propObject.p_7434986651834._Title2} ${propObject.p_7434986651834._Name2}\n\nFormerly known as`;
+        const formerNameTwo = `${propObject.p_7434986651834._Name2}`;
 
         deedPageTwo.drawText(MainHeading, {
           x: 200,
@@ -11016,14 +11022,14 @@ export default async function handler(req, res) {
           });
         });
 
-        const deedTwoUserNameWidth = `of ${deedCapitalizeTwo}`;
+        const deedTwoUserNameWidth = `of ${propObject.p_7434986651834._Name2}`;
         const formerDeedTwotextWidth = timesRomanFontHeading.widthOfTextAtSize(
           deedTwoUserNameWidth,
           12
         );
         const totalWidthDeedTwo = formerDeedTwotextWidth + 35;
 
-        const deedTwoNewNameWidth = `now ${propObject.p_7434986651834._Title2} ${deedCapitalizeTwo}`;
+        const deedTwoNewNameWidth = `now ${propObject.p_7434986651834._Title2} ${propObject.p_7434986651834._Name2}`;
         const newDeedTwotextWidth = timesRomanFontHeading.widthOfTextAtSize(
           deedTwoNewNameWidth,
           12
@@ -11064,10 +11070,10 @@ export default async function handler(req, res) {
           font: timesRomanFontHeading,
         });
 
-        const deedFormTextTwo = `of ${deedCapitalizeTwo}\n\nnow ${propObject.p_7434986651834._Title2} ${deedCapitalizeTwo}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_7434986651834._Title2} ${deedCapitalizeTwo}\n\nof`;
+        const deedFormTextTwo = `of ${propObject.p_7434986651834._Name2}\n\nnow ${propObject.p_7434986651834._Title2} ${propObject.p_7434986651834._Name2}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_7434986651834._Title2} ${propObject.p_7434986651834._Name2}\n\nof`;
 
-        const lordNameTwo = `${propObject.p_7434986651834._Title2} ${deedCapitalizeTwo}\n\nFormerly known as`;
-        const formerNameTwo = `${deedCapitalizeTwo}`;
+        const lordNameTwo = `${propObject.p_7434986651834._Title2} ${propObject.p_7434986651834._Name2}\n\nFormerly known as`;
+        const formerNameTwo = `${propObject.p_7434986651834._Name2}`;
 
         deedPageTwo.drawText(MainHeading, {
           x: 200,
@@ -12473,13 +12479,13 @@ export default async function handler(req, res) {
             });
           });
 
-          const deedTwoUserNameWidth = `of ${deedCapitalizeTwo}`;
+          const deedTwoUserNameWidth = `of ${propObject.p_7434986651834._Name2}`;
           const formerDeedTwotextWidth =
             timesRomanFontHeading.widthOfTextAtSize(deedTwoUserNameWidth, 12);
           // console.log(formertextWidth, "formertextWidth");
           const totalWidthDeedTwo = formerDeedTwotextWidth + 35;
 
-          const deedTwoNewNameWidth = `now ${propObject.p_7434986651834._Title2} ${deedCapitalizeTwo}`;
+          const deedTwoNewNameWidth = `now ${propObject.p_7434986651834._Title2} ${propObject.p_7434986651834._Name2}`;
           const newDeedTwotextWidth = timesRomanFontHeading.widthOfTextAtSize(
             deedTwoNewNameWidth,
             12
@@ -12520,10 +12526,10 @@ export default async function handler(req, res) {
             font: timesRomanFontHeadingPrinted,
           });
 
-          const deedFormTextTwo = `of ${deedCapitalizeTwo}\n\nnow ${propObject.p_7434986651834._Title2} ${deedCapitalizeTwo}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_7434986651834._Title2} ${deedCapitalizeTwo}\n\nof`;
+          const deedFormTextTwo = `of ${propObject.p_7434986651834._Name2}\n\nnow ${propObject.p_7434986651834._Title2} ${propObject.p_7434986651834._Name2}\n\nBY THIS DEED OF CHANGE OF NAME AND TITLE made by myself the undersigned\n\n${propObject.p_7434986651834._Title2} ${propObject.p_7434986651834._Name2}\n\nof`;
 
-          const lordNameTwo = `${propObject.p_7434986651834._Title2} ${deedCapitalizeTwo}\n\nFormerly known as`;
-          const formerNameTwo = `${deedCapitalizeTwo}`;
+          const lordNameTwo = `${propObject.p_7434986651834._Title2} ${propObject.p_7434986651834._Name2}\n\nFormerly known as`;
+          const formerNameTwo = `${propObject.p_7434986651834._Name2}`;
 
           printeddeedPageTwo.drawText(MainHeading, {
             x: 200,
@@ -13078,9 +13084,9 @@ export default async function handler(req, res) {
         var emblemCapitalizedTwo = capitalizeWords(emblemModifiedNameTwo);
       }
 
-      const emblemCertficateUserName = `${
-        propObject.p_7434986651834._Title1
-      } ${emblemCapitalizedOne} ${
+      const emblemCertficateUserName = `${propObject.p_7434986651834._Title1} ${
+        propObject.p_7434986651834._Name1
+      } ${
         propObject.p_7434986651834._Title2 &&
         propObject.p_7434986651834._Name2 != ""
           ? "&"
@@ -13100,7 +13106,7 @@ export default async function handler(req, res) {
       const emblememblemCertficateUserNameTwo = `${
         propObject.p_7434986651834._Title2 &&
         propObject.p_7434986651834._Name2 != ""
-          ? `${propObject.p_7434986651834._Title2} ${emblemCapitalizedTwo}`
+          ? `${propObject.p_7434986651834._Title2} ${propObject.p_7434986651834._Name2}`
           : ""
       }`;
       const userNametextTwoWidth = oldEng.widthOfTextAtSize(
@@ -13955,9 +13961,9 @@ export default async function handler(req, res) {
         var emblemCapitalizedTwo = capitalizeWords(emblemModifiedNameTwo);
       }
 
-      const emblemCertficateUserName = `${
-        propObject.p_6846299078842._Title1
-      } ${emblemCapitalizedOne} ${
+      const emblemCertficateUserName = `${propObject.p_6846299078842._Title1} ${
+        propObject.p_6846299078842._Name1
+      } ${
         propObject.p_6846299078842._Title2 && propObject.p_6846299078842._Name2
           ? "&"
           : ""
@@ -13975,7 +13981,7 @@ export default async function handler(req, res) {
 
       const emblememblemCertficateUserNameTwo = `${
         propObject.p_6846299078842._Title2 && propObject.p_6846299078842._Name2
-          ? `${propObject.p_6846299078842._Title2} ${emblemCapitalizedTwo}`
+          ? `${propObject.p_6846299078842._Title2} ${propObject.p_6846299078842._Name2}`
           : ""
       }`;
       const userNametextTwoWidth = oldEng.widthOfTextAtSize(
@@ -14871,9 +14877,9 @@ export default async function handler(req, res) {
         var emblemCapitalizedTwo = capitalizeWords(emblemModifiedNameTwo);
       }
 
-      const emblemCertficateUserName = `${
-        propObject.p_6882555658426._Title1
-      } ${emblemCapitalizedOne} ${
+      const emblemCertficateUserName = `${propObject.p_6882555658426._Title1} ${
+        propObject.p_6882555658426._Name1
+      } ${
         propObject.p_6882555658426._Title2 && propObject.p_6882555658426._Name2
           ? "&"
           : ""
@@ -14891,7 +14897,7 @@ export default async function handler(req, res) {
 
       const emblememblemCertficateUserNameTwo = `${
         propObject.p_6882555658426._Title2 && propObject.p_6882555658426._Name2
-          ? `${propObject.p_6882555658426._Title2} ${emblemCapitalizedTwo}`
+          ? `${propObject.p_6882555658426._Title2} ${propObject.p_6882555658426._Name2}`
           : ""
       }`;
       const userNametextTwoWidth = oldEng.widthOfTextAtSize(
@@ -15788,9 +15794,9 @@ export default async function handler(req, res) {
         var specialCapitalizedTwo = capitalizeWords(tartanModifiedNameTwo);
       }
 
-      const tartanCertficateUserName = `${
-        propObject.p_6846299111610._Title1
-      } ${specialCapitalizedOne} ${
+      const tartanCertficateUserName = `${propObject.p_6846299111610._Title1} ${
+        propObject.p_6846299111610._Name1
+      } ${
         propObject.p_6846299111610._Title2 &&
         propObject.p_6846299111610._Name2 != ""
           ? "&"
@@ -15809,7 +15815,7 @@ export default async function handler(req, res) {
       const tartanCertficateUserNameTwo = `${
         propObject.p_6846299111610._Title2 &&
         propObject.p_6846299111610._Name2 != ""
-          ? `${propObject.p_6846299111610._Title2} ${specialCapitalizedTwo}`
+          ? `${propObject.p_6846299111610._Title2} ${propObject.p_6846299111610._Name2}`
           : ""
       }`;
 
