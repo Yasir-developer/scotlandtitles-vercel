@@ -17050,7 +17050,7 @@ export default async function handler(req, res) {
           discountedEmblemPackedId++;
         }
       });
-      console.log(SON.stringify(sortedLineItems), "My sortedLineItems");
+      console.log(JSON.stringify(sortedLineItems), "My sortedLineItems");
       console.log(JSON.stringify(pProperties), "pProperties");
       throw new Error(pProperties, "checking");
 
