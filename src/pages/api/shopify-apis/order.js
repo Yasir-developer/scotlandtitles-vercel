@@ -17011,7 +17011,7 @@ export default async function handler(req, res) {
             quantity: item.quantity,
           };
           tartanPackId++;
-          console.log(pProperties, "Tartan propereties");
+          console.log(JSON.stringify(pProperties), "Tartan propereties");
         } else if (item.product_id == freeTartanId) {
           pId.push(item.product_id);
           var word = item.variant_title.split(" ");
@@ -17244,6 +17244,10 @@ export default async function handler(req, res) {
           }
           embelemIncrement++;
         } else if (productId == tartanId) {
+          console.log("tartanId");
+          console.log(
+            JSON.stringify(pProperties[`p_6846299111610_${tartanIncrement}`])
+          );
           for (
             let i = 0;
             i < pProperties[`p_6846299111610_${tartanIncrement}`].quantity;
