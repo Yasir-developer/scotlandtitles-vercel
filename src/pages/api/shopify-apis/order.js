@@ -12,7 +12,7 @@ import capitalizeWords from "../../../../utils/common/capitalizeWords";
 export default async function handler(req, res) {
   // console.log(req.method, "req");
   const { id, email, created_at, order_number } = req.body;
-  const { first_name, last_name } = req.body.customer;
+  // const { first_name, last_name } = req.body.customer;
 
   const titlePackId = 6846298849466;
   const emblemId = 6846299078842;
@@ -66,7 +66,7 @@ export default async function handler(req, res) {
       orderId: req.body.id,
       status: true,
     });
-    await emailPdfs();
+    // await emailPdfs();
     // .then((response) => {
     console.log("response");
 
