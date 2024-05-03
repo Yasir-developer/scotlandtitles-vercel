@@ -16989,6 +16989,7 @@ export default async function handler(req, res) {
             pProperties["p_" + `${item.product_id}_${emblemPackId}`].properties,
             "abcd"
           );
+          console.log(JSON.stringify(pProperties), "emblum propereties");
           emblemPackId++;
         } else if (item.product_id == tartanId) {
           pId.push(item.product_id);
