@@ -17011,6 +17011,7 @@ export default async function handler(req, res) {
             quantity: item.quantity,
           };
           tartanPackId++;
+          console.log(pProperties, "Tartan propereties");
         } else if (item.product_id == freeTartanId) {
           pId.push(item.product_id);
           var word = item.variant_title.split(" ");
