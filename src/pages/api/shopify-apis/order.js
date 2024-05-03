@@ -17050,6 +17050,10 @@ export default async function handler(req, res) {
           discountedEmblemPackedId++;
         }
       });
+      console.log(sortedLineItems, "My sortedLineItems");
+      console.log(pProperties, "pProperties");
+      throw new Error(pProperties, "checking");
+
       let ko = Object.keys(pProperties);
       ko.map((a) => {});
       // console.log(pProperties[a]
