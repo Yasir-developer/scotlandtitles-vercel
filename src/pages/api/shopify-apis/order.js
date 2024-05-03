@@ -15757,6 +15757,7 @@ export default async function handler(req, res) {
   };
 
   const onlyTartan = async (propObject) => {
+    console.log(propObject, "only tartan");
     console.log(propObject, "===============propObject==================");
     try {
       if (propObject.p_6846299111610.variant.includes("Printed Pack")) {
