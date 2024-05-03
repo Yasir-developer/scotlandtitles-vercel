@@ -16997,7 +16997,17 @@ export default async function handler(req, res) {
 
           pProperties["p_" + `${item.product_id}_${tartanPackId}`] = {
             variant_title: item.variant_title,
-            properties: item.properties,
+            // properties: item.properties,
+            properties:
+              item.properties.length > 0
+                ? item.properties
+                : pProperties[`p_6846298849466_${tartanPackId}`]
+                ? pProperties[`p_6846298849466_${tartanPackId}`]
+                : pProperties[`p_7434986651834_${tartanPackId}`]
+                ? pProperties[`p_7434986651834_${tartanPackId}`]
+                : pProperties[`p_7420325265594_${tartanPackId}`]
+                ? pProperties[`p_7420325265594_${tartanPackId}`]
+                : null,
             quantity: item.quantity,
           };
           tartanPackId++;
@@ -17249,6 +17259,54 @@ export default async function handler(req, res) {
               ].properties) {
                 resultObjectTatran[obj.name] = obj.value;
               }
+            } else if (
+              pProperties[`p_7434986651834_${tartanIncrement}`]?.properties
+                ?.length > 0
+            ) {
+              if (
+                pProperties[`p_7434986651834_${tartanIncrement}`]?.properties
+              ) {
+                namesArrayTatran = pProperties[
+                  `p_7434986651834_${tartanIncrement}`
+                ]?.properties.map((propItem, index) => propItem.name);
+                for (const obj of pProperties[
+                  `p_7434986651834_${tartanIncrement}`
+                ]?.properties) {
+                  resultObjectTatran[obj.name] = obj.value;
+                }
+              }
+            } else if (
+              pProperties[`p_6846298849466_${tartanIncrement}`]?.properties
+                .length > 0
+            ) {
+              if (
+                pProperties[`p_6846298849466_${tartanIncrement}`]?.properties
+              ) {
+                namesArrayTatran = pProperties[
+                  `p_6846298849466_${tartanIncrement}`
+                ]?.properties.map((propItem, index) => propItem.name);
+                for (const obj of pProperties[
+                  `p_6846298849466_${tartanIncrement}`
+                ]?.properties) {
+                  resultObjectTatran[obj.name] = obj.value;
+                }
+              }
+            } else if (
+              pProperties[`p_7420325265594_${tartanIncrement}`]?.properties
+                ?.length > 0
+            ) {
+              if (
+                pProperties[`p_7420325265594_${tartanIncrement}`]?.properties
+              ) {
+                namesArrayTatran = pProperties[
+                  `p_7420325265594_${tartanIncrement}`
+                ]?.properties.map((propItem, index) => propItem.name);
+                for (const obj of pProperties[
+                  `p_7420325265594_${tartanIncrement}`
+                ]?.properties) {
+                  resultObjectTatran[obj.name] = obj.value;
+                }
+              }
             }
 
             if (
@@ -17271,7 +17329,9 @@ export default async function handler(req, res) {
                   _Title1: resultObjectTatran._Title1,
                   _Name1: resultObjectTatran._name1,
                   _Title2: resultObjectTatran._Title2,
-                  _Name2: resultObjectTatran._name2,
+                  _Name2: resultObjectTatran._name2
+                    ? resultObjectTatran._name2
+                    : resultObjectTatran._Name2,
                   _Date: resultObjectTatran._Date,
                   variant:
                     pProperties[`p_6846299111610_${tartanIncrement}`]
