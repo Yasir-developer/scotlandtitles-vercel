@@ -17258,14 +17258,21 @@ export default async function handler(req, res) {
             let resultObjectTatran = {};
             let namesArrayTatran = "";
 
-            if (pProperties[`p_6846299111610_${tartanIncrement}`].properties) {
-              namesArrayTatran = pProperties[
-                `p_6846299111610_${tartanIncrement}`
-              ].properties.map((propItem, index) => propItem.name);
-              for (const obj of pProperties[
-                `p_6846299111610_${tartanIncrement}`
-              ].properties) {
-                resultObjectTatran[obj.name] = obj.value;
+            if (
+              pProperties[`p_6846299111610_${tartanIncrement}`]?.properties
+                ?.length > 0
+            ) {
+              if (
+                pProperties[`p_6846299111610_${tartanIncrement}`].properties
+              ) {
+                namesArrayTatran = pProperties[
+                  `p_6846299111610_${tartanIncrement}`
+                ].properties.map((propItem, index) => propItem.name);
+                for (const obj of pProperties[
+                  `p_6846299111610_${tartanIncrement}`
+                ].properties) {
+                  resultObjectTatran[obj.name] = obj.value;
+                }
               }
             } else if (
               pProperties[`p_7434986651834_${tartanIncrement}`]?.properties
