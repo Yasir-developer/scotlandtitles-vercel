@@ -17346,7 +17346,7 @@ export default async function handler(req, res) {
               const propertiesObj = {
                 p_6846299111610: {
                   _Title1: resultObjectTatran._Title1,
-                  _Name1: resultObjectTatran._name1,
+                  _Name1: resultObjectTatran._name1 ? resultObjectTatran._name1 : resultObjectTatran._Name1,
                   _Title2: resultObjectTatran._Title2,
                   _Name2: resultObjectTatran._name2
                     ? resultObjectTatran._name2
