@@ -17012,6 +17012,10 @@ export default async function handler(req, res) {
                 : null,
             quantity: item.quantity,
           };
+          console.log(
+            pProperties["p_" + `${item.product_id}_${tartanPackId}`].properties,
+            "Tartan obj"
+          );
           tartanPackId++;
           console.log(JSON.stringify(pProperties), "Tartan propereties");
         } else if (item.product_id == freeTartanId) {
