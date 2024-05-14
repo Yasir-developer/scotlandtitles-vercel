@@ -12,6 +12,7 @@ import capitalizeWords from "../../../../utils/common/capitalizeWords";
 export default async function handler(req, res) {
   // console.log(req.method, "req");
   const { id, email, created_at, order_number } = req.body;
+  console.log(req.body, "req.body");
   // const { first_name, last_name } = req.body.customer;
 
   const titlePackId = 6846298849466;
@@ -22,13 +23,13 @@ export default async function handler(req, res) {
   const discountedEmblemId = 6882555658426;
 
   const emailPdfs = async () => {
-    console.log(
-      server,
-      email,
-      first_name,
-      order_number,
-      "user in verify email"
-    );
+    // console.log(
+    //   server,
+    //   email,
+    //   first_name,
+    //   order_number,
+    //   "user in verify email"
+    // );
 
     try {
       const response = await axios.post(
