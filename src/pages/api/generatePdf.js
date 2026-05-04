@@ -16057,7 +16057,7 @@ export default async function handler(req, res) {
         order_no: order_number,
     });
 
-    // Mark as downloaded
+    // Mark as downloaded and update in db
     const ordersCollection = db.collection('orders');
     await ordersCollection.insertOne({ orderId: order_number.toString(), downloaded: true });
 
