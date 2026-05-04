@@ -27,6 +27,31 @@ export default function Home() {
   const [checked, setChecked] = useState(false);
   const [status, setStatus] = useState([]);
   const [checkedOrders, setCheckedOrders] = useState([]);
+  const [pdfStatuses, setPdfStatuses] = useState({}); // {orderId: statusCode}
+
+  // Function to check PDF status
+  const checkPdfStatus = async (orderNumber) => {
+    console.log(pdfStatuses, "orderNumber for pdf status:"+orderNumber);
+    try {
+      const response = await fetch(`https://scotlandtitlesapp.com/pdfs/${orderNumber}.pdf`);
+      setPdfStatuses(prev => ({ ...prev, [orderNumber]: response.status }));
+    } catch (error) {
+      setPdfStatuses(prev => ({ ...prev, [orderNumber]: 404 }));
+    }
+  };
+
+  // Function to generate PDF
+  const generatePdf = async (orderId) => {
+    try {
+      await axios.post(`${server}/api/generatePdf`, { orderId });
+      // After generation, update status
+      checkPdfStatus(orderId);
+      // Refresh download status
+      downloadStatus();
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+    }
+  };
 
   // const db = connectToDatabase();
 
@@ -40,7 +65,14 @@ export default function Home() {
   useEffect(() => {
     console.log(pageInformation, "pageInformation");
   }, [pageInformation, nextBtn, prevBtn]);
-  // useEffect()
+  // Check PDF statuses when orders change
+  useEffect(() => {
+    orders.forEach(order => {
+      if (!(order.order_number in pdfStatuses)) {
+        checkPdfStatus(order.order_number);
+      }
+    });
+  }, [orders]);
   const handleInputChange = (e) => {
     setQuery(e.target.value);
   };
@@ -180,6 +212,7 @@ export default function Home() {
         // setLoader(false);
 
         if (res.status == 200) {
+          console.log(res, "res");
           if (res.data.data.data.length == 0) {
             setCount("No Result Found");
           }
@@ -323,6 +356,15 @@ export default function Home() {
               )}
             </div>
             <div style={{ display: "flex", flexDirection: "row" }}>
+              {pdfStatuses[item.order_number] === 404 && (
+                <button
+                  className="generate-pdf-button"
+                  onClick={() => generatePdf(item.id)}
+                  style={{ marginRight: "10px" }}
+                >
+                  Generate PDF
+                </button>
+              )}
               <a
                 href={`https://scotlandtitlesapp.com/pdfs/${item.order_number}.pdf`}
                 download
