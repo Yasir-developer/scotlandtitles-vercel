@@ -67,6 +67,8 @@ export default function Home() {
   }, [pageInformation, nextBtn, prevBtn]);
   // Check PDF statuses when orders change
   useEffect(() => {
+    console.log(orders, "orders for pdf status check");
+    console.log(pdfStatuses, "pdfStatuses status check");
     orders.forEach(order => {
       if (!(order.order_number in pdfStatuses)) {
         checkPdfStatus(order.order_number);
