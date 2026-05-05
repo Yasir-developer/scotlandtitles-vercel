@@ -30,6 +30,7 @@ export default function Home() {
 
   const [checkedOrders, setCheckedOrders] = useState([]);
   const [checkedDispatchOrders, setCheckedDispatchOrders] = useState([]);
+  const [pdfStatuses, setPdfStatuses] = useState({});
 
   // const db = connectToDatabase();
 
@@ -44,11 +45,41 @@ export default function Home() {
   useEffect(() => {
     console.log(pageInformation, "pageInformation");
   }, [pageInformation, nextBtn, prevBtn, selectedOption]);
+  useEffect(() => {
+    if (orders.length > 0) checkPDFs();
+  }, [orders]);
 
   const options = [
     { value: "printed", label: "Printed" },
     { value: "dispatched", label: "Dispatched" },
   ];
+
+  const checkPDFs = async () => {
+    const statuses = {};
+    for (const order of orders) {
+      const hasPrintedPack = order.line_items.some(
+        (data) => data.variant_title && data.variant_title.includes("Printed Pack")
+      );
+      if (hasPrintedPack) {
+        try {
+          const response = await fetch(`https://scotlandtitlesapp.com/pdfs/${order.order_number}-printed.pdf`);
+          statuses[order.order_number] = response.ok ? 'exists' : 'missing';
+        } catch {
+          statuses[order.order_number] = 'missing';
+        }
+      }
+    }
+    setPdfStatuses(statuses);
+  };
+
+  const regeneratePDF = async (orderNumber) => {
+    try {
+      await axios.post(`${server}/api/regenerate-pdf`, { order_number: orderNumber });
+      setPdfStatuses(prev => ({ ...prev, [orderNumber]: 'exists' }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const handleInputChange = (e) => {
     setQuery(e.target.value);
   };
@@ -376,6 +407,9 @@ export default function Home() {
                 >
                   <button className="pdf-printed-buttons">Printed PDF</button>
                 </a>
+              )}
+              {pdfStatuses[item.order_number] === 'missing' && hasPrintedPack && (
+                <button onClick={() => regeneratePDF(item.order_number)} className="pdf-buttons">Generate PDF</button>
               )}
             </div>
           </div>

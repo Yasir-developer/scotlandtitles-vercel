@@ -9,73 +9,9 @@ import axios from "axios";
 import connectToDatabase from "../../../../db";
 import capitalizeWords from "../../../../utils/common/capitalizeWords";
 
-export default async function handler(req, res) {
-  // console.log(req.method, "req");
-  const { id, email, created_at, order_number } = req.body;
-  console.log(req.body, "req.body");
-  const { first_name, last_name } = req.body.customer;
-
-  const titlePackId = 6846298849466;
-  const lordshipTitlePackId = 7999357780154;
-  const ladyshipTitlePackId = 7999372820666;
-  const couplesTitlePackId = 7999378129082;
-
-  const emblemId = 6846299078842;
-  const tartanId = 6846299111610;
-  const freeTartanId = 7420325265594;
-  const freeEmblemId = 7434986651834;
-  const discountedEmblemId = 6882555658426;
-
-  const emailPdfs = async () => {
-    try {
-      const response = await axios.post(
-        `${server}/api/user/email/orderEmail`,
-        {
-          email: email,
-          name: first_name ? first_name : last_name,
-          order_no: order_number,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      console.log(response.data, "complete response=========================");
-    } catch (error) {
-      console.log(error, "==== complete error =====");
-    }
-  };
-
-  const db = await connectToDatabase();
-  const collection = db.collection("totalOrders");
-  console.log(req.body.id, "req.body.orderId");
-  const result = await collection.findOne({ orderId: req.body.id });
-  if (result) {
-    console.log(
-      "=========================Already Present========================="
-    );
-    return res.status(200).send({ message: "SUCCESS ALREADY PRESENT" });
-  } else {
-    console.log(result, "============result=========");
-    await axios.post(`${server}/api/shopify-apis/insertOrder`, {
-      orderId: req.body.id,
-      status: true,
-    });
-    await emailPdfs();
-    // .then((response) => {
-    console.log("response");
-
-    // console.log(response.data, "webhook response");
-    // return res.status(200).send({ message: "Added in Database success" });
-    // })
-    // .catch((error) => {
-    //   console.log("error.message");
-    //   console.log(error.message);
-    //   return res.status(200).send({ message: error.message });
-    // });
-  }
+export const generatePDF = async (orderData) => {
+  const { id, email, created_at, order_number } = orderData;
+  const { first_name, last_name } = orderData.customer;
 
   const client = new ftp.Client();
 
@@ -27586,8 +27522,8 @@ export default async function handler(req, res) {
   let type;
   let typeTwo;
 
-  if (email && req.body.line_items.length > 0) {
-    // console.log(req.body.customer.last_name, "Order Complete Request");
+  if (email && orderData.line_items.length > 0) {
+    // console.log(orderData.customer.last_name, "Order Complete Request");
     try {
       let pId = [];
       let pProperties = {};
@@ -27607,7 +27543,7 @@ export default async function handler(req, res) {
         6882555658426, 6846299078842, 7999357780154, 7999372820666,
         7999378129082,
       ];
-      const sortedLineItems = req.body.line_items.sort((a, b) => {
+      const sortedLineItems = orderData.line_items.sort((a, b) => {
         return (
           desiredOrder.indexOf(a.product_id) -
           desiredOrder.indexOf(b.product_id)
@@ -28473,9 +28409,65 @@ export default async function handler(req, res) {
       }
     } catch (error) {
       console.log(error, "catch error final");
-      return res.status(200).send({ message: "error" });
+      console.log("error");
     }
   } else {
-    return res.status(200).send({ message: "error" });
+    console.log("error");
+  }
+};
+
+export default async function handler(req, res) {
+  const { id, email, created_at, order_number } = req.body;
+  console.log(req.body, "req.body");
+  const { first_name, last_name } = req.body.customer;
+
+  const titlePackId = 6846298849466;
+  const lordshipTitlePackId = 7999357780154;
+  const ladyshipTitlePackId = 7999372820666;
+  const couplesTitlePackId = 7999378129082;
+
+  const emblemId = 6846299078842;
+  const tartanId = 6846299111610;
+  const freeTartanId = 7420325265594;
+  const freeEmblemId = 7434986651834;
+  const discountedEmblemId = 6882555658426;
+
+  const emailPdfs = async (emailToSend) => {
+    try {
+      const response = await axios.post(
+        `${server}/api/user/email/orderEmail`,
+        {
+          email: emailToSend,
+          name: first_name ? first_name : last_name,
+          order_no: order_number,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log(response.data, "complete response=========================");
+    } catch (error) {
+      console.log(error, "==== complete error =====");
+    }
+  };
+
+  const db = await connectToDatabase();
+  const collection = db.collection("totalOrders");
+  console.log(req.body.id, "req.body.orderId");
+  const result = await collection.findOne({ orderId: req.body.id });
+  if (result) {
+    console.log(
+      "=========================Already Present========================="
+    );
+    return res.status(200).send({ message: "SUCCESS ALREADY PRESENT" });
+  } else {
+    console.log(result, "============result=========");
+    await collection.insertOne({ orderId: req.body.id, ...req.body, status: true });
+    await emailPdfs(process.env.ADMIN_EMAIL || email);
+    await generatePDF(req.body);
+    return res.status(200).send({ message: "SUCCESS" });
   }
 }
