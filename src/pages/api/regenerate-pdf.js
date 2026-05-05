@@ -1,6 +1,6 @@
 import { generatePDF } from './shopify-apis/order.js';
-import connectToDatabase from '../../../../db';
-import { server } from '../../../../config';
+import connectToDatabase from '../../../db.js';
+import { server } from '../../../config';
 import axios from 'axios';
 
 export default async function handler(req, res) {
