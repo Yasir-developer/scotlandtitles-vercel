@@ -62,8 +62,10 @@ export default function Home() {
       );
       if (hasPrintedPack) {
         try {
-          const response = await fetch(`https://scotlandtitlesapp.com/pdfs/${order.order_number}-printed.pdf`);
-          statuses[order.order_number] = response.ok ? 'exists' : 'missing';
+          const response = await axios.post(`${server}/api/check-pdf`, {
+            order_number: order.order_number,
+          });
+          statuses[order.order_number] = response.data.exists ? 'exists' : 'missing';
         } catch {
           statuses[order.order_number] = 'missing';
         }
@@ -74,7 +76,11 @@ export default function Home() {
 
   const regeneratePDF = async (orderNumber) => {
     try {
-      await axios.post(`${server}/api/regenerate-pdf`, { order_number: orderNumber });
+      const order = orders.find(o => o.order_number === orderNumber);
+      await axios.post(`${server}/api/regenerate-pdf`, { 
+        order_number: orderNumber,
+        orderData: order,
+      });
       setPdfStatuses(prev => ({ ...prev, [orderNumber]: 'exists' }));
     } catch (error) {
       console.log(error);

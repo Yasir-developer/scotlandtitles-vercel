@@ -8,18 +8,23 @@ export default async function handler(req, res) {
     return res.status(405).send({ message: 'Method not allowed' });
   }
 
-  const { order_number } = req.body;
+  const { order_number, orderData } = req.body;
 
   if (!order_number) {
     return res.status(400).send({ message: 'Order number required' });
   }
 
-  const db = await connectToDatabase();
-  const collection = db.collection('totalOrders');
-  const order = await collection.findOne({ orderId: parseInt(order_number) });
+  let order = orderData;
 
+  // If orderData not provided, fetch from database
   if (!order) {
-    return res.status(404).send({ message: 'Order not found' });
+    const db = await connectToDatabase();
+    const collection = db.collection('totalOrders');
+    order = await collection.findOne({ orderId: parseInt(order_number) });
+
+    if (!order) {
+      return res.status(404).send({ message: 'Order not found in database' });
+    }
   }
 
   try {
