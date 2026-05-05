@@ -28374,12 +28374,14 @@ export const generatePDF = async (orderData) => {
 
       const remotePath = `/pdfs/${order_number}.pdf`;
       await client.uploadFrom(pdfStream, remotePath);
+      const remoteSize = await client.size(remotePath);
+      if (!remoteSize || remoteSize === 0) {
+        throw new Error(`PDF upload failed for ${remotePath}`);
+      }
+      console.log(`PDF upload verified for ${remotePath}: ${remoteSize} bytes`);
+
       const pageCount = pdfDocPrinted.getPageCount();
       console.log(pageCount, "pageCount");
-
-      if (pageCount == 0) {
-        client.close();
-      }
       const pdfUrl = `https://scotlandtitlesapp.com/pdfs/${order_number}.pdf`;
       console.log(order_number, "down");
       console.log(pdfUrl, "pdfUrl");
@@ -28402,14 +28404,26 @@ export const generatePDF = async (orderData) => {
         console.log(remotePrintedPath, "remotePrintedPath s");
         await client.uploadFrom(pdfPrintedStream, remotePrintedPath);
 
-        client.close();
+        const printedSize = await client.size(remotePrintedPath);
+        if (!printedSize || printedSize === 0) {
+          throw new Error(`Printed PDF upload failed for ${remotePrintedPath}`);
+        }
+        console.log(`Printed PDF upload verified for ${remotePrintedPath}: ${printedSize} bytes`);
 
         const pdfPrintedUrl = `https://scotlandtitlesapp.com/pdfs/${order_number}-printed.pdf`;
         console.log(pdfPrintedUrl, "pdfPrintedUrl");
       }
     } catch (error) {
       console.log(error, "catch error final");
-      console.log("error");
+      throw error;
+    } finally {
+      if (client) {
+        try {
+          await client.close();
+        } catch (closeError) {
+          console.log(closeError, "FTP client close error");
+        }
+      }
     }
   } else {
     console.log("error");

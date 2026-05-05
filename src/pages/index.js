@@ -31,6 +31,8 @@ export default function Home() {
   const [checkedOrders, setCheckedOrders] = useState([]);
   const [checkedDispatchOrders, setCheckedDispatchOrders] = useState([]);
   const [pdfStatuses, setPdfStatuses] = useState({});
+  const [pdfStatusLoading, setPdfStatusLoading] = useState({});
+  const [pdfGeneratingLoading, setPdfGeneratingLoading] = useState({});
 
   // const db = connectToDatabase();
 
@@ -61,6 +63,8 @@ export default function Home() {
         (data) => data.variant_title && data.variant_title.includes("Printed Pack")
       );
       if (hasPrintedPack) {
+        setPdfStatusLoading((prev) => ({ ...prev, [order.order_number]: true }));
+        setPdfStatuses((prev) => ({ ...prev, [order.order_number]: 'checking' }));
         try {
           const response = await axios.post(`${server}/api/check-pdf`, {
             order_number: order.order_number,
@@ -68,22 +72,28 @@ export default function Home() {
           statuses[order.order_number] = response.data.exists ? 'exists' : 'missing';
         } catch {
           statuses[order.order_number] = 'missing';
+        } finally {
+          setPdfStatusLoading((prev) => ({ ...prev, [order.order_number]: false }));
         }
+        setPdfStatuses((prev) => ({ ...prev, ...statuses }));
       }
     }
-    setPdfStatuses(statuses);
   };
 
   const regeneratePDF = async (orderNumber) => {
+    setPdfGeneratingLoading((prev) => ({ ...prev, [orderNumber]: true }));
     try {
-      const order = orders.find(o => o.order_number === orderNumber);
-      await axios.post(`${server}/api/regenerate-pdf`, { 
+      const order = orders.find((o) => o.order_number === orderNumber);
+      await axios.post(`${server}/api/regenerate-pdf`, {
         order_number: orderNumber,
         orderData: order,
       });
-      setPdfStatuses(prev => ({ ...prev, [orderNumber]: 'exists' }));
+      setPdfStatuses((prev) => ({ ...prev, [orderNumber]: 'exists' }));
     } catch (error) {
       console.log(error);
+      setPdfStatuses((prev) => ({ ...prev, [orderNumber]: 'missing' }));
+    } finally {
+      setPdfGeneratingLoading((prev) => ({ ...prev, [orderNumber]: false }));
     }
   };
   const handleInputChange = (e) => {
@@ -415,7 +425,25 @@ export default function Home() {
                 </a>
               )}
               {pdfStatuses[item.order_number] === 'missing' && hasPrintedPack && (
-                <button onClick={() => regeneratePDF(item.order_number)} className="pdf-buttons">Generate PDF</button>
+                <button
+                  onClick={() => regeneratePDF(item.order_number)}
+                  className="pdf-buttons"
+                  disabled={pdfGeneratingLoading[item.order_number] || pdfStatusLoading[item.order_number]}
+                >
+                  {pdfGeneratingLoading[item.order_number] ? (
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                      <Puff height="16" width="16" radius={1} color="#fff" ariaLabel="loading" visible={true} />
+                      Generating...
+                    </span>
+                  ) : pdfStatusLoading[item.order_number] ? (
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                      <Puff height="16" width="16" radius={1} color="#fff" ariaLabel="checking" visible={true} />
+                      Checking...
+                    </span>
+                  ) : (
+                    'Generate PDF'
+                  )}
+                </button>
               )}
             </div>
           </div>
