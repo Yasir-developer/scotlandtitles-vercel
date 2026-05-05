@@ -47,6 +47,6 @@ export default async function handler(req, res) {
     return res.status(200).send({ message: 'PDF regenerated and email sent' });
   } catch (error) {
     console.log(error);
-    return res.status(500).send({ message: 'Error regenerating PDF' });
+    return res.status(500).send({ message: 'Error regenerating PDF', error: error.message });
   }
 }

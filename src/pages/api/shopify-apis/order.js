@@ -13,6 +13,18 @@ export const generatePDF = async (orderData) => {
   const { id, email, created_at, order_number } = orderData;
   const { first_name, last_name } = orderData.customer;
 
+  const titlePackId = 6846298849466;
+  const lordshipTitlePackId = 7999357780154;
+  const ladyshipTitlePackId = 7999372820666;
+  const couplesTitlePackId = 7999378129082;
+
+  const emblemId = 6846299078842;
+  const tartanId = 6846299111610;
+  const freeTartanId = 7420325265594;
+  const freeEmblemId = 7434986651834;
+  const discountedEmblemId = 6882555658426;
+
+
   const client = new ftp.Client();
 
   await client.access({
@@ -28435,17 +28447,7 @@ export default async function handler(req, res) {
   console.log(req.body, "req.body");
   const { first_name, last_name } = req.body.customer;
 
-  const titlePackId = 6846298849466;
-  const lordshipTitlePackId = 7999357780154;
-  const ladyshipTitlePackId = 7999372820666;
-  const couplesTitlePackId = 7999378129082;
-
-  const emblemId = 6846299078842;
-  const tartanId = 6846299111610;
-  const freeTartanId = 7420325265594;
-  const freeEmblemId = 7434986651834;
-  const discountedEmblemId = 6882555658426;
-
+  
   const emailPdfs = async (emailToSend) => {
     try {
       const response = await axios.post(
