@@ -23,6 +23,7 @@
     "postcss": "8.4.28",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hot-toast": "^2.6.0",
     "react-loader-spinner": "^5.4.5",
     "react-select": "^5.8.0",
     "stream": "^0.0.2",

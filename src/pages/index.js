@@ -31,6 +31,8 @@ export default function Home() {
   const [checkedOrders, setCheckedOrders] = useState([]);
   const [checkedDispatchOrders, setCheckedDispatchOrders] = useState([]);
 
+  const [showGenerate, setShowGenerate] = useState({});
+
   // const db = connectToDatabase();
 
   // console.log(db, "db");
@@ -269,6 +271,45 @@ export default function Home() {
     setNextBtn(nextBtn);
     listOrders(nextBtn);
   };
+
+  const handlePDFClick = async (orderNumber, type, createdAt) => {
+    const date = new Date(createdAt);
+    const isOld = date < new Date('2026-05-01');
+    let url;
+    if (isOld) {
+      url = type === 'digital' ? `https://scotlandtitlesapp.com/pdfs/${orderNumber}.pdf` : `https://scotlandtitlesapp.com/pdfs/${orderNumber}-printed.pdf`;
+    } else {
+      const month = date.getMonth() + 1;
+      url = type === 'digital' ? `http://app.scotlandtitlesapp.com/pdfs/${month}/${orderNumber}.pdf` : `http://app.scotlandtitlesapp.com/pdfs/${month}/${orderNumber}-printed.pdf`;
+    }
+    try {
+      const res = await axios.post(`${server}/api/check-pdf`, { url });
+      if (res.data.exists) {
+        window.open(url, '_blank');
+      } else {
+        alert('PDF not available Generated again');
+        setShowGenerate(prev => ({ ...prev, [orderNumber]: true }));
+      }
+    } catch (error) {
+      alert('Error checking PDF');
+    }
+  };
+
+  const regeneratePDF = async (order) => {
+    try {
+      const res = await axios.post(`${server}/api/regenerate-pdf`, {
+        order_number: order.order_number,
+        orderData: order
+      });
+      if (res.status === 200) {
+        alert('PDF regenerated successfully');
+        setShowGenerate(prev => ({ ...prev, [order.order_number]: false }));
+      }
+    } catch (error) {
+      alert('Error regenerating PDF');
+    }
+  };
+
   const customStyles = {
     multiValue: (provided, state) => ({
       ...provided,
@@ -358,25 +399,12 @@ export default function Home() {
               />
             </div>
             <div style={{ display: "flex", flexDirection: "row" }}>
-              <a
-                href={`https://scotlandtitlesapp.com/pdfs/${item.order_number}.pdf`}
-                download
-                target="_blank"
-                rel="noreferrer"
-              >
-                <button className="pdf-buttons">Digital PDF</button>
-              </a>
+              <button onClick={() => handlePDFClick(item.order_number, 'digital', item.created_at)} className="pdf-buttons">Digital PDF</button>
 
               {hasPrintedPack && (
-                <a
-                  href={`https://scotlandtitlesapp.com/pdfs/${item.order_number}-printed.pdf`}
-                  download
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <button className="pdf-printed-buttons">Printed PDF</button>
-                </a>
+                <button onClick={() => handlePDFClick(item.order_number, 'printed', item.created_at)} className="pdf-printed-buttons">Printed PDF</button>
               )}
+              {showGenerate[item.order_number] && <button onClick={() => regeneratePDF(item)} className="generate-pdf-button">Generate PDF</button>}
             </div>
           </div>
         );
