@@ -272,19 +272,11 @@ export default function Home() {
     listOrders(nextBtn);
   };
 
-  const handlePDFClick = async (orderNumber, type, createdAt) => {
-    const date = new Date(createdAt);
-    const isOld = date < new Date('2026-05-01');
-    let url;
-    if (isOld) {
-      url = type === 'digital' ? `https://scotlandtitlesapp.com/pdfs/${orderNumber}.pdf` : `https://scotlandtitlesapp.com/pdfs/${orderNumber}-printed.pdf`;
-    } else {
-      const month = date.getMonth() + 1;
-      url = type === 'digital' ? `http://app.scotlandtitlesapp.com/pdfs/${month}/${orderNumber}.pdf` : `http://app.scotlandtitlesapp.com/pdfs/${month}/${orderNumber}-printed.pdf`;
-    }
+  const handlePDFClick = async (orderNumber, type) => {
     try {
-      const res = await axios.post(`${server}/api/check-pdf`, { url });
+      const res = await axios.post(`${server}/api/check-pdf`, { order_number: orderNumber, type });
       if (res.data.exists) {
+        const url = type === 'digital' ? `https://scotlandtitlesapp.com/pdfs/${orderNumber}.pdf` : `https://scotlandtitlesapp.com/pdfs/${orderNumber}-printed.pdf`;
         window.open(url, '_blank');
       } else {
         alert('PDF not available Generated again');
@@ -399,10 +391,10 @@ export default function Home() {
               />
             </div>
             <div style={{ display: "flex", flexDirection: "row" }}>
-              <button onClick={() => handlePDFClick(item.order_number, 'digital', item.created_at)} className="pdf-buttons">Digital PDF</button>
+              <button onClick={() => handlePDFClick(item.order_number, 'digital')} className="pdf-buttons">Digital PDF</button>
 
               {hasPrintedPack && (
-                <button onClick={() => handlePDFClick(item.order_number, 'printed', item.created_at)} className="pdf-printed-buttons">Printed PDF</button>
+                <button onClick={() => handlePDFClick(item.order_number, 'printed')} className="pdf-printed-buttons">Printed PDF</button>
               )}
               {showGenerate[item.order_number] && <button onClick={() => regeneratePDF(item)} className="generate-pdf-button">Generate PDF</button>}
             </div>
