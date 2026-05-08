@@ -26,7 +26,7 @@ export default async function handler(req, res) {
     return res.status(200).send({ exists: response.status >= 200 && response.status < 300, url: pdfUrl, resp: response });
   } catch (error) {
     // If 404 or any error, PDF doesn't exist
-    console.error(`Error checking PDF at ${pdfUrl}:`, error.response);
-    return res.status(200).send({ exists: false, url: pdfUrl , resp: error.response});
+    console.error(`Error checking PDF at ${pdfUrl}:`, error);
+    return res.status(200).send({ exists: false, url: pdfUrl , resp: error});
   }
 }
