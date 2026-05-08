@@ -280,30 +280,33 @@ export default function Home() {
   };
 
   const handlePDFClick = async (orderNumber, type, month) => {
-    if (!month) {
-      toast.error('Order month unavailable. Cannot check PDF until the order month is available.');
-      return;
-    }
+    // if (!month) {
+    //   toast.error('Order month unavailable. Cannot check PDF until the order month is available.');
+    //   return;
+    // }
+    const suffix = type === 'printed' ? '-printed' : '';
+    const url = `https://app.scotlandtitlesapp.com/pdfs/${month}/${orderNumber}${suffix}.pdf`;
+    window.open(url, '_blank');
+    // try {
+    //   console.log([orderNumber, type, month], "orderNumber, type and month in pdf click");
+      
+    //   const suffix = type === 'printed' ? '-printed' : '';
+    //   const url = `https://app.scotlandtitlesapp.com/pdfs/${month}/${orderNumber}${suffix}.pdf`;
+    //   const res = await axios.post(url, {
+    //     order_number: orderNumber,
+    //     type,
+    //     month,
+    //   });
+    //   if (res.data.exists) {
 
-    try {
-      console.log([orderNumber, type, month], "orderNumber, type and month in pdf click");
-      const res = await axios.post(`${server}/api/check-pdf`, {
-        order_number: orderNumber,
-        type,
-        month,
-      });
-      if (res.data.exists) {
-        const suffix = type === 'printed' ? '-printed' : '';
-        const url = `https://app.scotlandtitlesapp.com/pdfs/${month}/${orderNumber}${suffix}.pdf`;
-        window.open(url, '_blank');
-      } else {
-        console.log('PDF does not exist for order', [orderNumber, type, month, res]);
-        toast.error('PDF not available. Generate again.');
-        setShowGenerate(prev => ({ ...prev, [orderNumber]: true }));
-      }
-    } catch (error) {
-      toast.error('Error checking PDF');
-    }
+    //   } else {
+    //     console.log('PDF does not exist for order', [orderNumber, type, month, res]);
+    //     toast.error('PDF not available. Generate again.');
+    //     setShowGenerate(prev => ({ ...prev, [orderNumber]: true }));
+    //   }
+    // } catch (error) {
+    //   toast.error('Error checking PDF');
+    // }
   };
 
   const regeneratePDF = async (order) => {
