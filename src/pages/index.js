@@ -274,6 +274,7 @@ export default function Home() {
 
   const handlePDFClick = async (orderNumber, type) => {
     try {
+      console.log([orderNumber, type], "orderNumber and type in pdf click");
       const res = await axios.post(`${server}/api/check-pdf`, { order_number: orderNumber, type });
       if (res.data.exists) {
         const url = type === 'digital' ? `https://scotlandtitlesapp.com/pdfs/${orderNumber}.pdf` : `https://scotlandtitlesapp.com/pdfs/${orderNumber}-printed.pdf`;
