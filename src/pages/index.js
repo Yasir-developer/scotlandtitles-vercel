@@ -297,6 +297,7 @@ export default function Home() {
         const url = `https://app.scotlandtitlesapp.com/pdfs/${month}/${orderNumber}${suffix}.pdf`;
         window.open(url, '_blank');
       } else {
+        console.log('PDF does not exist for order', [orderNumber, type, month, res]);
         toast.error('PDF not available. Generate again.');
         setShowGenerate(prev => ({ ...prev, [orderNumber]: true }));
       }
