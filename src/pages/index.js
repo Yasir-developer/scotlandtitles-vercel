@@ -32,8 +32,6 @@ export default function Home() {
   const [checkedOrders, setCheckedOrders] = useState([]);
   const [checkedDispatchOrders, setCheckedDispatchOrders] = useState([]);
 
-  const [showGenerate, setShowGenerate] = useState({});
-
   // const db = connectToDatabase();
 
   // console.log(db, "db");
@@ -279,31 +277,20 @@ export default function Home() {
     return new Date(createdAt).getMonth() + 1;
   };
 
-  const handlePDFClick = async (orderNumber, type, month) => {
-    if (!month) {
-      toast.error('Order month unavailable. Cannot check PDF until the order month is available.');
+  const getPDFUrl = (order, type) => {
+    const month = getOrderMonth(order);
+    if (!month) return null;
+    const suffix = type === 'printed' ? '-printed' : '';
+    return `https://app.scotlandtitlesapp.com/pdfs/${month}/${order.order_number}${suffix}.pdf`;
+  };
+
+  const handlePDFClick = (order, type) => {
+    const url = getPDFUrl(order, type);
+    if (!url) {
+      toast.error('Order month unavailable. Cannot open PDF URL.');
       return;
     }
-
-    try {
-      console.log([orderNumber, type, month], "orderNumber, type and month in pdf click");
-      const res = await axios.post(`${server}/api/check-pdf`, {
-        order_number: orderNumber,
-        type,
-        month,
-      });
-      if (res.data.exists) {
-        const suffix = type === 'printed' ? '-printed' : '';
-        const url = `https://app.scotlandtitlesapp.com/pdfs/${month}/${orderNumber}${suffix}.pdf`;
-        window.open(url, '_blank');
-      } else {
-        console.log('PDF does not exist for order', [orderNumber, type, month, res]);
-        toast.error('PDF not available. Generate again.');
-        setShowGenerate(prev => ({ ...prev, [orderNumber]: true }));
-      }
-    } catch (error) {
-      toast.error('Error checking PDF');
-    }
+    window.open(url, '_blank');
   };
 
   const regeneratePDF = async (order) => {
@@ -314,7 +301,6 @@ export default function Home() {
       });
       if (res.status === 200) {
         alert('PDF regenerated successfully');
-        setShowGenerate(prev => ({ ...prev, [order.order_number]: false }));
       }
     } catch (error) {
       alert('Error regenerating PDF');
@@ -411,33 +397,46 @@ export default function Home() {
             </div>
             <div style={{ display: "flex", flexDirection: "row" }}>
               <button
-                onClick={() =>
-                  handlePDFClick(
-                    item.order_number,
-                    'digital',
-                    getOrderMonth(item)
-                  )
-                }
+                onClick={() => handlePDFClick(item, 'digital')}
                 className="pdf-buttons"
               >
-                Digital PDF
+                Open Digital PDF
               </button>
 
               {hasPrintedPack && (
                 <button
-                  onClick={() =>
-                    handlePDFClick(
-                      item.order_number,
-                      'printed',
-                      getOrderMonth(item)
-                    )
-                  }
+                  onClick={() => handlePDFClick(item, 'printed')}
                   className="pdf-printed-buttons"
                 >
-                  Printed PDF
+                  Open Printed PDF
                 </button>
               )}
-              {showGenerate[item.order_number] && <button onClick={() => regeneratePDF(item)} className="generate-pdf-button">Generate PDF</button>}
+
+              <button onClick={() => regeneratePDF(item)} className="generate-pdf-button">
+                Generate PDF
+              </button>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', marginLeft: '10px' }}>
+              {getPDFUrl(item, 'digital') && (
+                <a
+                  href={getPDFUrl(item, 'digital')}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="pdf-url-link"
+                >
+                  {getPDFUrl(item, 'digital')}
+                </a>
+              )}
+              {hasPrintedPack && getPDFUrl(item, 'printed') && (
+                <a
+                  href={getPDFUrl(item, 'printed')}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="pdf-url-link"
+                >
+                  {getPDFUrl(item, 'printed')}
+                </a>
+              )}
             </div>
           </div>
         );

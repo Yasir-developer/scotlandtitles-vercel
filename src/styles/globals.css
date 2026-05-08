@@ -80,6 +80,11 @@
 .generate-pdf-button:hover {
   background-color: #1C86EE;
 }
+.pdf-url-link {
+  color: #1E40AF;
+  text-decoration: underline;
+  word-break: break-all;
+}
 .next-btn{
   padding: 5px 14px;
   margin-top: 5px;
