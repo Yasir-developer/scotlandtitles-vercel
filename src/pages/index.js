@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { server } from "../../config";
 import { Puff } from "react-loader-spinner";
 import Select from "react-select";
+import toast, { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -272,19 +273,35 @@ export default function Home() {
     listOrders(nextBtn);
   };
 
-  const handlePDFClick = async (orderNumber, type) => {
+  const getOrderMonth = (order) => {
+    const createdAt = order.created_at || order.createdAt;
+    if (!createdAt) return null;
+    return new Date(createdAt).getMonth() + 1;
+  };
+
+  const handlePDFClick = async (orderNumber, type, month) => {
+    if (!month) {
+      toast.error('Order month unavailable. Cannot check PDF until the order month is available.');
+      return;
+    }
+
     try {
-      console.log([orderNumber, type], "orderNumber and type in pdf click");
-      const res = await axios.post(`${server}/api/check-pdf`, { order_number: orderNumber, type });
+      console.log([orderNumber, type, month], "orderNumber, type and month in pdf click");
+      const res = await axios.post(`${server}/api/check-pdf`, {
+        order_number: orderNumber,
+        type,
+        month,
+      });
       if (res.data.exists) {
-        const url = type === 'digital' ? `https://scotlandtitlesapp.com/pdfs/${orderNumber}.pdf` : `https://scotlandtitlesapp.com/pdfs/${orderNumber}-printed.pdf`;
+        const suffix = type === 'printed' ? '-printed' : '';
+        const url = `https://scotlandtitlesapp.com/pdfs/${month}/${orderNumber}${suffix}.pdf`;
         window.open(url, '_blank');
       } else {
-        alert('PDF not available Generated again');
+        toast.error('PDF not available. Generate again.');
         setShowGenerate(prev => ({ ...prev, [orderNumber]: true }));
       }
     } catch (error) {
-      alert('Error checking PDF');
+      toast.error('Error checking PDF');
     }
   };
 
@@ -392,10 +409,32 @@ export default function Home() {
               />
             </div>
             <div style={{ display: "flex", flexDirection: "row" }}>
-              <button onClick={() => handlePDFClick(item.order_number, 'digital')} className="pdf-buttons">Digital PDF</button>
+              <button
+                onClick={() =>
+                  handlePDFClick(
+                    item.order_number,
+                    'digital',
+                    getOrderMonth(item)
+                  )
+                }
+                className="pdf-buttons"
+              >
+                Digital PDF
+              </button>
 
               {hasPrintedPack && (
-                <button onClick={() => handlePDFClick(item.order_number, 'printed')} className="pdf-printed-buttons">Printed PDF</button>
+                <button
+                  onClick={() =>
+                    handlePDFClick(
+                      item.order_number,
+                      'printed',
+                      getOrderMonth(item)
+                    )
+                  }
+                  className="pdf-printed-buttons"
+                >
+                  Printed PDF
+                </button>
               )}
               {showGenerate[item.order_number] && <button onClick={() => regeneratePDF(item)} className="generate-pdf-button">Generate PDF</button>}
             </div>
@@ -422,6 +461,7 @@ export default function Home() {
 
   return (
     <main className={`flex min-h-screen flex-col p-24`}>
+      <Toaster position="top-right" />
       {!loader ? (
         <div className="search-container">
           <div style={{}}>
