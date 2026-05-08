@@ -23,8 +23,15 @@ export default async function handler(req, res) {
   try {
     console.log(`Checking PDF existence at ${pdfUrl}`);
     const response = await axios.get(pdfUrl, {
-      timeout: 5000,
-      responseType: 'stream'
+      timeout: 15000,
+      responseType: 'arraybuffer',
+      maxRedirects: 5,
+      headers: {
+        'User-Agent':
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124.0 Safari/537.36',
+        'Accept': '*/*',
+        'Connection': 'close'
+      }
     });
     return res.status(200).send({ exists: response.status >= 200 && response.status < 300, url: pdfUrl, resp: response });
   } catch (error) {
