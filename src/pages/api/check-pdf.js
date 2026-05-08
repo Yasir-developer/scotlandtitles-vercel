@@ -22,7 +22,10 @@ export default async function handler(req, res) {
 
   try {
     console.log(`Checking PDF existence at ${pdfUrl}`);
-    const response = await axios.head(pdfUrl, { timeout: 5000 });
+    const response = await axios.get(pdfUrl, {
+      timeout: 5000,
+      responseType: 'stream'
+    });
     return res.status(200).send({ exists: response.status >= 200 && response.status < 300, url: pdfUrl, resp: response });
   } catch (error) {
     // If 404 or any error, PDF doesn't exist
