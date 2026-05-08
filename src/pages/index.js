@@ -294,7 +294,7 @@ export default function Home() {
       });
       if (res.data.exists) {
         const suffix = type === 'printed' ? '-printed' : '';
-        const url = `https://scotlandtitlesapp.com/pdfs/${month}/${orderNumber}${suffix}.pdf`;
+        const url = `https://app.scotlandtitlesapp.com/pdfs/${month}/${orderNumber}${suffix}.pdf`;
         window.open(url, '_blank');
       } else {
         toast.error('PDF not available. Generate again.');

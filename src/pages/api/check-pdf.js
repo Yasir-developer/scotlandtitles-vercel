@@ -14,7 +14,7 @@ export default async function handler(req, res) {
     }
 
     const suffix = type === 'printed' ? '-printed' : '';
-    pdfUrl = `https://scotlandtitlesapp.com/pdfs/${month}/${order_number}${suffix}.pdf`;
+    pdfUrl = `https://app.scotlandtitlesapp.com/pdfs/${month}/${order_number}${suffix}.pdf`;
   }
 
   try {
