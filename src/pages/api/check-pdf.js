@@ -5,15 +5,21 @@ export default async function handler(req, res) {
     return res.status(405).send({ message: 'Method not allowed' });
   }
 
-  const { url } = req.body;
+  const { url, order_number, type = 'digital' } = req.body;
+  let pdfUrl = url;
 
-  if (!url) {
-    return res.status(400).send({ message: 'URL required' });
+  if (!pdfUrl) {
+    if (!order_number) {
+      return res.status(400).send({ message: 'order_number or url required' });
+    }
+
+    const suffix = type === 'printed' ? '-printed' : '';
+    pdfUrl = `https://scotlandtitlesapp.com/pdfs/${order_number}${suffix}.pdf`;
   }
 
   try {
-    const response = await axios.head(url, { timeout: 5000 });
-    return res.status(200).send({ exists: response.status === 200 });
+    const response = await axios.head(pdfUrl, { timeout: 5000 });
+    return res.status(200).send({ exists: response.status >= 200 && response.status < 300 });
   } catch (error) {
     // If 404 or any error, PDF doesn't exist
     return res.status(200).send({ exists: false });
