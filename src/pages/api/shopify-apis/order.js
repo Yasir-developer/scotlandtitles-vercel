@@ -28506,34 +28506,35 @@ export default async function handler(req, res) {
   const { first_name, last_name } = req.body.customer;
 
   
-  const emailPdfs = async (emailToSend) => {
-    try {
-      const response = await axios.post(
-        `${server}/api/user/email/orderEmail`,
-        {
-          email: emailToSend,
-          name: first_name ? first_name : last_name,
-          order_no: order_number,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+//   const emailPdfs = async (emailToSend) => {
+//     try {
+//       const response = await axios.post(
+//         `${server}/api/user/email/orderEmail`,
+//         {
+//           email: emailToSend,
+//           name: first_name ? first_name : last_name,
+//           order_no: order_number,
+//         },
+//         {
+//           headers: {
+//             "Content-Type": "application/json",
+//           },
+//         }
+//       );
 
-      console.log(response.data, "complete response=========================");
-    } catch (error) {
-      console.log(error, "==== complete error =====");
-    }
-  };
+//       console.log(response.data, "complete response=========================");
+//     } catch (error) {
+//       console.log(error, "==== complete error =====");
+//     }
+//   };
 
 
 
-  const db = await connectToDatabase();
-  const collection = db.collection("totalOrders");
-  console.log(req.body.id, "req.body.orderId");
-  const result = await collection.findOne({ orderId: req.body.id });
+//   const db = await connectToDatabase();
+//   const collection = db.collection("totalOrders");
+//   console.log(req.body.id, "req.body.orderId");
+//   const result = await collection.findOne({ orderId: req.body.id });
+    const result = false;
   if (result) {
     console.log(
       `=========================${req.body.id} Already Present=========================`
@@ -28542,7 +28543,7 @@ export default async function handler(req, res) {
   } else {
     console.log(result, "============result=========");
     await collection.insertOne({ orderId: req.body.id, ...req.body, status: true });
-    await emailPdfs(process.env.ADMIN_EMAIL || email);
+    // await emailPdfs(process.env.ADMIN_EMAIL || email);
     await generatePDFRemote(req.body);
     return res.status(200).send({ message: "SUCCESS" });
   }

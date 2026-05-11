@@ -18,8 +18,8 @@ export default async function orderEmail(req, res) {
     // console.log(req, "reqqqqqq");
     const db = await connectToDatabase();
 
-    const { email, name, order_no } = req.body;
-    console.log(email, order_no, name, "order_number in order Email");
+    const { email, name, order_no, pdf_url } = req.body;
+    console.log(email, order_no, name, pdf_url, "order_number in order Email");
 
     const emailTemplate = `
     <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -214,7 +214,7 @@ export default async function orderEmail(req, res) {
       <!--[if mso]><style>.v-button {background: transparent !important;}</style><![endif]-->
     <div class="v-text-align" align="center">
       <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://unlayer.com" style="height:39px; v-text-anchor:middle; width:296px;" arcsize="10.5%"  strokecolor="#000000" strokeweight="1px" fillcolor="#411212"><w:anchorlock/><center style="color:#ffffff;"><![endif]-->
-        <a href="https://scotlandtitlesapp.com/pdfs/${order_no}.pdf" download target="_blank" class="v-button v-size-width v-font-size" style="box-sizing: border-box;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #ffffff; background-color: #411212; border-radius: 4px;-webkit-border-radius: 4px; -moz-border-radius: 4px; width:auto; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;border-top-color: #000000; border-top-style: solid; border-top-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px;font-size: 16px;">
+        <a href="${pdf_url}" download target="_blank" class="v-button v-size-width v-font-size" style="box-sizing: border-box;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #ffffff; background-color: #411212; border-radius: 4px;-webkit-border-radius: 4px; -moz-border-radius: 4px; width:auto; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;border-top-color: #000000; border-top-style: solid; border-top-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px;font-size: 16px;">
           <span style="display:block;padding:10px 20px;line-height:120%;"><span style="line-height: 19.2px;">DOWNLOAD YOUR DIGITAL PACK</span></span>
         </a>
         <!--[if mso]></center></v:roundrect><![endif]-->
