@@ -2,3 +2,5 @@ node_modules/
 .env
 # next.js build output
 .next/
+.next/*
+.next
