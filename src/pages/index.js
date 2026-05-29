@@ -445,7 +445,7 @@ export default function Home() {
                 </button>
               )}
               {/* {showGenerate[item.order_number] && */}
-               <button onClick={() => regeneratePDF(item)} className="generate-pdf-button">Generate PDF</button>
+               {/* <button onClick={() => regeneratePDF(item)} className="generate-pdf-button">Generate PDF</button> */}
                {/* } */}
             </div>
           </div>
