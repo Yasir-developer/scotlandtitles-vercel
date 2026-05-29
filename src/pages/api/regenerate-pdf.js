@@ -32,23 +32,27 @@ export default async function handler(req, res) {
     const generatdPDf = await generatePDFRemote(order);
 
     // Send email
-    const { email, first_name, last_name } = order.customer;
-    const emailToSend = process.env.ADMIN_EMAIL || email;
-    console.log(`Sending email ${order_number}`, generatdPDf);
-    await axios.post(`${server}/api/user/email/orderEmail`, {
-      email: emailToSend,
-      name: first_name ? first_name : last_name,
-      order_no: order_number,
-      pdf_url: generatdPDf?.pdf_url,
-    }, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    // =========================================================================================
+    // const { email, first_name, last_name } = order?.customer;
+    // // const emailToSend = process.env.ADMIN_EMAIL || email;
+    // const emailToSend = 'markjgrr@protonmail.com'; // testing line to check email in test mode 
+    // if(email) {
+    //   await axios.post(`${server}/api/user/email/orderEmail`, {
+    //     email: emailToSend,
+    //     name: first_name ? first_name : last_name,
+    //     order_no: order_number,
+    //     pdf_url: generatdPDf?.pdf_url,
+    //   }, {
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //   });
+    // }
+    // =========================================================================================
 
     return res.status(200).send({ message: 'PDF regenerated and email sent', data: generatdPDf });
   } catch (error) {
     console.log(error);
-    return res.status(500).send({ message: 'Error regenerating PDF', error: error.message });
+    return res.status(500).send({ message: 'Error regenerating PDF', error: error.message, order: order });
   }
 }

@@ -28531,12 +28531,12 @@ export default async function handler(req, res) {
 
 
 
-//   const db = await connectToDatabase();
-//   const collection = db.collection("totalOrders");
-//   console.log(req.body.id, "req.body.orderId");
-//   const result = await collection.findOne({ orderId: req.body.id });
+  const db = await connectToDatabase();
+  const collection = db.collection("totalOrders");
+  console.log(req.body.id, "req.body.orderId");
+  const result = await collection.findOne({ orderId: req.body.id });
 
-    const result = false;
+    // const result = false;
   if (result) {
     console.log(
       `=========================${req.body.id} Already Present=========================`
@@ -28546,7 +28546,9 @@ export default async function handler(req, res) {
     console.log(result, "============result=========");
     // await collection.insertOne({ orderId: req.body.id, ...req.body, status: true });
     const pdfResponse = await generatePDFRemote(req.body);
-    await emailPdfs(process.env.ADMIN_EMAIL || email, pdfResponse?.pdf_url);
+    await emailPdfs(email, pdfResponse?.pdf_url);
+    // testing line to check email in test mode
+    // await emailPdfs('markjgrr@protonmail.com', pdfResponse?.pdf_url);
     return res.status(200).send({ message: "SUCCESS" });
   }
 }

@@ -556,10 +556,10 @@ export default async function orderEmail(req, res) {
       message: "Email Sent!",
     });
   } catch (err) {
+    console.log(err, "err");
     return res.json({
       message: "Catch Error",
     });
-    console.log(err, "err");
   }
 }
 

@@ -276,14 +276,17 @@ export default function Home() {
   const getOrderMonth = (order) => {
     const createdAt = order.created_at || order.createdAt;
     if (!createdAt) return null;
-    return new Date(createdAt).getMonth() + 1;
+    const date = new Date(createdAt);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    return `${year}${month}`;
   };
 
   const handlePDFClick = async (orderNumber, type, month) => {
-    // if (!month) {
-    //   toast.error('Order month unavailable. Cannot check PDF until the order month is available.');
-    //   return;
-    // }
+    if (!month) {
+      toast.error('Order month unavailable. Cannot check PDF until the order month is available.');
+      return;
+    }
     const suffix = type === 'printed' ? '-printed' : '';
     const url = `https://app.scotlandtitlesapp.com/pdfs/${month}/${orderNumber}${suffix}.pdf`;
     window.open(url, '_blank');
@@ -310,6 +313,7 @@ export default function Home() {
   };
 
   const regeneratePDF = async (order) => {
+    console.log(order, "order in regeneratePDF");
     try {
       const res = await axios.post(`${server}/api/regenerate-pdf`, {
         order_number: order.order_number,
@@ -441,7 +445,7 @@ export default function Home() {
                 </button>
               )}
               {/* {showGenerate[item.order_number] && */}
-               {/* <button onClick={() => regeneratePDF(item)} className="generate-pdf-button">Generate PDF</button> */}
+               <button onClick={() => regeneratePDF(item)} className="generate-pdf-button">Generate PDF</button>
                {/* } */}
             </div>
           </div>
